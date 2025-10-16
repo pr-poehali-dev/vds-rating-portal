@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Slider } from '@/components/ui/slider';
 import Icon from '@/components/ui/icon';
 
 interface Provider {
@@ -9,14 +10,19 @@ interface Provider {
   name: string;
   logo: string;
   rating: number;
-  price: string;
-  cpu: string;
-  ram: string;
-  storage: string;
-  traffic: string;
+  basePrice: number;
+  cpuPrice: number;
+  ramPrice: number;
+  storagePrice: number;
   features: string[];
   pros: string[];
   cons: string[];
+}
+
+interface ResourceConfig {
+  cpu: number;
+  ram: number;
+  storage: number;
 }
 
 const providers: Provider[] = [
@@ -25,11 +31,10 @@ const providers: Provider[] = [
     name: 'Timeweb Cloud',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/c68c0760-0692-436d-8905-b2f1b5486586.jpg',
     rating: 9.8,
-    price: '399',
-    cpu: '2 vCPU',
-    ram: '4 GB',
-    storage: '40 GB NVMe',
-    traffic: 'Безлимит',
+    basePrice: 199,
+    cpuPrice: 100,
+    ramPrice: 50,
+    storagePrice: 2,
     features: ['DDoS защита', 'NVMe диски', '99.99% SLA', 'Поддержка 24/7'],
     pros: ['Лучшее соотношение цена/качество', 'Быстрая техподдержка', 'Удобная панель управления'],
     cons: ['Минимальная конфигурация для начинающих']
@@ -39,11 +44,10 @@ const providers: Provider[] = [
     name: 'Beget',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/cb5c67be-af76-4963-81a3-66f542907b9d.jpg',
     rating: 9.6,
-    price: '350',
-    cpu: '2 vCPU',
-    ram: '2 GB',
-    storage: '25 GB SSD',
-    traffic: 'Безлимит',
+    basePrice: 150,
+    cpuPrice: 90,
+    ramPrice: 45,
+    storagePrice: 1.5,
     features: ['Защита от DDoS', 'Автобэкапы', 'SSL бесплатно', '24/7 поддержка'],
     pros: ['Низкая стоимость', 'Простота использования', 'Отличная поддержка'],
     cons: ['Базовые ресурсы в минимальной конфигурации']
@@ -53,11 +57,10 @@ const providers: Provider[] = [
     name: 'CloudVDS Pro',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/ae7859e0-64a7-4d13-8a4b-f88d53564d0a.jpg',
     rating: 9.5,
-    price: '590',
-    cpu: '4 vCPU',
-    ram: '8 GB',
-    storage: '160 GB NVMe',
-    traffic: 'Безлимит',
+    basePrice: 290,
+    cpuPrice: 120,
+    ramPrice: 60,
+    storagePrice: 2.5,
     features: ['DDoS защита', 'SSD диски', '99.9% Uptime', 'Техподдержка 24/7'],
     pros: ['Высокая производительность', 'Отличная поддержка', 'Гибкие тарифы'],
     cons: ['Цена выше среднего']
@@ -66,6 +69,27 @@ const providers: Provider[] = [
 
 const Index = () => {
   const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
+  const [configs, setConfigs] = useState<Record<number, ResourceConfig>>({
+    1: { cpu: 2, ram: 4, storage: 40 },
+    2: { cpu: 2, ram: 2, storage: 25 },
+    3: { cpu: 4, ram: 8, storage: 160 }
+  });
+
+  const calculatePrice = (provider: Provider, config: ResourceConfig) => {
+    return Math.round(
+      provider.basePrice +
+      config.cpu * provider.cpuPrice +
+      config.ram * provider.ramPrice +
+      config.storage * provider.storagePrice
+    );
+  };
+
+  const updateConfig = (providerId: number, key: keyof ResourceConfig, value: number) => {
+    setConfigs(prev => ({
+      ...prev,
+      [providerId]: { ...prev[providerId], [key]: value }
+    }));
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -162,165 +186,247 @@ const Index = () => {
               Топ VDS хостингов
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Выбрано на основе реальных отзывов и тестирования
+              Настрой конфигурацию под свой проект и сравни цены
             </p>
           </div>
 
           <div className="grid gap-6 max-w-6xl mx-auto">
-            {providers.map((provider, index) => (
-              <Card 
-                key={provider.id}
-                className="group border-2 border-border hover:border-primary/50 transition-all duration-300 hover-lift overflow-hidden relative bg-card"
-              >
-                {index === 0 && (
-                  <div className="absolute -top-1 -right-1 z-20">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-primary rounded-bl-2xl rounded-tr-xl blur-lg"></div>
-                      <div className="relative bg-primary text-background font-bold px-5 py-2.5 rounded-bl-2xl rounded-tr-xl shadow-lg flex items-center gap-2">
-                        <Icon name="Crown" size={16} />
-                        Лидер рейтинга
-                      </div>
-                    </div>
-                  </div>
-                )}
-                
-                <CardHeader className="p-6 md:p-8">
-                  <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
-                    <div className="flex items-start gap-6 flex-1">
-                      <div className="relative flex-shrink-0">
-                        <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden bg-accent border border-primary/10 shadow-soft flex items-center justify-center">
-                          <img src={provider.logo} alt={provider.name} className="w-16 h-16 md:w-20 md:h-20 object-contain" />
-                        </div>
-                        <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-primary rounded-xl flex items-center justify-center shadow-lg text-background text-sm font-bold">
-                          {index + 1}
-                        </div>
-                      </div>
-                      
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2">{provider.name}</h3>
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="flex items-center gap-1">
-                            {[...Array(5)].map((_, i) => (
-                              <Icon 
-                                key={i}
-                                name="Star" 
-                                size={16} 
-                                className={i < Math.floor(provider.rating) ? "fill-primary text-primary" : "text-muted"}
-                              />
-                            ))}
-                          </div>
-                          <span className="text-xl font-bold text-foreground">{provider.rating}</span>
-                          <span className="text-muted-foreground text-sm">/10</span>
-                        </div>
-                        <div className="flex flex-wrap gap-2">
-                          {provider.features.slice(0, 3).map((feature, idx) => (
-                            <Badge key={idx} className="bg-accent border border-primary/20 text-foreground font-semibold text-xs">
-                              {feature}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="w-full lg:w-auto flex-shrink-0">
-                      <div className="bg-accent border-2 border-primary/20 rounded-2xl p-6 text-center">
-                        <div className="text-xs font-bold text-primary uppercase tracking-wider mb-2">От</div>
-                        <div className="flex items-baseline justify-center gap-1 mb-1">
-                          <span className="text-4xl md:text-5xl font-black text-foreground">{provider.price}</span>
-                          <span className="text-xl text-muted-foreground">₽</span>
-                        </div>
-                        <div className="text-sm text-muted-foreground font-medium mb-4">/месяц</div>
-                        <Button className="w-full h-12 text-sm font-bold bg-primary text-background shadow-lg shadow-primary/30 hover:shadow-neon transition-all group">
-                          Перейти
-                          <Icon name="ExternalLink" size={16} className="ml-2" />
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </CardHeader>
-                
-                <CardContent className="px-6 md:px-8 pb-6 md:pb-8">
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                    {[
-                      { icon: 'Cpu', label: 'CPU', value: provider.cpu },
-                      { icon: 'MemoryStick', label: 'RAM', value: provider.ram },
-                      { icon: 'HardDrive', label: 'Диск', value: provider.storage },
-                      { icon: 'Wifi', label: 'Трафик', value: provider.traffic }
-                    ].map((spec, idx) => (
-                      <div key={idx} className="bg-accent/50 border border-border rounded-xl p-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-7 h-7 bg-primary/20 rounded-lg flex items-center justify-center">
-                            <Icon name={spec.icon as any} size={14} className="text-primary" />
-                          </div>
-                          <span className="text-xs font-bold text-muted-foreground uppercase">{spec.label}</span>
-                        </div>
-                        <div className="text-base font-bold text-foreground">{spec.value}</div>
-                      </div>
-                    ))}
-                  </div>
+            {providers.map((provider, index) => {
+              const config = configs[provider.id];
+              const calculatedPrice = calculatePrice(provider, config);
 
-                  <Button 
-                    variant="ghost" 
-                    className="w-full text-sm font-semibold hover:bg-accent/50 hover:text-primary"
-                    onClick={() => setSelectedProvider(selectedProvider?.id === provider.id ? null : provider)}
-                  >
-                    {selectedProvider?.id === provider.id ? (
-                      <>
-                        <Icon name="ChevronUp" size={18} className="mr-2" />
-                        Скрыть детали
-                      </>
-                    ) : (
-                      <>
-                        <Icon name="ChevronDown" size={18} className="mr-2" />
-                        Показать плюсы и минусы
-                      </>
-                    )}
-                  </Button>
-
-                  {selectedProvider?.id === provider.id && (
-                    <div className="mt-6 pt-6 border-t border-border grid md:grid-cols-2 gap-4">
-                      <div className="bg-accent border border-secondary/30 rounded-2xl p-5">
-                        <div className="flex items-center gap-2 mb-4">
-                          <div className="w-9 h-9 bg-secondary rounded-xl flex items-center justify-center shadow-lg">
-                            <Icon name="Check" size={18} className="text-background" />
-                          </div>
-                          <h4 className="text-base font-bold text-foreground">Преимущества</h4>
+              return (
+                <Card 
+                  key={provider.id}
+                  className="group border-2 border-border hover:border-primary/50 transition-all duration-300 hover-lift overflow-hidden relative bg-card"
+                >
+                  {index === 0 && (
+                    <div className="absolute -top-1 -right-1 z-20">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-primary rounded-bl-2xl rounded-tr-xl blur-lg"></div>
+                        <div className="relative bg-primary text-background font-bold px-5 py-2.5 rounded-bl-2xl rounded-tr-xl shadow-lg flex items-center gap-2">
+                          <Icon name="Crown" size={16} />
+                          Лидер рейтинга
                         </div>
-                        <ul className="space-y-2.5">
-                          {provider.pros.map((pro, idx) => (
-                            <li key={idx} className="flex items-start gap-2.5">
-                              <div className="w-5 h-5 bg-secondary rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <Icon name="Plus" size={12} className="text-background" />
-                              </div>
-                              <span className="text-sm text-foreground font-medium">{pro}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      
-                      <div className="bg-accent border border-destructive/30 rounded-2xl p-5">
-                        <div className="flex items-center gap-2 mb-4">
-                          <div className="w-9 h-9 bg-destructive rounded-xl flex items-center justify-center shadow-lg">
-                            <Icon name="AlertCircle" size={18} className="text-white" />
-                          </div>
-                          <h4 className="text-base font-bold text-foreground">Недостатки</h4>
-                        </div>
-                        <ul className="space-y-2.5">
-                          {provider.cons.map((con, idx) => (
-                            <li key={idx} className="flex items-start gap-2.5">
-                              <div className="w-5 h-5 bg-destructive rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <Icon name="Minus" size={12} className="text-white" />
-                              </div>
-                              <span className="text-sm text-foreground font-medium">{con}</span>
-                            </li>
-                          ))}
-                        </ul>
                       </div>
                     </div>
                   )}
-                </CardContent>
-              </Card>
-            ))}
+                  
+                  <CardHeader className="p-6 md:p-8">
+                    <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
+                      <div className="flex items-start gap-6 flex-1">
+                        <div className="relative flex-shrink-0">
+                          <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden bg-accent border border-primary/10 shadow-soft flex items-center justify-center">
+                            <img src={provider.logo} alt={provider.name} className="w-16 h-16 md:w-20 md:h-20 object-contain" />
+                          </div>
+                          <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-primary rounded-xl flex items-center justify-center shadow-lg text-background text-sm font-bold">
+                            {index + 1}
+                          </div>
+                        </div>
+                        
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2">{provider.name}</h3>
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="flex items-center gap-1">
+                              {[...Array(5)].map((_, i) => (
+                                <Icon 
+                                  key={i}
+                                  name="Star" 
+                                  size={16} 
+                                  className={i < Math.floor(provider.rating) ? "fill-primary text-primary" : "text-muted"}
+                                />
+                              ))}
+                            </div>
+                            <span className="text-xl font-bold text-foreground">{provider.rating}</span>
+                            <span className="text-muted-foreground text-sm">/10</span>
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {provider.features.slice(0, 3).map((feature, idx) => (
+                              <Badge key={idx} className="bg-accent border border-primary/20 text-foreground font-semibold text-xs">
+                                {feature}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="w-full lg:w-auto flex-shrink-0">
+                        <div className="bg-accent border-2 border-primary/20 rounded-2xl p-6 text-center">
+                          <div className="text-xs font-bold text-primary uppercase tracking-wider mb-2">Цена</div>
+                          <div className="flex items-baseline justify-center gap-1 mb-1">
+                            <span className="text-4xl md:text-5xl font-black text-primary">{calculatedPrice}</span>
+                            <span className="text-xl text-muted-foreground">₽</span>
+                          </div>
+                          <div className="text-sm text-muted-foreground font-medium mb-4">/месяц</div>
+                          <Button className="w-full h-12 text-sm font-bold bg-primary text-background shadow-lg shadow-primary/30 hover:shadow-neon transition-all group">
+                            Перейти
+                            <Icon name="ExternalLink" size={16} className="ml-2" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  
+                  <CardContent className="px-6 md:px-8 pb-6 md:pb-8">
+                    <div className="space-y-6 mb-6">
+                      <div className="bg-accent/50 border border-primary/10 rounded-2xl p-6">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-2">
+                            <Icon name="Settings" size={20} className="text-primary" />
+                            <h4 className="text-lg font-bold text-foreground">Конфигуратор ресурсов</h4>
+                          </div>
+                          <Badge className="bg-primary/20 text-primary border-0">Настрой под себя</Badge>
+                        </div>
+                        
+                        <div className="space-y-6">
+                          <div>
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center gap-2">
+                                <div className="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
+                                  <Icon name="Cpu" size={16} className="text-primary" />
+                                </div>
+                                <span className="text-sm font-bold text-foreground">CPU</span>
+                              </div>
+                              <span className="text-lg font-black text-primary">{config.cpu} vCPU</span>
+                            </div>
+                            <Slider
+                              value={[config.cpu]}
+                              onValueChange={(value) => updateConfig(provider.id, 'cpu', value[0])}
+                              min={1}
+                              max={16}
+                              step={1}
+                              className="cursor-pointer"
+                            />
+                            <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                              <span>1 vCPU</span>
+                              <span>16 vCPU</span>
+                            </div>
+                          </div>
+
+                          <div>
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center gap-2">
+                                <div className="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
+                                  <Icon name="MemoryStick" size={16} className="text-primary" />
+                                </div>
+                                <span className="text-sm font-bold text-foreground">RAM</span>
+                              </div>
+                              <span className="text-lg font-black text-primary">{config.ram} GB</span>
+                            </div>
+                            <Slider
+                              value={[config.ram]}
+                              onValueChange={(value) => updateConfig(provider.id, 'ram', value[0])}
+                              min={1}
+                              max={64}
+                              step={1}
+                              className="cursor-pointer"
+                            />
+                            <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                              <span>1 GB</span>
+                              <span>64 GB</span>
+                            </div>
+                          </div>
+
+                          <div>
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center gap-2">
+                                <div className="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
+                                  <Icon name="HardDrive" size={16} className="text-primary" />
+                                </div>
+                                <span className="text-sm font-bold text-foreground">Диск</span>
+                              </div>
+                              <span className="text-lg font-black text-primary">{config.storage} GB</span>
+                            </div>
+                            <Slider
+                              value={[config.storage]}
+                              onValueChange={(value) => updateConfig(provider.id, 'storage', value[0])}
+                              min={10}
+                              max={500}
+                              step={10}
+                              className="cursor-pointer"
+                            />
+                            <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                              <span>10 GB</span>
+                              <span>500 GB</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="mt-6 pt-6 border-t border-border">
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-muted-foreground">Трафик</span>
+                            <div className="flex items-center gap-2">
+                              <Icon name="Wifi" size={16} className="text-secondary" />
+                              <span className="text-sm font-bold text-foreground">Безлимит</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <Button 
+                      variant="ghost" 
+                      className="w-full text-sm font-semibold hover:bg-accent/50 hover:text-primary"
+                      onClick={() => setSelectedProvider(selectedProvider?.id === provider.id ? null : provider)}
+                    >
+                      {selectedProvider?.id === provider.id ? (
+                        <>
+                          <Icon name="ChevronUp" size={18} className="mr-2" />
+                          Скрыть детали
+                        </>
+                      ) : (
+                        <>
+                          <Icon name="ChevronDown" size={18} className="mr-2" />
+                          Показать плюсы и минусы
+                        </>
+                      )}
+                    </Button>
+
+                    {selectedProvider?.id === provider.id && (
+                      <div className="mt-6 pt-6 border-t border-border grid md:grid-cols-2 gap-4">
+                        <div className="bg-accent border border-secondary/30 rounded-2xl p-5">
+                          <div className="flex items-center gap-2 mb-4">
+                            <div className="w-9 h-9 bg-secondary rounded-xl flex items-center justify-center shadow-lg">
+                              <Icon name="Check" size={18} className="text-background" />
+                            </div>
+                            <h4 className="text-base font-bold text-foreground">Преимущества</h4>
+                          </div>
+                          <ul className="space-y-2.5">
+                            {provider.pros.map((pro, idx) => (
+                              <li key={idx} className="flex items-start gap-2.5">
+                                <div className="w-5 h-5 bg-secondary rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                  <Icon name="Plus" size={12} className="text-background" />
+                                </div>
+                                <span className="text-sm text-foreground font-medium">{pro}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        
+                        <div className="bg-accent border border-destructive/30 rounded-2xl p-5">
+                          <div className="flex items-center gap-2 mb-4">
+                            <div className="w-9 h-9 bg-destructive rounded-xl flex items-center justify-center shadow-lg">
+                              <Icon name="AlertCircle" size={18} className="text-white" />
+                            </div>
+                            <h4 className="text-base font-bold text-foreground">Недостатки</h4>
+                          </div>
+                          <ul className="space-y-2.5">
+                            {provider.cons.map((con, idx) => (
+                              <li key={idx} className="flex items-start gap-2.5">
+                                <div className="w-5 h-5 bg-destructive rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                  <Icon name="Minus" size={12} className="text-white" />
+                                </div>
+                                <span className="text-sm text-foreground font-medium">{con}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
 
           <div className="text-center mt-12">
