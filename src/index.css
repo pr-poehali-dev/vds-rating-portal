@@ -6,35 +6,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 8%;
+    --background: 0 0% 7%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 8%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 8%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 263 70% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 84 100% 59%;
+    --primary-foreground: 0 0% 7%;
 
-    --secondary: 330 81% 60%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 166 77% 56%;
+    --secondary-foreground: 0 0% 7%;
 
-    --muted: 240 5% 96%;
-    --muted-foreground: 240 4% 46%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 251 91% 95%;
-    --accent-foreground: 263 70% 50%;
+    --accent: 0 0% 14%;
+    --accent-foreground: 84 100% 59%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 6% 90%;
-    --input: 240 6% 90%;
-    --ring: 263 70% 50%;
+    --border: 0 0% 20%;
+    --input: 0 0% 18%;
+    --ring: 84 100% 59%;
 
-    --radius: 1rem;
+    --radius: 1.25rem;
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -107,15 +107,21 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-[#6366F1] via-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#D4FF00] via-[#B8E803] to-[#7FFF00] bg-clip-text text-transparent;
   }
 
   .glass-effect {
-    @apply bg-white/70 backdrop-blur-2xl border border-white/50;
+    @apply bg-black/40 backdrop-blur-2xl border border-white/10;
   }
 
   .shadow-glow {
-    box-shadow: 0 20px 60px -15px rgba(99, 102, 241, 0.35);
+    box-shadow: 0 20px 60px -15px rgba(212, 255, 0, 0.4);
+  }
+
+  .shadow-neon {
+    box-shadow:
+      0 0 20px rgba(212, 255, 0, 0.5),
+      0 0 40px rgba(212, 255, 0, 0.3);
   }
 
   .shadow-soft {
@@ -128,6 +134,6 @@
 
   .hover-lift:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px rgba(212, 255, 0, 0.2);
   }
 }

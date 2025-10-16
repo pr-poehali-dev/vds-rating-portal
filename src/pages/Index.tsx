@@ -68,30 +68,30 @@ const Index = () => {
   const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-accent/5 to-background">
-      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-border/50">
+    <div className="min-h-screen bg-background">
+      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-card/60 border-b border-border">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-2xl blur-lg opacity-60"></div>
-                <div className="relative w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center">
-                  <Icon name="Zap" className="text-white" size={22} />
+                <div className="absolute inset-0 bg-primary rounded-2xl blur-xl opacity-50 shadow-neon"></div>
+                <div className="relative w-12 h-12 bg-primary rounded-2xl flex items-center justify-center">
+                  <Icon name="Zap" className="text-background" size={22} />
                 </div>
               </div>
               <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">VDS Rating</h1>
-                <p className="text-xs text-muted-foreground font-medium">Выбор профессионалов</p>
+                <h1 className="text-xl font-bold text-primary">VDS Rating</h1>
+                <p className="text-xs text-muted-foreground font-medium">Топ хостингов</p>
               </div>
             </div>
             <div className="hidden md:flex items-center gap-8">
-              <a href="#providers" className="text-sm font-semibold text-foreground/70 hover:text-foreground transition-colors">
+              <a href="#providers" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-colors">
                 Провайдеры
               </a>
-              <a href="#compare" className="text-sm font-semibold text-foreground/70 hover:text-foreground transition-colors">
+              <a href="#compare" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-colors">
                 Сравнение
               </a>
-              <Button className="bg-gradient-to-r from-primary via-[#8B5CF6] to-secondary text-white font-semibold shadow-lg hover:shadow-xl transition-all">
+              <Button className="bg-primary text-background font-bold shadow-lg shadow-primary/30 hover:shadow-neon transition-all">
                 Начать
                 <Icon name="ArrowRight" size={16} className="ml-2" />
               </Button>
@@ -101,13 +101,13 @@ const Index = () => {
       </nav>
 
       <section className="relative pt-20 pb-32 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px]"></div>
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[100px]"></div>
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[120px]"></div>
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-5xl mx-auto text-center space-y-8">
-            <div className="inline-flex items-center gap-2 bg-accent/50 backdrop-blur-sm border border-primary/20 rounded-full px-5 py-2.5">
-              <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+            <div className="inline-flex items-center gap-2 bg-accent border border-primary/30 rounded-full px-5 py-2.5">
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse shadow-neon"></div>
               <span className="text-sm font-bold text-primary">Топ провайдеров 2024</span>
             </div>
             
@@ -122,11 +122,11 @@ const Index = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button size="lg" className="h-14 px-8 text-base font-bold bg-gradient-to-r from-primary via-[#8B5CF6] to-secondary text-white shadow-xl hover:shadow-2xl transition-all group rounded-xl">
+              <Button size="lg" className="h-14 px-8 text-base font-bold bg-primary text-background shadow-xl shadow-primary/30 hover:shadow-neon transition-all group rounded-xl">
                 Посмотреть рейтинг
                 <Icon name="ArrowRight" size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button size="lg" variant="outline" className="h-14 px-8 text-base font-bold border-2 rounded-xl hover:bg-accent/50 transition-all">
+              <Button size="lg" variant="outline" className="h-14 px-8 text-base font-bold border-2 border-border rounded-xl hover:bg-accent hover:border-primary/50 transition-all">
                 <Icon name="Play" size={18} className="mr-2" />
                 Как выбрать
               </Button>
@@ -139,7 +139,7 @@ const Index = () => {
                 { icon: 'Shield', value: '100%', label: 'Защита данных' }
               ].map((stat, idx) => (
                 <div key={idx} className="group">
-                  <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl mb-4 group-hover:scale-110 transition-transform">
+                  <div className="inline-flex items-center justify-center w-14 h-14 bg-accent border border-primary/20 rounded-2xl mb-4 group-hover:scale-110 group-hover:border-primary/50 group-hover:shadow-neon transition-all">
                     <Icon name={stat.icon as any} size={24} className="text-primary" />
                   </div>
                   <div className="text-3xl md:text-4xl font-extrabold text-foreground mb-1">{stat.value}</div>
@@ -154,9 +154,9 @@ const Index = () => {
       <section id="providers" className="py-24 relative">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 bg-secondary/10 border border-secondary/20 rounded-full px-5 py-2.5">
-              <Icon name="Trophy" size={16} className="text-secondary" />
-              <span className="text-sm font-bold text-secondary">Лучшие провайдеры</span>
+            <div className="inline-flex items-center gap-2 bg-accent border border-primary/30 rounded-full px-5 py-2.5">
+              <Icon name="Trophy" size={16} className="text-primary" />
+              <span className="text-sm font-bold text-primary">Лучшие провайдеры</span>
             </div>
             <h2 className="text-5xl md:text-6xl font-extrabold text-foreground">
               Топ VDS хостингов
@@ -170,13 +170,13 @@ const Index = () => {
             {providers.map((provider, index) => (
               <Card 
                 key={provider.id}
-                className="group border-2 hover:border-primary/30 transition-all duration-300 hover-lift overflow-hidden relative bg-card/50 backdrop-blur-sm"
+                className="group border-2 border-border hover:border-primary/50 transition-all duration-300 hover-lift overflow-hidden relative bg-card"
               >
                 {index === 0 && (
                   <div className="absolute -top-1 -right-1 z-20">
                     <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-secondary to-[#F97316] rounded-bl-2xl rounded-tr-xl blur-md"></div>
-                      <div className="relative bg-gradient-to-r from-secondary to-[#F97316] text-white font-bold px-5 py-2.5 rounded-bl-2xl rounded-tr-xl shadow-lg flex items-center gap-2">
+                      <div className="absolute inset-0 bg-primary rounded-bl-2xl rounded-tr-xl blur-lg"></div>
+                      <div className="relative bg-primary text-background font-bold px-5 py-2.5 rounded-bl-2xl rounded-tr-xl shadow-lg flex items-center gap-2">
                         <Icon name="Crown" size={16} />
                         Лидер рейтинга
                       </div>
@@ -188,10 +188,10 @@ const Index = () => {
                   <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
                     <div className="flex items-start gap-6 flex-1">
                       <div className="relative flex-shrink-0">
-                        <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden bg-white shadow-soft ring-4 ring-primary/5 flex items-center justify-center">
+                        <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden bg-accent border border-primary/10 shadow-soft flex items-center justify-center">
                           <img src={provider.logo} alt={provider.name} className="w-16 h-16 md:w-20 md:h-20 object-contain" />
                         </div>
-                        <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg text-white text-sm font-bold">
+                        <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-primary rounded-xl flex items-center justify-center shadow-lg text-background text-sm font-bold">
                           {index + 1}
                         </div>
                       </div>
@@ -205,7 +205,7 @@ const Index = () => {
                                 key={i}
                                 name="Star" 
                                 size={16} 
-                                className={i < Math.floor(provider.rating) ? "fill-secondary text-secondary" : "text-gray-300"}
+                                className={i < Math.floor(provider.rating) ? "fill-primary text-primary" : "text-muted"}
                               />
                             ))}
                           </div>
@@ -214,7 +214,7 @@ const Index = () => {
                         </div>
                         <div className="flex flex-wrap gap-2">
                           {provider.features.slice(0, 3).map((feature, idx) => (
-                            <Badge key={idx} className="bg-accent/80 text-accent-foreground border-0 font-semibold text-xs">
+                            <Badge key={idx} className="bg-accent border border-primary/20 text-foreground font-semibold text-xs">
                               {feature}
                             </Badge>
                           ))}
@@ -223,14 +223,14 @@ const Index = () => {
                     </div>
                     
                     <div className="w-full lg:w-auto flex-shrink-0">
-                      <div className="bg-gradient-to-br from-accent/40 to-accent/20 backdrop-blur-sm rounded-2xl p-6 border-2 border-primary/10 text-center">
+                      <div className="bg-accent border-2 border-primary/20 rounded-2xl p-6 text-center">
                         <div className="text-xs font-bold text-primary uppercase tracking-wider mb-2">От</div>
                         <div className="flex items-baseline justify-center gap-1 mb-1">
                           <span className="text-4xl md:text-5xl font-black text-foreground">{provider.price}</span>
                           <span className="text-xl text-muted-foreground">₽</span>
                         </div>
                         <div className="text-sm text-muted-foreground font-medium mb-4">/месяц</div>
-                        <Button className="w-full h-12 text-sm font-bold bg-gradient-to-r from-primary via-[#8B5CF6] to-secondary text-white shadow-lg hover:shadow-xl transition-all group">
+                        <Button className="w-full h-12 text-sm font-bold bg-primary text-background shadow-lg shadow-primary/30 hover:shadow-neon transition-all group">
                           Перейти
                           <Icon name="ExternalLink" size={16} className="ml-2" />
                         </Button>
@@ -247,9 +247,9 @@ const Index = () => {
                       { icon: 'HardDrive', label: 'Диск', value: provider.storage },
                       { icon: 'Wifi', label: 'Трафик', value: provider.traffic }
                     ].map((spec, idx) => (
-                      <div key={idx} className="bg-muted/30 rounded-xl p-4 backdrop-blur-sm">
+                      <div key={idx} className="bg-accent/50 border border-border rounded-xl p-4">
                         <div className="flex items-center gap-2 mb-2">
-                          <div className="w-7 h-7 bg-primary/10 rounded-lg flex items-center justify-center">
+                          <div className="w-7 h-7 bg-primary/20 rounded-lg flex items-center justify-center">
                             <Icon name={spec.icon as any} size={14} className="text-primary" />
                           </div>
                           <span className="text-xs font-bold text-muted-foreground uppercase">{spec.label}</span>
@@ -261,7 +261,7 @@ const Index = () => {
 
                   <Button 
                     variant="ghost" 
-                    className="w-full text-sm font-semibold hover:bg-accent/50"
+                    className="w-full text-sm font-semibold hover:bg-accent/50 hover:text-primary"
                     onClick={() => setSelectedProvider(selectedProvider?.id === provider.id ? null : provider)}
                   >
                     {selectedProvider?.id === provider.id ? (
@@ -278,19 +278,19 @@ const Index = () => {
                   </Button>
 
                   {selectedProvider?.id === provider.id && (
-                    <div className="mt-6 pt-6 border-t grid md:grid-cols-2 gap-4">
-                      <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-5 border border-green-100">
+                    <div className="mt-6 pt-6 border-t border-border grid md:grid-cols-2 gap-4">
+                      <div className="bg-accent border border-secondary/30 rounded-2xl p-5">
                         <div className="flex items-center gap-2 mb-4">
-                          <div className="w-9 h-9 bg-green-500 rounded-xl flex items-center justify-center shadow-lg">
-                            <Icon name="Check" size={18} className="text-white" />
+                          <div className="w-9 h-9 bg-secondary rounded-xl flex items-center justify-center shadow-lg">
+                            <Icon name="Check" size={18} className="text-background" />
                           </div>
                           <h4 className="text-base font-bold text-foreground">Преимущества</h4>
                         </div>
                         <ul className="space-y-2.5">
                           {provider.pros.map((pro, idx) => (
                             <li key={idx} className="flex items-start gap-2.5">
-                              <div className="w-5 h-5 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <Icon name="Plus" size={12} className="text-white" />
+                              <div className="w-5 h-5 bg-secondary rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <Icon name="Plus" size={12} className="text-background" />
                               </div>
                               <span className="text-sm text-foreground font-medium">{pro}</span>
                             </li>
@@ -298,9 +298,9 @@ const Index = () => {
                         </ul>
                       </div>
                       
-                      <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-5 border border-orange-100">
+                      <div className="bg-accent border border-destructive/30 rounded-2xl p-5">
                         <div className="flex items-center gap-2 mb-4">
-                          <div className="w-9 h-9 bg-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+                          <div className="w-9 h-9 bg-destructive rounded-xl flex items-center justify-center shadow-lg">
                             <Icon name="AlertCircle" size={18} className="text-white" />
                           </div>
                           <h4 className="text-base font-bold text-foreground">Недостатки</h4>
@@ -308,7 +308,7 @@ const Index = () => {
                         <ul className="space-y-2.5">
                           {provider.cons.map((con, idx) => (
                             <li key={idx} className="flex items-start gap-2.5">
-                              <div className="w-5 h-5 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <div className="w-5 h-5 bg-destructive rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
                                 <Icon name="Minus" size={12} className="text-white" />
                               </div>
                               <span className="text-sm text-foreground font-medium">{con}</span>
@@ -324,7 +324,7 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Button size="lg" variant="outline" className="h-14 px-8 text-base font-bold border-2 rounded-xl hover:bg-accent/50">
+            <Button size="lg" variant="outline" className="h-14 px-8 text-base font-bold border-2 border-border rounded-xl hover:bg-accent hover:border-primary/50">
               Посмотреть все провайдеры
               <Icon name="Grid" size={20} className="ml-2" />
             </Button>
@@ -333,14 +333,13 @@ const Index = () => {
       </section>
 
       <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/5"></div>
-        <div className="absolute top-20 left-10 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[80px]"></div>
-        <div className="absolute bottom-20 right-10 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[80px]"></div>
+        <div className="absolute top-20 left-10 w-[400px] h-[400px] bg-primary/20 rounded-full blur-[100px]"></div>
+        <div className="absolute bottom-20 right-10 w-[400px] h-[400px] bg-secondary/20 rounded-full blur-[100px]"></div>
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16 space-y-4">
-              <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-5 py-2.5">
+              <div className="inline-flex items-center gap-2 bg-accent border border-primary/30 rounded-full px-5 py-2.5">
                 <Icon name="Lightbulb" size={16} className="text-primary" />
                 <span className="text-sm font-bold text-primary">Гайд по выбору</span>
               </div>
@@ -356,35 +355,31 @@ const Index = () => {
               {[
                 { 
                   icon: 'Target', 
-                  gradient: 'from-[#6366F1] to-[#8B5CF6]',
                   title: 'Определи задачи', 
                   text: 'Понять для чего нужен сервер: сайт, приложение или база данных' 
                 },
                 { 
                   icon: 'Cpu', 
-                  gradient: 'from-[#8B5CF6] to-[#EC4899]',
                   title: 'Выбери ресурсы', 
                   text: 'Подобрать CPU, RAM и диск с запасом для роста проекта' 
                 },
                 { 
                   icon: 'Globe', 
-                  gradient: 'from-[#EC4899] to-[#F43F5E]',
                   title: 'Проверь локацию', 
                   text: 'Выбрать дата-центр ближе к аудитории для скорости' 
                 },
                 { 
                   icon: 'Headphones', 
-                  gradient: 'from-[#F43F5E] to-[#F97316]',
                   title: 'Оцени поддержку', 
                   text: 'Убедиться в наличии поддержки 24/7 на русском языке' 
                 }
               ].map((step, idx) => (
-                <Card key={idx} className="border-2 hover:border-primary/30 transition-all group hover-lift bg-card/50 backdrop-blur-sm">
+                <Card key={idx} className="border-2 border-border hover:border-primary/50 transition-all group hover-lift bg-card">
                   <CardHeader className="p-6 md:p-8">
                     <div className="relative mb-6 inline-block">
-                      <div className={`absolute inset-0 bg-gradient-to-br ${step.gradient} rounded-2xl blur-lg opacity-40`}></div>
-                      <div className={`relative w-16 h-16 bg-gradient-to-br ${step.gradient} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
-                        <Icon name={step.icon as any} size={28} className="text-white" />
+                      <div className="absolute inset-0 bg-primary rounded-2xl blur-lg opacity-40"></div>
+                      <div className="relative w-16 h-16 bg-primary rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-neon transition-all">
+                        <Icon name={step.icon as any} size={28} className="text-background" />
                       </div>
                     </div>
                     <CardTitle className="text-2xl font-bold text-foreground mb-3">
@@ -401,21 +396,21 @@ const Index = () => {
         </div>
       </section>
 
-      <footer className="bg-muted/30 backdrop-blur-sm border-t py-16">
+      <footer className="bg-card border-t border-border py-16">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-4 gap-12 mb-12">
               <div className="md:col-span-2">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-2xl blur-lg opacity-60"></div>
-                    <div className="relative w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center">
-                      <Icon name="Zap" className="text-white" size={22} />
+                    <div className="absolute inset-0 bg-primary rounded-2xl blur-lg opacity-50"></div>
+                    <div className="relative w-12 h-12 bg-primary rounded-2xl flex items-center justify-center">
+                      <Icon name="Zap" className="text-background" size={22} />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">VDS Rating</h3>
-                    <p className="text-xs text-muted-foreground font-medium">Выбор профессионалов</p>
+                    <h3 className="text-xl font-bold text-primary">VDS Rating</h3>
+                    <p className="text-xs text-muted-foreground font-medium">Топ хостингов</p>
                   </div>
                 </div>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -457,7 +452,7 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-sm text-muted-foreground font-medium">
                 © 2024 VDS Rating. Все права защищены.
               </p>
