@@ -71,9 +71,9 @@ const Index = () => {
   const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
   const [configOpen, setConfigOpen] = useState<number | null>(null);
   const [configs, setConfigs] = useState<Record<number, ResourceConfig>>({
-    1: { cpu: 2, ram: 4, storage: 40 },
-    2: { cpu: 2, ram: 2, storage: 25 },
-    3: { cpu: 4, ram: 8, storage: 160 }
+    1: { cpu: 1, ram: 1, storage: 10 },
+    2: { cpu: 1, ram: 1, storage: 10 },
+    3: { cpu: 1, ram: 1, storage: 10 }
   });
 
   const calculatePrice = (provider: Provider, config: ResourceConfig) => {
