@@ -283,7 +283,7 @@ const Index = () => {
                       </Button>
 
                       {configOpen === provider.id && (
-                        <div className="bg-accent/50 border border-primary/10 rounded-2xl p-6 animate-in slide-in-from-bottom duration-500 ease-out overflow-hidden">
+                        <div className="bg-accent/50 border border-primary/10 rounded-2xl p-6">
                           <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center gap-2">
                               <Icon name="Sliders" size={20} className="text-primary" />
