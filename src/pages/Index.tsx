@@ -108,7 +108,7 @@ const Index = () => {
           <div className="max-w-5xl mx-auto text-center space-y-8">
             <div className="inline-flex items-center gap-2 bg-accent border border-primary/30 rounded-full px-5 py-2.5">
               <div className="w-2 h-2 bg-primary rounded-full animate-pulse shadow-neon"></div>
-              <span className="text-sm font-bold text-primary">Топ провайдеров 2024</span>
+              <span className="text-sm font-bold text-primary">Топ провайдеров 2025</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-[1.1] tracking-tight">
@@ -454,7 +454,7 @@ const Index = () => {
             
             <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-sm text-muted-foreground font-medium">
-                © 2024 VDS Rating. Все права защищены.
+                © 2025 VDS Rating. Все права защищены.
               </p>
               <div className="flex gap-6 text-sm text-muted-foreground font-medium">
                 <a href="#" className="hover:text-primary transition-colors">Политика конфиденциальности</a>
