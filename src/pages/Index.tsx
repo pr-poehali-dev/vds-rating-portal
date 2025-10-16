@@ -390,47 +390,48 @@ const Index = () => {
                         <Icon name={selectedProvider?.id === provider.id ? "ChevronUp" : "ChevronDown"} size={18} />
                       </Button>
 
-                    {selectedProvider?.id === provider.id && (
-                      <div className="mt-6 pt-6 border-t border-border grid md:grid-cols-2 gap-4">
-                        <div className="bg-accent border border-secondary/30 rounded-2xl p-5">
-                          <div className="flex items-center gap-2 mb-4">
-                            <div className="w-9 h-9 bg-secondary rounded-xl flex items-center justify-center shadow-lg">
-                              <Icon name="Check" size={18} className="text-background" />
+                      {selectedProvider?.id === provider.id && (
+                        <div className="pt-4 border-t border-border grid md:grid-cols-2 gap-4">
+                          <div className="bg-accent border border-secondary/30 rounded-2xl p-5">
+                            <div className="flex items-center gap-2 mb-4">
+                              <div className="w-9 h-9 bg-secondary rounded-xl flex items-center justify-center shadow-lg">
+                                <Icon name="Check" size={18} className="text-background" />
+                              </div>
+                              <h4 className="text-base font-bold text-foreground">Преимущества</h4>
                             </div>
-                            <h4 className="text-base font-bold text-foreground">Преимущества</h4>
+                            <ul className="space-y-2.5">
+                              {provider.pros.map((pro, idx) => (
+                                <li key={idx} className="flex items-start gap-2.5">
+                                  <div className="w-5 h-5 bg-secondary rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <Icon name="Plus" size={12} className="text-background" />
+                                  </div>
+                                  <span className="text-sm text-foreground font-medium">{pro}</span>
+                                </li>
+                              ))}
+                            </ul>
                           </div>
-                          <ul className="space-y-2.5">
-                            {provider.pros.map((pro, idx) => (
-                              <li key={idx} className="flex items-start gap-2.5">
-                                <div className="w-5 h-5 bg-secondary rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                                  <Icon name="Plus" size={12} className="text-background" />
-                                </div>
-                                <span className="text-sm text-foreground font-medium">{pro}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        
-                        <div className="bg-accent border border-destructive/30 rounded-2xl p-5">
-                          <div className="flex items-center gap-2 mb-4">
-                            <div className="w-9 h-9 bg-destructive rounded-xl flex items-center justify-center shadow-lg">
-                              <Icon name="AlertCircle" size={18} className="text-white" />
+                          
+                          <div className="bg-accent border border-destructive/30 rounded-2xl p-5">
+                            <div className="flex items-center gap-2 mb-4">
+                              <div className="w-9 h-9 bg-destructive rounded-xl flex items-center justify-center shadow-lg">
+                                <Icon name="AlertCircle" size={18} className="text-white" />
+                              </div>
+                              <h4 className="text-base font-bold text-foreground">Недостатки</h4>
                             </div>
-                            <h4 className="text-base font-bold text-foreground">Недостатки</h4>
+                            <ul className="space-y-2.5">
+                              {provider.cons.map((con, idx) => (
+                                <li key={idx} className="flex items-start gap-2.5">
+                                  <div className="w-5 h-5 bg-destructive rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <Icon name="Minus" size={12} className="text-white" />
+                                  </div>
+                                  <span className="text-sm text-foreground font-medium">{con}</span>
+                                </li>
+                              ))}
+                            </ul>
                           </div>
-                          <ul className="space-y-2.5">
-                            {provider.cons.map((con, idx) => (
-                              <li key={idx} className="flex items-start gap-2.5">
-                                <div className="w-5 h-5 bg-destructive rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                                  <Icon name="Minus" size={12} className="text-white" />
-                                </div>
-                                <span className="text-sm text-foreground font-medium">{con}</span>
-                              </li>
-                            ))}
-                          </ul>
                         </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               );
