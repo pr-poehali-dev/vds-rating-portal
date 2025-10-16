@@ -37,6 +37,20 @@ const providers: Provider[] = [
   },
   {
     id: 2,
+    name: 'Beget',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/cb5c67be-af76-4963-81a3-66f542907b9d.jpg',
+    rating: 9.6,
+    price: '350 ₽/мес',
+    cpu: '2 vCPU',
+    ram: '2 GB',
+    storage: '25 GB SSD',
+    traffic: 'Безлимит',
+    features: ['Защита от DDoS', 'Автобэкапы', 'SSL бесплатно', '24/7 поддержка', 'ISPmanager'],
+    pros: ['Низкая стоимость', 'Простота использования', 'Отличная поддержка', 'Стабильная работа'],
+    cons: ['Базовые ресурсы в минимальной конфигурации']
+  },
+  {
+    id: 3,
     name: 'CloudVDS Pro',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/ae7859e0-64a7-4d13-8a4b-f88d53564d0a.jpg',
     rating: 9.5,
@@ -50,7 +64,7 @@ const providers: Provider[] = [
     cons: ['Цена выше среднего']
   },
   {
-    id: 3,
+    id: 4,
     name: 'ServerSpace',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/ae7859e0-64a7-4d13-8a4b-f88d53564d0a.jpg',
     rating: 9.2,
@@ -64,7 +78,7 @@ const providers: Provider[] = [
     cons: ['Ограниченный трафик']
   },
   {
-    id: 4,
+    id: 5,
     name: 'HostPro VDS',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/ae7859e0-64a7-4d13-8a4b-f88d53564d0a.jpg',
     rating: 8.8,
@@ -297,11 +311,12 @@ const Index = () => {
           </div>
 
           <Tabs defaultValue="timeweb" className="max-w-4xl mx-auto">
-            <TabsList className="grid w-full grid-cols-4 mb-8">
-              <TabsTrigger value="timeweb">Timeweb Cloud</TabsTrigger>
-              <TabsTrigger value="cloudvds">CloudVDS Pro</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-5 mb-8">
+              <TabsTrigger value="timeweb">Timeweb</TabsTrigger>
+              <TabsTrigger value="beget">Beget</TabsTrigger>
+              <TabsTrigger value="cloudvds">CloudVDS</TabsTrigger>
               <TabsTrigger value="serverspace">ServerSpace</TabsTrigger>
-              <TabsTrigger value="hostpro">HostPro VDS</TabsTrigger>
+              <TabsTrigger value="hostpro">HostPro</TabsTrigger>
             </TabsList>
             
             <TabsContent value="timeweb">
@@ -371,12 +386,79 @@ const Index = () => {
               </Card>
             </TabsContent>
 
-            <TabsContent value="cloudvds">
+            <TabsContent value="beget">
               <Card className="border-2">
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-4">
                     <img 
                       src={providers[1].logo} 
+                      alt="Beget" 
+                      className="w-20 h-20 rounded-xl object-cover"
+                    />
+                    <div>
+                      <CardTitle className="text-2xl">Beget</CardTitle>
+                      <CardDescription>Доступный и надежный VDS хостинг</CardDescription>
+                      <div className="flex items-center gap-2 mt-2">
+                        <Icon name="Star" size={18} className="fill-yellow-400 text-yellow-400" />
+                        <span className="font-bold">9.6</span>
+                        <span className="text-muted-foreground">/ 10</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                      <Icon name="Info" size={20} className="text-primary" />
+                      О провайдере
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Beget — один из самых популярных российских хостинг-провайдеров с 2005 года. 
+                      Известен простотой использования, доступными ценами и качественной технической поддержкой. 
+                      Отлично подходит как для начинающих, так и для опытных пользователей.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                      <Icon name="Zap" size={20} className="text-primary" />
+                      Производительность
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      VDS серверы работают на SSD дисках с хорошей скоростью доступа. Панель управления ISPmanager 
+                      делает администрирование простым и понятным. Безлимитный трафик позволяет не беспокоиться 
+                      о дополнительных расходах при высокой нагрузке.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                      <Icon name="Shield" size={20} className="text-primary" />
+                      Преимущества
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Защита от DDoS атак, бесплатные SSL сертификаты и автоматические бэкапы входят в стоимость. 
+                      Техподдержка 24/7 отвечает быстро и помогает решить любые вопросы. 
+                      Низкая стоимость делает Beget отличным выбором для малого бизнеса.
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t">
+                    <Button size="lg" className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90">
+                      <Icon name="ExternalLink" size={20} className="mr-2" />
+                      Перейти на сайт Beget
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="cloudvds">
+              <Card className="border-2">
+                <CardHeader>
+                  <div className="flex items-center gap-4 mb-4">
+                    <img 
+                      src={providers[2].logo} 
                       alt="CloudVDS Pro" 
                       className="w-20 h-20 rounded-xl object-cover"
                     />
@@ -442,7 +524,7 @@ const Index = () => {
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-4">
                     <img 
-                      src={providers[2].logo} 
+                      src={providers[3].logo} 
                       alt="ServerSpace" 
                       className="w-20 h-20 rounded-xl object-cover"
                     />
@@ -508,7 +590,7 @@ const Index = () => {
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-4">
                     <img 
-                      src={providers[3].logo} 
+                      src={providers[4].logo} 
                       alt="HostPro VDS" 
                       className="w-20 h-20 rounded-xl object-cover"
                     />
