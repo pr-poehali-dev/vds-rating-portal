@@ -32,9 +32,9 @@ const providers: Provider[] = [
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/c68c0760-0692-436d-8905-b2f1b5486586.jpg',
     rating: 9.8,
     basePrice: 0,
-    cpuPrice: 249,
-    ramPrice: 149,
-    storagePrice: 3.9,
+    cpuPrice: 210,
+    ramPrice: 120,
+    storagePrice: 12,
     features: ['DDoS защита', 'NVMe диски', '99.99% SLA', 'Поддержка 24/7'],
     pros: ['Лучшее соотношение цена/качество', 'Быстрая техподдержка', 'Удобная панель управления'],
     cons: ['Минимальная конфигурация для начинающих']
