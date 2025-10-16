@@ -23,6 +23,20 @@ interface Provider {
 const providers: Provider[] = [
   {
     id: 1,
+    name: 'Timeweb Cloud',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/c68c0760-0692-436d-8905-b2f1b5486586.jpg',
+    rating: 9.8,
+    price: '399 ₽/мес',
+    cpu: '2 vCPU',
+    ram: '4 GB',
+    storage: '40 GB NVMe',
+    traffic: 'Безлимит',
+    features: ['DDoS защита', 'NVMe диски', '99.99% SLA', 'Поддержка 24/7', 'Панель управления'],
+    pros: ['Лучшее соотношение цена/качество', 'Быстрая техподдержка', 'Удобная панель управления', 'Стабильная работа'],
+    cons: ['Минимальная конфигурация для начинающих']
+  },
+  {
+    id: 2,
     name: 'CloudVDS Pro',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/ae7859e0-64a7-4d13-8a4b-f88d53564d0a.jpg',
     rating: 9.5,
@@ -36,7 +50,7 @@ const providers: Provider[] = [
     cons: ['Цена выше среднего']
   },
   {
-    id: 2,
+    id: 3,
     name: 'ServerSpace',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/ae7859e0-64a7-4d13-8a4b-f88d53564d0a.jpg',
     rating: 9.2,
@@ -50,7 +64,7 @@ const providers: Provider[] = [
     cons: ['Ограниченный трафик']
   },
   {
-    id: 3,
+    id: 4,
     name: 'HostPro VDS',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/ae7859e0-64a7-4d13-8a4b-f88d53564d0a.jpg',
     rating: 8.8,
@@ -282,19 +296,87 @@ const Index = () => {
             <p className="text-muted-foreground">Подробный анализ каждого провайдера</p>
           </div>
 
-          <Tabs defaultValue="cloudvds" className="max-w-4xl mx-auto">
-            <TabsList className="grid w-full grid-cols-3 mb-8">
+          <Tabs defaultValue="timeweb" className="max-w-4xl mx-auto">
+            <TabsList className="grid w-full grid-cols-4 mb-8">
+              <TabsTrigger value="timeweb">Timeweb Cloud</TabsTrigger>
               <TabsTrigger value="cloudvds">CloudVDS Pro</TabsTrigger>
               <TabsTrigger value="serverspace">ServerSpace</TabsTrigger>
               <TabsTrigger value="hostpro">HostPro VDS</TabsTrigger>
             </TabsList>
             
-            <TabsContent value="cloudvds">
+            <TabsContent value="timeweb">
               <Card className="border-2">
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-4">
                     <img 
                       src={providers[0].logo} 
+                      alt="Timeweb Cloud" 
+                      className="w-20 h-20 rounded-xl object-cover"
+                    />
+                    <div>
+                      <CardTitle className="text-2xl">Timeweb Cloud</CardTitle>
+                      <CardDescription>Лидер облачных VDS решений</CardDescription>
+                      <div className="flex items-center gap-2 mt-2">
+                        <Icon name="Star" size={18} className="fill-yellow-400 text-yellow-400" />
+                        <span className="font-bold">9.8</span>
+                        <span className="text-muted-foreground">/ 10</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                      <Icon name="Info" size={20} className="text-primary" />
+                      О провайдере
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Timeweb Cloud — крупнейший российский хостинг-провайдер с 20-летней историей. 
+                      Предлагает облачные VDS на базе собственной инфраструктуры с дата-центрами в России. 
+                      Известен надежностью, быстрой техподдержкой и удобной панелью управления.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                      <Icon name="Zap" size={20} className="text-primary" />
+                      Производительность
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Все серверы работают на NVMe дисках с скоростью до 3000 МБ/с. Использование новейших 
+                      процессоров Intel Xeon и выделенные ресурсы гарантируют стабильную работу. 
+                      SLA 99.99% подтверждает высокую надежность инфраструктуры.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                      <Icon name="Shield" size={20} className="text-primary" />
+                      Безопасность и поддержка
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Бесплатная защита от DDoS атак, автоматические бэкапы и мониторинг серверов. 
+                      Техническая поддержка работает круглосуточно на русском языке. 
+                      Среднее время ответа — менее 5 минут.
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t">
+                    <Button size="lg" className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90">
+                      <Icon name="ExternalLink" size={20} className="mr-2" />
+                      Перейти на сайт Timeweb Cloud
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="cloudvds">
+              <Card className="border-2">
+                <CardHeader>
+                  <div className="flex items-center gap-4 mb-4">
+                    <img 
+                      src={providers[1].logo} 
                       alt="CloudVDS Pro" 
                       className="w-20 h-20 rounded-xl object-cover"
                     />
@@ -360,7 +442,7 @@ const Index = () => {
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-4">
                     <img 
-                      src={providers[1].logo} 
+                      src={providers[2].logo} 
                       alt="ServerSpace" 
                       className="w-20 h-20 rounded-xl object-cover"
                     />
@@ -426,7 +508,7 @@ const Index = () => {
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-4">
                     <img 
-                      src={providers[2].logo} 
+                      src={providers[3].logo} 
                       alt="HostPro VDS" 
                       className="w-20 h-20 rounded-xl object-cover"
                     />
