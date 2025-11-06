@@ -127,9 +127,17 @@ export const ProviderCard = ({
                   </Badge>
                 ))}
               </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Icon name="MapPin" size={14} className="text-primary" />
-                <span><span className="font-semibold text-foreground">Расположение серверов:</span> {provider.locations.join(', ')}</span>
+              <div className="flex flex-col gap-1.5">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Icon name="MapPin" size={14} className="text-primary" />
+                  <span><span className="font-semibold text-foreground">Расположение серверов:</span> {provider.locations.join(', ')}</span>
+                </div>
+                {provider.trialDays && (
+                  <div className="flex items-center gap-2 text-sm">
+                    <Icon name="Gift" size={14} className="text-secondary" />
+                    <span className="font-semibold text-secondary">Тестовый период: {provider.trialDays} {provider.trialDays === 1 ? 'день' : provider.trialDays < 5 ? 'дня' : 'дней'} бесплатно</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>

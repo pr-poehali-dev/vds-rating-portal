@@ -16,6 +16,7 @@ export interface Provider {
   storagePrice: number;
   features: string[];
   locations: string[];
+  trialDays?: number;
   pros: string[];
   cons: string[];
   reviews: Review[];
