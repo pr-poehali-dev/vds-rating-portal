@@ -17,8 +17,10 @@ interface Review {
 
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState('admin');
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [pendingReviews, setPendingReviews] = useState<Review[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [processingId, setProcessingId] = useState<number | null>(null);
@@ -39,40 +41,89 @@ const Admin = () => {
   };
 
   useEffect(() => {
-    const savedAuth = localStorage.getItem('admin_auth');
-    if (savedAuth === 'true') {
-      setIsAuthenticated(true);
-      fetchPendingReviews();
+    const savedToken = localStorage.getItem('admin_token');
+    if (savedToken) {
+      verifyToken(savedToken);
     } else {
       setIsLoading(false);
     }
   }, []);
 
-  const handleLogin = (e: FormEvent) => {
+  const verifyToken = async (token: string) => {
+    try {
+      const response = await fetch('https://functions.poehali.dev/ccab6b74-68f9-4520-ad0e-701c27393f9d', {
+        method: 'GET',
+        headers: {
+          'X-Auth-Token': token,
+        },
+      });
+
+      if (response.ok) {
+        setIsAuthenticated(true);
+        fetchPendingReviews();
+      } else {
+        localStorage.removeItem('admin_token');
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.error('Error verifying token:', error);
+      localStorage.removeItem('admin_token');
+      setIsLoading(false);
+    }
+  };
+
+  const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
-    if (password === 'admin2025') {
-      setIsAuthenticated(true);
-      localStorage.setItem('admin_auth', 'true');
-      setAuthError('');
-      fetchPendingReviews();
-    } else {
-      setAuthError('Неверный пароль');
+    setIsAuthenticating(true);
+    setAuthError('');
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/ccab6b74-68f9-4520-ad0e-701c27393f9d', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem('admin_token', data.token);
+        setIsAuthenticated(true);
+        setPassword('');
+        fetchPendingReviews();
+      } else {
+        setAuthError(data.error || 'Неверные учётные данные');
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+      setAuthError('Ошибка подключения к серверу');
+    } finally {
+      setIsAuthenticating(false);
     }
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem('admin_auth');
+    localStorage.removeItem('admin_token');
     setPassword('');
+    setUsername('admin');
   };
 
   const handleReviewAction = async (reviewId: number, action: 'approve' | 'reject' | 'delete') => {
     setProcessingId(reviewId);
+    const token = localStorage.getItem('admin_token');
+    
     try {
       const response = await fetch('https://functions.poehali.dev/15bd2bf9-a831-4ef9-9ce3-fd6c7823ddc8', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'X-Auth-Token': token || '',
         },
         body: JSON.stringify({
           review_id: reviewId,
@@ -82,6 +133,9 @@ const Admin = () => {
 
       if (response.ok) {
         setPendingReviews(pendingReviews.filter(r => r.id !== reviewId));
+      } else if (response.status === 401) {
+        localStorage.removeItem('admin_token');
+        setIsAuthenticated(false);
       }
     } catch (error) {
       console.error('Error processing review:', error);
@@ -111,6 +165,19 @@ const Admin = () => {
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
                 <label className="text-sm font-semibold text-foreground mb-2 block">
+                  Имя пользователя
+                </label>
+                <Input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Введите имя пользователя"
+                  required
+                  className="h-11"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-semibold text-foreground mb-2 block">
                   Пароль
                 </label>
                 <Input
@@ -127,10 +194,20 @@ const Admin = () => {
               </div>
               <Button
                 type="submit"
-                className="w-full h-11 font-bold bg-primary text-background"
+                disabled={isAuthenticating}
+                className="w-full h-11 font-bold bg-primary text-background disabled:opacity-50"
               >
-                <Icon name="LogIn" size={16} className="mr-2" />
-                Войти
+                {isAuthenticating ? (
+                  <>
+                    <Icon name="Loader2" size={16} className="mr-2 animate-spin" />
+                    Вход...
+                  </>
+                ) : (
+                  <>
+                    <Icon name="LogIn" size={16} className="mr-2" />
+                    Войти
+                  </>
+                )}
               </Button>
               <Button
                 type="button"

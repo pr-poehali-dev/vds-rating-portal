@@ -20,7 +20,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'headers': {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type, X-User-Id',
+                'Access-Control-Allow-Headers': 'Content-Type, X-Auth-Token',
                 'Access-Control-Max-Age': '86400'
             },
             'body': '',
@@ -140,6 +140,40 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         }
     
     if method == 'PUT':
+        auth_token = event.get('headers', {}).get('X-Auth-Token') or event.get('headers', {}).get('x-auth-token')
+        
+        if not auth_token:
+            conn.close()
+            return {
+                'statusCode': 401,
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                'body': json.dumps({'error': 'Authentication required'}),
+                'isBase64Encoded': False
+            }
+        
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+        cursor.execute(
+            "SELECT u.id FROM admin_tokens t JOIN admin_users u ON t.user_id = u.id WHERE t.token = %s AND t.created_at > NOW() - INTERVAL '7 days'",
+            (auth_token,)
+        )
+        admin_user = cursor.fetchone()
+        cursor.close()
+        
+        if not admin_user:
+            conn.close()
+            return {
+                'statusCode': 401,
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                'body': json.dumps({'error': 'Invalid or expired token'}),
+                'isBase64Encoded': False
+            }
+        
         body_data = json.loads(event.get('body', '{}'))
         review_id = body_data.get('review_id')
         action = body_data.get('action')
