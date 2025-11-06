@@ -120,12 +120,16 @@ export const ProviderCard = ({
                 </span>
                 <span className="text-muted-foreground text-sm">из 5</span>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-2">
                 {provider.features.slice(0, 3).map((feature, idx) => (
                   <Badge key={idx} className="bg-accent border border-primary/20 text-foreground font-semibold text-xs">
                     {feature}
                   </Badge>
                 ))}
+              </div>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Icon name="MapPin" size={14} className="text-primary" />
+                <span>{provider.locations.join(', ')}</span>
               </div>
             </div>
           </div>

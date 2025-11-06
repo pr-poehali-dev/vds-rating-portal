@@ -15,6 +15,7 @@ export interface Provider {
   ramPrice: number;
   storagePrice: number;
   features: string[];
+  locations: string[];
   pros: string[];
   cons: string[];
   reviews: Review[];
