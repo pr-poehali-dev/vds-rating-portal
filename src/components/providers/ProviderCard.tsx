@@ -65,17 +65,22 @@ export const ProviderCard = ({
               <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2">{provider.name}</h3>
               <div className="flex items-center gap-3 mb-3">
                 <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Icon 
-                      key={i}
-                      name="Star" 
-                      size={16} 
-                      className={i < Math.floor(provider.rating) ? "fill-primary text-primary" : "text-muted"}
-                    />
-                  ))}
+                  {[...Array(5)].map((_, i) => {
+                    const avgRating = provider.reviews.reduce((sum, r) => sum + r.rating, 0) / provider.reviews.length;
+                    return (
+                      <Icon 
+                        key={i}
+                        name="Star" 
+                        size={16} 
+                        className={i < Math.round(avgRating) ? "fill-primary text-primary" : "text-muted"}
+                      />
+                    );
+                  })}
                 </div>
-                <span className="text-xl font-bold text-foreground">{provider.rating}</span>
-                <span className="text-muted-foreground text-sm">/10</span>
+                <span className="text-xl font-bold text-foreground">
+                  {(provider.reviews.reduce((sum, r) => sum + r.rating, 0) / provider.reviews.length).toFixed(1)}
+                </span>
+                <span className="text-muted-foreground text-sm">из 5</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {provider.features.slice(0, 3).map((feature, idx) => (
