@@ -6,7 +6,7 @@
       "path": "/",
       "body": {
         "username": "admin",
-        "password": "admin2025"
+        "password": "!@dmin2025!"
       },
       "expectedStatus": 200,
       "expectedBody": {

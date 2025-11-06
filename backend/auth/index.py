@@ -64,13 +64,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         username_escaped = username.replace("'", "''")
         
         cursor = conn.cursor(cursor_factory=RealDictCursor)
-        cursor.execute(
-            f"SELECT id, username FROM admin_users WHERE username = '{username_escaped}' AND password_hash = '{password_hash}'"
-        )
         
-        user = cursor.fetchone()
+        query = f"SELECT id, username, password_hash FROM admin_users WHERE username = '{username_escaped}'"
+        cursor.execute(query)
         
-        if not user:
+        db_user = cursor.fetchone()
+        
+        if not db_user or db_user['password_hash'] != password_hash:
             cursor.close()
             conn.close()
             return {
@@ -82,6 +82,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'body': json.dumps({'error': 'Invalid credentials'}),
                 'isBase64Encoded': False
             }
+        
+        user = {'id': db_user['id'], 'username': db_user['username']}
         
         token = secrets.token_urlsafe(32)
         
