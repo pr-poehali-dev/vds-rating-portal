@@ -453,13 +453,64 @@ const Index = () => {
                             </ul>
                           </div>
 
-                          <div className="pt-6 border-t border-border">
+                          <div className="pt-6 border-t border-border md:col-span-2">
                             <div className="flex items-center gap-2 mb-4">
                               <div className="w-9 h-9 bg-primary/20 rounded-xl flex items-center justify-center">
                                 <Icon name="MessageSquare" size={18} className="text-primary" />
                               </div>
                               <h4 className="text-base font-bold text-foreground">Отзывы клиентов</h4>
                             </div>
+
+                            <div className="bg-accent border border-primary/10 rounded-2xl p-5 mb-4">
+                              <div className="grid grid-cols-3 gap-6">
+                                <div className="text-center">
+                                  <div className="text-3xl font-black text-primary mb-1">
+                                    {(provider.reviews.reduce((sum, r) => sum + r.rating, 0) / provider.reviews.length).toFixed(1)}
+                                  </div>
+                                  <div className="flex items-center justify-center gap-1 mb-1">
+                                    {[...Array(5)].map((_, i) => (
+                                      <Icon 
+                                        key={i}
+                                        name="Star" 
+                                        size={14} 
+                                        className={i < Math.round(provider.reviews.reduce((sum, r) => sum + r.rating, 0) / provider.reviews.length) ? "fill-primary text-primary" : "text-muted"}
+                                      />
+                                    ))}
+                                  </div>
+                                  <span className="text-xs text-muted-foreground font-medium">Средний рейтинг</span>
+                                </div>
+
+                                <div className="text-center border-x border-border">
+                                  <div className="text-3xl font-black text-foreground mb-1">
+                                    {provider.reviews.length}
+                                  </div>
+                                  <Icon name="Users" size={20} className="text-primary mx-auto mb-1" />
+                                  <span className="text-xs text-muted-foreground font-medium">Всего отзывов</span>
+                                </div>
+
+                                <div className="text-center">
+                                  <div className="space-y-1">
+                                    {[5, 4, 3, 2, 1].map((star) => {
+                                      const count = provider.reviews.filter(r => r.rating === star).length;
+                                      const percentage = (count / provider.reviews.length) * 100;
+                                      return (
+                                        <div key={star} className="flex items-center gap-2 text-xs">
+                                          <span className="text-muted-foreground w-3">{star}</span>
+                                          <div className="flex-1 h-2 bg-background rounded-full overflow-hidden">
+                                            <div 
+                                              className="h-full bg-primary rounded-full transition-all" 
+                                              style={{ width: `${percentage}%` }}
+                                            ></div>
+                                          </div>
+                                          <span className="text-muted-foreground w-6 text-right">{count}</span>
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
                             <div className="space-y-3">
                               {provider.reviews.map((review, idx) => (
                                 <div key={idx} className="bg-background border border-border rounded-xl p-4">
