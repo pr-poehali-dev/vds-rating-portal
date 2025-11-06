@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import Icon from '@/components/ui/icon';
 import { providers } from '@/data/providers';
 
@@ -15,6 +16,9 @@ interface Review {
 }
 
 const Admin = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [authError, setAuthError] = useState('');
   const [pendingReviews, setPendingReviews] = useState<Review[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [processingId, setProcessingId] = useState<number | null>(null);
@@ -35,8 +39,32 @@ const Admin = () => {
   };
 
   useEffect(() => {
-    fetchPendingReviews();
+    const savedAuth = localStorage.getItem('admin_auth');
+    if (savedAuth === 'true') {
+      setIsAuthenticated(true);
+      fetchPendingReviews();
+    } else {
+      setIsLoading(false);
+    }
   }, []);
+
+  const handleLogin = (e: FormEvent) => {
+    e.preventDefault();
+    if (password === 'admin2025') {
+      setIsAuthenticated(true);
+      localStorage.setItem('admin_auth', 'true');
+      setAuthError('');
+      fetchPendingReviews();
+    } else {
+      setAuthError('Неверный пароль');
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem('admin_auth');
+    setPassword('');
+  };
 
   const handleReviewAction = async (reviewId: number, action: 'approve' | 'reject' | 'delete') => {
     setProcessingId(reviewId);
@@ -67,6 +95,59 @@ const Admin = () => {
     return provider?.name || `Provider #${providerId}`;
   };
 
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Card className="w-full max-w-md border-2 border-primary/20">
+          <CardHeader>
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center">
+                <Icon name="Shield" size={32} className="text-primary" />
+              </div>
+            </div>
+            <CardTitle className="text-2xl text-center">Вход в админ-панель</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <label className="text-sm font-semibold text-foreground mb-2 block">
+                  Пароль
+                </label>
+                <Input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Введите пароль"
+                  required
+                  className="h-11"
+                />
+                {authError && (
+                  <p className="text-sm text-destructive mt-2">{authError}</p>
+                )}
+              </div>
+              <Button
+                type="submit"
+                className="w-full h-11 font-bold bg-primary text-background"
+              >
+                <Icon name="LogIn" size={16} className="mr-2" />
+                Войти
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => window.location.href = '/'}
+                className="w-full h-11"
+              >
+                <Icon name="Home" size={16} className="mr-2" />
+                На главную
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
@@ -75,14 +156,24 @@ const Admin = () => {
             <h1 className="text-4xl font-bold text-foreground mb-2">Модерация отзывов</h1>
             <p className="text-muted-foreground">Управление отзывами пользователей</p>
           </div>
-          <Button
-            variant="outline"
-            onClick={() => window.location.href = '/'}
-            className="flex items-center gap-2"
-          >
-            <Icon name="Home" size={18} />
-            На главную
-          </Button>
+          <div className="flex gap-3">
+            <Button
+              variant="outline"
+              onClick={handleLogout}
+              className="flex items-center gap-2 border-destructive text-destructive hover:bg-destructive/10"
+            >
+              <Icon name="LogOut" size={18} />
+              Выйти
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => window.location.href = '/'}
+              className="flex items-center gap-2"
+            >
+              <Icon name="Home" size={18} />
+              На главную
+            </Button>
+          </div>
         </div>
 
         {isLoading ? (
