@@ -129,7 +129,7 @@ export const ProviderCard = ({
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Icon name="MapPin" size={14} className="text-primary" />
-                <span>{provider.locations.join(', ')}</span>
+                <span><span className="font-semibold text-foreground">Расположение серверов:</span> {provider.locations.join(', ')}</span>
               </div>
             </div>
           </div>
