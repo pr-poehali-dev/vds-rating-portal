@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
 import { Provider, ResourceConfig } from './types';
 
@@ -33,6 +35,18 @@ export const ProviderCard = ({
   reviewsToShow,
   onLoadMoreReviews
 }: ProviderCardProps) => {
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [reviewForm, setReviewForm] = useState({ author: '', text: '', rating: 5 });
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  const handleSubmitReview = (e: FormEvent) => {
+    e.preventDefault();
+    setSubmitSuccess(true);
+    setShowReviewForm(false);
+    setReviewForm({ author: '', text: '', rating: 5 });
+    setTimeout(() => setSubmitSuccess(false), 5000);
+  };
+
   return (
     <Card 
       className="group border-2 border-border hover:border-primary/50 transition-all duration-300 hover-lift overflow-hidden relative bg-card"
@@ -366,6 +380,104 @@ export const ProviderCard = ({
                     </Button>
                   </div>
                 )}
+
+                {submitSuccess && (
+                  <div className="mt-4 bg-secondary/20 border border-secondary rounded-xl p-4 flex items-center gap-3">
+                    <Icon name="CheckCircle" size={20} className="text-secondary" />
+                    <span className="text-sm font-medium text-foreground">Спасибо за отзыв! Он будет опубликован после модерации.</span>
+                  </div>
+                )}
+
+                <div className="mt-6">
+                  {!showReviewForm ? (
+                    <Button
+                      onClick={() => setShowReviewForm(true)}
+                      className="w-full h-12 text-sm font-bold bg-primary text-background hover:bg-primary/90 rounded-xl"
+                    >
+                      <Icon name="PenLine" size={18} className="mr-2" />
+                      Оставить отзыв
+                    </Button>
+                  ) : (
+                    <div className="bg-accent border border-primary/10 rounded-2xl p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <h5 className="text-lg font-bold text-foreground">Ваш отзыв</h5>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setShowReviewForm(false)}
+                          className="h-8 w-8 p-0"
+                        >
+                          <Icon name="X" size={18} />
+                        </Button>
+                      </div>
+                      <form onSubmit={handleSubmitReview} className="space-y-4">
+                        <div>
+                          <label className="text-sm font-semibold text-foreground mb-2 block">
+                            Ваше имя
+                          </label>
+                          <Input
+                            value={reviewForm.author}
+                            onChange={(e) => setReviewForm({ ...reviewForm, author: e.target.value })}
+                            placeholder="Введите ваше имя"
+                            required
+                            className="h-11"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-sm font-semibold text-foreground mb-2 block">
+                            Оценка
+                          </label>
+                          <div className="flex gap-2">
+                            {[1, 2, 3, 4, 5].map((star) => (
+                              <button
+                                key={star}
+                                type="button"
+                                onClick={() => setReviewForm({ ...reviewForm, rating: star })}
+                                className="transition-transform hover:scale-110"
+                              >
+                                <Icon
+                                  name="Star"
+                                  size={28}
+                                  className={star <= reviewForm.rating ? "fill-primary text-primary" : "text-muted hover:text-primary/50"}
+                                />
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                        <div>
+                          <label className="text-sm font-semibold text-foreground mb-2 block">
+                            Отзыв
+                          </label>
+                          <Textarea
+                            value={reviewForm.text}
+                            onChange={(e) => setReviewForm({ ...reviewForm, text: e.target.value })}
+                            placeholder="Расскажите о вашем опыте использования хостинга..."
+                            required
+                            rows={4}
+                            className="resize-none"
+                          />
+                        </div>
+                        <div className="flex gap-3">
+                          <Button
+                            type="submit"
+                            className="flex-1 h-11 font-bold bg-primary text-background"
+                          >
+                            <Icon name="Send" size={16} className="mr-2" />
+                            Отправить
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => setShowReviewForm(false)}
+                            className="h-11 px-6"
+                          >
+                            Отмена
+                          </Button>
+                        </div>
+                      </form>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           )}
