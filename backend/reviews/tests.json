@@ -19,9 +19,9 @@
       "bodyMatcher": "partial"
     },
     {
-      "name": "GET: List approved reviews",
+      "name": "GET: List pending reviews",
       "method": "GET",
-      "path": "/?provider_id=1&status=approved",
+      "path": "/?status=pending",
       "expectedStatus": 200,
       "expectedBody": {
         "reviews": "array"

@@ -7,7 +7,7 @@ from psycopg2.extras import RealDictCursor
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Business: Manage provider reviews (create, list)
+    Business: Manage provider reviews (create, list, moderate)
     Args: event - dict with httpMethod, body, queryStringParameters
           context - object with attributes: request_id, function_name
     Returns: HTTP response dict
@@ -19,7 +19,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'statusCode': 200,
             'headers': {
                 'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
                 'Access-Control-Allow-Headers': 'Content-Type, X-User-Id',
                 'Access-Control-Max-Age': '86400'
             },
@@ -136,6 +136,49 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'Access-Control-Allow-Origin': '*'
             },
             'body': json.dumps({'reviews': reviews_list}),
+            'isBase64Encoded': False
+        }
+    
+    if method == 'PUT':
+        body_data = json.loads(event.get('body', '{}'))
+        review_id = body_data.get('review_id')
+        action = body_data.get('action')
+        
+        if not review_id or action not in ['approve', 'reject', 'delete']:
+            conn.close()
+            return {
+                'statusCode': 400,
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                'body': json.dumps({'error': 'Invalid review_id or action'}),
+                'isBase64Encoded': False
+            }
+        
+        cursor = conn.cursor()
+        
+        if action == 'delete':
+            cursor.execute("DELETE FROM reviews WHERE id = %s", (review_id,))
+        elif action == 'approve':
+            cursor.execute("UPDATE reviews SET status = 'approved' WHERE id = %s", (review_id,))
+        elif action == 'reject':
+            cursor.execute("UPDATE reviews SET status = 'rejected' WHERE id = %s", (review_id,))
+        
+        conn.commit()
+        cursor.close()
+        conn.close()
+        
+        return {
+            'statusCode': 200,
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            'body': json.dumps({
+                'success': True,
+                'message': f'Review {action}d successfully'
+            }),
             'isBase64Encoded': False
         }
     

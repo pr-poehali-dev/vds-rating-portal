@@ -66,6 +66,10 @@ export const Footer = () => {
             <div className="flex gap-6 text-sm text-muted-foreground font-medium">
               <a href="#" className="hover:text-primary transition-colors">Политика конфиденциальности</a>
               <a href="#" className="hover:text-primary transition-colors">Условия</a>
+              <a href="/admin" className="hover:text-primary transition-colors flex items-center gap-1">
+                <Icon name="Shield" size={14} />
+                Админ
+              </a>
             </div>
           </div>
         </div>
