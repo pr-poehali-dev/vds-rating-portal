@@ -5,6 +5,13 @@ import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import Icon from '@/components/ui/icon';
 
+interface Review {
+  author: string;
+  text: string;
+  rating: number;
+  date: string;
+}
+
 interface Provider {
   id: number;
   name: string;
@@ -17,6 +24,7 @@ interface Provider {
   features: string[];
   pros: string[];
   cons: string[];
+  reviews: Review[];
 }
 
 interface ResourceConfig {
@@ -37,7 +45,12 @@ const providers: Provider[] = [
     storagePrice: 12,
     features: ['DDoS защита', 'NVMe диски', '99.99% SLA', 'Поддержка 24/7'],
     pros: ['Самая быстрая техподдержка на рынке', 'NVMe диски в базе', 'Гибкое масштабирование ресурсов', 'Бесплатный тестовый период'],
-    cons: ['Высокая цена за CPU', 'Нет готовых образов приложений', 'Сложная панель для новичков']
+    cons: ['Высокая цена за CPU', 'Нет готовых образов приложений', 'Сложная панель для новичков'],
+    reviews: [
+      { author: 'Алексей М.', text: 'Перешёл с другого хостинга — разница в скорости просто огромная! NVMe диски реально работают. Поддержка отвечает за 2-3 минуты, даже ночью.', rating: 5, date: '15 окт 2024' },
+      { author: 'Мария К.', text: 'Использую для интернет-магазина. За полгода не было ни одного сбоя. Цена кусается, но оно того стоит — клиенты довольны скоростью сайта.', rating: 5, date: '02 ноя 2024' },
+      { author: 'Дмитрий П.', text: 'Панель управления поначалу показалась сложной, но через пару дней разобрался. Главное — стабильность на высоте, сервер летает.', rating: 4, date: '28 окт 2024' }
+    ]
   },
   {
     id: 2,
@@ -50,7 +63,12 @@ const providers: Provider[] = [
     storagePrice: 1.5,
     features: ['Защита от DDoS', 'Автобэкапы', 'SSL бесплатно', '24/7 поддержка'],
     pros: ['Самые низкие цены на рынке', 'Идеален для новичков', 'Бесплатные автобэкапы', 'Более 100 готовых CMS'],
-    cons: ['Ограниченная производительность', 'Медленная работа техподдержки', 'Нет выделенных IP в базе']
+    cons: ['Ограниченная производительность', 'Медленная работа техподдержки', 'Нет выделенных IP в базе'],
+    reviews: [
+      { author: 'Ольга В.', text: 'Отличный вариант для первого сайта! Цена смешная, всё понятно даже новичку. WordPress установился в пару кликов. Для блога хватает с головой.', rating: 5, date: '20 окт 2024' },
+      { author: 'Сергей Л.', text: 'Пользуюсь 3 года, за эти деньги — супер. Но когда трафик вырос, начались тормоза. Пришлось переходить на более мощный тариф.', rating: 4, date: '10 ноя 2024' },
+      { author: 'Анна Т.', text: 'Техподдержка иногда отвечает по 2-3 часа, это раздражает. Но для небольших проектов за такую цену — идеально. Автобэкапы спасали несколько раз.', rating: 4, date: '05 ноя 2024' }
+    ]
   },
   {
     id: 3,
@@ -63,7 +81,12 @@ const providers: Provider[] = [
     storagePrice: 2.5,
     features: ['DDoS защита', 'SSD диски', '99.9% Uptime', 'Техподдержка 24/7'],
     pros: ['Максимальная производительность SSD', 'Быстрое развёртывание за 60 секунд', 'Техподдержка с экспертами', 'Широкий выбор ОС'],
-    cons: ['Дороже конкурентов на 15-20%', 'Сложная документация', 'Нет программы лояльности']
+    cons: ['Дороже конкурентов на 15-20%', 'Сложная документация', 'Нет программы лояльности'],
+    reviews: [
+      { author: 'Игорь Р.', text: 'Работаю с высоконагруженными проектами — CloudVDS справляется на ура! Сервер действительно разворачивается за минуту. Поддержка знает своё дело.', rating: 5, date: '12 ноя 2024' },
+      { author: 'Екатерина С.', text: 'Дороговато, конечно, но качество на высоте. Для серьёзного бизнеса самое то. Единственный минус — документация могла бы быть попроще.', rating: 4, date: '08 ноя 2024' },
+      { author: 'Павел Н.', text: 'Перешёл с Timeweb, чтобы сэкономить. По скорости почти не заметил разницы, зато плачу на 1500₽ меньше. Выбор дистрибутивов Linux огромный!', rating: 5, date: '01 ноя 2024' }
+    ]
   }
 ];
 
@@ -428,6 +451,36 @@ const Index = () => {
                                 </li>
                               ))}
                             </ul>
+                          </div>
+
+                          <div className="pt-6 border-t border-border">
+                            <div className="flex items-center gap-2 mb-4">
+                              <div className="w-9 h-9 bg-primary/20 rounded-xl flex items-center justify-center">
+                                <Icon name="MessageSquare" size={18} className="text-primary" />
+                              </div>
+                              <h4 className="text-base font-bold text-foreground">Отзывы клиентов</h4>
+                            </div>
+                            <div className="space-y-3">
+                              {provider.reviews.map((review, idx) => (
+                                <div key={idx} className="bg-background border border-border rounded-xl p-4">
+                                  <div className="flex items-center justify-between mb-2">
+                                    <span className="text-sm font-bold text-foreground">{review.author}</span>
+                                    <div className="flex items-center gap-1">
+                                      {[...Array(5)].map((_, i) => (
+                                        <Icon 
+                                          key={i}
+                                          name="Star" 
+                                          size={12} 
+                                          className={i < review.rating ? "fill-primary text-primary" : "text-muted"}
+                                        />
+                                      ))}
+                                    </div>
+                                  </div>
+                                  <p className="text-sm text-muted-foreground leading-relaxed mb-2">{review.text}</p>
+                                  <span className="text-xs text-muted-foreground">{review.date}</span>
+                                </div>
+                              ))}
+                            </div>
                           </div>
                         </div>
                       )}
