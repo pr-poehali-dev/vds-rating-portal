@@ -61,10 +61,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         
         password_hash = hashlib.sha256(password.encode()).hexdigest()
         
+        username_escaped = username.replace("'", "''")
+        
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         cursor.execute(
-            "SELECT id, username FROM admin_users WHERE username = %s AND password_hash = %s",
-            (username, password_hash)
+            f"SELECT id, username FROM admin_users WHERE username = '{username_escaped}' AND password_hash = '{password_hash}'"
         )
         
         user = cursor.fetchone()
@@ -85,8 +86,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         token = secrets.token_urlsafe(32)
         
         cursor.execute(
-            "INSERT INTO admin_tokens (user_id, token) VALUES (%s, %s) ON CONFLICT (user_id) DO UPDATE SET token = EXCLUDED.token, created_at = CURRENT_TIMESTAMP",
-            (user['id'], token)
+            f"INSERT INTO admin_tokens (user_id, token) VALUES ({user['id']}, '{token}') ON CONFLICT (user_id) DO UPDATE SET token = EXCLUDED.token, created_at = CURRENT_TIMESTAMP"
         )
         conn.commit()
         cursor.close()
@@ -121,10 +121,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'isBase64Encoded': False
             }
         
+        token_escaped = auth_token.replace("'", "''")
+        
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         cursor.execute(
-            "SELECT u.id, u.username FROM admin_tokens t JOIN admin_users u ON t.user_id = u.id WHERE t.token = %s AND t.created_at > NOW() - INTERVAL '7 days'",
-            (auth_token,)
+            f"SELECT u.id, u.username FROM admin_tokens t JOIN admin_users u ON t.user_id = u.id WHERE t.token = '{token_escaped}' AND t.created_at > NOW() - INTERVAL '7 days'"
         )
         
         user = cursor.fetchone()
