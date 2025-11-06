@@ -228,6 +228,11 @@ const providers: Provider[] = [
 const Index = () => {
   const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
   const [configOpen, setConfigOpen] = useState<number | null>(null);
+  const [reviewsToShow, setReviewsToShow] = useState<Record<number, number>>({
+    1: 5,
+    2: 5,
+    3: 5
+  });
   const [configs, setConfigs] = useState<Record<number, ResourceConfig>>({
     1: { cpu: 1, ram: 1, storage: 10 },
     2: { cpu: 1, ram: 1, storage: 10 },
@@ -647,7 +652,7 @@ const Index = () => {
                             </div>
 
                             <div className="space-y-3">
-                              {provider.reviews.map((review, idx) => (
+                              {provider.reviews.slice(0, reviewsToShow[provider.id]).map((review, idx) => (
                                 <div key={idx} className="bg-background border border-border rounded-xl p-4">
                                   <div className="flex items-center justify-between mb-2">
                                     <span className="text-sm font-bold text-foreground">{review.author}</span>
@@ -667,6 +672,25 @@ const Index = () => {
                                 </div>
                               ))}
                             </div>
+
+                            {reviewsToShow[provider.id] < provider.reviews.length && (
+                              <div className="mt-4 text-center">
+                                <Button 
+                                  variant="outline" 
+                                  className="w-full h-11 text-sm font-semibold border-2 border-border hover:bg-accent hover:border-primary/50 rounded-xl"
+                                  onClick={() => setReviewsToShow(prev => ({
+                                    ...prev,
+                                    [provider.id]: prev[provider.id] + 10
+                                  }))}
+                                >
+                                  Показать ещё отзывы
+                                  <Icon name="ChevronDown" size={18} className="ml-2" />
+                                  <span className="ml-2 text-muted-foreground">
+                                    ({provider.reviews.length - reviewsToShow[provider.id]} осталось)
+                                  </span>
+                                </Button>
+                              </div>
+                            )}
                           </div>
                         </div>
                       )}
