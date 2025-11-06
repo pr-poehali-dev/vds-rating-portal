@@ -72,10 +72,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'isBase64Encoded': False
             }
         
+        author_escaped = author.replace("'", "''")
+        text_escaped = text.replace("'", "''")
+        
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO reviews (provider_id, author, text, rating, status) VALUES (%s, %s, %s, %s, 'pending') RETURNING id",
-            (provider_id, author, text, rating)
+            f"INSERT INTO reviews (provider_id, author, text, rating, status) VALUES ({provider_id}, '{author_escaped}', '{text_escaped}', {rating}, 'pending') RETURNING id"
         )
         review_id = cursor.fetchone()[0]
         conn.commit()
@@ -101,17 +103,17 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         provider_id = params.get('provider_id')
         status = params.get('status', 'approved')
         
+        status_escaped = status.replace("'", "''")
+        
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         
         if provider_id:
             cursor.execute(
-                "SELECT id, provider_id, author, text, rating, created_at FROM reviews WHERE provider_id = %s AND status = %s ORDER BY created_at DESC",
-                (provider_id, status)
+                f"SELECT id, provider_id, author, text, rating, created_at FROM reviews WHERE provider_id = {provider_id} AND status = '{status_escaped}' ORDER BY created_at DESC"
             )
         else:
             cursor.execute(
-                "SELECT id, provider_id, author, text, rating, created_at FROM reviews WHERE status = %s ORDER BY created_at DESC LIMIT 100",
-                (status,)
+                f"SELECT id, provider_id, author, text, rating, created_at FROM reviews WHERE status = '{status_escaped}' ORDER BY created_at DESC LIMIT 100"
             )
         
         reviews = cursor.fetchall()
@@ -154,10 +156,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'isBase64Encoded': False
             }
         
+        token_escaped = auth_token.replace("'", "''")
+        
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         cursor.execute(
-            "SELECT u.id FROM admin_tokens t JOIN admin_users u ON t.user_id = u.id WHERE t.token = %s AND t.created_at > NOW() - INTERVAL '7 days'",
-            (auth_token,)
+            f"SELECT u.id FROM admin_tokens t JOIN admin_users u ON t.user_id = u.id WHERE t.token = '{token_escaped}' AND t.created_at > NOW() - INTERVAL '7 days'"
         )
         admin_user = cursor.fetchone()
         cursor.close()
@@ -193,11 +196,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         cursor = conn.cursor()
         
         if action == 'delete':
-            cursor.execute("DELETE FROM reviews WHERE id = %s", (review_id,))
+            cursor.execute(f"DELETE FROM reviews WHERE id = {review_id}")
         elif action == 'approve':
-            cursor.execute("UPDATE reviews SET status = 'approved' WHERE id = %s", (review_id,))
+            cursor.execute(f"UPDATE reviews SET status = 'approved' WHERE id = {review_id}")
         elif action == 'reject':
-            cursor.execute("UPDATE reviews SET status = 'rejected' WHERE id = %s", (review_id,))
+            cursor.execute(f"UPDATE reviews SET status = 'rejected' WHERE id = {review_id}")
         
         conn.commit()
         cursor.close()

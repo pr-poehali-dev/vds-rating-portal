@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
-import { Provider, ResourceConfig } from './types';
+import { Provider, ResourceConfig, Review } from './types';
 import { ProviderCard } from './ProviderCard';
 
 interface ProvidersSectionProps {
@@ -21,6 +21,39 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     2: { cpu: 1, ram: 1, storage: 10 },
     3: { cpu: 1, ram: 1, storage: 10 }
   });
+  const [loadedReviews, setLoadedReviews] = useState<Record<number, Review[]>>({});
+  const [providersWithReviews, setProvidersWithReviews] = useState<Provider[]>(providers);
+
+  useEffect(() => {
+    const fetchApprovedReviews = async () => {
+      try {
+        const response = await fetch('https://functions.poehali.dev/15bd2bf9-a831-4ef9-9ce3-fd6c7823ddc8?status=approved');
+        if (response.ok) {
+          const data = await response.json();
+          const reviewsByProvider: Record<number, Review[]> = {};
+          
+          data.reviews.forEach((review: Review) => {
+            if (!reviewsByProvider[review.provider_id]) {
+              reviewsByProvider[review.provider_id] = [];
+            }
+            reviewsByProvider[review.provider_id].push(review);
+          });
+          
+          setLoadedReviews(reviewsByProvider);
+          
+          const updatedProviders = providers.map(provider => ({
+            ...provider,
+            reviews: reviewsByProvider[provider.id] || provider.reviews
+          }));
+          setProvidersWithReviews(updatedProviders);
+        }
+      } catch (error) {
+        console.error('Error fetching approved reviews:', error);
+      }
+    };
+
+    fetchApprovedReviews();
+  }, [providers]);
 
   const calculatePrice = (provider: Provider, config: ResourceConfig) => {
     return Math.round(
@@ -55,7 +88,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
         </div>
 
         <div className="grid gap-6 max-w-6xl mx-auto">
-          {providers.map((provider, index) => {
+          {providersWithReviews.map((provider, index) => {
             const config = configs[provider.id];
             const calculatedPrice = calculatePrice(provider, config);
 
