@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавление отзывов Timeweb Cloud</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Добавление отзывов про Timeweb Cloud</h1>
+    <div id="status">Загрузка...</div>
+    <div id="results"></div>
+
+    <script>
+        const reviews = [
+            { author: 'Дмитрий К.', text: 'Пользуюсь Timeweb Cloud уже 2 года. Отличная стабильность, серверы практически не падают. Поддержка быстро отвечает, хотя иногда приходится ждать. Цены адекватные, особенно с учетом качества.', rating: 5 },
+            { author: 'Анна М.', text: 'Перешла с другого хостинга на Timeweb и очень довольна. Панель управления интуитивно понятная, даже для новичка. Скорость загрузки сайта заметно выросла. Рекомендую!', rating: 5 },
+            { author: 'Сергей П.', text: 'Неплохой хостинг, но были проблемы с миграцией. Техподдержка помогла, но пришлось ждать около суток. В остальном всё работает стабильно, придраться не к чему.', rating: 4 },
+            { author: 'Екатерина Л.', text: 'Отличное соотношение цена-качество! Для моего интернет-магазина на WooCommerce это идеальный вариант. Скорость отличная, бэкапы делаются автоматически.', rating: 5 },
+            { author: 'Алексей В.', text: 'Пользуюсь несколько месяцев. В целом доволен, но один раз был непонятный даунтайм на 15 минут. Поддержка объяснила, что была плановая работа, но не предупредили заранее. Минус за это.', rating: 4 },
+            { author: 'Мария С.', text: 'Лучший хостинг, который у меня был! Быстрая регистрация, простая настройка SSL, автоматические обновления. Поддержка вежливая и компетентная. Всем советую!', rating: 5 },
+            { author: 'Игорь Н.', text: 'Использую для нескольких проектов на Django. Всё работает быстро, ресурсов хватает с запасом. Удобно масштабировать конфигурацию прямо из панели. Рекомендую разработчикам.', rating: 5 },
+            { author: 'Ольга Т.', text: 'Неплохо, но цены чуть выше, чем у конкурентов. Зато качество на высоте, серверы шустрые, аптайм почти 100%. Для серьёзных проектов подходит отлично.', rating: 4 },
+            { author: 'Павел Ж.', text: 'Раньше был на shared-хостинге, перешёл на VDS в Timeweb — небо и земля! Сайт летает, никаких тормозов. Немного сложновато разобраться сначала, но есть хорошая документация.', rating: 5 },
+            { author: 'Наталья Р.', text: 'Пользуюсь год, всё устраивает. Один раз обращалась в поддержку — ответили за 10 минут и всё решили. Цены адекватные, качество хорошее. Буду продолжать использовать.', rating: 5 },
+            { author: 'Владимир К.', text: 'Хороший провайдер для малого и среднего бизнеса. Использую для корпоративного сайта и CRM. Стабильно работает, проблем не было. Единственное — хотелось бы больше дата-центров в регионах.', rating: 4 }
+        ];
+
+        async function addReviews() {
+            const resultsDiv = document.getElementById('results');
+            const statusDiv = document.getElementById('status');
+            
+            statusDiv.innerHTML = 'Добавление отзывов...';
+            
+            for (let i = 0; i < reviews.length; i++) {
+                const review = reviews[i];
+                try {
+                    const response = await fetch('https://functions.poehali.dev/15bd2bf9-a831-4ef9-9ce3-fd6c7823ddc8', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            provider_id: 1,
+                            author: review.author,
+                            text: review.text,
+                            rating: review.rating,
+                        }),
+                    });
+
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        resultsDiv.innerHTML += `<p style="color: green;">✅ Добавлен отзыв от ${review.author}</p>`;
+                    } else {
+                        resultsDiv.innerHTML += `<p style="color: red;">❌ Ошибка для ${review.author}: ${data.error}</p>`;
+                    }
+                } catch (error) {
+                    resultsDiv.innerHTML += `<p style="color: red;">❌ Ошибка для ${review.author}: ${error.message}</p>`;
+                }
+                
+                // Небольшая задержка между запросами
+                await new Promise(resolve => setTimeout(resolve, 200));
+            }
+            
+            statusDiv.innerHTML = 'Готово! Теперь нужно одобрить отзывы в админ-панели.';
+        }
+
+        addReviews();
+    </script>
+</body>
+</html>
