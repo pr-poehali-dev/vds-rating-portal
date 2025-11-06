@@ -61,6 +61,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         
         password_hash = hashlib.sha256(password.encode()).hexdigest()
         
+        print(f"DEBUG: Login attempt - username='{username}', password_length={len(password)}, hash={password_hash}")
+        
         username_escaped = username.replace("'", "''")
         
         cursor = conn.cursor(cursor_factory=RealDictCursor)
@@ -69,6 +71,10 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         cursor.execute(query)
         
         db_user = cursor.fetchone()
+        
+        print(f"DEBUG: DB query result - found={db_user is not None}")
+        if db_user:
+            print(f"DEBUG: DB hash={db_user['password_hash']}, match={db_user['password_hash'] == password_hash}")
         
         if not db_user or db_user['password_hash'] != password_hash:
             cursor.close()
