@@ -1,0 +1,32 @@
+{
+  "tests": [
+    {
+      "name": "POST: Create review",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "provider_id": 1,
+        "author": "Тестовый пользователь",
+        "text": "Отличный хостинг, всё работает стабильно!",
+        "rating": 5
+      },
+      "expectedStatus": 201,
+      "expectedBody": {
+        "success": true,
+        "review_id": "number",
+        "message": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "GET: List approved reviews",
+      "method": "GET",
+      "path": "/?provider_id=1&status=approved",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "reviews": "array"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

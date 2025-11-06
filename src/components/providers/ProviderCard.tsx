@@ -38,13 +38,37 @@ export const ProviderCard = ({
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [reviewForm, setReviewForm] = useState({ author: '', text: '', rating: 5 });
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmitReview = (e: FormEvent) => {
+  const handleSubmitReview = async (e: FormEvent) => {
     e.preventDefault();
-    setSubmitSuccess(true);
-    setShowReviewForm(false);
-    setReviewForm({ author: '', text: '', rating: 5 });
-    setTimeout(() => setSubmitSuccess(false), 5000);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/15bd2bf9-a831-4ef9-9ce3-fd6c7823ddc8', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          provider_id: provider.id,
+          author: reviewForm.author,
+          text: reviewForm.text,
+          rating: reviewForm.rating,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitSuccess(true);
+        setShowReviewForm(false);
+        setReviewForm({ author: '', text: '', rating: 5 });
+        setTimeout(() => setSubmitSuccess(false), 5000);
+      }
+    } catch (error) {
+      console.error('Error submitting review:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -460,16 +484,27 @@ export const ProviderCard = ({
                         <div className="flex gap-3">
                           <Button
                             type="submit"
-                            className="flex-1 h-11 font-bold bg-primary text-background"
+                            disabled={isSubmitting}
+                            className="flex-1 h-11 font-bold bg-primary text-background disabled:opacity-50"
                           >
-                            <Icon name="Send" size={16} className="mr-2" />
-                            Отправить
+                            {isSubmitting ? (
+                              <>
+                                <Icon name="Loader2" size={16} className="mr-2 animate-spin" />
+                                Отправка...
+                              </>
+                            ) : (
+                              <>
+                                <Icon name="Send" size={16} className="mr-2" />
+                                Отправить
+                              </>
+                            )}
                           </Button>
                           <Button
                             type="button"
                             variant="outline"
                             onClick={() => setShowReviewForm(false)}
                             className="h-11 px-6"
+                            disabled={isSubmitting}
                           >
                             Отмена
                           </Button>
