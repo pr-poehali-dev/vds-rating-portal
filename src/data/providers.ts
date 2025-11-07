@@ -2,6 +2,67 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 22,
+    name: 'AdminVPS',
+    logo: 'https://adminvps.ru/assets/img/logos/logo.svg',
+    rating: 9.1,
+    basePrice: 299,
+    cpuPrice: 140,
+    ramPrice: 80,
+    storagePrice: 6,
+    features: ['SSD диски', 'Бесплатная миграция', 'Техподдержка 24/7', 'DDoS защита'],
+    locations: ['Москва', 'Германия', 'Нидерланды'],
+    trialDays: 0,
+    url: 'https://my.adminvps.ru/aff.php?aff=29302',
+    pros: ['15 000+ клиентов', 'Бесплатная миграция сайтов', 'Мгновенная активация', 'Бесплатные SSL сертификаты'],
+    cons: ['Нет тестового периода', 'Средние цены', 'Ограниченный выбор локаций'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Bitrix', 'WordPress'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'Базовая защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 25 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 0,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 15 },
+        { months: 6, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney'],
+      minPrice: 299
+    },
+    popularity: 15000,
+    promoText: 'Бесплатная миграция сайтов + скидка 15% при оплате года',
+    caseStudies: ['WordPress сайты', 'Bitrix порталы', 'OpenCart магазины', 'Корпоративный сектор'],
+    uptime30days: 99.88,
+    reviews: [
+      { author: 'Сергей М.', text: 'Пользуюсь AdminVPS уже год. Бесплатная миграция прошла отлично, всё перенесли сами. Поддержка отзывчивая, цены адекватные.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Анна К.', text: 'Мгновенная активация сервера — буквально за минуту всё готово. SSL сертификаты бесплатные, что очень удобно для проектов.', rating: 5, date: '07 ноя 2025' },
+      { author: 'Дмитрий В.', text: 'Более 15 тысяч клиентов — это внушает доверие. Использую для WordPress сайтов, всё работает стабильно и быстро.', rating: 5, date: '06 ноя 2025' },
+      { author: 'Елена Т.', text: 'Нет тестового периода — пришлось сразу платить. Но качество компенсирует, за полгода сбоев не было. Рекомендую!', rating: 4, date: '05 ноя 2025' },
+      { author: 'Игорь Н.', text: 'Техподдержка работает круглосуточно, помогли с настройкой Bitrix за 20 минут. Цены средние, но сервис качественный.', rating: 5, date: '04 ноя 2025' }
+    ]
+  },
+  {
     id: 21,
     name: 'handyhost',
     logo: 'http://handyhost.ru/tpl/img/logo3.png',
