@@ -13,7 +13,7 @@ export const providers: Provider[] = [
     features: ['NVMe диски', 'Тестовый период 14 дней', '24/7 поддержка', 'DDoS защита'],
     locations: ['Москва'],
     trialDays: 14,
-    url: 'https://www.rusonyx.ru/hosting/vps/',
+    url: 'https://my.rusonyx.ru/#/login/reg?partner=34042924',
     pros: ['Длительный тестовый период', 'Отличная техподдержка', 'Стабильная работа', 'Низкие цены'],
     cons: ['Только одна локация', 'Интерфейс может показаться сложным'],
     fz152Compliant: true,
