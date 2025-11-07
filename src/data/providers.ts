@@ -2,6 +2,190 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 28,
+    name: 'VK Cloud',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/e06e2fc0-7dd2-4591-9d37-1494d45ebad9.jpg',
+    rating: 9.6,
+    basePrice: 0,
+    cpuPrice: 210,
+    ramPrice: 130,
+    storagePrice: 13,
+    features: ['NVMe диски', 'Kubernetes', 'ML Platform', 'CDN'],
+    locations: ['Москва', 'Санкт-Петербург', 'Казахстан'],
+    trialDays: 30,
+    url: 'https://cloud.vk.com/',
+    pros: ['Экосистема VK', 'ML Platform для AI проектов', 'Managed Kubernetes', 'Бесплатные 3000₽ на старте'],
+    cons: ['Средняя цена', 'Мало локаций за рубежом', 'Привязка к экосистеме VK'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '10 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Windows Server', 'Astra Linux'],
+      controlPanel: 'VK Cloud Console',
+      apiAccess: true,
+      ddosProtection: 'До 500 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.95%',
+      supportResponseTime: '< 15 мин',
+      moneyBackGuarantee: 30
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 160,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 20 },
+        { months: 6, percent: 12 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Безналичный расчет'],
+      minPrice: 210
+    },
+    popularity: 280000,
+    promoText: '3000₽ на счёт при регистрации + 30 дней тестирования',
+    caseStudies: ['ML/AI проекты', 'Highload API', 'Kubernetes кластеры', 'Big Data', 'Стартапы'],
+    uptime30days: 99.94,
+    reviews: [
+      { author: 'Максим Д.', text: 'ML Platform от VK — мощный инструмент для AI проектов. Jupyter notebooks, GPU инстансы, всё интегрировано. 3000₽ на старте хватило на месяц тестирования.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Анна К.', text: 'Интеграция с VK экосистемой удобна для наших проектов. Kubernetes разворачивается быстро, мониторинг встроенный. Поддержка отвечает оперативно!', rating: 5, date: '07 ноя 2025' },
+      { author: 'Сергей Н.', text: 'NVMe диски работают быстро, CDN включён в тариф. API понятное, документация подробная. Для стартапов — отличный вариант!', rating: 5, date: '06 ноя 2025' },
+      { author: 'Ольга М.', text: 'Цена чуть выше среднего, но качество компенсирует. За полгода ни одного серьёзного сбоя. Uptime близок к заявленным 99.95%.', rating: 5, date: '05 ноя 2025' },
+      { author: 'Дмитрий Л.', text: 'Мало зарубежных локаций — только Казахстан. Для международных проектов не хватает. Но для России покрытие хорошее.', rating: 4, date: '04 ноя 2025' }
+    ]
+  },
+  {
+    id: 27,
+    name: 'Cloud.ru',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/eb9cf2f4-f0cf-4796-856f-e616df3857fe.jpg',
+    rating: 9.4,
+    basePrice: 0,
+    cpuPrice: 200,
+    ramPrice: 125,
+    storagePrice: 14,
+    features: ['NVMe диски', 'Собственная сеть ЦОД', 'Kubernetes', 'DBaaS'],
+    locations: ['Москва', 'Санкт-Петербург', 'Екатеринбург', 'Красноярск'],
+    trialDays: 30,
+    url: 'https://cloud.ru/',
+    pros: ['Российская компания с 2008 года', 'Собственные ЦОД по всей России', 'Managed базы данных', 'SLA 99.95%'],
+    cons: ['Нет зарубежных локаций', 'Средняя скорость техподдержки', 'Сложная биллинговая система'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '10 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Astra Linux', 'Windows Server'],
+      controlPanel: 'Cloud.ru Panel',
+      apiAccess: true,
+      ddosProtection: 'До 400 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.95%',
+      supportResponseTime: '< 25 мин',
+      moneyBackGuarantee: 30
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 140,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 18 },
+        { months: 6, percent: 12 },
+        { months: 3, percent: 8 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Безналичный расчет'],
+      minPrice: 200
+    },
+    popularity: 180000,
+    promoText: '30 дней бесплатно + скидка 18% при годовой оплате',
+    caseStudies: ['Корпоративные решения', 'E-commerce', 'Highload системы', 'Kubernetes', 'DBaaS'],
+    uptime30days: 99.93,
+    reviews: [
+      { author: 'Игорь В.', text: 'Работаю с Cloud.ru 3 года. Собственные ЦОД по России — это надёжность. Managed PostgreSQL работает отлично, не надо возиться с настройкой.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Елена С.', text: 'SLA 99.95% реально соблюдают — за 2 года ни одного критичного сбоя. Kubernetes кластеры разворачиваются за минуты. Мониторинг встроенный.', rating: 5, date: '07 ноя 2025' },
+      { author: 'Алексей П.', text: 'Российская компания с 2008 года — это внушает доверие. NVMe диски быстрые, сеть стабильная. API удобное, документация понятная.', rating: 5, date: '06 ноя 2025' },
+      { author: 'Мария Т.', text: 'Биллинговая система запутанная — пришлось долго разбираться. Техподдержка отвечает медленно, иногда 30-40 минут. Но сервис качественный!', rating: 4, date: '05 ноя 2025' },
+      { author: 'Дмитрий Н.', text: 'Нет зарубежных локаций — для международных проектов минус. Но 4 ЦОД по России покрывают большую территорию. Цена адекватная.', rating: 4, date: '04 ноя 2025' }
+    ]
+  },
+  {
+    id: 26,
+    name: 'Serverspace',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/063d36f0-177c-4ae0-b26e-45bafe64e1eb.jpg',
+    rating: 9.5,
+    basePrice: 0,
+    cpuPrice: 180,
+    ramPrice: 100,
+    storagePrice: 10,
+    features: ['Глобальная сеть ЦОД', 'NVMe диски', 'API автоматизации', 'DDoS защита'],
+    locations: ['Москва', 'Амстердам', 'Нью-Йорк', 'Сингапур', 'Торонто', 'Сан-Паулу'],
+    trialDays: 10,
+    url: 'https://serverspace.ru/',
+    pros: ['Дата-центры по всему миру', 'Гибкая тарификация', 'Мощное API', 'Быстрое масштабирование'],
+    cons: ['Интерфейс только на английском', 'Мало русскоязычных материалов', 'Молодая компания'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '10 Гбит/с',
+      virtualization: ['KVM', 'VMware', 'Hyper-V'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'CoreOS', 'FreeBSD', 'Windows Server'],
+      controlPanel: 'Serverspace Panel',
+      apiAccess: true,
+      ddosProtection: 'До 300 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.95%',
+      supportResponseTime: '< 10 мин',
+      moneyBackGuarantee: 10
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 120,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 18 },
+        { months: 6, percent: 12 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Криптовалюта', 'PayPal', 'SWIFT'],
+      minPrice: 180
+    },
+    popularity: 45000,
+    promoText: 'Скидка 15% для новых клиентов на первые 3 месяца',
+    caseStudies: ['Международные проекты', 'Highload системы', 'DevOps инфраструктура', 'CDN сервисы', 'Gaming'],
+    uptime30days: 99.96,
+    reviews: [
+      { author: 'Дмитрий К.', text: 'Глобальная сеть ЦОД — ключевое преимущество. Разместил сервера в 4 локациях для CDN. NVMe диски работают быстро, пинг низкий везде!', rating: 5, date: '08 ноя 2025' },
+      { author: 'Алексей М.', text: 'API мощное, автоматизировал всё через Terraform. Гибкая тарификация позволяет оптимизировать расходы. Поддержка отвечает за 5-10 минут.', rating: 5, date: '07 ноя 2025' },
+      { author: 'Марина В.', text: 'Интерфейс только на английском — пришлось привыкать. Но функционал отличный. Масштабирование работает моментально, без простоев.', rating: 4, date: '06 ноя 2025' },
+      { author: 'Сергей П.', text: 'Для международных проектов идеально — 6 локаций на разных континентах. Криптовалютные платежи — плюс для зарубежных клиентов!', rating: 5, date: '05 ноя 2025' },
+      { author: 'Ольга Т.', text: 'Мало обучающих материалов на русском — приходится читать англоязычную документацию. Но качество сервиса компенсирует это неудобство.', rating: 4, date: '04 ноя 2025' }
+    ]
+  },
+  {
     id: 25,
     name: 'Яндекс Облако',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/30c049ff-e34d-4d12-94d2-d8da64bcc04d.jpg',
