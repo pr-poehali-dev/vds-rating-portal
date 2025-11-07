@@ -196,12 +196,12 @@ export const ProviderCard = ({
                     <span className="text-muted-foreground"> — {provider.locations.join(', ')}</span>
                   </div>
                 </div>
-                {provider.trialDays && (
-                  <div className="flex items-center gap-2 text-sm">
-                    <Icon name="Gift" size={14} className="text-primary" />
-                    <span className="font-semibold text-foreground">Тестовый период: {provider.trialDays} {provider.trialDays === 1 ? 'день' : provider.trialDays < 5 ? 'дня' : 'дней'} бесплатно</span>
-                  </div>
-                )}
+                <div className="flex items-center gap-2 text-sm">
+                  <Icon name="Gift" size={14} className={provider.trialDays ? "text-primary" : "text-muted-foreground"} />
+                  <span className="font-semibold text-foreground">
+                    Тестовый период: {provider.trialDays ? `${provider.trialDays} ${provider.trialDays === 1 ? 'день' : provider.trialDays < 5 ? 'дня' : 'дней'} бесплатно` : 'отсутствует'}
+                  </span>
+                </div>
                 {provider.fz152Compliant && (
                   <div className="flex items-center gap-2 text-sm">
                     <Icon name="ShieldCheck" size={14} className="text-primary" />
