@@ -123,22 +123,6 @@ const Promo = () => {
                           </div>
                         </div>
                       )}
-
-                      {provider.serviceGuarantees.moneyBackGuarantee > 0 && (
-                        <div className="bg-green-500/10 border-2 border-green-500/30 rounded-xl p-4">
-                          <div className="flex items-start gap-3">
-                            <div className="flex-shrink-0 w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
-                              <Icon name="ShieldCheck" size={20} className="text-white" />
-                            </div>
-                            <div className="flex-1">
-                              <div className="text-xs font-bold text-green-600 uppercase mb-1">Гарантия возврата</div>
-                              <div className="text-sm font-semibold text-foreground">
-                                {provider.serviceGuarantees.moneyBackGuarantee} дней гарантия возврата денег
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
                     </div>
 
                     <Button 
