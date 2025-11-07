@@ -2,6 +2,67 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 21,
+    name: 'handyhost',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/6fe68e4e-08cf-43f6-bff9-4f9af50f0d9b.jpg',
+    rating: 9.0,
+    basePrice: 160,
+    cpuPrice: 125,
+    ramPrice: 75,
+    storagePrice: 5,
+    features: ['SSD диски', 'Бесплатные SSL', 'ISPmanager', 'Техподдержка 24/7'],
+    locations: ['Москва', 'Санкт-Петербург', 'Германия'],
+    trialDays: 7,
+    url: 'http://handyhost.ru/?ref=189921',
+    pros: ['Тестовый период 7 дней', 'Низкие цены', 'ISPmanager в комплекте', 'Быстрое развертывание'],
+    cons: ['Нет NVMe дисков', 'Ограниченный выбор локаций', 'Молодая компания'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Alma Linux'],
+      controlPanel: 'ISPmanager',
+      apiAccess: true,
+      ddosProtection: 'До 60 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 20 мин',
+      moneyBackGuarantee: 7
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 55,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 20 },
+        { months: 6, percent: 15 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney'],
+      minPrice: 160
+    },
+    popularity: 9000,
+    promoText: 'Первая неделя бесплатно + скидка 20% при оплате года',
+    caseStudies: ['Корпоративные сайты', 'Интернет-магазины', 'Малый бизнес', 'Веб-разработка'],
+    uptime30days: 99.86,
+    reviews: [
+      { author: 'Владимир К.', text: 'Пользуюсь handyhost уже 8 месяцев. Цены очень доступные, поддержка отзывчивая. ISPmanager удобная, всё настраивается легко.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Анна М.', text: 'Тестовая неделя помогла разобраться во всём. SSD диски работают быстро, сайт загружается мгновенно. Рекомендую!', rating: 5, date: '07 ноя 2025' },
+      { author: 'Дмитрий П.', text: 'За свои деньги отличный вариант. Развернул сервер за пару минут. Панель ISPmanager знакома и удобна.', rating: 5, date: '06 ноя 2025' },
+      { author: 'Екатерина Л.', text: 'Молодая компания, но сервис качественный. За полгода использования сбоев не было. Цена радует!', rating: 4, date: '05 ноя 2025' },
+      { author: 'Игорь В.', text: 'Поддержка отвечает быстро, помогли с настройкой DNS за 15 минут. Стабильность хорошая, цена низкая.', rating: 5, date: '04 ноя 2025' }
+    ]
+  },
+  {
     id: 20,
     name: 'IHC',
     logo: 'https://www.ihc.ru/img/logo-ihc.svg',
