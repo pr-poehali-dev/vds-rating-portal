@@ -4,7 +4,7 @@ export const providers: Provider[] = [
   {
     id: 12,
     name: 'Fornex',
-    logo: 'https://fornex.com/static/local/templates/main/img/logo.svg',
+    logo: 'https://cdn.poehali.dev/files/20b93f61-55a3-4229-a553-3af037e4622c.png',
     rating: 9.1,
     basePrice: 250,
     cpuPrice: 155,
