@@ -45,7 +45,8 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     6: 5,
     7: 5,
     8: 5,
-    9: 5
+    9: 5,
+    10: 5
   });
   const [configs, setConfigs] = useState<Record<number, ResourceConfig>>({
     1: { cpu: 1, ram: 1, storage: 10 },
@@ -56,7 +57,8 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     6: { cpu: 1, ram: 1, storage: 10 },
     7: { cpu: 1, ram: 1, storage: 10 },
     8: { cpu: 1, ram: 1, storage: 10 },
-    9: { cpu: 1, ram: 1, storage: 10 }
+    9: { cpu: 1, ram: 1, storage: 10 },
+    10: { cpu: 1, ram: 1, storage: 10 }
   });
   const [loadedReviews, setLoadedReviews] = useState<Record<number, Review[]>>({});
   const [providersWithReviews, setProvidersWithReviews] = useState<Provider[]>(providers);

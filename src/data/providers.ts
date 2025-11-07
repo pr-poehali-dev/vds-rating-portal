@@ -2,6 +2,67 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 10,
+    name: 'NetAngels',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/netangels-logo.png',
+    rating: 9.2,
+    basePrice: 284,
+    cpuPrice: 170,
+    ramPrice: 105,
+    storagePrice: 11,
+    features: ['NVMe диски', '24/7 поддержка', 'DDoS защита', '99.99% SLA'],
+    locations: ['Москва', 'Санкт-Петербург'],
+    trialDays: 0,
+    url: 'https://netangels.ru/vds/',
+    pros: ['21 год на рынке', 'Высокая стабильность', 'Гибкая конфигурация', 'Поддержка GPU'],
+    cons: ['Нет тестового периода', 'Цены выше среднего', 'Интерфейс панели устарел'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Rocky Linux', 'Alma Linux', 'Windows Server'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'Базовая защита включена'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.99%',
+      supportResponseTime: '< 15 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 100,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 20 },
+        { months: 6, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'Яндекс.Касса', 'Безналичный расчет'],
+      minPrice: 284
+    },
+    popularity: 35000,
+    promoText: '21 год опыта в хостинге. Стабильность и надёжность проверенная временем',
+    caseStudies: ['Корпоративные сайты', 'E-commerce', 'SaaS приложения', 'ML/AI проекты с GPU', 'Highload системы'],
+    uptime30days: 99.98,
+    reviews: [
+      { author: 'Алексей М.', text: 'Работаем с NetAngels с 2015 года. За 10 лет ни одного серьёзного сбоя. Техподдержка всегда на связи.', rating: 5, date: '06 ноя 2025' },
+      { author: 'Ирина К.', text: 'Стабильный провайдер с долгой историей. Цены выше, чем у конкурентов, но за надёжность стоит платить.', rating: 4, date: '04 ноя 2025' },
+      { author: 'Дмитрий В.', text: 'Панель управления выглядит как из 2010 года, но функционально всё работает. Сервер стабильный.', rating: 3, date: '02 ноя 2025' },
+      { author: 'Олег П.', text: 'Отличная стабильность работы. Uptime реально близок к 100%. Для продакшна — самое то.', rating: 5, date: '31 окт 2025' },
+      { author: 'Мария Л.', text: 'Поддержка GPU серверов — это большой плюс для наших ML моделей. Работает отлично.', rating: 5, date: '29 окт 2025' }
+    ]
+  },
+  {
     id: 9,
     name: 'Rusonyx',
     logo: 'https://cdn.poehali.dev/files/6f53a0ca-f293-4181-bd08-74896750fa35.png',
