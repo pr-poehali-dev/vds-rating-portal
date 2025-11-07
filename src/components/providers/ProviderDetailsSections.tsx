@@ -22,7 +22,7 @@ export const TechnicalSpecsSection = ({ provider }: TechnicalSpecsSectionProps) 
           <Icon name="HardDrive" size={16} className="text-primary mt-0.5" />
           <div>
             <div className="text-xs text-muted-foreground mb-0.5">Тип дисков</div>
-            <Badge className="bg-primary/10 border border-primary/30 text-primary font-bold text-xs">
+            <Badge className="bg-primary/10 border border-primary/30 text-primary font-bold text-xs transition-all duration-300 hover:bg-primary/20 hover:scale-105 hover:shadow-md cursor-default">
               <Icon name="HardDrive" size={12} className="mr-1" />
               {technicalSpecs.diskType}
             </Badge>
@@ -32,7 +32,7 @@ export const TechnicalSpecsSection = ({ provider }: TechnicalSpecsSectionProps) 
           <Icon name="Wifi" size={16} className="text-primary mt-0.5" />
           <div>
             <div className="text-xs text-muted-foreground mb-0.5">Скорость сети</div>
-            <Badge className="bg-secondary/10 border border-secondary/30 text-secondary font-bold text-xs">
+            <Badge className="bg-secondary/10 border border-secondary/30 text-secondary font-bold text-xs transition-all duration-300 hover:bg-secondary/20 hover:scale-105 hover:shadow-md cursor-default">
               <Icon name="Zap" size={12} className="mr-1" />
               {technicalSpecs.networkSpeed}
             </Badge>
@@ -42,7 +42,7 @@ export const TechnicalSpecsSection = ({ provider }: TechnicalSpecsSectionProps) 
           <Icon name="Box" size={16} className="text-primary mt-0.5" />
           <div>
             <div className="text-xs text-muted-foreground mb-0.5">Виртуализация</div>
-            <Badge className="bg-primary/10 border border-primary/30 text-primary font-bold text-xs">
+            <Badge className="bg-primary/10 border border-primary/30 text-primary font-bold text-xs transition-all duration-300 hover:bg-primary/20 hover:scale-105 hover:shadow-md cursor-default">
               <Icon name="Box" size={12} className="mr-1" />
               {technicalSpecs.virtualization}
             </Badge>
@@ -52,7 +52,7 @@ export const TechnicalSpecsSection = ({ provider }: TechnicalSpecsSectionProps) 
           <Icon name="Shield" size={16} className="text-primary mt-0.5" />
           <div>
             <div className="text-xs text-muted-foreground mb-0.5">DDoS защита</div>
-            <Badge className="bg-primary/10 border border-primary/30 text-primary font-bold text-xs">
+            <Badge className="bg-primary/10 border border-primary/30 text-primary font-bold text-xs transition-all duration-300 hover:bg-primary/20 hover:scale-105 hover:shadow-md cursor-default">
               <Icon name="ShieldCheck" size={12} className="mr-1" />
               {technicalSpecs.ddosProtection}
             </Badge>
@@ -62,7 +62,7 @@ export const TechnicalSpecsSection = ({ provider }: TechnicalSpecsSectionProps) 
           <Icon name="Layout" size={16} className="text-primary mt-0.5" />
           <div>
             <div className="text-xs text-muted-foreground mb-0.5">Панель управления</div>
-            <Badge className="bg-accent border border-border text-foreground font-bold text-xs">
+            <Badge className="bg-accent border border-border text-foreground font-bold text-xs transition-all duration-300 hover:bg-accent/80 hover:scale-105 hover:shadow-md cursor-default">
               <Icon name="Monitor" size={12} className="mr-1" />
               {technicalSpecs.controlPanel}
             </Badge>
