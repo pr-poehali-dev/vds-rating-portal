@@ -74,7 +74,7 @@ export const ContactForm = () => {
           variant="outline" 
           className="rounded-xl hover:border-primary hover:bg-primary/10 hover:text-primary transition-all"
         >
-          <Icon name="Send" size={18} />
+          <Icon name="MessageCircle" size={18} />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
