@@ -38,8 +38,18 @@ export const HeroSection = () => {
               Посмотреть рейтинг
               <Icon name="ArrowRight" size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button size="lg" variant="outline" className="h-14 px-8 text-base font-bold border-2 border-border rounded-xl hover:bg-accent hover:border-primary/50 transition-all">
-              <Icon name="Play" size={18} className="mr-2" />
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="h-14 px-8 text-base font-bold border-2 border-border rounded-xl hover:bg-accent hover:border-primary/50 transition-all"
+              onClick={() => {
+                const guideSection = document.getElementById('guide');
+                if (guideSection) {
+                  guideSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
+              <Icon name="Lightbulb" size={18} className="mr-2" />
               Как выбрать
             </Button>
           </div>

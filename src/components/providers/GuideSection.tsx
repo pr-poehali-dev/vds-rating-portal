@@ -3,7 +3,7 @@ import Icon from '@/components/ui/icon';
 
 export const GuideSection = () => {
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section id="guide" className="py-24 relative overflow-hidden">
       <div className="absolute top-20 left-10 w-[400px] h-[400px] bg-primary/20 rounded-full blur-[100px]"></div>
       <div className="absolute bottom-20 right-10 w-[400px] h-[400px] bg-secondary/20 rounded-full blur-[100px]"></div>
       
