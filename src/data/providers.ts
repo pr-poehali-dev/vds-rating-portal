@@ -2,6 +2,67 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 19,
+    name: 'eurobyte',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/50a5c758-a64e-44fe-911b-6d12ea0637a9.jpg',
+    rating: 9.1,
+    basePrice: 195,
+    cpuPrice: 150,
+    ramPrice: 88,
+    storagePrice: 7,
+    features: ['SSD диски', 'DDoS защита', 'Панель ISPmanager', 'Бесплатные бэкапы'],
+    locations: ['Москва', 'Санкт-Петербург', 'Нидерланды'],
+    trialDays: 0,
+    url: 'https://eurobyte.ru/?referer=211867',
+    pros: ['Стабильная работа', 'Адекватные цены', 'ISPmanager в комплекте', 'Быстрая техподдержка'],
+    cons: ['Нет тестового периода', 'Мало локаций', 'Нет NVMe дисков'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Astra Linux'],
+      controlPanel: 'ISPmanager',
+      apiAccess: true,
+      ddosProtection: 'До 50 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 20 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 0,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 15 },
+        { months: 6, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney'],
+      minPrice: 195
+    },
+    popularity: 18000,
+    promoText: 'Скидка 15% при оплате на год + бесплатные бэкапы',
+    caseStudies: ['Корпоративные сайты', 'Интернет-магазины', 'CMS проекты', 'Веб-приложения'],
+    uptime30days: 99.88,
+    reviews: [
+      { author: 'Сергей Д.', text: 'Пользуюсь eurobyte уже 2 года. Стабильная работа, цены адекватные. ISPmanager удобный, всё настраивается быстро.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Анна В.', text: 'Бесплатные бэкапы — это очень удобно! Дважды спасали проект. Поддержка отвечает быстро, помогают по делу.', rating: 5, date: '07 ноя 2025' },
+      { author: 'Максим К.', text: 'За свои деньги отличный вариант. SSD диски работают быстро, сервер стабильный. Рекомендую!', rating: 5, date: '06 ноя 2025' },
+      { author: 'Ольга Т.', text: 'Нет тестового периода — пришлось сразу платить. Но качество оправдало ожидания. Для продакшна подходит.', rating: 4, date: '05 ноя 2025' },
+      { author: 'Дмитрий Н.', text: 'Локаций маловато — только 3. Но для российских проектов хватает. Цена и стабильность на уровне.', rating: 4, date: '04 ноя 2025' }
+    ]
+  },
+  {
     id: 18,
     name: 'cloud4box',
     logo: 'https://cdn.poehali.dev/files/d2e671d1-6589-4724-9c0e-4412622bf5a0.png',
