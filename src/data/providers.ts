@@ -2,6 +2,67 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 11,
+    name: 'Hostland',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/868b628e-4dcc-4820-9c47-3ac954360827.jpg',
+    rating: 9.0,
+    basePrice: 216,
+    cpuPrice: 140,
+    ramPrice: 85,
+    storagePrice: 7,
+    features: ['SSD диски', 'Бесплатный SSL', 'Бесплатный антивирус', 'Ежедневные бэкапы'],
+    locations: ['Москва'],
+    trialDays: 30,
+    url: 'https://hostland.ru',
+    pros: ['Длительный тестовый период', 'Бесплатная миграция сайта', 'Антивирус в комплекте', 'Бесплатный домен .RU/.РФ'],
+    cons: ['Только одна локация', 'Базовая производительность', 'Мало ЦОДов'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server'],
+      controlPanel: 'ISPmanager',
+      apiAccess: true,
+      ddosProtection: 'Базовая защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 30 мин',
+      moneyBackGuarantee: 30
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 0,
+      monitoring: true,
+      snapshots: true,
+      customOS: false
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 15 },
+        { months: 6, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'Яндекс.Касса'],
+      minPrice: 216
+    },
+    popularity: 25000,
+    promoText: 'Тестовый период 30 дней + бесплатный домен в зоне .RU/.РФ',
+    caseStudies: ['Сайты WordPress', 'Малый бизнес', 'Интернет-магазины', 'Блоги', 'Корпоративные порталы'],
+    uptime30days: 99.87,
+    reviews: [
+      { author: 'Иван С.', text: 'Тестовый период 30 дней — успел всё протестировать! Бесплатный домен .RU — приятный бонус. Для малого бизнеса идеально.', rating: 5, date: '07 ноя 2025' },
+      { author: 'Анна П.', text: 'Бесплатная миграция сайта — ребята всё перенесли сами за день. Очень удобно, не надо было разбираться самой.', rating: 5, date: '05 ноя 2025' },
+      { author: 'Максим Р.', text: 'Антивирус ImunifyAV+ бесплатно — это круто! Сразу нашёл пару уязвимостей на старом сайте. Рекомендую!', rating: 5, date: '03 ноя 2025' },
+      { author: 'Ольга К.', text: 'Только одна локация в Москве — для регионального бизнеса хотелось бы больше. Но цена и сервис хорошие.', rating: 4, date: '01 ноя 2025' },
+      { author: 'Дмитрий Л.', text: 'Поддержка отвечает не очень быстро — полчаса ждал. Но в итоге помогли решить проблему. За свои деньги норм.', rating: 4, date: '30 окт 2025' }
+    ]
+  },
+  {
     id: 10,
     name: 'NetAngels',
     logo: 'https://cdn.poehali.dev/files/026105ab-9f08-4cab-a6f1-63ce5e558a33.png',
