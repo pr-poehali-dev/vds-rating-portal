@@ -2,6 +2,67 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 8,
+    name: 'FastVPS',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/fastvps-logo.png',
+    rating: 9.1,
+    basePrice: 299,
+    cpuPrice: 180,
+    ramPrice: 110,
+    storagePrice: 10,
+    features: ['SSD диски', 'Бесплатная панель FASTPANEL', '24/7 поддержка', 'Бесплатные бэкапы'],
+    locations: ['Москва', 'Санкт-Петербург', 'Германия', 'США'],
+    trialDays: 0,
+    url: 'https://fastvps.ru/vps',
+    pros: ['Широкий выбор локаций', 'Бесплатная панель управления', 'Поддержка разных виртуализаций', 'Стабильная работа'],
+    cons: ['Средние цены', 'Нет тестового периода', 'Интерфейс сайта устарел'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM', 'OpenVZ', 'Hyper-V'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Alma Linux', 'Rocky Linux', 'Windows Server'],
+      controlPanel: 'FASTPANEL (бесплатно)',
+      apiAccess: true,
+      ddosProtection: 'Базовая защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 20 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 0,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 15 },
+        { months: 6, percent: 8 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'PayPal', 'Криптовалюта'],
+      minPrice: 299
+    },
+    popularity: 35000,
+    promoText: 'Скидка 15% при оплате на год вперёд',
+    caseStudies: ['Малый и средний бизнес', 'CMS сайты', 'Интернет-магазины', 'Корпоративные порталы', 'Разработка'],
+    uptime30days: 99.88,
+    reviews: [
+      { author: 'Павел Д.', text: 'Использую FastVPS уже 3 года. Стабильная работа, редкие сбои. Поддержка отвечает быстро. Цена адекватная.', rating: 5, date: '06 ноя 2025' },
+      { author: 'Ольга М.', text: 'FASTPANEL очень удобная, экономит деньги на платных панелях. Сервер работает без нареканий.', rating: 5, date: '04 ноя 2025' },
+      { author: 'Сергей К.', text: 'Хороший провайдер, но интерфейс сайта выглядит старомодно. Функционально всё отлично.', rating: 4, date: '02 ноя 2025' },
+      { author: 'Татьяна В.', text: 'Перенесла сайт на WordPress — всё работает быстро. Техподдержка помогла с миграцией.', rating: 5, date: '31 окт 2025' },
+      { author: 'Алексей Р.', text: 'За свои деньги отличный выбор. Много локаций, можно выбрать ближайшую. Скорость хорошая.', rating: 4, date: '29 окт 2025' }
+    ]
+  },
+  {
     id: 7,
     name: 'SprintHost',
     logo: 'https://cdn.poehali.dev/files/1b92b591-afaf-4ff7-8ed0-9385f837339d.png',
