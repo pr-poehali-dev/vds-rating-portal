@@ -8,6 +8,12 @@ import Icon from '@/components/ui/icon';
 
 const Promo = () => {
   const allowedProviders = ['Timeweb Cloud', 'ServerSpace', 'SprintHost'];
+  const providerLinks: Record<string, string> = {
+    'Timeweb Cloud': 'https://timeweb.cloud/',
+    'ServerSpace': 'https://serverspace.ru/',
+    'SprintHost': 'https://sprinthost.ru/'
+  };
+  
   const providersWithPromo = providers.filter(p => 
     allowedProviders.includes(p.name)
   );
@@ -143,8 +149,11 @@ const Promo = () => {
 
                     <Button 
                       className="w-full mt-6 h-12 text-base font-bold bg-primary text-background shadow-lg shadow-primary/30 hover:shadow-neon transition-all group"
-                      onClick={() => provider.url && window.open(provider.url, '_blank')}
-                      disabled={!provider.url}
+                      onClick={() => {
+                        const url = providerLinks[provider.name] || provider.url;
+                        if (url) window.open(url, '_blank');
+                      }}
+                      disabled={!providerLinks[provider.name] && !provider.url}
                     >
                       Получить предложение
                       <Icon name="ExternalLink" size={18} className="ml-2" />
