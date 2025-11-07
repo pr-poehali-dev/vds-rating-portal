@@ -75,11 +75,6 @@ export const Footer = () => {
                 </li>
                 <li>
                   <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium">
-                    Блог
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium">
                     О нас
                   </a>
                 </li>
