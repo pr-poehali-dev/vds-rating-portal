@@ -569,7 +569,7 @@ export const providers: Provider[] = [
     ramPrice: 90,
     storagePrice: 8,
     features: ['NVMe диски', 'Безлимитный трафик', 'ISPmanager бесплатно', 'Бесплатная миграция'],
-    locations: ['Россия (DataPro)', 'Нидерланды (Serverius)'],
+    locations: ['Россия', 'Нидерланды'],
     trialDays: 0,
     url: 'https://mchost.ru',
     pros: ['20 лет на рынке', 'NVMe диски Dell', 'Бесплатный ISPmanager 6', '60 000+ клиентов'],
