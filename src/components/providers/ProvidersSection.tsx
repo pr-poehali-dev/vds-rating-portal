@@ -11,10 +11,21 @@ interface ProvidersSectionProps {
 export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
   const [configOpen, setConfigOpen] = useState<number | null>(null);
-  const [filterFZ152, setFilterFZ152] = useState(false);
-  const [filterTrialPeriod, setFilterTrialPeriod] = useState(false);
-  const [filterLocation, setFilterLocation] = useState<string | null>(null);
-  const [sortBy, setSortBy] = useState<'rating' | 'price'>('rating');
+  const [filterFZ152, setFilterFZ152] = useState(() => {
+    const saved = localStorage.getItem('filterFZ152');
+    return saved ? JSON.parse(saved) : false;
+  });
+  const [filterTrialPeriod, setFilterTrialPeriod] = useState(() => {
+    const saved = localStorage.getItem('filterTrialPeriod');
+    return saved ? JSON.parse(saved) : false;
+  });
+  const [filterLocation, setFilterLocation] = useState<string | null>(() => {
+    return localStorage.getItem('filterLocation') || null;
+  });
+  const [sortBy, setSortBy] = useState<'rating' | 'price'>(() => {
+    const saved = localStorage.getItem('sortBy');
+    return (saved as 'rating' | 'price') || 'rating';
+  });
   const [reviewsToShow, setReviewsToShow] = useState<Record<number, number>>({
     1: 5,
     2: 5,
@@ -60,6 +71,26 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
 
     fetchApprovedReviews();
   }, [providers]);
+
+  useEffect(() => {
+    localStorage.setItem('filterFZ152', JSON.stringify(filterFZ152));
+  }, [filterFZ152]);
+
+  useEffect(() => {
+    localStorage.setItem('filterTrialPeriod', JSON.stringify(filterTrialPeriod));
+  }, [filterTrialPeriod]);
+
+  useEffect(() => {
+    if (filterLocation) {
+      localStorage.setItem('filterLocation', filterLocation);
+    } else {
+      localStorage.removeItem('filterLocation');
+    }
+  }, [filterLocation]);
+
+  useEffect(() => {
+    localStorage.setItem('sortBy', sortBy);
+  }, [sortBy]);
 
   const calculatePrice = (provider: Provider, config: ResourceConfig) => {
     return Math.round(
@@ -196,6 +227,9 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                       setFilterFZ152(false);
                       setFilterTrialPeriod(false);
                       setFilterLocation(null);
+                      localStorage.removeItem('filterFZ152');
+                      localStorage.removeItem('filterTrialPeriod');
+                      localStorage.removeItem('filterLocation');
                     }}
                   >
                     <Icon name="X" size={14} className="mr-1.5" />
