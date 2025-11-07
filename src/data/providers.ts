@@ -2,6 +2,128 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 30,
+    name: 'Hetzner',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/hetzner-logo.svg',
+    rating: 9.7,
+    basePrice: 0,
+    cpuPrice: 180,
+    ramPrice: 95,
+    storagePrice: 8,
+    features: ['NVMe диски', 'Dedicated vCPU', 'Snapshots бесплатно', 'IPv6'],
+    locations: ['Германия', 'Финляндия', 'США'],
+    trialDays: 0,
+    url: 'https://www.hetzner.com/',
+    pros: ['Лучшее соотношение цена/качество в Европе', 'Отличная сеть и скорость', 'Прозрачное ценообразование', 'Экологичные ЦОД'],
+    cons: ['Нет ЦОД в России', 'Техподдержка на английском', 'Требуется верификация документов'],
+    fz152Compliant: false,
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '20 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Rocky Linux', 'Alma Linux', 'Arch Linux', 'Windows Server'],
+      controlPanel: 'Hetzner Cloud Console',
+      apiAccess: true,
+      ddosProtection: 'Базовая защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 30 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 20,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [],
+      paymentMethods: ['Банковская карта', 'PayPal', 'SEPA'],
+      minPrice: 180
+    },
+    popularity: 500000,
+    promoText: '20€ бонус при регистрации для новых клиентов',
+    caseStudies: ['Международные проекты', 'Highload системы', 'DevOps инфраструктура', 'Kubernetes кластеры', 'CDN'],
+    uptime30days: 99.95,
+    reviews: [
+      { author: 'Алексей В.', text: 'Самое выгодное предложение в Европе! За €4.5 получаешь 2 vCPU + 4GB RAM + 40GB NVMe. Конкуренты в 2-3 раза дороже. Сеть быстрая, серверы летают!', rating: 5, date: '08 ноя 2025' },
+      { author: 'Дмитрий К.', text: 'Использую для международных проектов. ЦОД в Германии, Финляндии и США — пинг отличный по всей Европе. API мощное, Terraform работает идеально.', rating: 5, date: '07 ноя 2025' },
+      { author: 'Мария С.', text: 'NVMe диски показывают 3000+ IOPS даже на минимальном тарифе. База данных летает. Snapshots бесплатные — очень удобно для бэкапов!', rating: 5, date: '06 ноя 2025' },
+      { author: 'Сергей Н.', text: 'Техподдержка только на английском — пришлось подтянуть язык. Но ребята компетентные, отвечают быстро. Документация подробная.', rating: 4, date: '05 ноя 2025' },
+      { author: 'Ольга М.', text: 'Требуется верификация документов при регистрации — не всем подойдёт. Но для легального бизнеса это нормально. Цены честные, без скрытых комиссий.', rating: 4, date: '04 ноя 2025' },
+      { author: 'Игорь Р.', text: 'Dedicated vCPU — это не shared ресурсы! Производительность стабильная 24/7. Для продакшна идеально. За 3 года ни одного серьёзного сбоя.', rating: 5, date: '03 ноя 2025' },
+      { author: 'Анна П.', text: 'Экологичные ЦОД на возобновляемой энергии — для меня это важно. Сеть 20 Гбит/с — трафик летает. Kubernetes разворачивается за минуты.', rating: 5, date: '02 ноя 2025' }
+    ]
+  },
+  {
+    id: 29,
+    name: 'HostKey',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/hostkey-logo.svg',
+    rating: 9.5,
+    basePrice: 0,
+    cpuPrice: 160,
+    ramPrice: 85,
+    storagePrice: 7,
+    features: ['NVMe диски', '10 стран мира', 'DDoS защита', 'Managed services'],
+    locations: ['Москва', 'Нидерланды', 'США', 'Литва', 'Великобритания', 'Гонконг', 'Сингапур', 'Япония', 'ОАЭ', 'Турция'],
+    trialDays: 0,
+    url: 'https://www.hostkey.com/',
+    pros: ['10 локаций на 4 континентах', 'Российская компания с международными ЦОД', 'Managed услуги', 'Гибкая тарификация'],
+    cons: ['Нет тестового периода', 'Цены в долларах', 'Техподдержка иногда медленная'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '10 Гбит/с',
+      virtualization: ['KVM', 'VMware'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Rocky Linux', 'Alma Linux', 'Windows Server', 'FreeBSD'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'До 500 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 20 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 100,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 15 },
+        { months: 6, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'PayPal', 'Криптовалюта', 'Безналичный расчет', 'WebMoney'],
+      minPrice: 160
+    },
+    popularity: 120000,
+    promoText: 'Скидка 15% при оплате на год + бесплатная миграция',
+    caseStudies: ['Международный e-commerce', 'Игровые серверы', 'CDN сети', 'Финтех', 'VPN сервисы'],
+    uptime30days: 99.92,
+    reviews: [
+      { author: 'Максим Л.', text: '10 локаций на выбор — это круто! Разместил сервера в Москве, Сингапуре и США для глобального CDN. Пинг отличный во всех регионах.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Елена К.', text: 'Российская компания, но с международной инфраструктурой. ЦОД в Азии — редкость! Для e-commerce с азиатскими клиентами идеально.', rating: 5, date: '07 ноя 2025' },
+      { author: 'Андрей В.', text: 'NVMe диски работают быстро. Managed services помогли настроить кластер за день — сами всё сделали. Для тех, кто не хочет возиться — отлично!', rating: 5, date: '06 ноя 2025' },
+      { author: 'Светлана Н.', text: 'Цены в долларах — при скачках курса неудобно планировать бюджет. Но качество компенсирует. Стабильность хорошая.', rating: 4, date: '05 ноя 2025' },
+      { author: 'Дмитрий Р.', text: 'Техподдержка иногда отвечает долго — ждал 40 минут. Но в итоге помогли. Для некритичных проектов нормально.', rating: 4, date: '04 ноя 2025' },
+      { author: 'Ольга С.', text: 'Гибкая тарификация позволяет собрать конфигурацию под свои нужды. DDoS защита до 500 Гбит/с справилась с атакой на игровой сервер. Молодцы!', rating: 5, date: '03 ноя 2025' },
+      { author: 'Игорь П.', text: 'Принимают криптовалюту — удобно для международных платежей. ЦОД в ОАЭ и Турции — для ближневосточного рынка находка!', rating: 5, date: '02 ноя 2025' }
+    ]
+  },
+  {
     id: 28,
     name: 'VK Cloud',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/e06e2fc0-7dd2-4591-9d37-1494d45ebad9.jpg',
