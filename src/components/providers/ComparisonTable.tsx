@@ -1,0 +1,201 @@
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import Icon from '@/components/ui/icon';
+import { Provider, ResourceConfig } from './types';
+
+interface ComparisonTableProps {
+  providers: Provider[];
+  configs: Record<number, ResourceConfig>;
+  onClose: () => void;
+  calculatePrice: (provider: Provider, config: ResourceConfig) => number;
+}
+
+export const ComparisonTable = ({ providers, configs, onClose, calculatePrice }: ComparisonTableProps) => {
+  if (providers.length === 0) return null;
+
+  const rows = [
+    { label: 'Рейтинг', key: 'rating', icon: 'Star' },
+    { label: 'Цена (с текущей конфигурацией)', key: 'price', icon: 'DollarSign' },
+    { label: 'CPU цена за 1 vCPU', key: 'cpuPrice', icon: 'Cpu' },
+    { label: 'RAM цена за 1 GB', key: 'ramPrice', icon: 'MemoryStick' },
+    { label: 'Диск цена за 1 GB', key: 'storagePrice', icon: 'HardDrive' },
+    { label: 'Тестовый период', key: 'trialDays', icon: 'Gift' },
+    { label: 'Локации серверов', key: 'locations', icon: 'MapPin' },
+    { label: '152-ФЗ', key: 'fz152', icon: 'ShieldCheck' },
+    { label: 'Техподдержка', key: 'support', icon: 'Headphones' },
+  ];
+
+  return (
+    <div className="fixed inset-0 bg-background/95 backdrop-blur-sm z-50 overflow-y-auto">
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-primary/20 rounded-2xl flex items-center justify-center">
+                <Icon name="GitCompare" size={24} className="text-primary" />
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold text-foreground">Сравнение провайдеров</h2>
+                <p className="text-sm text-muted-foreground">Выбрано: {providers.length}</p>
+              </div>
+            </div>
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={onClose}
+              className="h-12 px-6 rounded-xl border-2"
+            >
+              <Icon name="X" size={18} className="mr-2" />
+              Закрыть
+            </Button>
+          </div>
+
+          <div className="bg-card border-2 border-border rounded-2xl overflow-hidden shadow-xl">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b-2 border-border bg-accent/50">
+                    <th className="text-left p-6 font-bold text-foreground sticky left-0 bg-accent/50 z-10">
+                      Характеристика
+                    </th>
+                    {providers.map((provider) => (
+                      <th key={provider.id} className="p-6 min-w-[250px]">
+                        <div className="flex flex-col items-center gap-3">
+                          <div className="w-16 h-16 rounded-xl bg-accent border border-primary/10 flex items-center justify-center">
+                            <img src={provider.logo} alt={provider.name} className="w-12 h-12 object-contain" />
+                          </div>
+                          <div className="text-lg font-bold text-foreground text-center">{provider.name}</div>
+                        </div>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {rows.map((row, idx) => (
+                    <tr key={row.key} className={idx % 2 === 0 ? 'bg-accent/20' : ''}>
+                      <td className="p-6 font-semibold text-foreground border-r-2 border-border sticky left-0 bg-card z-10">
+                        <div className="flex items-center gap-2">
+                          <Icon name={row.icon as any} size={18} className="text-primary" />
+                          {row.label}
+                        </div>
+                      </td>
+                      {providers.map((provider) => {
+                        const avgRating = provider.reviews.reduce((sum, r) => sum + r.rating, 0) / provider.reviews.length;
+                        
+                        let content;
+                        switch (row.key) {
+                          case 'rating':
+                            content = (
+                              <div className="flex items-center justify-center gap-2">
+                                <div className="flex items-center gap-1">
+                                  {[...Array(5)].map((_, i) => (
+                                    <Icon 
+                                      key={i}
+                                      name="Star" 
+                                      size={14} 
+                                      className={i < Math.round(avgRating) ? "fill-primary text-primary" : "text-muted"}
+                                    />
+                                  ))}
+                                </div>
+                                <span className="font-bold text-foreground">{avgRating.toFixed(1)}</span>
+                              </div>
+                            );
+                            break;
+                          case 'price':
+                            const price = calculatePrice(provider, configs[provider.id]);
+                            content = (
+                              <div className="text-center">
+                                <span className="text-2xl font-black text-primary">{price}₽</span>
+                                <span className="text-sm text-muted-foreground block">/месяц</span>
+                              </div>
+                            );
+                            break;
+                          case 'cpuPrice':
+                            content = <span className="font-semibold text-foreground">{provider.cpuPrice}₽</span>;
+                            break;
+                          case 'ramPrice':
+                            content = <span className="font-semibold text-foreground">{provider.ramPrice}₽</span>;
+                            break;
+                          case 'storagePrice':
+                            content = <span className="font-semibold text-foreground">{provider.storagePrice}₽</span>;
+                            break;
+                          case 'trialDays':
+                            content = provider.trialDays ? (
+                              <Badge className="bg-secondary/20 text-secondary border border-secondary/30">
+                                {provider.trialDays} {provider.trialDays === 1 ? 'день' : provider.trialDays < 5 ? 'дня' : 'дней'}
+                              </Badge>
+                            ) : (
+                              <span className="text-muted-foreground">Нет</span>
+                            );
+                            break;
+                          case 'locations':
+                            content = (
+                              <div className="flex flex-wrap gap-1.5 justify-center">
+                                {provider.locations.map((loc, i) => (
+                                  <Badge key={i} variant="outline" className="text-xs">
+                                    {loc}
+                                  </Badge>
+                                ))}
+                              </div>
+                            );
+                            break;
+                          case 'fz152':
+                            content = provider.fz152Compliant ? (
+                              <div className="flex flex-col items-center gap-1">
+                                <Icon name="Check" size={20} className="text-secondary" />
+                                {provider.fz152Level && (
+                                  <Badge className="bg-primary/20 text-primary border-0 text-xs">
+                                    {provider.fz152Level}
+                                  </Badge>
+                                )}
+                              </div>
+                            ) : (
+                              <Icon name="X" size={20} className="text-muted" />
+                            );
+                            break;
+                          case 'support':
+                            content = (
+                              <Badge className="bg-accent border border-primary/20 text-foreground">
+                                24/7
+                              </Badge>
+                            );
+                            break;
+                          default:
+                            content = null;
+                        }
+                        
+                        return (
+                          <td key={provider.id} className="p-6 text-center">
+                            {content}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                  
+                  <tr className="bg-accent/30 border-t-2 border-border">
+                    <td className="p-6 font-bold text-foreground sticky left-0 bg-accent/30 z-10">
+                      Действия
+                    </td>
+                    {providers.map((provider) => (
+                      <td key={provider.id} className="p-6 text-center">
+                        <Button 
+                          className="w-full h-11 font-bold bg-primary text-background"
+                          onClick={() => provider.url && window.open(provider.url, '_blank')}
+                          disabled={!provider.url}
+                        >
+                          Перейти
+                          <Icon name="ExternalLink" size={16} className="ml-2" />
+                        </Button>
+                      </td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

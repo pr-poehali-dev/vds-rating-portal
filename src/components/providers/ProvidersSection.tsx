@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Provider, ResourceConfig, Review } from './types';
 import { ProviderCard } from './ProviderCard';
+import { ComparisonTable } from './ComparisonTable';
 
 interface ProvidersSectionProps {
   providers: Provider[];
@@ -26,6 +27,8 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     const saved = localStorage.getItem('sortBy');
     return (saved as 'rating' | 'price') || 'rating';
   });
+  const [selectedForComparison, setSelectedForComparison] = useState<number[]>([]);
+  const [showComparison, setShowComparison] = useState(false);
   const [reviewsToShow, setReviewsToShow] = useState<Record<number, number>>({
     1: 5,
     2: 5,
@@ -99,6 +102,20 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
       config.ram * provider.ramPrice +
       config.storage * provider.storagePrice
     );
+  };
+
+  const toggleComparison = (providerId: number) => {
+    setSelectedForComparison(prev => 
+      prev.includes(providerId) 
+        ? prev.filter(id => id !== providerId)
+        : [...prev, providerId]
+    );
+  };
+
+  const compareProviders = () => {
+    if (selectedForComparison.length >= 2) {
+      setShowComparison(true);
+    }
   };
 
   const updateConfig = (providerId: number, key: keyof ResourceConfig, value: number) => {
@@ -263,10 +280,44 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                   ...prev,
                   [provider.id]: prev[provider.id] + 10
                 }))}
+                isSelected={selectedForComparison.includes(provider.id)}
+                onToggleCompare={() => toggleComparison(provider.id)}
               />
             );
           })}
         </div>
+
+        {selectedForComparison.length > 0 && (
+          <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40">
+            <div className="bg-card border-2 border-primary shadow-2xl shadow-primary/30 rounded-2xl p-4 flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <Icon name="GitCompare" size={20} className="text-primary" />
+                <span className="font-bold text-foreground">
+                  Выбрано для сравнения: {selectedForComparison.length}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setSelectedForComparison([])}
+                  className="h-9 px-4 rounded-xl"
+                >
+                  Очистить
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={compareProviders}
+                  disabled={selectedForComparison.length < 2}
+                  className="h-9 px-4 bg-primary text-background rounded-xl disabled:opacity-50"
+                >
+                  Сравнить
+                  <Icon name="ArrowRight" size={16} className="ml-2" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="text-center mt-12">
           <Button size="lg" variant="outline" className="h-14 px-8 text-base font-bold border-2 border-border rounded-xl hover:bg-accent hover:border-primary/50">
@@ -275,6 +326,15 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
           </Button>
         </div>
       </div>
+
+      {showComparison && (
+        <ComparisonTable
+          providers={providersWithReviews.filter(p => selectedForComparison.includes(p.id))}
+          configs={configs}
+          onClose={() => setShowComparison(false)}
+          calculatePrice={calculatePrice}
+        />
+      )}
     </section>
   );
 };

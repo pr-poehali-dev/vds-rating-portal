@@ -20,6 +20,8 @@ interface ProviderCardProps {
   onToggleDetails: () => void;
   reviewsToShow: number;
   onLoadMoreReviews: () => void;
+  isSelected?: boolean;
+  onToggleCompare?: () => void;
 }
 
 export const ProviderCard = ({
@@ -33,7 +35,9 @@ export const ProviderCard = ({
   showDetails,
   onToggleDetails,
   reviewsToShow,
-  onLoadMoreReviews
+  onLoadMoreReviews,
+  isSelected = false,
+  onToggleCompare
 }: ProviderCardProps) => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [reviewForm, setReviewForm] = useState({ author: '', text: '', rating: 5 });
@@ -73,10 +77,35 @@ export const ProviderCard = ({
 
   return (
     <Card 
-      className="group border-2 border-border hover:border-primary/50 transition-all duration-300 hover-lift overflow-hidden relative bg-card"
+      className={`group border-2 transition-all duration-300 hover-lift overflow-hidden relative bg-card ${
+        isSelected ? 'border-primary shadow-lg shadow-primary/20' : 'border-border hover:border-primary/50'
+      }`}
     >
+      {onToggleCompare && (
+        <div className="absolute top-4 right-4 z-20">
+          <Button
+            size="sm"
+            variant={isSelected ? "default" : "outline"}
+            className="h-9 px-3 text-xs font-bold rounded-lg shadow-lg"
+            onClick={onToggleCompare}
+          >
+            {isSelected ? (
+              <>
+                <Icon name="CheckCircle" size={14} className="mr-1.5" />
+                Выбрано
+              </>
+            ) : (
+              <>
+                <Icon name="GitCompare" size={14} className="mr-1.5" />
+                Сравнить
+              </>
+            )}
+          </Button>
+        </div>
+      )}
+
       {index === 0 && (
-        <div className="absolute -top-1 -right-1 z-20">
+        <div className="absolute -top-1 -right-1 z-10">
           <div className="relative">
             <div className="absolute inset-0 bg-primary rounded-bl-2xl rounded-tr-xl blur-lg"></div>
             <div className="relative bg-primary text-background font-bold px-5 py-2.5 rounded-bl-2xl rounded-tr-xl shadow-lg flex items-center gap-2">
