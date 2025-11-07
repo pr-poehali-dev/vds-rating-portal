@@ -2,6 +2,67 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 18,
+    name: 'cloud4box',
+    logo: 'https://cloud4box.com/assets/images/logo.svg',
+    rating: 9.2,
+    basePrice: 180,
+    cpuPrice: 140,
+    ramPrice: 85,
+    storagePrice: 8,
+    features: ['NVMe диски', 'DDoS защита', 'Панель управления', '24/7 поддержка'],
+    locations: ['Москва', 'Санкт-Петербург', 'Амстердам'],
+    trialDays: 7,
+    url: 'https://cloud4box.com/?from=93432',
+    pros: ['Тестовый период 7 дней', 'NVMe диски', 'Доступные цены', 'Быстрая техподдержка'],
+    cons: ['Молодая компания', 'Ограниченный выбор локаций', 'Мало отзывов'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Alma Linux'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'До 100 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 15 мин',
+      moneyBackGuarantee: 7
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 70,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 15 },
+        { months: 6, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney'],
+      minPrice: 180
+    },
+    popularity: 8000,
+    promoText: 'Первая неделя бесплатно + скидка 15% при оплате года',
+    caseStudies: ['Веб-разработка', 'Интернет-магазины', 'Корпоративные сайты', 'Dev окружения'],
+    uptime30days: 99.90,
+    reviews: [
+      { author: 'Алексей М.', text: 'Отличный провайдер! NVMe диски работают быстро, цена доступная. Тестовая неделя помогла разобраться во всём.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Мария К.', text: 'Поддержка отвечает быстро, помогли с настройкой за 10 минут. Панель управления понятная и удобная.', rating: 5, date: '07 ноя 2025' },
+      { author: 'Дмитрий П.', text: 'За свои деньги отличный вариант. Сервер работает стабильно, скорость высокая. Рекомендую!', rating: 5, date: '06 ноя 2025' },
+      { author: 'Ольга С.', text: 'Молодая компания, но сервис качественный. За 3 месяца не было ни одного сбоя. Довольна выбором!', rating: 4, date: '05 ноя 2025' },
+      { author: 'Игорь Н.', text: 'Локаций маловато — только 3 города. Но для моих задач хватает. Цена и качество соответствуют.', rating: 4, date: '04 ноя 2025' }
+    ]
+  },
+  {
     id: 17,
     name: 'VDSka',
     logo: 'https://cdn.poehali.dev/files/aea1fda7-d43c-4751-9792-a963e15f2850.png',
