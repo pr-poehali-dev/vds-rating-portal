@@ -182,9 +182,17 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
 
         <div className="mb-10 max-w-6xl mx-auto">
           <div className="bg-accent/50 border border-primary/10 rounded-2xl p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <Icon name="Filter" size={18} className="text-primary" />
-              <h3 className="text-lg font-bold text-foreground">Фильтры</h3>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <Icon name="Filter" size={18} className="text-primary" />
+                <h3 className="text-lg font-bold text-foreground">Фильтры</h3>
+              </div>
+              <div className="flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-4 py-2">
+                <Icon name="Search" size={16} className="text-primary" />
+                <span className="text-sm font-bold text-primary">
+                  Найдено: {filteredProviders.length} {filteredProviders.length === 1 ? 'провайдер' : filteredProviders.length < 5 ? 'провайдера' : 'провайдеров'}
+                </span>
+              </div>
             </div>
             
             <div className="flex flex-wrap gap-3 mb-4">
