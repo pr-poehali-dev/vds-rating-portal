@@ -18,6 +18,12 @@
       "method": "GET",
       "path": "/",
       "expectedStatus": 200
+    },
+    {
+      "name": "GET - Get daily statistics",
+      "method": "GET",
+      "path": "/?view=daily",
+      "expectedStatus": 200
     }
   ]
 }

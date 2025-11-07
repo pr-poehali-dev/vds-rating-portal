@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import Icon from '@/components/ui/icon';
 import { providers } from '@/data/providers';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 interface Review {
   id: number;
@@ -22,6 +23,12 @@ interface ClickStats {
   last_click: string | null;
 }
 
+interface DailyStats {
+  provider_id: number;
+  date: string;
+  clicks: number;
+}
+
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('admin');
@@ -33,6 +40,8 @@ const Admin = () => {
   const [processingId, setProcessingId] = useState<number | null>(null);
   const [clickStats, setClickStats] = useState<ClickStats[]>([]);
   const [isLoadingStats, setIsLoadingStats] = useState(true);
+  const [dailyStats, setDailyStats] = useState<DailyStats[]>([]);
+  const [isLoadingDaily, setIsLoadingDaily] = useState(true);
 
   const fetchPendingReviews = async () => {
     setIsLoading(true);
@@ -64,6 +73,21 @@ const Admin = () => {
     }
   };
 
+  const fetchDailyStats = async () => {
+    setIsLoadingDaily(true);
+    try {
+      const response = await fetch('https://functions.poehali.dev/d0b8e2ce-45c2-4ab9-8d08-baf03c0268f4?view=daily');
+      if (response.ok) {
+        const data = await response.json();
+        setDailyStats(data.daily_stats || []);
+      }
+    } catch (error) {
+      console.error('Error fetching daily stats:', error);
+    } finally {
+      setIsLoadingDaily(false);
+    }
+  };
+
   useEffect(() => {
     const savedToken = localStorage.getItem('admin_token');
     if (savedToken) {
@@ -86,6 +110,7 @@ const Admin = () => {
         setIsAuthenticated(true);
         fetchPendingReviews();
         fetchClickStats();
+        fetchDailyStats();
       } else {
         localStorage.removeItem('admin_token');
         setIsLoading(false);
@@ -122,6 +147,7 @@ const Admin = () => {
         setPassword('');
         fetchPendingReviews();
         fetchClickStats();
+        fetchDailyStats();
       } else {
         setAuthError(data.error || 'Неверные учётные данные');
       }
@@ -326,6 +352,75 @@ const Admin = () => {
               })}
             </div>
           )}
+
+          <div className="mt-8">
+            <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+              <Icon name="TrendingUp" size={20} className="text-primary" />
+              Динамика переходов (последние 30 дней)
+            </h3>
+            {isLoadingDaily ? (
+              <div className="flex items-center justify-center py-8">
+                <Icon name="Loader2" size={32} className="animate-spin text-primary" />
+              </div>
+            ) : (
+              <Card className="border-2 border-primary/20">
+                <CardContent className="pt-6">
+                  <ResponsiveContainer width="100%" height={400}>
+                    <LineChart
+                      data={(() => {
+                        const dateMap = new Map<string, any>();
+                        
+                        dailyStats.forEach(stat => {
+                          if (!dateMap.has(stat.date)) {
+                            dateMap.set(stat.date, { date: stat.date });
+                          }
+                          const providerName = getProviderName(stat.provider_id);
+                          dateMap.get(stat.date)![providerName] = stat.clicks;
+                        });
+                        
+                        return Array.from(dateMap.values()).sort((a, b) => 
+                          new Date(a.date).getTime() - new Date(b.date).getTime()
+                        ).map(item => ({
+                          ...item,
+                          date: new Date(item.date).toLocaleDateString('ru-RU', { 
+                            day: '2-digit', 
+                            month: '2-digit' 
+                          })
+                        }));
+                      })()}
+                      margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
+                      <XAxis 
+                        dataKey="date" 
+                        style={{ fontSize: '12px' }}
+                      />
+                      <YAxis style={{ fontSize: '12px' }} />
+                      <Tooltip 
+                        contentStyle={{ 
+                          backgroundColor: 'hsl(var(--card))',
+                          border: '1px solid hsl(var(--border))',
+                          borderRadius: '8px'
+                        }}
+                      />
+                      <Legend />
+                      {providers.map((provider, idx) => (
+                        <Line
+                          key={provider.id}
+                          type="monotone"
+                          dataKey={provider.name}
+                          stroke={['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'][idx % 4]}
+                          strokeWidth={2}
+                          dot={{ r: 4 }}
+                          activeDot={{ r: 6 }}
+                        />
+                      ))}
+                    </LineChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
+            )}
+          </div>
         </div>
 
         <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
