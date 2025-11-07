@@ -164,9 +164,14 @@ export const ProviderCard = ({
                 ))}
               </div>
               <div className="flex flex-col gap-1.5">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Icon name="MapPin" size={14} className="text-primary" />
-                  <span><span className="font-semibold text-foreground">Расположение серверов:</span> {provider.locations.join(', ')}</span>
+                <div className="flex items-start gap-2 text-sm">
+                  <Icon name="Database" size={14} className="text-primary mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-foreground">
+                      {provider.locations.length} {provider.locations.length === 1 ? 'ЦОД' : provider.locations.length < 5 ? 'ЦОДа' : 'ЦОДов'}
+                    </span>
+                    <span className="text-muted-foreground"> — {provider.locations.join(', ')}</span>
+                  </div>
                 </div>
                 {provider.trialDays && (
                   <div className="flex items-center gap-2 text-sm">
