@@ -175,8 +175,8 @@ export const ProviderCard = ({
                 </div>
                 {provider.trialDays && (
                   <div className="flex items-center gap-2 text-sm">
-                    <Icon name="Gift" size={14} className="text-secondary" />
-                    <span className="font-semibold text-secondary">Тестовый период: {provider.trialDays} {provider.trialDays === 1 ? 'день' : provider.trialDays < 5 ? 'дня' : 'дней'} бесплатно</span>
+                    <Icon name="Gift" size={14} className="text-primary" />
+                    <span className="font-semibold text-foreground">Тестовый период: {provider.trialDays} {provider.trialDays === 1 ? 'день' : provider.trialDays < 5 ? 'дня' : 'дней'} бесплатно</span>
                   </div>
                 )}
                 {provider.fz152Compliant && (
