@@ -13,7 +13,7 @@ export const providers: Provider[] = [
     features: ['SSD диски', 'Бесплатный SSL', 'Бесплатный антивирус', 'Ежедневные бэкапы'],
     locations: ['Москва'],
     trialDays: 30,
-    url: 'https://hostland.ru',
+    url: 'https://www.hostland.ru/?r=cf78346c',
     pros: ['Длительный тестовый период', 'Бесплатная миграция сайта', 'Антивирус в комплекте', 'Бесплатный домен .RU/.РФ'],
     cons: ['Только одна локация', 'Базовая производительность', 'Мало ЦОДов'],
     fz152Compliant: true,
