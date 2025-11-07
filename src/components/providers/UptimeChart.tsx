@@ -148,7 +148,7 @@ export const UptimeChart = ({ providers }: UptimeChartProps) => {
               <div className="bg-background border border-border rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <span className="text-xs font-bold text-muted-foreground">< 99.5%</span>
+                  <span className="text-xs font-bold text-muted-foreground">&lt; 99.5%</span>
                 </div>
                 <div className="text-sm text-foreground">Низкий</div>
               </div>
