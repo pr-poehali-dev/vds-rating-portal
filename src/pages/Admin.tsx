@@ -15,6 +15,13 @@ interface Review {
   date: string;
 }
 
+interface ClickStats {
+  provider_id: number;
+  clicks: number;
+  first_click: string | null;
+  last_click: string | null;
+}
+
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('admin');
@@ -24,6 +31,8 @@ const Admin = () => {
   const [pendingReviews, setPendingReviews] = useState<Review[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [processingId, setProcessingId] = useState<number | null>(null);
+  const [clickStats, setClickStats] = useState<ClickStats[]>([]);
+  const [isLoadingStats, setIsLoadingStats] = useState(true);
 
   const fetchPendingReviews = async () => {
     setIsLoading(true);
@@ -37,6 +46,21 @@ const Admin = () => {
       console.error('Error fetching reviews:', error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchClickStats = async () => {
+    setIsLoadingStats(true);
+    try {
+      const response = await fetch('https://functions.poehali.dev/d0b8e2ce-45c2-4ab9-8d08-baf03c0268f4');
+      if (response.ok) {
+        const data = await response.json();
+        setClickStats(data.stats || []);
+      }
+    } catch (error) {
+      console.error('Error fetching click stats:', error);
+    } finally {
+      setIsLoadingStats(false);
     }
   };
 
@@ -61,6 +85,7 @@ const Admin = () => {
       if (response.ok) {
         setIsAuthenticated(true);
         fetchPendingReviews();
+        fetchClickStats();
       } else {
         localStorage.removeItem('admin_token');
         setIsLoading(false);
@@ -96,6 +121,7 @@ const Admin = () => {
         setIsAuthenticated(true);
         setPassword('');
         fetchPendingReviews();
+        fetchClickStats();
       } else {
         setAuthError(data.error || 'Неверные учётные данные');
       }
@@ -230,8 +256,8 @@ const Admin = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-4xl font-bold text-foreground mb-2">Модерация отзывов</h1>
-            <p className="text-muted-foreground">Управление отзывами пользователей</p>
+            <h1 className="text-4xl font-bold text-foreground mb-2">Админ-панель</h1>
+            <p className="text-muted-foreground">Управление отзывами и статистика переходов</p>
           </div>
           <div className="flex gap-3">
             <Button
@@ -252,6 +278,60 @@ const Admin = () => {
             </Button>
           </div>
         </div>
+
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+            <Icon name="MousePointerClick" size={24} className="text-primary" />
+            Статистика переходов на сайты провайдеров
+          </h2>
+          {isLoadingStats ? (
+            <div className="flex items-center justify-center py-8">
+              <Icon name="Loader2" size={32} className="animate-spin text-primary" />
+            </div>
+          ) : (
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {clickStats.map((stat) => {
+                const totalClicks = clickStats.reduce((sum, s) => sum + s.clicks, 0);
+                const percentage = totalClicks > 0 ? ((stat.clicks / totalClicks) * 100).toFixed(1) : '0';
+                
+                return (
+                  <Card key={stat.provider_id} className="border-2 border-primary/20">
+                    <CardContent className="pt-6">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="font-bold text-foreground">{getProviderName(stat.provider_id)}</h3>
+                        <Badge className="bg-primary/10 text-primary border-primary/30">
+                          {percentage}%
+                        </Badge>
+                      </div>
+                      <div className="flex items-baseline gap-2 mb-3">
+                        <span className="text-4xl font-black text-primary">{stat.clicks}</span>
+                        <span className="text-sm text-muted-foreground">
+                          {stat.clicks === 1 ? 'переход' : stat.clicks < 5 ? 'перехода' : 'переходов'}
+                        </span>
+                      </div>
+                      {stat.last_click && (
+                        <div className="text-xs text-muted-foreground">
+                          Последний: {new Date(stat.last_click).toLocaleString('ru-RU', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <Icon name="MessageSquare" size={24} className="text-primary" />
+          Модерация отзывов
+        </h2>
 
         {isLoading ? (
           <div className="flex items-center justify-center py-12">

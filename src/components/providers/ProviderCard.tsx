@@ -82,6 +82,29 @@ export const ProviderCard = ({
     }
   };
 
+  const trackClick = async () => {
+    try {
+      await fetch('https://functions.poehali.dev/d0b8e2ce-45c2-4ab9-8d08-baf03c0268f4', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          provider_id: provider.id,
+        }),
+      });
+    } catch (error) {
+      console.error('Error tracking click:', error);
+    }
+  };
+
+  const handleProviderClick = () => {
+    if (provider.url) {
+      trackClick();
+      window.open(provider.url, '_blank');
+    }
+  };
+
   return (
     <Card 
       className={`group border-2 transition-all duration-300 hover-lift overflow-hidden relative bg-card ${
@@ -249,7 +272,7 @@ export const ProviderCard = ({
               )}
               <Button 
                 className="w-full h-12 text-sm font-bold bg-primary text-background shadow-lg shadow-primary/30 hover:shadow-neon transition-all group mb-3"
-                onClick={() => provider.url && window.open(provider.url, '_blank')}
+                onClick={handleProviderClick}
                 disabled={!provider.url}
               >
                 Перейти

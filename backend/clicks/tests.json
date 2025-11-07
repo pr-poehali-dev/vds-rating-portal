@@ -1,0 +1,23 @@
+{
+  "tests": [
+    {
+      "name": "POST - Track click",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "provider_id": 1
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "GET - Get statistics",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    }
+  ]
+}
