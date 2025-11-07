@@ -4,7 +4,7 @@ export const providers: Provider[] = [
   {
     id: 18,
     name: 'cloud4box',
-    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/17f359e8-69ef-4454-927d-e4337d5b9b2c.jpg',
+    logo: 'https://cdn.poehali.dev/files/d2e671d1-6589-4724-9c0e-4412622bf5a0.png',
     rating: 9.2,
     basePrice: 180,
     cpuPrice: 140,
