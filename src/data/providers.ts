@@ -2,6 +2,67 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 16,
+    name: 'U1Host',
+    logo: 'https://u1host.com/assets/images/logo.svg',
+    rating: 9.0,
+    basePrice: 180,
+    cpuPrice: 145,
+    ramPrice: 85,
+    storagePrice: 7,
+    features: ['SSD диски', 'Безлимитный трафик', 'Панель управления', 'DDoS защита'],
+    locations: ['Москва', 'Санкт-Петербург'],
+    trialDays: 0,
+    url: 'https://u1host.com/?from=17448',
+    pros: ['Доступные цены', 'Стабильная работа', 'Быстрая техподдержка', 'Простая панель управления'],
+    cons: ['Нет тестового периода', 'Только 2 локации', 'Нет NVMe дисков'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'Базовая защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 25 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 60,
+      monitoring: true,
+      snapshots: true,
+      customOS: false
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 15 },
+        { months: 6, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney'],
+      minPrice: 180
+    },
+    popularity: 15000,
+    promoText: 'Скидка 15% при оплате на год',
+    caseStudies: ['Корпоративные сайты', 'Интернет-магазины', 'Веб-приложения', 'Малый бизнес'],
+    uptime30days: 99.88,
+    reviews: [
+      { author: 'Александр Г.', text: 'Пользуюсь U1Host уже год. Цены доступные, сервер работает стабильно. Для малого бизнеса отличный вариант.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Мария Н.', text: 'Техподдержка отвечает быстро, помогли с настройкой за 20 минут. Панель простая и понятная.', rating: 5, date: '07 ноя 2025' },
+      { author: 'Дмитрий С.', text: 'Цена адекватная, SSD диски работают быстро. Для WordPress сайта хватает с головой.', rating: 5, date: '06 ноя 2025' },
+      { author: 'Елена В.', text: 'Нет тестового периода — пришлось сразу оплачивать. Но качество оправдало ожидания.', rating: 4, date: '05 ноя 2025' },
+      { author: 'Игорь К.', text: 'Только две локации — хотелось бы больше выбора. Но для российских проектов подходит отлично.', rating: 4, date: '04 ноя 2025' }
+    ]
+  },
+  {
     id: 15,
     name: 'JustHost',
     logo: 'https://cdn.poehali.dev/files/c9c7db95-69e2-4f0b-a222-66d510eb134f.png',
