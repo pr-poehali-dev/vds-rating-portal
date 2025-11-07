@@ -52,7 +52,7 @@ export const providers: Provider[] = [
       paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'Яндекс.Касса', 'PayPal'],
       minPrice: 210
     },
-    popularity: 4850,
+    popularity: 50000,
     promoText: 'Скидка 20% на первый месяц при оплате годового тарифа',
     caseStudies: ['E-commerce проекты', 'Highload API', 'SaaS платформы', 'Финтех приложения', 'Игровые серверы'],
     uptime30days: 99.98,
@@ -156,7 +156,7 @@ export const providers: Provider[] = [
       paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'PayPal'],
       minPrice: 90
     },
-    popularity: 4200,
+    popularity: 200000,
     promoText: 'Бесплатный тестовый период 14 дней',
     caseStudies: ['WordPress сайты', 'Интернет-магазины', 'Корпоративные порталы', 'Блоги и форумы'],
     uptime30days: 99.92,
@@ -262,7 +262,7 @@ export const providers: Provider[] = [
       paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'Яндекс.Касса'],
       minPrice: 150
     },
-    popularity: 3800,
+    popularity: 750000,
     promoText: 'Тестовый период 30 дней + скидка 25% при оплате года',
     caseStudies: ['Корпоративные сайты', 'Онлайн-сервисы', 'Доменные порталы', 'Бизнес-приложения'],
     uptime30days: 99.89,
@@ -366,7 +366,7 @@ export const providers: Provider[] = [
       paymentMethods: ['Банковская карта', 'ЮMoney', 'Криптовалюта', 'PayPal', 'SWIFT'],
       minPrice: 180
     },
-    popularity: 3200,
+    popularity: 10000,
     promoText: 'Скидка 15% для новых клиентов на первые 3 месяца',
     caseStudies: ['Международные проекты', 'Highload системы', 'DevOps инфраструктура', 'CDN сервисы'],
     uptime30days: 99.96,
