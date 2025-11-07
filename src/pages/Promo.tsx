@@ -37,7 +37,14 @@ const Promo = () => {
 
             <div className="grid md:grid-cols-2 gap-6">
               {providersWithPromo.map((provider) => (
-                <Card key={provider.id} className="border-2 border-border hover:border-primary/50 transition-all group hover:shadow-xl bg-gradient-to-br from-card to-card/50 overflow-hidden">
+                <Card key={provider.id} className="border-2 border-border hover:border-primary/50 transition-all group hover:shadow-xl bg-gradient-to-br from-card to-card/50 overflow-hidden relative">
+                  {provider.name === 'Timeweb Cloud' && (
+                    <div className="absolute top-4 right-4 z-10">
+                      <div className="bg-gradient-to-br from-orange-500 to-red-500 rounded-full p-2 shadow-lg animate-pulse">
+                        <Icon name="Flame" size={20} className="text-white" />
+                      </div>
+                    </div>
+                  )}
                   <div className="p-6 md:p-8">
                     <div className="flex items-start gap-4 mb-6">
                       <div className="flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden bg-white border border-primary/10 flex items-center justify-center">
@@ -78,7 +85,9 @@ const Promo = () => {
                               <Icon name="Gift" size={20} className="text-background" />
                             </div>
                             <div className="flex-1">
-                              <div className="text-xs font-bold text-secondary uppercase mb-1">Спецпредложение</div>
+                              <div className="text-xs font-bold text-secondary uppercase mb-1">
+                                {provider.name === 'Timeweb Cloud' ? 'Лучшее спецпредложение' : 'Спецпредложение'}
+                              </div>
                               <div className="text-sm font-semibold text-foreground">{provider.promoText}</div>
                             </div>
                           </div>
