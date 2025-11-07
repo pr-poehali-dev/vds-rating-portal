@@ -7,6 +7,13 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
 import { Provider, ResourceConfig } from './types';
+import { 
+  TechnicalSpecsSection,
+  ServiceGuaranteesSection,
+  AdditionalServicesSection,
+  PaymentMethodsSection,
+  CaseStudiesSection
+} from './ProviderDetailsSections';
 
 interface ProviderCardProps {
   provider: Provider;
@@ -173,26 +180,62 @@ export const ProviderCard = ({
                     <span className="font-semibold text-foreground">152-ФЗ: {provider.fz152Level || 'Соответствует'}</span>
                   </div>
                 )}
+                <div className="flex items-center gap-2 text-sm">
+                  <Icon name="HardDrive" size={14} className="text-primary" />
+                  <span className="font-semibold text-foreground">{provider.technicalSpecs.diskType} • {provider.technicalSpecs.virtualization}</span>
+                </div>
+                {provider.popularity && (
+                  <div className="flex items-center gap-2 text-sm">
+                    <Icon name="Users" size={14} className="text-primary" />
+                    <span className="text-muted-foreground">{provider.popularity.toLocaleString('ru-RU')}+ пользователей</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
           
           <div className="w-full lg:w-auto flex-shrink-0">
             <div className="bg-accent border-2 border-primary/20 rounded-2xl p-6 text-center">
+              {provider.promoText && (
+                <div className="bg-secondary/20 border border-secondary rounded-xl px-3 py-1.5 mb-3">
+                  <p className="text-xs font-bold text-secondary">{provider.promoText}</p>
+                </div>
+              )}
               <div className="text-xs font-bold text-primary uppercase tracking-wider mb-2">Цена</div>
               <div className="flex items-baseline justify-center gap-1 mb-1">
                 <span className="text-4xl md:text-5xl font-black text-primary">{calculatedPrice}</span>
                 <span className="text-xl text-muted-foreground">₽</span>
               </div>
-              <div className="text-sm text-muted-foreground font-medium mb-4">/месяц</div>
+              <div className="text-sm text-muted-foreground font-medium mb-1">/месяц</div>
+              {provider.pricingDetails.minPrice && (
+                <div className="text-xs text-muted-foreground mb-4">от {provider.pricingDetails.minPrice}₽</div>
+              )}
+              {provider.pricingDetails.discounts && provider.pricingDetails.discounts.length > 0 && (
+                <div className="mb-4">
+                  <div className="text-xs text-muted-foreground mb-1.5">Скидки:</div>
+                  <div className="flex flex-wrap gap-1 justify-center">
+                    {provider.pricingDetails.discounts.map((d, idx) => (
+                      <Badge key={idx} variant="outline" className="text-xs bg-secondary/10 text-secondary border-secondary/30">
+                        -{d.percent}% на {d.months} мес
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
               <Button 
-                className="w-full h-12 text-sm font-bold bg-primary text-background shadow-lg shadow-primary/30 hover:shadow-neon transition-all group"
+                className="w-full h-12 text-sm font-bold bg-primary text-background shadow-lg shadow-primary/30 hover:shadow-neon transition-all group mb-3"
                 onClick={() => provider.url && window.open(provider.url, '_blank')}
                 disabled={!provider.url}
               >
                 Перейти
                 <Icon name="ExternalLink" size={16} className="ml-2" />
               </Button>
+              {provider.uptime30days && (
+                <div className="flex items-center justify-center gap-2 text-xs">
+                  <div className="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
+                  <span className="text-muted-foreground">Uptime: {provider.uptime30days}%</span>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -378,6 +421,12 @@ export const ProviderCard = ({
                   </p>
                 </div>
               )}
+
+              <TechnicalSpecsSection provider={provider} />
+              <ServiceGuaranteesSection provider={provider} />
+              <AdditionalServicesSection provider={provider} />
+              <PaymentMethodsSection provider={provider} />
+              <CaseStudiesSection provider={provider} />
 
               <div className="pt-6 border-t border-border md:col-span-2">
                 <div className="flex items-center gap-2 mb-4">

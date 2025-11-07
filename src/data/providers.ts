@@ -19,6 +19,43 @@ export const providers: Provider[] = [
     cons: ['Высокая цена за CPU', 'Нет готовых образов приложений', 'Сложная панель для новичков'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '10 Гбит/с',
+      virtualization: 'KVM',
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Alma Linux', 'Rocky Linux', 'Astra Linux', 'Windows Server'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'До 500 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.99%',
+      supportResponseTime: '< 5 мин',
+      moneyBackGuarantee: 7
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 150,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 15 },
+        { months: 6, percent: 10 },
+        { months: 3, percent: 5 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'Яндекс.Касса', 'PayPal'],
+      minPrice: 210
+    },
+    popularity: 4850,
+    promoText: 'Скидка 20% на первый месяц при оплате годового тарифа',
+    caseStudies: ['E-commerce проекты', 'Highload API', 'SaaS платформы', 'Финтех приложения', 'Игровые серверы'],
+    uptime30days: 99.98,
     reviews: [
       { author: 'Алексей М.', text: 'Перешёл с другого хостинга — разница в скорости просто огромная! NVMe диски реально работают. Поддержка отвечает за 2-3 минуты, даже ночью.', rating: 5, date: '15 окт 2025' },
       { author: 'Мария К.', text: 'Использую для интернет-магазина. За полгода не было ни одного сбоя. Цена кусается, но оно того стоит — клиенты довольны скоростью сайта.', rating: 5, date: '02 ноя 2025' },
@@ -87,6 +124,42 @@ export const providers: Provider[] = [
     cons: ['Ограниченная производительность', 'Медленная работа техподдержки', 'Нет выделенных IP в базе'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: 'KVM',
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'FreeBSD', 'Windows Server'],
+      controlPanel: 'ISPmanager',
+      apiAccess: true,
+      ddosProtection: 'Базовая защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 15 мин',
+      moneyBackGuarantee: 14
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: undefined,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 20 },
+        { months: 6, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'PayPal'],
+      minPrice: 90
+    },
+    popularity: 4200,
+    promoText: 'Бесплатный тестовый период 14 дней',
+    caseStudies: ['WordPress сайты', 'Интернет-магазины', 'Корпоративные порталы', 'Блоги и форумы'],
+    uptime30days: 99.92,
     reviews: [
       { author: 'Ольга В.', text: 'Отличный вариант для первого сайта! Цена смешная, всё понятно даже новичку. Установила WordPress за 5 минут — готовых образов куча!', rating: 5, date: '14 ноя 2025' },
       { author: 'Дмитрий К.', text: 'Дёшево, но для блога хватает с головой. Автобэкапы спасли меня дважды — случайно удалил файлы, восстановили за минуту.', rating: 5, date: '10 ноя 2025' },
@@ -156,6 +229,43 @@ export const providers: Provider[] = [
     cons: ['Средняя скорость поддержки', 'Интерфейс устарел визуально', 'Меньше дата-центров'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: 'KVM',
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Arch Linux', 'Windows Server'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'До 100 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 1 час',
+      moneyBackGuarantee: 30
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 100,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 25 },
+        { months: 6, percent: 15 },
+        { months: 3, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'Яндекс.Касса'],
+      minPrice: 150
+    },
+    popularity: 3800,
+    promoText: 'Тестовый период 30 дней + скидка 25% при оплате года',
+    caseStudies: ['Корпоративные сайты', 'Онлайн-сервисы', 'Доменные порталы', 'Бизнес-приложения'],
+    uptime30days: 99.89,
     reviews: [
       { author: 'Игорь Р.', text: 'REG.RU использую уже 5 лет — домены, хостинг, VPS. Всё в одном месте, очень удобно! Поддержка всегда помогает, хоть и не молниеносно.', rating: 5, date: '12 ноя 2025' },
       { author: 'Екатерина С.', text: 'Панель управления немного устарела внешне, но функционал отличный. Цена адекватная, особенно с тестовым периодом 30 дней!', rating: 4, date: '08 ноя 2025' },
@@ -224,6 +334,42 @@ export const providers: Provider[] = [
     cons: ['Меньше отзывов на рынке', 'Нет русскоязычных обучающих материалов', 'Интерфейс только на английском'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '10 Гбит/с',
+      virtualization: 'KVM',
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'CoreOS', 'FreeBSD', 'Windows Server'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'До 300 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.95%',
+      supportResponseTime: '< 10 мин',
+      moneyBackGuarantee: 10
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 120,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 18 },
+        { months: 6, percent: 12 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Криптовалюта', 'PayPal', 'SWIFT'],
+      minPrice: 180
+    },
+    popularity: 3200,
+    promoText: 'Скидка 15% для новых клиентов на первые 3 месяца',
+    caseStudies: ['Международные проекты', 'Highload системы', 'DevOps инфраструктура', 'CDN сервисы'],
+    uptime30days: 99.96,
     reviews: [
       { author: 'Дмитрий К.', text: 'Отличное соотношение цена/качество. Дата-центры по всему миру — можно выбрать ближайший к клиентам. API работает стабильно.', rating: 5, date: '10 ноя 2025' },
       { author: 'Алексей М.', text: 'NVMe диски показывают отличную производительность. Масштабирование работает быстро. Поддержка отвечает оперативно.', rating: 5, date: '05 ноя 2025' },

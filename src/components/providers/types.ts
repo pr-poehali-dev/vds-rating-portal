@@ -3,6 +3,44 @@ export interface Review {
   text: string;
   rating: number;
   date: string;
+  provider_id?: number;
+  category?: 'performance' | 'support' | 'price' | 'general';
+}
+
+export interface TechnicalSpecs {
+  diskType: 'NVMe' | 'SSD' | 'HDD';
+  networkSpeed: string;
+  virtualization: 'KVM' | 'OpenVZ' | 'VMware' | 'Hyper-V';
+  guaranteedResources: boolean;
+  ipv4: boolean;
+  ipv6: boolean;
+  availableOS: string[];
+  controlPanel?: string;
+  apiAccess: boolean;
+  ddosProtection?: string;
+}
+
+export interface ServiceGuarantees {
+  uptimeSLA: string;
+  supportResponseTime?: string;
+  moneyBackGuarantee?: number;
+}
+
+export interface AdditionalServices {
+  autoBackups: boolean;
+  backupPrice?: number;
+  monitoring: boolean;
+  snapshots: boolean;
+  customOS: boolean;
+}
+
+export interface PricingDetails {
+  discounts?: {
+    months: number;
+    percent: number;
+  }[];
+  paymentMethods: string[];
+  minPrice: number;
 }
 
 export interface Provider {
@@ -23,6 +61,14 @@ export interface Provider {
   reviews: Review[];
   fz152Compliant: boolean;
   fz152Level?: string;
+  technicalSpecs: TechnicalSpecs;
+  serviceGuarantees: ServiceGuarantees;
+  additionalServices: AdditionalServices;
+  pricingDetails: PricingDetails;
+  popularity?: number;
+  promoText?: string;
+  caseStudies?: string[];
+  uptime30days?: number;
 }
 
 export interface ResourceConfig {
