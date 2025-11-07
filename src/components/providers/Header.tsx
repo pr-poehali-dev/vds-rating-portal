@@ -23,7 +23,23 @@ export const Header = () => {
               <Icon name="Activity" size={14} />
               Аптайм
             </a>
-            <a href="#compare" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-colors">
+            <a 
+              href="#compare" 
+              className="text-sm font-semibold text-foreground/80 hover:text-primary transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                const providersSection = document.querySelector('[id="providers"]');
+                if (providersSection) {
+                  providersSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  setTimeout(() => {
+                    const compareButton = document.querySelector('[class*="Сравнить"]') as HTMLElement;
+                    if (compareButton) {
+                      compareButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                  }, 500);
+                }
+              }}
+            >
               Сравнение
             </a>
             <Button className="bg-primary text-background font-bold shadow-lg shadow-primary/30 hover:shadow-neon transition-all">

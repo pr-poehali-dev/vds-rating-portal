@@ -290,7 +290,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   }
 
   return (
-    <section className="container mx-auto px-4 py-8">
+    <section id="providers" className="container mx-auto px-4 py-8">
       <FilterPanel
         filterFZ152={filterFZ152}
         setFilterFZ152={setFilterFZ152}
