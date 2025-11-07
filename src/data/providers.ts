@@ -22,7 +22,7 @@ export const providers: Provider[] = [
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '10 Гбит/с',
-      virtualization: 'VMware',
+      virtualization: 'KVM',
       guaranteedResources: true,
       ipv4: true,
       ipv6: true,
