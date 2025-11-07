@@ -43,12 +43,25 @@ export const TechnicalSpecsSection = ({ provider }: TechnicalSpecsSectionProps) 
           <div>
             <div className="text-xs text-muted-foreground mb-0.5">Виртуализация</div>
             <div className="flex flex-wrap gap-1.5">
-              {technicalSpecs.virtualization.map((virt, idx) => (
-                <Badge key={idx} className="bg-primary/10 border border-primary/30 text-primary font-bold text-xs transition-all duration-300 hover:bg-primary/20 hover:scale-105 hover:shadow-md cursor-default">
-                  <Icon name="Box" size={12} className="mr-1" />
-                  {virt}
-                </Badge>
-              ))}
+              {technicalSpecs.virtualization.map((virt, idx) => {
+                const getVirtColor = (type: string) => {
+                  switch(type) {
+                    case 'KVM': return 'bg-blue-500/10 border-blue-500/30 text-blue-600 hover:bg-blue-500/20';
+                    case 'VMware': return 'bg-purple-500/10 border-purple-500/30 text-purple-600 hover:bg-purple-500/20';
+                    case 'OpenVZ': return 'bg-orange-500/10 border-orange-500/30 text-orange-600 hover:bg-orange-500/20';
+                    case 'Hyper-V': return 'bg-cyan-500/10 border-cyan-500/30 text-cyan-600 hover:bg-cyan-500/20';
+                    case 'LXC': return 'bg-green-500/10 border-green-500/30 text-green-600 hover:bg-green-500/20';
+                    case 'Xen': return 'bg-pink-500/10 border-pink-500/30 text-pink-600 hover:bg-pink-500/20';
+                    default: return 'bg-primary/10 border-primary/30 text-primary hover:bg-primary/20';
+                  }
+                };
+                return (
+                  <Badge key={idx} className={`${getVirtColor(virt)} border font-bold text-xs transition-all duration-300 hover:scale-105 hover:shadow-md cursor-default`}>
+                    <Icon name="Box" size={12} className="mr-1" />
+                    {virt}
+                  </Badge>
+                );
+              })}
             </div>
           </div>
         </div>

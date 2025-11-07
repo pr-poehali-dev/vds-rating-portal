@@ -186,7 +186,27 @@ export const ProviderCard = ({
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <Icon name="Box" size={14} className="text-primary" />
-                  <span className="font-semibold text-foreground">Виртуализация: {provider.technicalSpecs.virtualization.join(', ')}</span>
+                  <span className="font-semibold text-foreground">Виртуализация:</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {provider.technicalSpecs.virtualization.map((virt, idx) => {
+                      const getVirtColor = (type: string) => {
+                        switch(type) {
+                          case 'KVM': return 'bg-blue-500/10 border-blue-500/30 text-blue-600';
+                          case 'VMware': return 'bg-purple-500/10 border-purple-500/30 text-purple-600';
+                          case 'OpenVZ': return 'bg-orange-500/10 border-orange-500/30 text-orange-600';
+                          case 'Hyper-V': return 'bg-cyan-500/10 border-cyan-500/30 text-cyan-600';
+                          case 'LXC': return 'bg-green-500/10 border-green-500/30 text-green-600';
+                          case 'Xen': return 'bg-pink-500/10 border-pink-500/30 text-pink-600';
+                          default: return 'bg-primary/10 border-primary/30 text-primary';
+                        }
+                      };
+                      return (
+                        <Badge key={idx} className={`${getVirtColor(virt)} border font-semibold text-[10px] px-1.5 py-0.5`}>
+                          {virt}
+                        </Badge>
+                      );
+                    })}
+                  </div>
                 </div>
                 {provider.popularity && (
                   <div className="flex items-center gap-2 text-sm">
