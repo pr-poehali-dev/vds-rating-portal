@@ -43,13 +43,22 @@ const Promo = () => {
               {providersWithPromo.map((provider) => (
                 <Card key={provider.id} className="border-2 border-border hover:border-primary/50 transition-all group hover:shadow-xl bg-gradient-to-br from-card to-card/50 overflow-hidden relative">
                   {provider.name === 'Timeweb Cloud' && (
-                    <div className="absolute top-4 right-4 z-10">
-                      <div className="bg-gradient-to-br from-orange-500 to-red-500 rounded-full p-2 shadow-lg animate-pulse">
-                        <Icon name="Flame" size={20} className="text-white" />
+                    <>
+                      <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-orange-500 to-red-500 py-1.5 px-4 z-10">
+                        <div className="flex items-center justify-center gap-2">
+                          <Icon name="Zap" size={14} className="text-white" />
+                          <span className="text-xs font-bold text-white uppercase tracking-wide">Выгодное предложение</span>
+                          <Icon name="Zap" size={14} className="text-white" />
+                        </div>
                       </div>
-                    </div>
+                      <div className="absolute top-4 right-4 z-10">
+                        <div className="bg-gradient-to-br from-orange-500 to-red-500 rounded-full p-2 shadow-lg animate-pulse">
+                          <Icon name="Flame" size={20} className="text-white" />
+                        </div>
+                      </div>
+                    </>
                   )}
-                  <div className="p-6 md:p-8">
+                  <div className={`p-6 md:p-8 ${provider.name === 'Timeweb Cloud' ? 'pt-12' : ''}`}>
                     <div className="flex items-start gap-4 mb-6">
                       <div className="flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden bg-white border border-primary/10 flex items-center justify-center">
                         <img 
