@@ -6,7 +6,7 @@ export const Header = () => {
     <nav className="sticky top-0 z-50 backdrop-blur-xl bg-card/60 border-b border-border">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <div className="flex items-center gap-3">
+          <a href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
             <div className="relative">
               <div className="absolute inset-0 bg-primary rounded-2xl blur-xl opacity-50 shadow-neon"></div>
               <div className="relative w-12 h-12 bg-primary rounded-2xl flex items-center justify-center">
@@ -17,7 +17,7 @@ export const Header = () => {
               <h1 className="text-xl font-bold text-primary">top-vds</h1>
               <p className="text-xs text-muted-foreground font-medium">Топ хостингов</p>
             </div>
-          </div>
+          </a>
           <div className="hidden md:flex items-center gap-8">
             <a href="#providers" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-colors">
               Провайдеры
