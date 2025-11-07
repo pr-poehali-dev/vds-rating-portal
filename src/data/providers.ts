@@ -2,6 +2,67 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 17,
+    name: 'VDSka',
+    logo: 'https://vdska.ru/assets/images/logo.svg',
+    rating: 8.8,
+    basePrice: 294,
+    cpuPrice: 98,
+    ramPrice: 98,
+    storagePrice: 10,
+    features: ['SSD диски', 'DDoS защита', 'Бесплатные бэкапы', '9 стран'],
+    locations: ['Россия', 'Нидерланды', 'США', 'Германия', 'Польша', 'Финляндия', 'Латвия', 'Казахстан', 'Кыргызстан'],
+    trialDays: 0,
+    url: 'https://vdska.ru',
+    pros: ['9 локаций в разных странах', 'Быстрая поддержка (32 сек)', 'Бесплатные бэкапы', 'Гибкая конфигурация'],
+    cons: ['Нет тестового периода', 'Базовые цены выше среднего', 'Нет NVMe дисков'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'DDoS защита включена'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 1 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 0,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 10 },
+        { months: 6, percent: 5 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney'],
+      minPrice: 294
+    },
+    popularity: 12000,
+    promoText: 'Бесплатные бэкапы + DDoS защита в подарок',
+    caseStudies: ['Веб-разработка', 'Тестирование', 'Малые организации', 'Международные проекты'],
+    uptime30days: 99.87,
+    reviews: [
+      { author: 'Сергей Д.', text: '9 стран для размещения серверов — это круто! Выбрал Германию для европейских клиентов. Пинг отличный, всё летает.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Анна К.', text: 'Поддержка реально отвечает за 32 секунды! Писала в чат трижды — каждый раз моментально помогли. Молодцы!', rating: 5, date: '07 ноя 2025' },
+      { author: 'Максим В.', text: 'Бесплатные бэкапы — это очень удобно! Не надо доплачивать. DDoS защита тоже включена. За 294₽ хороший вариант.', rating: 5, date: '06 ноя 2025' },
+      { author: 'Ольга Т.', text: 'Нет тестового периода — пришлось сразу платить. Но сервис качественный, за месяц сбоев не было. Рекомендую!', rating: 4, date: '05 ноя 2025' },
+      { author: 'Дмитрий Н.', text: 'Цена базового тарифа выше чем у конкурентов, но локаций много. Для международных проектов подходит идеально.', rating: 4, date: '04 ноя 2025' }
+    ]
+  },
+  {
     id: 16,
     name: 'U1Host',
     logo: 'https://cdn.poehali.dev/files/aa6a19cb-f969-4b2b-a20b-e5a5fdfb313c.png',
