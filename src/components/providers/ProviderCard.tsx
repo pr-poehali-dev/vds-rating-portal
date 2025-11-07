@@ -247,29 +247,33 @@ export const ProviderCard = ({
           </div>
           
           <div className="w-full lg:w-auto flex-shrink-0">
-            <div className="bg-accent border-2 border-primary/20 rounded-2xl p-6 text-center">
-              {provider.promoText && (
-                <div className="bg-secondary/20 border border-secondary rounded-xl px-3 py-1.5 mb-3">
-                  <p className="text-xs font-bold text-secondary">{provider.promoText}</p>
-                </div>
-              )}
+            <div className="bg-accent border-2 border-primary/20 rounded-2xl p-6 text-center flex flex-col h-full">
+              <div className="min-h-[60px] flex items-center justify-center mb-3">
+                {provider.promoText && (
+                  <div className="bg-secondary/20 border border-secondary rounded-xl px-3 py-1.5">
+                    <p className="text-xs font-bold text-secondary">{provider.promoText}</p>
+                  </div>
+                )}
+              </div>
               <div className="text-xs font-bold text-primary uppercase tracking-wider mb-2">Цена</div>
               <div className="flex items-baseline justify-center gap-1 mb-4">
                 <span className="text-4xl md:text-5xl font-black text-primary">{calculatedPrice}</span>
                 <span className="text-xl text-muted-foreground">₽/месяц</span>
               </div>
-              {provider.pricingDetails.discounts && provider.pricingDetails.discounts.length > 0 && (
-                <div className="mb-4">
-                  <div className="text-xs text-muted-foreground mb-1.5">Скидки:</div>
-                  <div className="flex flex-wrap gap-1 justify-center">
-                    {provider.pricingDetails.discounts.map((d, idx) => (
-                      <Badge key={idx} variant="outline" className="text-xs bg-secondary/10 text-secondary border-secondary/30">
-                        -{d.percent}% на {d.months} мес
-                      </Badge>
-                    ))}
+              <div className="min-h-[72px] mb-4">
+                {provider.pricingDetails.discounts && provider.pricingDetails.discounts.length > 0 && (
+                  <div>
+                    <div className="text-xs text-muted-foreground mb-1.5">Скидки:</div>
+                    <div className="flex flex-wrap gap-1 justify-center">
+                      {provider.pricingDetails.discounts.map((d, idx) => (
+                        <Badge key={idx} variant="outline" className="text-xs bg-secondary/10 text-secondary border-secondary/30">
+                          -{d.percent}% на {d.months} мес
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
               <Button 
                 className="w-full h-12 text-sm font-bold bg-primary text-background shadow-lg shadow-primary/30 hover:shadow-neon transition-all group mb-3"
                 onClick={handleProviderClick}
