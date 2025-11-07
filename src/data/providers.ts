@@ -13,7 +13,7 @@ export const providers: Provider[] = [
     features: ['SSD диски', 'Безлимитные сайты', 'Бесплатная панель', 'Оптимизация под CMS'],
     locations: ['Москва'],
     trialDays: 0,
-    url: 'https://smartape.ru',
+    url: 'http://www.smartape.ru/?partner=180984',
     pros: ['Низкие цены', 'Оптимизация под популярные CMS', 'Гибкие тарифы', 'Безлимитные сайты'],
     cons: ['Только одна локация', 'Нет тестового периода', 'Базовая поддержка'],
     fz152Compliant: true,
