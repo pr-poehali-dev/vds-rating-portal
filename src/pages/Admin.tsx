@@ -42,6 +42,7 @@ const Admin = () => {
   const [isLoadingStats, setIsLoadingStats] = useState(true);
   const [dailyStats, setDailyStats] = useState<DailyStats[]>([]);
   const [isLoadingDaily, setIsLoadingDaily] = useState(true);
+  const [period, setPeriod] = useState<'1' | '7' | '30'>('30');
 
   const fetchPendingReviews = async () => {
     setIsLoading(true);
@@ -73,10 +74,10 @@ const Admin = () => {
     }
   };
 
-  const fetchDailyStats = async () => {
+  const fetchDailyStats = async (days: string = '30') => {
     setIsLoadingDaily(true);
     try {
-      const response = await fetch('https://functions.poehali.dev/d0b8e2ce-45c2-4ab9-8d08-baf03c0268f4?view=daily');
+      const response = await fetch(`https://functions.poehali.dev/d0b8e2ce-45c2-4ab9-8d08-baf03c0268f4?view=daily&period=${days}`);
       if (response.ok) {
         const data = await response.json();
         setDailyStats(data.daily_stats || []);
@@ -110,7 +111,7 @@ const Admin = () => {
         setIsAuthenticated(true);
         fetchPendingReviews();
         fetchClickStats();
-        fetchDailyStats();
+        fetchDailyStats(period);
       } else {
         localStorage.removeItem('admin_token');
         setIsLoading(false);
@@ -147,7 +148,7 @@ const Admin = () => {
         setPassword('');
         fetchPendingReviews();
         fetchClickStats();
-        fetchDailyStats();
+        fetchDailyStats(period);
       } else {
         setAuthError(data.error || 'Неверные учётные данные');
       }
@@ -354,10 +355,47 @@ const Admin = () => {
           )}
 
           <div className="mt-8">
-            <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-              <Icon name="TrendingUp" size={20} className="text-primary" />
-              Динамика переходов (последние 30 дней)
-            </h3>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
+                <Icon name="TrendingUp" size={20} className="text-primary" />
+                Динамика переходов
+              </h3>
+              <div className="flex gap-2">
+                <Button
+                  variant={period === '1' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => {
+                    setPeriod('1');
+                    fetchDailyStats('1');
+                  }}
+                  className="font-semibold"
+                >
+                  День
+                </Button>
+                <Button
+                  variant={period === '7' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => {
+                    setPeriod('7');
+                    fetchDailyStats('7');
+                  }}
+                  className="font-semibold"
+                >
+                  Неделя
+                </Button>
+                <Button
+                  variant={period === '30' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => {
+                    setPeriod('30');
+                    fetchDailyStats('30');
+                  }}
+                  className="font-semibold"
+                >
+                  Месяц
+                </Button>
+              </div>
+            </div>
             {isLoadingDaily ? (
               <div className="flex items-center justify-center py-8">
                 <Icon name="Loader2" size={32} className="animate-spin text-primary" />

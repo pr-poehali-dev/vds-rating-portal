@@ -79,19 +79,21 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     if method == 'GET':
         params = event.get('queryStringParameters', {}) or {}
         view = params.get('view', 'summary')
+        period = params.get('period', '30')
         
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
             if view == 'daily':
+                days = int(period) if period.isdigit() else 30
                 cur.execute("""
                     SELECT 
                         provider_id,
                         DATE(clicked_at) as date,
                         COUNT(*) as clicks
                     FROM provider_clicks
-                    WHERE clicked_at >= CURRENT_DATE - 30
+                    WHERE clicked_at >= CURRENT_DATE - %s
                     GROUP BY provider_id, DATE(clicked_at)
                     ORDER BY date DESC, provider_id
-                """)
+                """, (days,))
                 
                 daily_stats = cur.fetchall()
                 
