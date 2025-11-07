@@ -12,6 +12,9 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
   const [configOpen, setConfigOpen] = useState<number | null>(null);
   const [filterFZ152, setFilterFZ152] = useState(false);
+  const [filterTrialPeriod, setFilterTrialPeriod] = useState(false);
+  const [filterLocation, setFilterLocation] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<'rating' | 'price'>('rating');
   const [reviewsToShow, setReviewsToShow] = useState<Record<number, number>>({
     1: 5,
     2: 5,
@@ -74,9 +77,28 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     }));
   };
 
-  const filteredProviders = filterFZ152 
-    ? providersWithReviews.filter(p => p.fz152Compliant)
-    : providersWithReviews;
+  const allLocations = Array.from(
+    new Set(providersWithReviews.flatMap(p => p.locations))
+  ).sort();
+
+  const filteredProviders = providersWithReviews
+    .filter(p => {
+      if (filterFZ152 && !p.fz152Compliant) return false;
+      if (filterTrialPeriod && !p.trialDays) return false;
+      if (filterLocation && !p.locations.includes(filterLocation)) return false;
+      return true;
+    })
+    .sort((a, b) => {
+      if (sortBy === 'rating') {
+        const ratingA = a.reviews.reduce((sum, r) => sum + r.rating, 0) / a.reviews.length;
+        const ratingB = b.reviews.reduce((sum, r) => sum + r.rating, 0) / b.reviews.length;
+        return ratingB - ratingA;
+      } else {
+        const priceA = calculatePrice(a, configs[a.id]);
+        const priceB = calculatePrice(b, configs[b.id]);
+        return priceA - priceB;
+      }
+    });
 
   return (
     <section id="providers" className="py-24 relative">
@@ -94,31 +116,95 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-3 justify-center mb-10 max-w-4xl mx-auto">
-          <Button 
-            variant={filterFZ152 ? "default" : "outline"}
-            className="h-11 px-6 text-sm font-semibold border-2 rounded-xl transition-all"
-            onClick={() => setFilterFZ152(!filterFZ152)}
-          >
-            <Icon name="ShieldCheck" size={16} className="mr-2" />
-            152-ФЗ
-            {filterFZ152 && <Icon name="Check" size={16} className="ml-2" />}
-          </Button>
-          {filterFZ152 && (
-            <div className="flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-xl px-4 py-2">
-              <span className="text-sm font-medium text-foreground">
-                Найдено провайдеров: {filteredProviders.length}
-              </span>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="h-6 w-6 p-0 hover:bg-primary/20"
-                onClick={() => setFilterFZ152(false)}
-              >
-                <Icon name="X" size={14} />
-              </Button>
+        <div className="mb-10 max-w-6xl mx-auto">
+          <div className="bg-accent/50 border border-primary/10 rounded-2xl p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <Icon name="Filter" size={18} className="text-primary" />
+              <h3 className="text-lg font-bold text-foreground">Фильтры</h3>
             </div>
-          )}
+            
+            <div className="flex flex-wrap gap-3 mb-4">
+              <Button 
+                variant={filterFZ152 ? "default" : "outline"}
+                className="h-10 px-4 text-sm font-semibold rounded-xl transition-all"
+                onClick={() => setFilterFZ152(!filterFZ152)}
+              >
+                <Icon name="ShieldCheck" size={16} className="mr-2" />
+                152-ФЗ
+                {filterFZ152 && <Icon name="Check" size={16} className="ml-1" />}
+              </Button>
+
+              <Button 
+                variant={filterTrialPeriod ? "default" : "outline"}
+                className="h-10 px-4 text-sm font-semibold rounded-xl transition-all"
+                onClick={() => setFilterTrialPeriod(!filterTrialPeriod)}
+              >
+                <Icon name="Gift" size={16} className="mr-2" />
+                Тестовый период
+                {filterTrialPeriod && <Icon name="Check" size={16} className="ml-1" />}
+              </Button>
+
+              <div className="relative">
+                <select
+                  value={filterLocation || ''}
+                  onChange={(e) => setFilterLocation(e.target.value || null)}
+                  className="h-10 pl-4 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
+                >
+                  <option value="">Все локации</option>
+                  {allLocations.map(loc => (
+                    <option key={loc} value={loc}>{loc}</option>
+                  ))}
+                </select>
+                <Icon name="MapPin" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
+                <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="text-sm font-semibold text-muted-foreground">Сортировка:</span>
+              <Button 
+                variant={sortBy === 'rating' ? "default" : "outline"}
+                size="sm"
+                className="h-9 px-4 text-sm font-semibold rounded-xl"
+                onClick={() => setSortBy('rating')}
+              >
+                <Icon name="Star" size={14} className="mr-1.5" />
+                По рейтингу
+              </Button>
+              <Button 
+                variant={sortBy === 'price' ? "default" : "outline"}
+                size="sm"
+                className="h-9 px-4 text-sm font-semibold rounded-xl"
+                onClick={() => setSortBy('price')}
+              >
+                <Icon name="DollarSign" size={14} className="mr-1.5" />
+                По цене
+              </Button>
+
+              {(filterFZ152 || filterTrialPeriod || filterLocation) && (
+                <div className="flex items-center gap-2 ml-auto">
+                  <div className="flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-xl px-3 py-1.5">
+                    <span className="text-sm font-medium text-foreground">
+                      Найдено: {filteredProviders.length}
+                    </span>
+                  </div>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="h-9 px-3 text-sm font-semibold hover:bg-destructive/20 hover:text-destructive rounded-xl"
+                    onClick={() => {
+                      setFilterFZ152(false);
+                      setFilterTrialPeriod(false);
+                      setFilterLocation(null);
+                    }}
+                  >
+                    <Icon name="X" size={14} className="mr-1.5" />
+                    Сбросить
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
 
         <div className="grid gap-6 max-w-6xl mx-auto">
