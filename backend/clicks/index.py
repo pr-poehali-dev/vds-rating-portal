@@ -57,10 +57,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'isBase64Encoded': False
             }
         
+        user_ip = event.get('requestContext', {}).get('identity', {}).get('sourceIp', 'unknown')
+        
         with conn.cursor() as cur:
             cur.execute(
-                "INSERT INTO provider_clicks (provider_id) VALUES (%s)",
-                (provider_id,)
+                "INSERT INTO provider_clicks (provider_id, user_ip) VALUES (%s, %s) ON CONFLICT (provider_id, user_ip) DO NOTHING",
+                (provider_id, user_ip)
             )
             conn.commit()
         
@@ -88,7 +90,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     SELECT 
                         provider_id,
                         DATE(clicked_at) as date,
-                        COUNT(*) as clicks
+                        COUNT(DISTINCT user_ip) as clicks
                     FROM provider_clicks
                     WHERE clicked_at >= CURRENT_DATE - %s
                     GROUP BY provider_id, DATE(clicked_at)
@@ -121,7 +123,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 cur.execute("""
                     SELECT 
                         provider_id,
-                        COUNT(*) as clicks,
+                        COUNT(DISTINCT user_ip) as clicks,
                         MIN(clicked_at) as first_click,
                         MAX(clicked_at) as last_click
                     FROM provider_clicks
