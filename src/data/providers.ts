@@ -2,6 +2,67 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 12,
+    name: 'Fornex',
+    logo: 'https://fornex.com/static/local/templates/main/img/logo.svg',
+    rating: 9.1,
+    basePrice: 250,
+    cpuPrice: 155,
+    ramPrice: 95,
+    storagePrice: 9,
+    features: ['SSD диски', 'DDoS защита', 'Snapshot бэкапы', 'API управление'],
+    locations: ['Москва', 'Санкт-Петербург', 'Нидерланды'],
+    trialDays: 0,
+    url: 'https://fornex.com',
+    pros: ['Стабильная работа', 'Адекватные цены', 'Гибкая конфигурация', 'Хорошая поддержка'],
+    cons: ['Нет тестового периода', 'Мало локаций', 'Базовая панель управления'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Arch Linux', 'Windows Server'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'До 100 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 20 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 80,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 20 },
+        { months: 6, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'Криптовалюта'],
+      minPrice: 250
+    },
+    popularity: 30000,
+    promoText: 'Скидка 20% при оплате на год вперёд',
+    caseStudies: ['Веб-приложения', 'Игровые серверы', 'Корпоративные проекты', 'E-commerce', 'Dev окружения'],
+    uptime30days: 99.89,
+    reviews: [
+      { author: 'Алексей Т.', text: 'Работаю с Fornex уже 2 года. Стабильная работа, редкие сбои. Цена адекватная, поддержка отвечает быстро.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Марина В.', text: 'DDoS защита работает отлично — проверил на практике. Сервер выдержал атаку без проблем. Рекомендую!', rating: 5, date: '06 ноя 2025' },
+      { author: 'Сергей К.', text: 'Нет тестового периода — пришлось сразу оплачивать. Но качество оправдало ожидания. Для продакшна подходит.', rating: 4, date: '04 ноя 2025' },
+      { author: 'Ольга Н.', text: 'API удобное, интегрировала с мониторингом за пару часов. Snapshot бэкапы дважды спасали проект.', rating: 5, date: '02 ноя 2025' },
+      { author: 'Дмитрий Л.', text: 'За свои деньги отличный выбор. SSD диски быстрые, производительность стабильная. Поддержка на уровне.', rating: 5, date: '31 окт 2025' }
+    ]
+  },
+  {
     id: 11,
     name: 'Hostland',
     logo: 'https://hostland.ru/img/logotypes/logo_cm_1.png',
