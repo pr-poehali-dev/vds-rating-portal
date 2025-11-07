@@ -63,7 +63,7 @@ export const providers: Provider[] = [
   {
     id: 29,
     name: 'HostKey',
-    logo: 'https://www.hostkey.com/assets/images/logo.svg',
+    logo: 'https://cdn.poehali.dev/files/0cf5de36-7228-484c-9fc4-627f990d3767.png',
     rating: 9.5,
     basePrice: 0,
     cpuPrice: 160,
