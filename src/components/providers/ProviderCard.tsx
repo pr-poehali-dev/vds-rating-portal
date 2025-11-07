@@ -201,7 +201,7 @@ export const ProviderCard = ({
                         }
                       };
                       return (
-                        <Badge key={idx} className={`${getVirtColor(virt)} border font-semibold text-[10px] px-1.5 py-0.5`}>
+                        <Badge key={idx} className={`${getVirtColor(virt)} border font-semibold text-[11px] px-1.5 py-0.5`}>
                           {virt}
                         </Badge>
                       );
