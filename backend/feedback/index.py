@@ -53,19 +53,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'body': json.dumps({'error': 'Message is required'})
             }
         
-        bot_token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
-        chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
-        
-        if not bot_token or not chat_id:
-            return {
-                'statusCode': 500,
-                'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-                'isBase64Encoded': False,
-                'body': json.dumps({'error': 'Telegram configuration missing'})
-            }
+        bot_token = os.environ.get('TELEGRAM_BOT_TOKEN', '8206254112:AAEgCguDQWK7yUbnBDx-n_BSruQWwTDivX4')
+        chat_id = os.environ.get('TELEGRAM_CHAT_ID', '7988374801')
         
         telegram_message = f"🔔 Новое сообщение с сайта VDS Rating\n\n"
         telegram_message += f"👤 Имя: {name}\n"
