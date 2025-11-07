@@ -307,10 +307,28 @@ const Admin = () => {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
-            <Icon name="MousePointerClick" size={24} className="text-primary" />
-            Статистика переходов на сайты провайдеров
-          </h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
+              <Icon name="MousePointerClick" size={24} className="text-primary" />
+              Статистика переходов на сайты провайдеров
+            </h2>
+            {!isLoadingStats && (
+              <div className="bg-primary/10 border-2 border-primary/30 rounded-xl px-6 py-3">
+                <div className="text-xs font-bold text-primary uppercase tracking-wider mb-1">Всего переходов</div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-3xl font-black text-primary">
+                    {clickStats.reduce((sum, s) => sum + s.clicks, 0)}
+                  </span>
+                  <span className="text-sm text-muted-foreground">
+                    {(() => {
+                      const total = clickStats.reduce((sum, s) => sum + s.clicks, 0);
+                      return total === 1 ? 'переход' : total < 5 ? 'перехода' : 'переходов';
+                    })()}
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
           {isLoadingStats ? (
             <div className="flex items-center justify-center py-8">
               <Icon name="Loader2" size={32} className="animate-spin text-primary" />
