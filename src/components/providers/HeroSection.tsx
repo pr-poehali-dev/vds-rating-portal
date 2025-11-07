@@ -25,7 +25,16 @@ export const HeroSection = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <Button size="lg" className="h-14 px-8 text-base font-bold bg-primary text-background shadow-xl shadow-primary/30 hover:shadow-neon transition-all group rounded-xl">
+            <Button 
+              size="lg" 
+              className="h-14 px-8 text-base font-bold bg-primary text-background shadow-xl shadow-primary/30 hover:shadow-neon transition-all group rounded-xl"
+              onClick={() => {
+                const providersSection = document.getElementById('providers');
+                if (providersSection) {
+                  providersSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
               Посмотреть рейтинг
               <Icon name="ArrowRight" size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
