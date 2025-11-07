@@ -2,6 +2,67 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 14,
+    name: 'MCHost',
+    logo: 'https://mchost.ru/files/img/logo.svg',
+    rating: 9.2,
+    basePrice: 220,
+    cpuPrice: 160,
+    ramPrice: 90,
+    storagePrice: 8,
+    features: ['NVMe диски', 'Безлимитный трафик', 'ISPmanager бесплатно', 'Бесплатная миграция'],
+    locations: ['Россия (DataPro)', 'Нидерланды (Serverius)'],
+    trialDays: 0,
+    url: 'https://mchost.ru',
+    pros: ['20 лет на рынке', 'NVMe диски Dell', 'Бесплатный ISPmanager 6', '60 000+ клиентов'],
+    cons: ['Нет тестового периода', 'Всего 2 локации', 'Средняя цена'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Arch Linux', 'Windows Server'],
+      controlPanel: 'ISPmanager 6 (бесплатно)',
+      apiAccess: true,
+      ddosProtection: 'Базовая защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 15 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 100,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 15 },
+        { months: 6, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'Яндекс.Касса'],
+      minPrice: 220
+    },
+    popularity: 60000,
+    promoText: 'Скидка 15% при оплате на год + ISPmanager 6 бесплатно',
+    caseStudies: ['Корпоративные сайты', 'E-commerce', 'CMS проекты', 'Dev окружения', 'Малый бизнес'],
+    uptime30days: 99.91,
+    reviews: [
+      { author: 'Андрей М.', text: 'Работаю с MCHost с 2018 года. Надёжный провайдер, сервера стабильные. NVMe диски Dell работают отлично. Поддержка всегда помогает.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Екатерина С.', text: 'ISPmanager 6 бесплатно — это огромный плюс! Панель удобная, всё интуитивно. Миграция с прошлого хостинга прошла без проблем.', rating: 5, date: '06 ноя 2025' },
+      { author: 'Максим В.', text: 'Безлимитный трафик — то что нужно для highload проектов. За 2 года использования сбоев практически не было. Рекомендую!', rating: 5, date: '04 ноя 2025' },
+      { author: 'Светлана К.', text: 'Нет тестового периода — пришлось сразу платить. Но качество того стоит. 20 лет на рынке внушают доверие.', rating: 4, date: '02 ноя 2025' },
+      { author: 'Дмитрий Р.', text: 'NVMe диски действительно быстрые! База данных работает моментально. Цена средняя, но за качество не жалко платить.', rating: 5, date: '31 окт 2025' }
+    ]
+  },
+  {
     id: 13,
     name: 'Smartape',
     logo: 'https://smartape.ru/images/logo/logo_header_default_ru.svg',
