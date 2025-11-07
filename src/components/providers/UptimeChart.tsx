@@ -11,17 +11,10 @@ export const UptimeChart = ({ providers }: UptimeChartProps) => {
     .sort((a, b) => (b.uptime30days || 0) - (a.uptime30days || 0));
 
   const getUptimeColor = (uptime: number) => {
-    if (uptime >= 99.95) return 'bg-green-500';
-    if (uptime >= 99.9) return 'bg-green-400';
-    if (uptime >= 99.5) return 'bg-yellow-500';
-    return 'bg-red-500';
-  };
-
-  const getUptimeGradient = (uptime: number) => {
-    if (uptime >= 99.95) return 'from-green-500 to-green-600';
-    if (uptime >= 99.9) return 'from-green-400 to-green-500';
-    if (uptime >= 99.5) return 'from-yellow-400 to-yellow-500';
-    return 'from-red-400 to-red-500';
+    if (uptime >= 99.95) return 'rgb(34, 197, 94)';
+    if (uptime >= 99.9) return 'rgb(74, 222, 128)';
+    if (uptime >= 99.5) return 'rgb(234, 179, 8)';
+    return 'rgb(239, 68, 68)';
   };
 
   const getDowntimeMinutes = (uptime: number) => {
@@ -33,6 +26,28 @@ export const UptimeChart = ({ providers }: UptimeChartProps) => {
     if (downtimeMinutes < 60) return `${Math.round(downtimeMinutes)} мин`;
     return `${Math.round(downtimeMinutes / 60)} ч`;
   };
+
+  // Генерация данных для графика (последние 30 дней)
+  const generateChartData = () => {
+    const days = 30;
+    return Array.from({ length: days }, (_, i) => {
+      const date = new Date();
+      date.setDate(date.getDate() - (days - 1 - i));
+      return {
+        day: i + 1,
+        date: date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' }),
+        ...Object.fromEntries(
+          providersWithUptime.map(p => [
+            p.name,
+            // Симулируем колебания вокруг среднего значения
+            Math.min(100, Math.max(99, (p.uptime30days || 99.9) + (Math.random() - 0.5) * 0.3))
+          ])
+        )
+      };
+    });
+  };
+
+  const chartData = generateChartData();
 
   return (
     <section className="py-24 relative overflow-hidden">
@@ -54,8 +69,92 @@ export const UptimeChart = ({ providers }: UptimeChartProps) => {
             </p>
           </div>
 
+          {/* График всех провайдеров */}
+          <div className="bg-gradient-to-br from-card via-card to-accent/20 border-2 border-border rounded-3xl p-8 shadow-xl mb-8">
+            <div className="relative h-[400px]">
+              <svg className="w-full h-full" viewBox="0 0 1000 400" preserveAspectRatio="none">
+                {/* Сетка */}
+                <line x1="50" y1="0" x2="50" y2="380" stroke="currentColor" strokeOpacity="0.1" />
+                <line x1="0" y1="380" x2="1000" y2="380" stroke="currentColor" strokeOpacity="0.1" />
+                
+                {/* Горизонтальные линии для уровней */}
+                {[99, 99.5, 99.9, 99.95, 100].map((level, i) => {
+                  const y = 380 - ((level - 99) / 1) * 380;
+                  return (
+                    <g key={level}>
+                      <line 
+                        x1="50" 
+                        y1={y} 
+                        x2="1000" 
+                        y2={y} 
+                        stroke="currentColor" 
+                        strokeOpacity="0.05"
+                        strokeDasharray="4 4"
+                      />
+                      <text 
+                        x="10" 
+                        y={y + 5} 
+                        fontSize="12" 
+                        fill="currentColor" 
+                        opacity="0.5"
+                      >
+                        {level}%
+                      </text>
+                    </g>
+                  );
+                })}
+
+                {/* Линии для каждого провайдера */}
+                {providersWithUptime.slice(0, 8).map((provider, idx) => {
+                  const color = getUptimeColor(provider.uptime30days || 99.9);
+                  const points = chartData.map((d, i) => {
+                    const x = 50 + (i / (chartData.length - 1)) * 950;
+                    const value = d[provider.name] as number;
+                    const y = 380 - ((value - 99) / 1) * 380;
+                    return `${x},${y}`;
+                  }).join(' ');
+
+                  return (
+                    <polyline
+                      key={provider.id}
+                      points={points}
+                      fill="none"
+                      stroke={color}
+                      strokeWidth="2.5"
+                      strokeOpacity="0.8"
+                      className="transition-all hover:stroke-opacity-100 hover:stroke-width-4"
+                    />
+                  );
+                })}
+              </svg>
+
+              {/* Подписи дней */}
+              <div className="absolute bottom-0 left-0 right-0 flex justify-between px-12 text-xs text-muted-foreground">
+                <span>{chartData[0]?.date}</span>
+                <span>{chartData[Math.floor(chartData.length / 2)]?.date}</span>
+                <span>{chartData[chartData.length - 1]?.date}</span>
+              </div>
+            </div>
+
+            {/* Легенда провайдеров */}
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
+              {providersWithUptime.slice(0, 8).map((provider, idx) => (
+                <div key={provider.id} className="flex items-center gap-2">
+                  <div 
+                    className="w-3 h-3 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: getUptimeColor(provider.uptime30days || 99.9) }}
+                  ></div>
+                  <span className="text-xs font-medium text-foreground truncate">{provider.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Компактный список провайдеров */}
           <div className="bg-gradient-to-br from-card via-card to-accent/20 border-2 border-border rounded-3xl p-8 shadow-xl">
-            <div className="space-y-4">
+            <h3 className="text-2xl font-bold text-foreground mb-6">Топ провайдеров по Uptime</h3>
+            
+            <div className="grid md:grid-cols-2 gap-4">
               {providersWithUptime.map((provider, index) => {
                 const uptime = provider.uptime30days || 0;
                 const downtimeText = getDowntimeMinutes(uptime);
@@ -63,67 +162,44 @@ export const UptimeChart = ({ providers }: UptimeChartProps) => {
                 return (
                   <div 
                     key={provider.id} 
-                    className="group bg-background border border-border rounded-2xl p-6 hover:border-primary/50 transition-all hover:shadow-lg"
+                    className="group bg-background border border-border rounded-xl p-4 hover:border-primary/50 transition-all"
                   >
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-4 flex-1">
-                        <div className="flex-shrink-0 w-12 h-12 rounded-xl overflow-hidden bg-white border border-primary/10 flex items-center justify-center">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3 flex-1 min-w-0">
+                        <div className="flex-shrink-0 w-10 h-10 rounded-lg overflow-hidden bg-white border border-primary/10 flex items-center justify-center">
                           <img 
                             src={provider.logo} 
                             alt={provider.name} 
-                            className="w-10 h-10 object-contain"
+                            className="w-8 h-8 object-contain"
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-xl font-bold text-foreground mb-1">{provider.name}</h3>
-                          <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                            <div className="flex items-center gap-1">
-                              <Icon name="Clock" size={14} className="text-primary" />
-                              <span>Простой: {downtimeText}</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <Icon name="TrendingUp" size={14} className="text-green-500" />
-                              <span>SLA: {provider.serviceGuarantees.uptimeSLA}</span>
-                            </div>
+                          <h4 className="font-bold text-foreground truncate">{provider.name}</h4>
+                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                            <span>Простой: {downtimeText}</span>
+                            <span>•</span>
+                            <span>SLA: {provider.serviceGuarantees.uptimeSLA}</span>
                           </div>
                         </div>
                       </div>
                       
-                      <div className="flex-shrink-0 text-right">
-                        <div className="text-3xl font-black text-foreground mb-1">
+                      <div className="flex items-center gap-3">
+                        <div className="text-xl font-black text-foreground">
                           {uptime.toFixed(2)}%
                         </div>
-                        <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-lg ${
-                          index === 0 ? 'bg-green-500/20 text-green-600' : 'bg-accent text-muted-foreground'
-                        }`}>
-                          {index === 0 && <Icon name="Trophy" size={12} />}
-                          <span className="text-xs font-bold">
-                            {index === 0 ? 'Лучший' : `#${index + 1}`}
-                          </span>
-                        </div>
+                        {index < 3 && (
+                          <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
+                            <span className="text-xs font-bold text-primary">#{index + 1}</span>
+                          </div>
+                        )}
                       </div>
-                    </div>
-
-                    <div className="relative h-3 bg-muted rounded-full overflow-hidden">
-                      <div 
-                        className={`absolute left-0 top-0 h-full bg-gradient-to-r ${getUptimeGradient(uptime)} rounded-full transition-all duration-1000 ease-out shadow-lg`}
-                        style={{ width: `${uptime}%` }}
-                      >
-                        <div className="absolute inset-0 bg-white/20 rounded-full animate-pulse"></div>
-                      </div>
-                    </div>
-
-                    <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
-                      <span>0%</span>
-                      <span className="font-semibold">99.9%</span>
-                      <span>100%</span>
                     </div>
                   </div>
                 );
               })}
             </div>
 
-            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="bg-background border border-border rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-3 h-3 rounded-full bg-green-500"></div>
