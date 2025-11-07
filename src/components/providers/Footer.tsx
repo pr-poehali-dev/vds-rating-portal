@@ -24,11 +24,24 @@ export const Footer = () => {
                 Независимая платформа для сравнения VDS провайдеров. Помогаем найти идеальное решение для вашего проекта.
               </p>
               <div className="flex gap-3">
-                {['Mail', 'MessageCircle', 'Send'].map((icon, idx) => (
-                  <Button key={idx} size="icon" variant="outline" className="rounded-xl hover:border-primary hover:bg-primary/10 hover:text-primary transition-all">
-                    <Icon name={icon as any} size={18} />
-                  </Button>
-                ))}
+                <Button 
+                  size="icon" 
+                  variant="outline" 
+                  className="rounded-xl hover:border-primary hover:bg-primary/10 hover:text-primary transition-all"
+                  onClick={() => window.location.href = '#contact'}
+                >
+                  <Icon name="Send" size={18} />
+                </Button>
+                <Button 
+                  size="icon" 
+                  variant="outline" 
+                  className="rounded-xl hover:border-primary hover:bg-primary/10 hover:text-primary transition-all"
+                  asChild
+                >
+                  <a href="https://t.me/top_vds_com" target="_blank" rel="noopener noreferrer">
+                    <Icon name="MessageCircle" size={18} />
+                  </a>
+                </Button>
               </div>
             </div>
             

@@ -1,0 +1,19 @@
+{
+  "tests": [
+    {
+      "name": "Test feedback submission",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Test User",
+        "email": "test@example.com",
+        "message": "Test feedback message"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
