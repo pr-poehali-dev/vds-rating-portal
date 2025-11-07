@@ -2,6 +2,67 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 20,
+    name: 'IHC',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/ee47ff54-dd2f-484c-a8a1-a1445faa99e8.jpg',
+    rating: 9.3,
+    basePrice: 170,
+    cpuPrice: 135,
+    ramPrice: 82,
+    storagePrice: 6,
+    features: ['SSD диски', 'DDoS защита', 'Панель управления', 'Техподдержка 24/7'],
+    locations: ['Москва', 'Санкт-Петербург', 'Казань'],
+    trialDays: 10,
+    url: 'https://www.ihc.ru/?ref=440585',
+    pros: ['Тестовый период 10 дней', 'Доступные цены', 'Стабильная работа', 'Быстрая поддержка'],
+    cons: ['Нет NVMe дисков', 'Ограниченный выбор локаций', 'Нет зарубежных ЦОДов'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Fedora'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'До 80 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 15 мин',
+      moneyBackGuarantee: 10
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 65,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 18 },
+        { months: 6, percent: 12 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney'],
+      minPrice: 170
+    },
+    popularity: 16000,
+    promoText: 'Тестовый период 10 дней + скидка 18% при оплате года',
+    caseStudies: ['Корпоративные сайты', 'Интернет-магазины', 'Веб-приложения', 'CMS проекты'],
+    uptime30days: 99.89,
+    reviews: [
+      { author: 'Игорь С.', text: 'Пользуюсь IHC уже полтора года. Цены доступные, сервер работает стабильно. Поддержка отвечает быстро, помогают по делу.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Марина К.', text: 'Тестовый период 10 дней — успела всё проверить! SSD диски работают быстро, для WordPress сайта отлично подходит.', rating: 5, date: '07 ноя 2025' },
+      { author: 'Алексей П.', text: 'За свои деньги отличный вариант. Панель управления простая и понятная. Развернул сервер за 5 минут. Рекомендую!', rating: 5, date: '06 ноя 2025' },
+      { author: 'Ольга Д.', text: 'Нет зарубежных локаций — для международных проектов не подойдёт. Но для российских клиентов хватает. Цена адекватная.', rating: 4, date: '05 ноя 2025' },
+      { author: 'Сергей Л.', text: 'Техподдержка действительно работает 24/7. Писал в 2 ночи — ответили за 12 минут. Молодцы! Стабильность хорошая.', rating: 5, date: '04 ноя 2025' }
+    ]
+  },
+  {
     id: 19,
     name: 'eurobyte',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/50a5c758-a64e-44fe-911b-6d12ea0637a9.jpg',
