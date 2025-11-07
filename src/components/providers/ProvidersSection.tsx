@@ -187,11 +187,29 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                 <Icon name="Filter" size={18} className="text-primary" />
                 <h3 className="text-lg font-bold text-foreground">Фильтры</h3>
               </div>
-              <div className="flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-4 py-2">
-                <Icon name="Search" size={16} className="text-primary" />
-                <span className="text-sm font-bold text-primary">
-                  Найдено: {filteredProviders.length} {filteredProviders.length === 1 ? 'провайдер' : filteredProviders.length < 5 ? 'провайдера' : 'провайдеров'}
-                </span>
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-4 py-2">
+                  <Icon name="Search" size={16} className="text-primary" />
+                  <span className="text-sm font-bold text-primary">
+                    Найдено: {filteredProviders.length} {filteredProviders.length === 1 ? 'провайдер' : filteredProviders.length < 5 ? 'провайдера' : 'провайдеров'}
+                  </span>
+                </div>
+                {(filterFZ152 || filterTrialPeriod || filterLocation || filterVirtualization) && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-10 px-4 text-sm font-semibold rounded-xl border-2 border-border hover:bg-destructive/10 hover:border-destructive/50 hover:text-destructive transition-all"
+                    onClick={() => {
+                      setFilterFZ152(false);
+                      setFilterTrialPeriod(false);
+                      setFilterLocation(null);
+                      setFilterVirtualization(null);
+                    }}
+                  >
+                    <Icon name="X" size={16} className="mr-1.5" />
+                    Сбросить
+                  </Button>
+                )}
               </div>
             </div>
             
