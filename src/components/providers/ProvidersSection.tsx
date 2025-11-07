@@ -254,11 +254,37 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                   value={filterVirtualization || ''}
                   onChange={(e) => setFilterVirtualization(e.target.value || null)}
                   className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
+                  style={{
+                    color: filterVirtualization ? (() => {
+                      switch(filterVirtualization) {
+                        case 'KVM': return 'rgb(37, 99, 235)';
+                        case 'VMware': return 'rgb(168, 85, 247)';
+                        case 'OpenVZ': return 'rgb(249, 115, 22)';
+                        case 'Hyper-V': return 'rgb(6, 182, 212)';
+                        case 'LXC': return 'rgb(34, 197, 94)';
+                        case 'Xen': return 'rgb(236, 72, 153)';
+                        default: return '';
+                      }
+                    })() : ''
+                  }}
                 >
                   <option value="">Виртуализация</option>
-                  {allVirtualizations.map(virt => (
-                    <option key={virt} value={virt}>{virt}</option>
-                  ))}
+                  {allVirtualizations.map(virt => {
+                    const getVirtEmoji = (type: string) => {
+                      switch(type) {
+                        case 'KVM': return '🔵';
+                        case 'VMware': return '🟣';
+                        case 'OpenVZ': return '🟠';
+                        case 'Hyper-V': return '🔷';
+                        case 'LXC': return '🟢';
+                        case 'Xen': return '🩷';
+                        default: return '⚙️';
+                      }
+                    };
+                    return (
+                      <option key={virt} value={virt}>{getVirtEmoji(virt)} {virt}</option>
+                    );
+                  })}
                 </select>
                 <Icon name="Box" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
                 <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
