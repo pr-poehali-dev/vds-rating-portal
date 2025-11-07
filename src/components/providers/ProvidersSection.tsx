@@ -11,6 +11,7 @@ interface ProvidersSectionProps {
 export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
   const [configOpen, setConfigOpen] = useState<number | null>(null);
+  const [filterFZ152, setFilterFZ152] = useState(false);
   const [reviewsToShow, setReviewsToShow] = useState<Record<number, number>>({
     1: 5,
     2: 5,
@@ -73,6 +74,10 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     }));
   };
 
+  const filteredProviders = filterFZ152 
+    ? providersWithReviews.filter(p => p.fz152Compliant)
+    : providersWithReviews;
+
   return (
     <section id="providers" className="py-24 relative">
       <div className="container mx-auto px-4 lg:px-8">
@@ -89,8 +94,35 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
           </p>
         </div>
 
+        <div className="flex flex-wrap gap-3 justify-center mb-10 max-w-4xl mx-auto">
+          <Button 
+            variant={filterFZ152 ? "default" : "outline"}
+            className="h-11 px-6 text-sm font-semibold border-2 rounded-xl transition-all"
+            onClick={() => setFilterFZ152(!filterFZ152)}
+          >
+            <Icon name="ShieldCheck" size={16} className="mr-2" />
+            152-ФЗ
+            {filterFZ152 && <Icon name="Check" size={16} className="ml-2" />}
+          </Button>
+          {filterFZ152 && (
+            <div className="flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-xl px-4 py-2">
+              <span className="text-sm font-medium text-foreground">
+                Найдено провайдеров: {filteredProviders.length}
+              </span>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="h-6 w-6 p-0 hover:bg-primary/20"
+                onClick={() => setFilterFZ152(false)}
+              >
+                <Icon name="X" size={14} />
+              </Button>
+            </div>
+          )}
+        </div>
+
         <div className="grid gap-6 max-w-6xl mx-auto">
-          {providersWithReviews.map((provider, index) => {
+          {filteredProviders.map((provider, index) => {
             const config = configs[provider.id];
             const calculatedPrice = calculatePrice(provider, config);
 
