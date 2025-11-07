@@ -13,7 +13,7 @@ export const providers: Provider[] = [
     features: ['NVMe диски', '24/7 поддержка', 'DDoS защита', '99.99% SLA'],
     locations: ['Москва', 'Санкт-Петербург'],
     trialDays: 0,
-    url: 'https://netangels.ru/vds/',
+    url: 'https://netangels.ru/?p_ref=u128310',
     pros: ['21 год на рынке', 'Высокая стабильность', 'Гибкая конфигурация', 'Поддержка GPU'],
     cons: ['Нет тестового периода', 'Цены выше среднего', 'Интерфейс панели устарел'],
     fz152Compliant: true,
