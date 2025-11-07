@@ -202,11 +202,10 @@ export const ProviderCard = ({
                 </div>
               )}
               <div className="text-xs font-bold text-primary uppercase tracking-wider mb-2">Цена</div>
-              <div className="flex items-baseline justify-center gap-1 mb-1">
+              <div className="flex items-baseline justify-center gap-1 mb-4">
                 <span className="text-4xl md:text-5xl font-black text-primary">{calculatedPrice}</span>
-                <span className="text-xl text-muted-foreground">₽</span>
+                <span className="text-xl text-muted-foreground">₽/месяц</span>
               </div>
-              <div className="text-sm text-muted-foreground font-medium mb-4">/месяц</div>
               {provider.pricingDetails.discounts && provider.pricingDetails.discounts.length > 0 && (
                 <div className="mb-4">
                   <div className="text-xs text-muted-foreground mb-1.5">Скидки:</div>
