@@ -30,6 +30,15 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     const saved = localStorage.getItem('filterMinDatacenters');
     return saved ? parseInt(saved) : null;
   });
+  const [filterDiskType, setFilterDiskType] = useState<string | null>(() => {
+    return localStorage.getItem('filterDiskType') || null;
+  });
+  const [filterPaymentMethod, setFilterPaymentMethod] = useState<string | null>(() => {
+    return localStorage.getItem('filterPaymentMethod') || null;
+  });
+  const [filterOS, setFilterOS] = useState<string | null>(() => {
+    return localStorage.getItem('filterOS') || null;
+  });
   const [sortBy, setSortBy] = useState<'rating' | 'price'>(() => {
     const saved = localStorage.getItem('sortBy');
     return (saved as 'rating' | 'price') || 'rating';
@@ -163,6 +172,30 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   }, [filterMinDatacenters]);
 
   useEffect(() => {
+    if (filterDiskType) {
+      localStorage.setItem('filterDiskType', filterDiskType);
+    } else {
+      localStorage.removeItem('filterDiskType');
+    }
+  }, [filterDiskType]);
+
+  useEffect(() => {
+    if (filterPaymentMethod) {
+      localStorage.setItem('filterPaymentMethod', filterPaymentMethod);
+    } else {
+      localStorage.removeItem('filterPaymentMethod');
+    }
+  }, [filterPaymentMethod]);
+
+  useEffect(() => {
+    if (filterOS) {
+      localStorage.setItem('filterOS', filterOS);
+    } else {
+      localStorage.removeItem('filterOS');
+    }
+  }, [filterOS]);
+
+  useEffect(() => {
     localStorage.setItem('sortBy', sortBy);
   }, [sortBy]);
 
@@ -207,6 +240,18 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     new Set(providersWithReviews.flatMap(p => p.technicalSpecs.virtualization))
   ).sort();
 
+  const allDiskTypes = Array.from(
+    new Set(providersWithReviews.map(p => p.technicalSpecs.diskType))
+  ).sort();
+
+  const allPaymentMethods = Array.from(
+    new Set(providersWithReviews.flatMap(p => p.pricingDetails.paymentMethods))
+  ).sort();
+
+  const allOS = Array.from(
+    new Set(providersWithReviews.flatMap(p => p.technicalSpecs.availableOS))
+  ).sort();
+
   const filteredProviders = providersWithReviews
     .filter(p => {
       if (filterFZ152 && !p.fz152Compliant) return false;
@@ -214,6 +259,9 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
       if (filterLocation && !p.locations.includes(filterLocation)) return false;
       if (filterVirtualization && !p.technicalSpecs.virtualization.includes(filterVirtualization)) return false;
       if (filterMinDatacenters !== null && p.locations.length < filterMinDatacenters) return false;
+      if (filterDiskType && p.technicalSpecs.diskType !== filterDiskType) return false;
+      if (filterPaymentMethod && !p.pricingDetails.paymentMethods.includes(filterPaymentMethod)) return false;
+      if (filterOS && !p.technicalSpecs.availableOS.includes(filterOS)) return false;
       return true;
     })
     .sort((a, b) => {
@@ -258,7 +306,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                     Найдено: {filteredProviders.length} {filteredProviders.length === 1 ? 'провайдер' : filteredProviders.length < 5 ? 'провайдера' : 'провайдеров'}
                   </span>
                 </div>
-                {(filterFZ152 || filterTrialPeriod || filterLocation || filterVirtualization || filterMinDatacenters) && (
+                {(filterFZ152 || filterTrialPeriod || filterLocation || filterVirtualization || filterMinDatacenters || filterDiskType || filterPaymentMethod || filterOS) && (
                   <Button
                     variant="ghost"
                     size="sm"
@@ -269,6 +317,9 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                       setFilterLocation(null);
                       setFilterVirtualization(null);
                       setFilterMinDatacenters(null);
+                      setFilterDiskType(null);
+                      setFilterPaymentMethod(null);
+                      setFilterOS(null);
                     }}
                   >
                     <Icon name="X" size={16} className="mr-1.5" />
@@ -371,6 +422,51 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                 <Icon name="Database" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
                 <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
               </div>
+
+              <div className="relative">
+                <select
+                  value={filterDiskType || ''}
+                  onChange={(e) => setFilterDiskType(e.target.value || null)}
+                  className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
+                >
+                  <option value="">Тип дисков</option>
+                  {allDiskTypes.map(type => (
+                    <option key={type} value={type}>{type}</option>
+                  ))}
+                </select>
+                <Icon name="HardDrive" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
+                <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+              </div>
+
+              <div className="relative">
+                <select
+                  value={filterPaymentMethod || ''}
+                  onChange={(e) => setFilterPaymentMethod(e.target.value || null)}
+                  className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
+                >
+                  <option value="">Способ оплаты</option>
+                  {allPaymentMethods.map(method => (
+                    <option key={method} value={method}>{method}</option>
+                  ))}
+                </select>
+                <Icon name="CreditCard" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
+                <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+              </div>
+
+              <div className="relative">
+                <select
+                  value={filterOS || ''}
+                  onChange={(e) => setFilterOS(e.target.value || null)}
+                  className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
+                >
+                  <option value="">Операционная система</option>
+                  {allOS.map(os => (
+                    <option key={os} value={os}>{os}</option>
+                  ))}
+                </select>
+                <Icon name="Monitor" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
+                <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+              </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
@@ -394,7 +490,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                 По цене
               </Button>
 
-              {(filterFZ152 || filterTrialPeriod || filterLocation) && (
+              {(filterFZ152 || filterTrialPeriod || filterLocation || filterDiskType || filterPaymentMethod || filterOS) && (
                 <div className="flex items-center gap-2 ml-auto">
                   <div className="flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-xl px-3 py-1.5">
                     <span className="text-sm font-medium text-foreground">
@@ -409,9 +505,15 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                       setFilterFZ152(false);
                       setFilterTrialPeriod(false);
                       setFilterLocation(null);
+                      setFilterDiskType(null);
+                      setFilterPaymentMethod(null);
+                      setFilterOS(null);
                       localStorage.removeItem('filterFZ152');
                       localStorage.removeItem('filterTrialPeriod');
                       localStorage.removeItem('filterLocation');
+                      localStorage.removeItem('filterDiskType');
+                      localStorage.removeItem('filterPaymentMethod');
+                      localStorage.removeItem('filterOS');
                     }}
                   >
                     <Icon name="X" size={14} className="mr-1.5" />
