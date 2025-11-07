@@ -25,7 +25,6 @@ export const Footer = () => {
                 Независимая платформа для сравнения VDS провайдеров. Помогаем найти идеальное решение для вашего проекта.
               </p>
               <div className="flex gap-3">
-                <ContactForm />
                 <Button 
                   size="icon" 
                   variant="outline" 
@@ -36,6 +35,7 @@ export const Footer = () => {
                     <Icon name="MessageCircle" size={18} />
                   </a>
                 </Button>
+                <ContactForm />
               </div>
             </div>
             
