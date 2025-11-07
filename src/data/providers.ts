@@ -2,6 +2,68 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 9,
+    name: 'Rusonyx',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/rusonyx-logo.png',
+    rating: 9.4,
+    basePrice: 200,
+    cpuPrice: 160,
+    ramPrice: 95,
+    storagePrice: 9,
+    features: ['NVMe диски', 'Тестовый период 14 дней', '24/7 поддержка', 'DDoS защита'],
+    locations: ['Москва'],
+    trialDays: 14,
+    url: 'https://www.rusonyx.ru/hosting/vps/',
+    pros: ['Длительный тестовый период', 'Отличная техподдержка', 'Стабильная работа', 'Низкие цены'],
+    cons: ['Только одна локация', 'Интерфейс может показаться сложным'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM', 'Virtuozzo'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Rocky Linux', 'Alma Linux', 'Astra Linux'],
+      controlPanel: 'ISPmanager / Plesk',
+      apiAccess: true,
+      ddosProtection: 'До 4 уровня (7 - по запросу)'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 10 мин',
+      moneyBackGuarantee: 14
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 0,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 67 },
+        { months: 6, percent: 50 },
+        { months: 3, percent: 33 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'Сбербанк Онлайн', 'Безналичный расчет'],
+      minPrice: 200
+    },
+    popularity: 45000,
+    promoText: 'Скидка до 67% при оплате на 3+ месяца. Тестовый период 14 дней!',
+    caseStudies: ['Корпоративные проекты', 'E-commerce', 'Высоконагруженные системы', 'Резервные площадки', 'Облачная инфраструктура'],
+    uptime30days: 99.95,
+    reviews: [
+      { author: 'Владимир Р.', text: '14 дней бесплатного теста — это реально круто! Успел все протестировать и остался на платном тарифе.', rating: 5, date: '06 ноя 2025' },
+      { author: 'Наталья С.', text: 'Работаем с Rusonyx уже 10 лет. Ни разу не пожалели. Техподдержка всегда помогает быстро и по делу.', rating: 5, date: '04 ноя 2025' },
+      { author: 'Максим Д.', text: 'Отличное соотношение цены и качества. Скидка 67% при годовой оплате — очень выгодно.', rating: 5, date: '02 ноя 2025' },
+      { author: 'Екатерина Л.', text: 'Техподдержка реально "живая" — без роботов и шаблонов. Помогли настроить всё с нуля.', rating: 5, date: '31 окт 2025' },
+      { author: 'Игорь Ш.', text: 'Стабильная работа серверов. За 2 года использования сбоев не было ни разу. Uptime 100%.', rating: 5, date: '29 окт 2025' }
+    ]
+  },
+  {
     id: 8,
     name: 'FastVPS',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/a8b01fac-df61-449b-a25c-73f5f070ada1.jpg',
