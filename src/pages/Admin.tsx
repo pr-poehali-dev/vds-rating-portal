@@ -29,6 +29,12 @@ interface DailyStats {
   clicks: number;
 }
 
+interface VisitorStats {
+  total_unique_visitors: number;
+  period_unique_visitors: number;
+  daily_stats: { date: string; visitors: number }[];
+}
+
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('admin');
@@ -43,6 +49,8 @@ const Admin = () => {
   const [dailyStats, setDailyStats] = useState<DailyStats[]>([]);
   const [isLoadingDaily, setIsLoadingDaily] = useState(true);
   const [period, setPeriod] = useState<'1' | '7' | '30'>('30');
+  const [visitorStats, setVisitorStats] = useState<VisitorStats | null>(null);
+  const [isLoadingVisitors, setIsLoadingVisitors] = useState(true);
 
   const fetchPendingReviews = async () => {
     setIsLoading(true);
@@ -89,6 +97,21 @@ const Admin = () => {
     }
   };
 
+  const fetchVisitorStats = async (days: string = '30') => {
+    setIsLoadingVisitors(true);
+    try {
+      const response = await fetch(`https://functions.poehali.dev/94b30990-d971-403f-a237-849453d2ec73?period=${days}`);
+      if (response.ok) {
+        const data = await response.json();
+        setVisitorStats(data);
+      }
+    } catch (error) {
+      console.error('Error fetching visitor stats:', error);
+    } finally {
+      setIsLoadingVisitors(false);
+    }
+  };
+
   useEffect(() => {
     const savedToken = localStorage.getItem('admin_token');
     if (savedToken) {
@@ -112,6 +135,7 @@ const Admin = () => {
         fetchPendingReviews();
         fetchClickStats();
         fetchDailyStats(period);
+        fetchVisitorStats(period);
       } else {
         localStorage.removeItem('admin_token');
         setIsLoading(false);
@@ -149,6 +173,7 @@ const Admin = () => {
         fetchPendingReviews();
         fetchClickStats();
         fetchDailyStats(period);
+        fetchVisitorStats(period);
       } else {
         setAuthError(data.error || 'Неверные учётные данные');
       }
@@ -284,7 +309,7 @@ const Admin = () => {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-4xl font-bold text-foreground mb-2">Админ-панель</h1>
-            <p className="text-muted-foreground">Управление отзывами и статистика переходов</p>
+            <p className="text-muted-foreground">Управление отзывами и статистика</p>
           </div>
           <div className="flex gap-3">
             <Button
@@ -304,6 +329,71 @@ const Admin = () => {
               На главную
             </Button>
           </div>
+        </div>
+
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+            <Icon name="Users" size={24} className="text-primary" />
+            Уникальные посетители сайта
+          </h2>
+          {isLoadingVisitors ? (
+            <div className="flex items-center justify-center py-8">
+              <Icon name="Loader2" size={32} className="animate-spin text-primary" />
+            </div>
+          ) : visitorStats ? (
+            <div className="grid gap-4 md:grid-cols-3">
+              <Card className="border-2 border-primary/20">
+                <CardContent className="pt-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center">
+                      <Icon name="Globe" size={24} className="text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Всего</div>
+                      <div className="text-2xl font-black text-primary">{visitorStats.total_unique_visitors}</div>
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground">За всё время</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-2 border-secondary/20">
+                <CardContent className="pt-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center">
+                      <Icon name="TrendingUp" size={24} className="text-secondary" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">За период</div>
+                      <div className="text-2xl font-black text-secondary">{visitorStats.period_unique_visitors}</div>
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    {period === '1' ? 'За последние 24 часа' : period === '7' ? 'За последние 7 дней' : 'За последние 30 дней'}
+                  </p>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-2 border-primary/20">
+                <CardContent className="pt-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center">
+                      <Icon name="Activity" size={24} className="text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Средний рост</div>
+                      <div className="text-2xl font-black text-primary">
+                        {visitorStats.daily_stats.length > 0 
+                          ? Math.round(visitorStats.period_unique_visitors / visitorStats.daily_stats.length)
+                          : 0}
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground">Новых в день</p>
+                </CardContent>
+              </Card>
+            </div>
+          ) : null}
         </div>
 
         <div className="mb-8">
@@ -385,6 +475,7 @@ const Admin = () => {
                   onClick={() => {
                     setPeriod('1');
                     fetchDailyStats('1');
+                    fetchVisitorStats('1');
                   }}
                   className="font-semibold"
                 >
@@ -396,6 +487,7 @@ const Admin = () => {
                   onClick={() => {
                     setPeriod('7');
                     fetchDailyStats('7');
+                    fetchVisitorStats('7');
                   }}
                   className="font-semibold"
                 >
@@ -407,6 +499,7 @@ const Admin = () => {
                   onClick={() => {
                     setPeriod('30');
                     fetchDailyStats('30');
+                    fetchVisitorStats('30');
                   }}
                   className="font-semibold"
                 >
