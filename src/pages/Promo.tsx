@@ -90,7 +90,7 @@ const Promo = () => {
                             </div>
                             <div className="flex-1">
                               <div className="text-xs font-bold text-secondary uppercase mb-1">
-                                {provider.name === 'Timeweb Cloud' ? 'Лучшее спецпредложение' : 'Спецпредложение'}
+                                Спецпредложение
                               </div>
                               <div className="text-sm font-semibold text-foreground">{provider.promoText}</div>
                             </div>
