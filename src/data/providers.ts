@@ -2,6 +2,67 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 7,
+    name: 'SprintHost',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/sprinthost-logo.png',
+    rating: 9.3,
+    basePrice: 190,
+    cpuPrice: 150,
+    ramPrice: 100,
+    storagePrice: 8,
+    features: ['NVMe диски', 'Безлимитный трафик', 'Бесплатные бэкапы', 'SprintBot управление'],
+    locations: ['Москва', 'Санкт-Петербург'],
+    trialDays: 0,
+    url: 'https://sprinthost.ru/tariffs/vds',
+    pros: ['Доступная цена', 'NVMe диски в базе', 'Безлимитный трафик', 'Бесплатные бэкапы'],
+    cons: ['Нет тестового периода', 'Ограниченный выбор локаций', 'Молодая компания'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '10 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Alma Linux', 'Rocky Linux', 'Astra Linux'],
+      controlPanel: 'Собственная панель + SprintBot',
+      apiAccess: true,
+      ddosProtection: 'До 100 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 15 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 0,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 10 },
+        { months: 6, percent: 5 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'Яндекс.Касса'],
+      minPrice: 190
+    },
+    popularity: 15000,
+    promoText: 'Первый месяц со скидкой 20% по промокоду SPRINT20',
+    caseStudies: ['Малый бизнес', 'Блоги', 'Интернет-магазины', 'Веб-приложения', 'Dev окружения'],
+    uptime30days: 99.85,
+    reviews: [
+      { author: 'Андрей С.', text: 'Отличное соотношение цены и качества. Для малого бизнеса идеальный вариант. NVMe диски реально быстрые.', rating: 5, date: '05 ноя 2025' },
+      { author: 'Марина К.', text: 'Перешла с дорогого хостинга. Разница в цене огромная, а по скорости почти не отличается. Довольна выбором.', rating: 4, date: '03 ноя 2025' },
+      { author: 'Дмитрий Л.', text: 'SprintBot удобный, но бэкапы хотелось бы автоматические. В целом за свои деньги отличный вариант.', rating: 4, date: '01 ноя 2025' },
+      { author: 'Елена В.', text: 'Поддержка отвечает быстро, помогли с настройкой. Цена приятная, особенно для стартапа.', rating: 5, date: '30 окт 2025' },
+      { author: 'Игорь П.', text: 'Безлимитный трафик — это большой плюс. Не нужно переживать о лимитах. Скорость хорошая.', rating: 5, date: '28 окт 2025' }
+    ]
+  },
+  {
     id: 1,
     name: 'Timeweb Cloud',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/c68c0760-0692-436d-8905-b2f1b5486586.jpg',
