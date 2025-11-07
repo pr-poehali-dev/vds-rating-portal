@@ -162,15 +162,15 @@ export const ServiceGuaranteesSection = ({ provider }: ServiceGuaranteesSectionP
             <div className="text-2xl font-black text-secondary">{serviceGuarantees.supportResponseTime}</div>
           </div>
         )}
-        {serviceGuarantees.moneyBackGuarantee && (
-          <div className="bg-background rounded-xl p-4 border border-border">
-            <div className="flex items-center gap-2 mb-2">
-              <Icon name="DollarSign" size={16} className="text-secondary" />
-              <div className="text-xs font-bold text-muted-foreground uppercase">Возврат денег</div>
-            </div>
-            <div className="text-2xl font-black text-secondary">{serviceGuarantees.moneyBackGuarantee} дней</div>
+        <div className="bg-background rounded-xl p-4 border border-border">
+          <div className="flex items-center gap-2 mb-2">
+            <Icon name="DollarSign" size={16} className="text-secondary" />
+            <div className="text-xs font-bold text-muted-foreground uppercase">Возврат денег</div>
           </div>
-        )}
+          <div className="text-2xl font-black text-secondary">
+            {serviceGuarantees.moneyBackGuarantee ? `${serviceGuarantees.moneyBackGuarantee} дней` : 'Информация отсутствует'}
+          </div>
+        </div>
       </div>
     </div>
   );
