@@ -184,29 +184,16 @@ export const AboutSection = () => {
                   Есть вопросы, предложения или хотите добавить своего провайдера в рейтинг? 
                   Мы всегда открыты для диалога и рады обратной связи!
                 </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <Button
-                    size="lg"
-                    className="h-12 px-8 bg-primary text-background font-bold rounded-xl"
-                    asChild
-                  >
-                    <a href="https://t.me/top_vds_com" target="_blank" rel="noopener noreferrer">
-                      <Icon name="Send" size={18} className="mr-2" />
-                      Telegram
-                    </a>
-                  </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="h-12 px-8 font-bold rounded-xl border-2"
-                    asChild
-                  >
-                    <a href="mailto:info@top-vds.com">
-                      <Icon name="Mail" size={18} className="mr-2" />
-                      Email
-                    </a>
-                  </Button>
-                </div>
+                <Button
+                  size="lg"
+                  className="h-12 px-8 bg-primary text-background font-bold rounded-xl"
+                  asChild
+                >
+                  <a href="https://t.me/top_vds_com" target="_blank" rel="noopener noreferrer">
+                    <Icon name="Send" size={18} className="mr-2" />
+                    Telegram
+                  </a>
+                </Button>
               </div>
             </div>
           </div>
