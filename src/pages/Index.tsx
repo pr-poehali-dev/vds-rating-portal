@@ -2,6 +2,7 @@ import { Header } from '@/components/providers/Header';
 import { HeroSection } from '@/components/providers/HeroSection';
 import { ProvidersSection } from '@/components/providers/ProvidersSection';
 import { GuideSection } from '@/components/providers/GuideSection';
+import { UptimeChart } from '@/components/providers/UptimeChart';
 import { Footer } from '@/components/providers/Footer';
 import { providers } from '@/data/providers';
 
@@ -11,6 +12,7 @@ const Index = () => {
       <Header />
       <HeroSection />
       <ProvidersSection providers={providers} />
+      <UptimeChart providers={providers} />
       <GuideSection />
       <Footer />
     </div>
