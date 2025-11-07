@@ -17,6 +17,7 @@ export interface Provider {
   features: string[];
   locations: string[];
   trialDays?: number;
+  url?: string;
   pros: string[];
   cons: string[];
   reviews: Review[];

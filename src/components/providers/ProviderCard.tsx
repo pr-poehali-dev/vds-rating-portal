@@ -150,7 +150,11 @@ export const ProviderCard = ({
                 <span className="text-xl text-muted-foreground">₽</span>
               </div>
               <div className="text-sm text-muted-foreground font-medium mb-4">/месяц</div>
-              <Button className="w-full h-12 text-sm font-bold bg-primary text-background shadow-lg shadow-primary/30 hover:shadow-neon transition-all group">
+              <Button 
+                className="w-full h-12 text-sm font-bold bg-primary text-background shadow-lg shadow-primary/30 hover:shadow-neon transition-all group"
+                onClick={() => provider.url && window.open(provider.url, '_blank')}
+                disabled={!provider.url}
+              >
                 Перейти
                 <Icon name="ExternalLink" size={16} className="ml-2" />
               </Button>
