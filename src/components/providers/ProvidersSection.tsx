@@ -229,10 +229,23 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                   onChange={(e) => setFilterVirtualization(e.target.value || null)}
                   className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
                 >
-                  <option value="">Все типы</option>
-                  {allVirtualizations.map(virt => (
-                    <option key={virt} value={virt}>{virt}</option>
-                  ))}
+                  <option value="">🔧 Все типы</option>
+                  {allVirtualizations.map(virt => {
+                    const getIcon = (type: string) => {
+                      switch(type) {
+                        case 'KVM': return '🖥️';
+                        case 'OpenVZ': return '📦';
+                        case 'Hyper-V': return '🔷';
+                        case 'VMware': return '⚙️';
+                        case 'LXC': return '🗂️';
+                        case 'Xen': return '⭐';
+                        default: return '🔧';
+                      }
+                    };
+                    return (
+                      <option key={virt} value={virt}>{getIcon(virt)} {virt}</option>
+                    );
+                  })}
                 </select>
                 <Icon name="Box" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
                 <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
