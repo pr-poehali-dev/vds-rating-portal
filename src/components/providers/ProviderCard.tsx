@@ -206,10 +206,7 @@ export const ProviderCard = ({
                 <span className="text-4xl md:text-5xl font-black text-primary">{calculatedPrice}</span>
                 <span className="text-xl text-muted-foreground">₽</span>
               </div>
-              <div className="text-sm text-muted-foreground font-medium mb-1">/месяц</div>
-              {provider.pricingDetails.minPrice && (
-                <div className="text-xs text-muted-foreground mb-4">от {provider.pricingDetails.minPrice}₽</div>
-              )}
+              <div className="text-sm text-muted-foreground font-medium mb-4">/месяц</div>
               {provider.pricingDetails.discounts && provider.pricingDetails.discounts.length > 0 && (
                 <div className="mb-4">
                   <div className="text-xs text-muted-foreground mb-1.5">Скидки:</div>
