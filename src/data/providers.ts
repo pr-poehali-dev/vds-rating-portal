@@ -4,7 +4,7 @@ export const providers: Provider[] = [
   {
     id: 21,
     name: 'handyhost',
-    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/6fe68e4e-08cf-43f6-bff9-4f9af50f0d9b.jpg',
+    logo: 'http://handyhost.ru/tpl/img/logo3.png',
     rating: 9.0,
     basePrice: 160,
     cpuPrice: 125,
