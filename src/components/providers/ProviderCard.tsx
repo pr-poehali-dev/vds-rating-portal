@@ -150,7 +150,7 @@ export const ProviderCard = ({
         <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
           <div className="flex items-start gap-6 flex-1">
             <div className="relative flex-shrink-0">
-              <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden bg-accent border border-primary/10 shadow-soft flex items-center justify-center">
+              <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden bg-white border border-primary/10 shadow-soft flex items-center justify-center">
                 <img src={provider.logo} alt={provider.name} className="w-16 h-16 md:w-20 md:h-20 object-contain" />
               </div>
               <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-primary rounded-xl flex items-center justify-center shadow-lg text-background text-sm font-bold">
