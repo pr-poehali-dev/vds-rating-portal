@@ -2,6 +2,76 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 15,
+    name: 'JustHost',
+    logo: 'https://justhost.ru/assets/images/logo.svg',
+    rating: 9.3,
+    basePrice: 0,
+    cpuPrice: 200,
+    ramPrice: 110,
+    storagePrice: 10,
+    features: ['NVMe диски', 'DDoS защита', '57 локаций в мире', 'Безлимитный трафик'],
+    locations: ['Москва', 'Санкт-Петербург', 'Европа', 'США', 'Азия', 'Австралия'],
+    trialDays: 0,
+    url: 'https://justhost.ru/?ref=286932',
+    pros: ['57 локаций в 36 странах', '281 000+ клиентов', 'Гибкий конструктор VPS', 'Выбор типа дисков'],
+    cons: ['Цены в долларах', 'Нет тестового периода', 'Сложный интерфейс для новичков'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '300-400 Мбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Debian', 'Ubuntu', 'CentOS', 'Fedora', 'Arch Linux', 'Rocky Linux', 'Windows Server'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'Включена бесплатно'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 20 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 50,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 20 },
+        { months: 6, percent: 15 },
+        { months: 3, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'PayPal', 'Криптовалюта', 'Webmoney', 'ЮMoney'],
+      minPrice: 200
+    },
+    popularity: 281000,
+    promoText: 'Скидка 20% при оплате на год. От 200₽/мес',
+    caseStudies: ['Международные проекты', 'Highload системы', 'CDN', 'Dev окружения', 'Игровые серверы'],
+    uptime30days: 99.89,
+    reviews: [
+      { author: 'Алексей Д.', text: 'Огромный выбор локаций — 57 по всему миру! Разместил сервера в 5 странах для CDN. Производительность отличная.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Мария С.', text: 'Работаю с JustHost уже 4 года. Стабильность высокая, цены адекватные. Конструктор VPS позволяет собрать что нужно.', rating: 5, date: '07 ноя 2025' },
+      { author: 'Дмитрий В.', text: 'DDoS защита бесплатная — это важно! Сервер выдерживал несколько атак без проблем. Поддержка помогла быстро.', rating: 5, date: '06 ноя 2025' },
+      { author: 'Светлана К.', text: 'Интерфейс сложноват для новичков — пришлось разбираться. Но функционал мощный, для опытных пользователей отлично.', rating: 4, date: '05 ноя 2025' },
+      { author: 'Игорь Н.', text: 'Цены в долларах — при скачках курса неудобно. Но сервис качественный, 281 тысяча клиентов не врут.', rating: 4, date: '04 ноя 2025' },
+      { author: 'Ольга Т.', text: 'NVMe диски работают быстро! База данных летает. Безлимитный трафик для highload проектов — находка.', rating: 5, date: '03 ноя 2025' },
+      { author: 'Максим Р.', text: 'Выбор типов дисков (NVMe/SSD/HDD) позволяет оптимизировать цену. Для архивных данных взял HDD, для БД — NVMe.', rating: 5, date: '02 ноя 2025' },
+      { author: 'Екатерина П.', text: '20 лет на рынке внушают доверие. За год использования сбоев практически не было. Рекомендую для продакшна!', rating: 5, date: '01 ноя 2025' },
+      { author: 'Андрей Л.', text: 'Техподдержка 24/7 отвечает на русском. Писал в выходные — помогли за 15 минут. Молодцы!', rating: 5, date: '31 окт 2025' },
+      { author: 'Наталья Ж.', text: 'Гибкий конструктор VPS — собрала конфигурацию под свои нужды. Не нужно переплачивать за лишние ресурсы.', rating: 5, date: '30 окт 2025' },
+      { author: 'Сергей М.', text: 'Локации в Азии и Австралии — редкость среди русских провайдеров. Для международных проектов идеально!', rating: 5, date: '29 окт 2025' },
+      { author: 'Виктория Б.', text: 'Нет тестового периода — пришлось платить сразу. Но за 6 месяцев ни разу не пожалела о выборе.', rating: 4, date: '28 окт 2025' },
+      { author: 'Роман К.', text: 'Поддержка криптовалют — удобно для международных платежей. Принимают Bitcoin и Ethereum без комиссий.', rating: 5, date: '27 окт 2025' }
+    ]
+  },
+  {
     id: 14,
     name: 'MCHost',
     logo: 'https://mchost.ru/files/img/logo.svg',
