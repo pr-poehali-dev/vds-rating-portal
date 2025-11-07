@@ -182,7 +182,11 @@ export const ProviderCard = ({
                 )}
                 <div className="flex items-center gap-2 text-sm">
                   <Icon name="HardDrive" size={14} className="text-primary" />
-                  <span className="font-semibold text-foreground">{provider.technicalSpecs.diskType} • {provider.technicalSpecs.virtualization}</span>
+                  <span className="font-semibold text-foreground">Диски: {provider.technicalSpecs.diskType}</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Icon name="Box" size={14} className="text-primary" />
+                  <span className="font-semibold text-foreground">Виртуализация: {provider.technicalSpecs.virtualization}</span>
                 </div>
                 {provider.popularity && (
                   <div className="flex items-center gap-2 text-sm">

@@ -23,6 +23,9 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   const [filterLocation, setFilterLocation] = useState<string | null>(() => {
     return localStorage.getItem('filterLocation') || null;
   });
+  const [filterVirtualization, setFilterVirtualization] = useState<string | null>(() => {
+    return localStorage.getItem('filterVirtualization') || null;
+  });
   const [sortBy, setSortBy] = useState<'rating' | 'price'>(() => {
     const saved = localStorage.getItem('sortBy');
     return (saved as 'rating' | 'price') || 'rating';
@@ -92,6 +95,14 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   }, [filterLocation]);
 
   useEffect(() => {
+    if (filterVirtualization) {
+      localStorage.setItem('filterVirtualization', filterVirtualization);
+    } else {
+      localStorage.removeItem('filterVirtualization');
+    }
+  }, [filterVirtualization]);
+
+  useEffect(() => {
     localStorage.setItem('sortBy', sortBy);
   }, [sortBy]);
 
@@ -129,11 +140,16 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     new Set(providersWithReviews.flatMap(p => p.locations))
   ).sort();
 
+  const allVirtualizations = Array.from(
+    new Set(providersWithReviews.map(p => p.technicalSpecs.virtualization))
+  ).sort();
+
   const filteredProviders = providersWithReviews
     .filter(p => {
       if (filterFZ152 && !p.fz152Compliant) return false;
       if (filterTrialPeriod && !p.trialDays) return false;
       if (filterLocation && !p.locations.includes(filterLocation)) return false;
+      if (filterVirtualization && p.technicalSpecs.virtualization !== filterVirtualization) return false;
       return true;
     })
     .sort((a, b) => {
@@ -196,7 +212,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                 <select
                   value={filterLocation || ''}
                   onChange={(e) => setFilterLocation(e.target.value || null)}
-                  className="h-10 pl-4 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
+                  className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
                 >
                   <option value="">Все локации</option>
                   {allLocations.map(loc => (
@@ -204,6 +220,21 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                   ))}
                 </select>
                 <Icon name="MapPin" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
+                <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+              </div>
+
+              <div className="relative">
+                <select
+                  value={filterVirtualization || ''}
+                  onChange={(e) => setFilterVirtualization(e.target.value || null)}
+                  className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
+                >
+                  <option value="">Все типы</option>
+                  {allVirtualizations.map(virt => (
+                    <option key={virt} value={virt}>{virt}</option>
+                  ))}
+                </select>
+                <Icon name="Box" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
                 <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
               </div>
             </div>
