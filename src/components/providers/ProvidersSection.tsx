@@ -214,7 +214,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                   onChange={(e) => setFilterLocation(e.target.value || null)}
                   className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
                 >
-                  <option value="">Все локации</option>
+                  <option value="">Локации</option>
                   {allLocations.map(loc => (
                     <option key={loc} value={loc}>{loc}</option>
                   ))}
