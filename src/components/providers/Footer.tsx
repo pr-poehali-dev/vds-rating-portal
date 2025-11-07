@@ -68,13 +68,21 @@ export const Footer = () => {
             <div>
               <h4 className="font-bold text-foreground mb-4 text-sm uppercase tracking-wider">Помощь</h4>
               <ul className="space-y-3">
-                {['FAQ', 'Блог', 'О нас'].map((item, idx) => (
-                  <li key={idx}>
-                    <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium">
-                      {item}
-                    </a>
-                  </li>
-                ))}
+                <li>
+                  <a href="#faq" className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium">
+                    FAQ
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium">
+                    Блог
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium">
+                    О нас
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
