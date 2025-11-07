@@ -33,10 +33,13 @@ export const TechnicalSpecsSection = ({ provider }: TechnicalSpecsSectionProps) 
           </div>
         </div>
         <div className="flex items-start gap-3">
-          <Icon name="Server" size={16} className="text-primary mt-0.5" />
+          <Icon name="Box" size={16} className="text-primary mt-0.5" />
           <div>
             <div className="text-xs text-muted-foreground mb-0.5">Виртуализация</div>
-            <div className="text-sm font-semibold text-foreground">{technicalSpecs.virtualization}</div>
+            <Badge className="bg-primary/10 border border-primary/30 text-primary font-bold text-xs">
+              <Icon name="Box" size={12} className="mr-1" />
+              {technicalSpecs.virtualization}
+            </Badge>
           </div>
         </div>
         <div className="flex items-start gap-3">
