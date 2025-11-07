@@ -2,6 +2,68 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 13,
+    name: 'Smartape',
+    logo: 'https://smartape.ru/images/logo/logo_header_default_ru.svg',
+    rating: 8.9,
+    basePrice: 145,
+    cpuPrice: 130,
+    ramPrice: 80,
+    storagePrice: 6,
+    features: ['SSD диски', 'Безлимитные сайты', 'Бесплатная панель', 'Оптимизация под CMS'],
+    locations: ['Москва'],
+    trialDays: 0,
+    url: 'https://smartape.ru',
+    pros: ['Низкие цены', 'Оптимизация под популярные CMS', 'Гибкие тарифы', 'Безлимитные сайты'],
+    cons: ['Только одна локация', 'Нет тестового периода', 'Базовая поддержка'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: false,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'Базовая защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 30 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 50,
+      monitoring: true,
+      snapshots: false,
+      customOS: false
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 36, percent: 30 },
+        { months: 12, percent: 20 },
+        { months: 6, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney'],
+      minPrice: 145
+    },
+    popularity: 20000,
+    promoText: 'Скидка до 30% при оплате на 3 года. От 145₽/мес',
+    caseStudies: ['Сайты на Bitrix', 'WordPress блоги', 'Joomla порталы', 'Малый бизнес', 'Личные проекты'],
+    uptime30days: 99.85,
+    reviews: [
+      { author: 'Игорь С.', text: 'Самые низкие цены на рынке! Для WordPress сайта хватает с головой. Оптимизация под CMS работает отлично.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Анна К.', text: 'Поддержка отвечает не очень быстро — полчаса ждала. Но за такую цену простительно. Сайт работает стабильно.', rating: 4, date: '06 ноя 2025' },
+      { author: 'Максим В.', text: 'Безлимитные сайты — поставил 5 проектов на один тариф. Экономия огромная! Для малого бизнеса идеально.', rating: 5, date: '04 ноя 2025' },
+      { author: 'Светлана Р.', text: 'Только одна локация в Москве — для регионов пинг выше. Но цена компенсирует этот минус.', rating: 4, date: '02 ноя 2025' },
+      { author: 'Дмитрий Н.', text: 'Отличная оптимизация под Bitrix! Сайт летает. За 145₽ это просто подарок. Рекомендую!', rating: 5, date: '31 окт 2025' }
+    ]
+  },
+  {
     id: 12,
     name: 'Fornex',
     logo: 'https://cdn.poehali.dev/files/20b93f61-55a3-4229-a553-3af037e4622c.png',
