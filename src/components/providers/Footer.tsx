@@ -43,7 +43,7 @@ export const Footer = () => {
               <h4 className="font-bold text-foreground mb-4 text-sm uppercase tracking-wider">Провайдеры</h4>
               <ul className="space-y-3">
                 <li>
-                  <a href="#providers" className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium">
+                  <a href="/" className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium">
                     Рейтинг
                   </a>
                 </li>
