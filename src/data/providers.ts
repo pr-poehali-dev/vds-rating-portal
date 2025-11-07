@@ -212,7 +212,7 @@ export const providers: Provider[] = [
   {
     id: 3,
     name: 'REG.RU',
-    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/45a743cb-35e0-42d9-98f4-b9a58ff151b3.jpg',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/a0d770bb-7a53-40f6-81d5-6db9eaf7f4e8.jpg',
     rating: 9.4,
     basePrice: 199,
     cpuPrice: 150,
