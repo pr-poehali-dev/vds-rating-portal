@@ -447,5 +447,71 @@ export const providers: Provider[] = [
       { author: 'Виктор М.', text: 'Гибкие тарифы позволяют собрать конфигурацию под свои нужды. API работает без нареканий, всё автоматизировал через Terraform.', rating: 5, date: '22 окт 2025' },
       { author: 'Татьяна Ж.', text: 'Использую для игрового сервера Minecraft. Производительность отличная, лагов нет. Цена адекватная для таких ресурсов.', rating: 5, date: '20 окт 2025' }
     ]
+  },
+  {
+    id: 6,
+    name: 'FirstVDS',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/b78fae6e-fd84-4313-950e-4f2b38426586.jpg',
+    rating: 9.3,
+    basePrice: 0,
+    cpuPrice: 165,
+    ramPrice: 90,
+    storagePrice: 8,
+    features: ['SSD диски', 'Панель ISPmanager', 'DDoS защита', 'IPv6'],
+    locations: ['Москва', 'Санкт-Петербург', 'Казань', 'Франкфурт'],
+    trialDays: 7,
+    url: 'https://firstvds.ru',
+    pros: ['Стабильная работа', 'Удобная панель управления', 'Адекватные цены', 'Хорошая техподдержка'],
+    cons: ['Нет NVMe дисков', 'Мало дата-центров за границей', 'Нет криптовалютных платежей'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Arch Linux', 'Windows Server'],
+      controlPanel: 'ISPmanager',
+      apiAccess: true,
+      ddosProtection: 'До 150 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 20 мин',
+      moneyBackGuarantee: 7
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 100,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 15 },
+        { months: 6, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'Яндекс.Касса'],
+      minPrice: 165
+    },
+    popularity: 28000,
+    promoText: 'Первая неделя бесплатно для новых клиентов',
+    caseStudies: ['Корпоративные сайты', 'E-commerce', 'CMS-проекты', 'API сервисы', 'Базы данных'],
+    uptime30days: 99.91,
+    reviews: [
+      { author: 'Игорь М.', text: 'Использую FirstVDS уже 3 года для корпоративных проектов. Стабильность отличная, цены адекватные. Панель ISPmanager удобная и привычная.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Светлана К.', text: 'Техподдержка отвечает быстро, помогли с миграцией базы данных. Цена ниже чем у конкурентов при том же качестве.', rating: 5, date: '06 ноя 2025' },
+      { author: 'Андрей В.', text: 'Нет NVMe дисков — это минус для highload проектов. Но для обычных задач SSD хватает. Тестовая неделя помогла разобраться.', rating: 4, date: '04 ноя 2025' },
+      { author: 'Мария Л.', text: 'Панель ISPmanager знакома, быстро настроила всё сама. Автобэкапы работают исправно. За 8 месяцев ни одного сбоя.', rating: 5, date: '02 ноя 2025' },
+      { author: 'Дмитрий П.', text: 'Цены ниже Timeweb, а качество на уровне. DDoS защита справилась с атакой на интернет-магазин. Рекомендую!', rating: 5, date: '31 окт 2025' },
+      { author: 'Екатерина Н.', text: 'Мало дата-центров за границей — только Франкфурт. Для международных проектов маловато. Но в России покрытие хорошее.', rating: 4, date: '29 окт 2025' },
+      { author: 'Сергей Р.', text: 'Работаю с FirstVDS 2 года. Ни разу не подвели. Поддержка грамотная, решают проблемы быстро. Стабильность — главный плюс.', rating: 5, date: '27 окт 2025' },
+      { author: 'Ольга Т.', text: 'API простое и понятное, интегрировала с системой мониторинга за час. Цена честная, без скрытых платежей.', rating: 5, date: '25 окт 2025' },
+      { author: 'Павел Ж.', text: 'Тестовая неделя дала время всё проверить. SSD диски работают быстро, хотя не NVMe. Для WordPress сайта хватает.', rating: 4, date: '23 окт 2025' },
+      { author: 'Наталья Д.', text: 'Панель ISPmanager удобнее собственных панелей других провайдеров. Привыкла к интерфейсу за день. Очень довольна!', rating: 5, date: '21 окт 2025' }
+    ]
   }
 ];
