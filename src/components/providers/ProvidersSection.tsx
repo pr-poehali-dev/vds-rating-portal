@@ -249,34 +249,19 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                 <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
               </div>
 
-              <div className="flex flex-wrap gap-2">
-                {allVirtualizations.map(virt => {
-                  const isActive = filterVirtualization === virt;
-                  const getVirtColor = (type: string) => {
-                    switch(type) {
-                      case 'KVM': return isActive ? 'bg-blue-500 text-white border-blue-500' : 'bg-blue-500/10 text-blue-600 border-blue-500/30 hover:bg-blue-500/20';
-                      case 'VMware': return isActive ? 'bg-purple-500 text-white border-purple-500' : 'bg-purple-500/10 text-purple-600 border-purple-500/30 hover:bg-purple-500/20';
-                      case 'OpenVZ': return isActive ? 'bg-orange-500 text-white border-orange-500' : 'bg-orange-500/10 text-orange-600 border-orange-500/30 hover:bg-orange-500/20';
-                      case 'Hyper-V': return isActive ? 'bg-cyan-500 text-white border-cyan-500' : 'bg-cyan-500/10 text-cyan-600 border-cyan-500/30 hover:bg-cyan-500/20';
-                      case 'LXC': return isActive ? 'bg-green-500 text-white border-green-500' : 'bg-green-500/10 text-green-600 border-green-500/30 hover:bg-green-500/20';
-                      case 'Xen': return isActive ? 'bg-pink-500 text-white border-pink-500' : 'bg-pink-500/10 text-pink-600 border-pink-500/30 hover:bg-pink-500/20';
-                      default: return isActive ? 'bg-primary text-white border-primary' : 'bg-primary/10 text-primary border-primary/30 hover:bg-primary/20';
-                    }
-                  };
-                  return (
-                    <Button
-                      key={virt}
-                      variant="outline"
-                      size="sm"
-                      className={`h-10 px-4 text-sm font-semibold rounded-xl border-2 transition-all ${getVirtColor(virt)}`}
-                      onClick={() => setFilterVirtualization(isActive ? null : virt)}
-                    >
-                      <Icon name="Box" size={14} className="mr-1.5" />
-                      {virt}
-                      {isActive && <Icon name="Check" size={14} className="ml-1.5" />}
-                    </Button>
-                  );
-                })}
+              <div className="relative">
+                <select
+                  value={filterVirtualization || ''}
+                  onChange={(e) => setFilterVirtualization(e.target.value || null)}
+                  className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
+                >
+                  <option value="">Виртуализация</option>
+                  {allVirtualizations.map(virt => (
+                    <option key={virt} value={virt}>{virt}</option>
+                  ))}
+                </select>
+                <Icon name="Box" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
+                <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
               </div>
             </div>
 
