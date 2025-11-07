@@ -246,7 +246,7 @@ export const ProviderCard = ({
             </div>
           </div>
           
-          <div className="w-full lg:w-auto flex-shrink-0">
+          <div className="w-full lg:w-[280px] flex-shrink-0">
             <div className="bg-accent border-2 border-primary/20 rounded-2xl p-6 text-center flex flex-col h-full">
               <div className="min-h-[60px] flex items-center justify-center mb-3">
                 {provider.promoText && (
