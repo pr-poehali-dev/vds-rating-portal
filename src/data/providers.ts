@@ -13,7 +13,7 @@ export const providers: Provider[] = [
     features: ['NVMe диски', 'Безлимитный трафик', 'Бесплатные бэкапы', 'SprintBot управление'],
     locations: ['Москва', 'Санкт-Петербург'],
     trialDays: 0,
-    url: 'https://cp.sprinthost.ru/wm/account/hello',
+    url: 'https://sprinthost.ru/s43965',
     pros: ['Доступная цена', 'NVMe диски в базе', 'Безлимитный трафик', 'Бесплатные бэкапы'],
     cons: ['Нет тестового периода', 'Ограниченный выбор локаций', 'Молодая компания'],
     fz152Compliant: true,
