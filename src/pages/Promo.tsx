@@ -8,9 +8,13 @@ import Icon from '@/components/ui/icon';
 
 const Promo = () => {
   const allowedProviders = ['Timeweb Cloud', 'Serverspace', 'SprintHost'];
-  const providersWithPromo = providers.filter(p => 
-    allowedProviders.includes(p.name)
-  );
+  const providersWithPromo = providers
+    .filter(p => allowedProviders.includes(p.name))
+    .sort((a, b) => {
+      if (a.name === 'Timeweb Cloud') return -1;
+      if (b.name === 'Timeweb Cloud') return 1;
+      return 0;
+    });
 
   return (
     <div className="min-h-screen bg-background">
