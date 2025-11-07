@@ -138,6 +138,12 @@ export const ProviderCard = ({
                     <span className="font-semibold text-secondary">Тестовый период: {provider.trialDays} {provider.trialDays === 1 ? 'день' : provider.trialDays < 5 ? 'дня' : 'дней'} бесплатно</span>
                   </div>
                 )}
+                {provider.fz152Compliant && (
+                  <div className="flex items-center gap-2 text-sm">
+                    <Icon name="ShieldCheck" size={14} className="text-primary" />
+                    <span className="font-semibold text-foreground">152-ФЗ: {provider.fz152Level || 'Соответствует'}</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -324,6 +330,25 @@ export const ProviderCard = ({
                   ))}
                 </ul>
               </div>
+
+              {provider.fz152Compliant && (
+                <div className="md:col-span-2 bg-primary/5 border border-primary/20 rounded-2xl p-5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-9 h-9 bg-primary/20 rounded-xl flex items-center justify-center">
+                      <Icon name="ShieldCheck" size={18} className="text-primary" />
+                    </div>
+                    <h4 className="text-base font-bold text-foreground">Соответствие 152-ФЗ</h4>
+                    {provider.fz152Level && (
+                      <Badge className="bg-primary/20 text-primary border-0 ml-auto">{provider.fz152Level}</Badge>
+                    )}
+                  </div>
+                  <p className="text-sm text-foreground leading-relaxed">
+                    Провайдер имеет сертификат соответствия требованиям 152-ФЗ "О персональных данных". 
+                    Это означает, что все дата-центры соответствуют требованиям законодательства РФ по защите персональных данных, 
+                    что особенно важно для организаций, работающих с конфиденциальной информацией клиентов.
+                  </p>
+                </div>
+              )}
 
               <div className="pt-6 border-t border-border md:col-span-2">
                 <div className="flex items-center gap-2 mb-4">

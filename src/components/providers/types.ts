@@ -21,6 +21,8 @@ export interface Provider {
   pros: string[];
   cons: string[];
   reviews: Review[];
+  fz152Compliant: boolean;
+  fz152Level?: string;
 }
 
 export interface ResourceConfig {
