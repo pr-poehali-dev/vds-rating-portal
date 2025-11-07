@@ -229,7 +229,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                   onChange={(e) => setFilterVirtualization(e.target.value || null)}
                   className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
                 >
-                  <option value="">🔧 Все типы</option>
+                  <option value="">Виртуализация</option>
                   {allVirtualizations.map(virt => {
                     const getIcon = (type: string) => {
                       switch(type) {
