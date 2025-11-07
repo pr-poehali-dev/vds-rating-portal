@@ -42,7 +42,8 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     3: 5,
     4: 5,
     5: 5,
-    6: 5
+    6: 5,
+    7: 5
   });
   const [configs, setConfigs] = useState<Record<number, ResourceConfig>>({
     1: { cpu: 1, ram: 1, storage: 10 },
@@ -50,7 +51,8 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     3: { cpu: 1, ram: 1, storage: 10 },
     4: { cpu: 1, ram: 1, storage: 10 },
     5: { cpu: 1, ram: 1, storage: 10 },
-    6: { cpu: 1, ram: 1, storage: 10 }
+    6: { cpu: 1, ram: 1, storage: 10 },
+    7: { cpu: 1, ram: 1, storage: 10 }
   });
   const [loadedReviews, setLoadedReviews] = useState<Record<number, Review[]>>({});
   const [providersWithReviews, setProvidersWithReviews] = useState<Provider[]>(providers);
@@ -122,7 +124,10 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     localStorage.setItem('sortBy', sortBy);
   }, [sortBy]);
 
-  const calculatePrice = (provider: Provider, config: ResourceConfig) => {
+  const calculatePrice = (provider: Provider, config?: ResourceConfig) => {
+    if (!config) {
+      config = { cpu: 1, ram: 1, storage: 10 };
+    }
     return Math.round(
       provider.basePrice +
       config.cpu * provider.cpuPrice +
