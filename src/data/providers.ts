@@ -4,7 +4,7 @@ export const providers: Provider[] = [
   {
     id: 30,
     name: 'Hetzner',
-    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/hetzner-logo.svg',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Logo_Hetzner.svg',
     rating: 9.7,
     basePrice: 0,
     cpuPrice: 180,
@@ -63,7 +63,7 @@ export const providers: Provider[] = [
   {
     id: 29,
     name: 'HostKey',
-    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/hostkey-logo.svg',
+    logo: 'https://www.hostkey.com/assets/images/logo.svg',
     rating: 9.5,
     basePrice: 0,
     cpuPrice: 160,
