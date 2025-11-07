@@ -35,7 +35,7 @@ const Promo = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               {providersWithPromo.map((provider) => (
                 <Card key={provider.id} className="border-2 border-border hover:border-primary/50 transition-all group hover:shadow-xl bg-gradient-to-br from-card to-card/50 overflow-hidden relative">
                   {provider.name === 'Timeweb Cloud' && (
