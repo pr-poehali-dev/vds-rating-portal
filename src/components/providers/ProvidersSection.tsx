@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import Icon from '@/components/ui/icon';
 import { Provider, ResourceConfig, Review } from './types';
-import { ProviderCard } from './ProviderCard';
 import { ComparisonTable } from './ComparisonTable';
+import { FilterPanel } from './FilterPanel';
+import { ComparisonControls } from './ComparisonControls';
+import { ProvidersList } from './ProvidersList';
 
 interface ProvidersSectionProps {
   providers: Provider[];
@@ -255,7 +255,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   const filteredProviders = providersWithReviews
     .filter(p => {
       if (filterFZ152 && !p.fz152Compliant) return false;
-      if (filterTrialPeriod && !p.trialDays) return false;
+      if (filterTrialPeriod && p.trialDays === 0) return false;
       if (filterLocation && !p.locations.includes(filterLocation)) return false;
       if (filterVirtualization && !p.technicalSpecs.virtualization.includes(filterVirtualization)) return false;
       if (filterMinDatacenters !== null && p.locations.length < filterMinDatacenters) return false;
@@ -266,9 +266,9 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     })
     .sort((a, b) => {
       if (sortBy === 'rating') {
-        const ratingA = a.reviews.reduce((sum, r) => sum + r.rating, 0) / a.reviews.length;
-        const ratingB = b.reviews.reduce((sum, r) => sum + r.rating, 0) / b.reviews.length;
-        return ratingB - ratingA;
+        const avgRatingA = a.reviews.reduce((sum, r) => sum + r.rating, 0) / a.reviews.length;
+        const avgRatingB = b.reviews.reduce((sum, r) => sum + r.rating, 0) / b.reviews.length;
+        return avgRatingB - avgRatingA;
       } else {
         const priceA = calculatePrice(a, configs[a.id]);
         const priceB = calculatePrice(b, configs[b.id]);
@@ -276,337 +276,65 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
       }
     });
 
+  if (showComparison) {
+    const selectedProviders = providersWithReviews.filter(p => 
+      selectedForComparison.includes(p.id)
+    );
+    return (
+      <ComparisonTable 
+        providers={selectedProviders} 
+        onClose={() => setShowComparison(false)} 
+      />
+    );
+  }
+
   return (
-    <section id="providers" className="py-24 relative">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="text-center mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 bg-accent border border-primary/30 rounded-full px-5 py-2.5">
-            <Icon name="Trophy" size={16} className="text-primary" />
-            <span className="text-sm font-bold text-primary">Лучшие провайдеры</span>
-          </div>
-          <h2 className="text-5xl md:text-6xl font-extrabold text-foreground">
-            Топ VDS хостингов
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Настрой конфигурацию под свой проект и сравни цены
-          </p>
-        </div>
+    <section className="container mx-auto px-4 py-8">
+      <FilterPanel
+        filterFZ152={filterFZ152}
+        setFilterFZ152={setFilterFZ152}
+        filterTrialPeriod={filterTrialPeriod}
+        setFilterTrialPeriod={setFilterTrialPeriod}
+        filterLocation={filterLocation}
+        setFilterLocation={setFilterLocation}
+        filterVirtualization={filterVirtualization}
+        setFilterVirtualization={setFilterVirtualization}
+        filterMinDatacenters={filterMinDatacenters}
+        setFilterMinDatacenters={setFilterMinDatacenters}
+        filterDiskType={filterDiskType}
+        setFilterDiskType={setFilterDiskType}
+        filterPaymentMethod={filterPaymentMethod}
+        setFilterPaymentMethod={setFilterPaymentMethod}
+        filterOS={filterOS}
+        setFilterOS={setFilterOS}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        allLocations={allLocations}
+        allVirtualizations={allVirtualizations}
+        allDiskTypes={allDiskTypes}
+        allPaymentMethods={allPaymentMethods}
+        allOS={allOS}
+      />
 
-        <div className="mb-10 max-w-6xl mx-auto">
-          <div className="bg-accent/50 border border-primary/10 rounded-2xl p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <Icon name="Filter" size={18} className="text-primary" />
-                <h3 className="text-lg font-bold text-foreground">Фильтры</h3>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-4 py-2">
-                  <Icon name="Search" size={16} className="text-primary" />
-                  <span className="text-sm font-bold text-primary">
-                    Найдено: {filteredProviders.length} {filteredProviders.length === 1 ? 'провайдер' : filteredProviders.length < 5 ? 'провайдера' : 'провайдеров'}
-                  </span>
-                </div>
-                {(filterFZ152 || filterTrialPeriod || filterLocation || filterVirtualization || filterMinDatacenters || filterDiskType || filterPaymentMethod || filterOS) && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-10 px-4 text-sm font-semibold rounded-xl border-2 border-border hover:bg-destructive/10 hover:border-destructive/50 hover:text-destructive transition-all"
-                    onClick={() => {
-                      setFilterFZ152(false);
-                      setFilterTrialPeriod(false);
-                      setFilterLocation(null);
-                      setFilterVirtualization(null);
-                      setFilterMinDatacenters(null);
-                      setFilterDiskType(null);
-                      setFilterPaymentMethod(null);
-                      setFilterOS(null);
-                    }}
-                  >
-                    <Icon name="X" size={16} className="mr-1.5" />
-                    Сбросить
-                  </Button>
-                )}
-              </div>
-            </div>
-            
-            <div className="flex flex-wrap gap-3 mb-4">
-              <Button 
-                variant={filterFZ152 ? "default" : "outline"}
-                className="h-10 px-4 text-sm font-semibold rounded-xl transition-all"
-                onClick={() => setFilterFZ152(!filterFZ152)}
-              >
-                <Icon name="ShieldCheck" size={16} className="mr-2" />
-                152-ФЗ
-                {filterFZ152 && <Icon name="Check" size={16} className="ml-1" />}
-              </Button>
+      <ProvidersList
+        filteredProviders={filteredProviders}
+        configs={configs}
+        calculatePrice={calculatePrice}
+        configOpen={configOpen}
+        setConfigOpen={setConfigOpen}
+        updateConfig={updateConfig}
+        selectedProvider={selectedProvider}
+        setSelectedProvider={setSelectedProvider}
+        reviewsToShow={reviewsToShow}
+        setReviewsToShow={setReviewsToShow}
+        selectedForComparison={selectedForComparison}
+        toggleComparison={toggleComparison}
+      />
 
-              <Button 
-                variant={filterTrialPeriod ? "default" : "outline"}
-                className="h-10 px-4 text-sm font-semibold rounded-xl transition-all"
-                onClick={() => setFilterTrialPeriod(!filterTrialPeriod)}
-              >
-                <Icon name="Gift" size={16} className="mr-2" />
-                Тестовый период
-                {filterTrialPeriod && <Icon name="Check" size={16} className="ml-1" />}
-              </Button>
-
-              <div className="relative">
-                <select
-                  value={filterLocation || ''}
-                  onChange={(e) => setFilterLocation(e.target.value || null)}
-                  className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
-                >
-                  <option value="">Локации</option>
-                  {allLocations.map(loc => (
-                    <option key={loc} value={loc}>{loc}</option>
-                  ))}
-                </select>
-                <Icon name="MapPin" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
-                <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
-              </div>
-
-              <div className="relative">
-                <select
-                  value={filterVirtualization || ''}
-                  onChange={(e) => setFilterVirtualization(e.target.value || null)}
-                  className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
-                  style={{
-                    color: filterVirtualization ? (() => {
-                      switch(filterVirtualization) {
-                        case 'KVM': return 'rgb(37, 99, 235)';
-                        case 'VMware': return 'rgb(168, 85, 247)';
-                        case 'OpenVZ': return 'rgb(249, 115, 22)';
-                        case 'Hyper-V': return 'rgb(6, 182, 212)';
-                        case 'LXC': return 'rgb(34, 197, 94)';
-                        case 'Xen': return 'rgb(236, 72, 153)';
-                        default: return '';
-                      }
-                    })() : ''
-                  }}
-                >
-                  <option value="">Виртуализация</option>
-                  {allVirtualizations.map(virt => {
-                    const getVirtEmoji = (type: string) => {
-                      switch(type) {
-                        case 'KVM': return '🔵';
-                        case 'VMware': return '🟣';
-                        case 'OpenVZ': return '🟠';
-                        case 'Hyper-V': return '🔷';
-                        case 'LXC': return '🟢';
-                        case 'Xen': return '🩷';
-                        default: return '⚙️';
-                      }
-                    };
-                    return (
-                      <option key={virt} value={virt}>{getVirtEmoji(virt)} {virt}</option>
-                    );
-                  })}
-                </select>
-                <Icon name="Box" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
-                <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
-              </div>
-
-              <div className="relative">
-                <select
-                  value={filterMinDatacenters || ''}
-                  onChange={(e) => setFilterMinDatacenters(e.target.value ? parseInt(e.target.value) : null)}
-                  className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
-                >
-                  <option value="">Количество ЦОДов</option>
-                  <option value="2">От 2 ЦОДов</option>
-                  <option value="3">От 3 ЦОДов</option>
-                  <option value="4">От 4 ЦОДов</option>
-                  <option value="5">От 5 ЦОДов</option>
-                  <option value="6">От 6 ЦОДов</option>
-                </select>
-                <Icon name="Database" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
-                <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
-              </div>
-
-              <div className="relative">
-                <select
-                  value={filterDiskType || ''}
-                  onChange={(e) => setFilterDiskType(e.target.value || null)}
-                  className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
-                >
-                  <option value="">Тип дисков</option>
-                  {allDiskTypes.map(type => (
-                    <option key={type} value={type}>{type}</option>
-                  ))}
-                </select>
-                <Icon name="HardDrive" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
-                <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
-              </div>
-
-              <div className="relative">
-                <select
-                  value={filterPaymentMethod || ''}
-                  onChange={(e) => setFilterPaymentMethod(e.target.value || null)}
-                  className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
-                >
-                  <option value="">Способ оплаты</option>
-                  {allPaymentMethods.map(method => (
-                    <option key={method} value={method}>{method}</option>
-                  ))}
-                </select>
-                <Icon name="CreditCard" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
-                <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
-              </div>
-
-              <div className="relative">
-                <select
-                  value={filterOS || ''}
-                  onChange={(e) => setFilterOS(e.target.value || null)}
-                  className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
-                >
-                  <option value="">Операционная система</option>
-                  {allOS.map(os => (
-                    <option key={os} value={os}>{os}</option>
-                  ))}
-                </select>
-                <Icon name="Monitor" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
-                <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
-              </div>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="text-sm font-semibold text-muted-foreground">Сортировка:</span>
-              <Button 
-                variant={sortBy === 'rating' ? "default" : "outline"}
-                size="sm"
-                className="h-9 px-4 text-sm font-semibold rounded-xl"
-                onClick={() => setSortBy('rating')}
-              >
-                <Icon name="Star" size={14} className="mr-1.5" />
-                По рейтингу
-              </Button>
-              <Button 
-                variant={sortBy === 'price' ? "default" : "outline"}
-                size="sm"
-                className="h-9 px-4 text-sm font-semibold rounded-xl"
-                onClick={() => setSortBy('price')}
-              >
-                <Icon name="DollarSign" size={14} className="mr-1.5" />
-                По цене
-              </Button>
-
-              {(filterFZ152 || filterTrialPeriod || filterLocation || filterDiskType || filterPaymentMethod || filterOS) && (
-                <div className="flex items-center gap-2 ml-auto">
-                  <div className="flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-xl px-3 py-1.5">
-                    <span className="text-sm font-medium text-foreground">
-                      Найдено: {filteredProviders.length}
-                    </span>
-                  </div>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="h-9 px-3 text-sm font-semibold hover:bg-destructive/20 hover:text-destructive rounded-xl"
-                    onClick={() => {
-                      setFilterFZ152(false);
-                      setFilterTrialPeriod(false);
-                      setFilterLocation(null);
-                      setFilterDiskType(null);
-                      setFilterPaymentMethod(null);
-                      setFilterOS(null);
-                      localStorage.removeItem('filterFZ152');
-                      localStorage.removeItem('filterTrialPeriod');
-                      localStorage.removeItem('filterLocation');
-                      localStorage.removeItem('filterDiskType');
-                      localStorage.removeItem('filterPaymentMethod');
-                      localStorage.removeItem('filterOS');
-                    }}
-                  >
-                    <Icon name="X" size={14} className="mr-1.5" />
-                    Сбросить
-                  </Button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="grid gap-6 max-w-6xl mx-auto">
-          {filteredProviders.map((provider, index) => {
-            const config = configs[provider.id];
-            const calculatedPrice = calculatePrice(provider, config);
-
-            return (
-              <div
-                key={provider.id}
-                className="animate-in fade-in slide-in-from-bottom-4 duration-500"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <ProviderCard
-                  provider={provider}
-                  index={index}
-                  config={config}
-                  onUpdateConfig={(key, value) => updateConfig(provider.id, key, value)}
-                  calculatedPrice={calculatedPrice}
-                  configOpen={configOpen === provider.id}
-                  onToggleConfig={() => setConfigOpen(configOpen === provider.id ? null : provider.id)}
-                  showDetails={selectedProvider?.id === provider.id}
-                  onToggleDetails={() => setSelectedProvider(selectedProvider?.id === provider.id ? null : provider)}
-                  reviewsToShow={reviewsToShow[provider.id]}
-                  onLoadMoreReviews={() => setReviewsToShow(prev => ({
-                    ...prev,
-                    [provider.id]: prev[provider.id] + 10
-                  }))}
-                  isSelected={selectedForComparison.includes(provider.id)}
-                  onToggleCompare={() => toggleComparison(provider.id)}
-                />
-              </div>
-            );
-          })}
-        </div>
-
-        {selectedForComparison.length > 0 && (
-          <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40">
-            <div className="bg-card border-2 border-primary shadow-2xl shadow-primary/30 rounded-2xl p-4 flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <Icon name="GitCompare" size={20} className="text-primary" />
-                <span className="font-bold text-foreground">
-                  Выбрано для сравнения: {selectedForComparison.length}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setSelectedForComparison([])}
-                  className="h-9 px-4 rounded-xl"
-                >
-                  Очистить
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={compareProviders}
-                  disabled={selectedForComparison.length < 2}
-                  className="h-9 px-4 bg-primary text-background rounded-xl disabled:opacity-50"
-                >
-                  Сравнить
-                  <Icon name="ArrowRight" size={16} className="ml-2" />
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        <div className="text-center mt-12">
-          <Button size="lg" variant="outline" className="h-14 px-8 text-base font-bold border-2 border-border rounded-xl hover:bg-accent hover:border-primary/50">
-            Посмотреть все провайдеры
-            <Icon name="Grid" size={20} className="ml-2" />
-          </Button>
-        </div>
-      </div>
-
-      {showComparison && (
-        <ComparisonTable
-          providers={providersWithReviews.filter(p => selectedForComparison.includes(p.id))}
-          configs={configs}
-          onClose={() => setShowComparison(false)}
-          calculatePrice={calculatePrice}
-        />
-      )}
+      <ComparisonControls
+        selectedForComparison={selectedForComparison}
+        compareProviders={compareProviders}
+      />
     </section>
   );
 };
