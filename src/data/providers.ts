@@ -13,7 +13,7 @@ export const providers: Provider[] = [
     features: ['SSD диски', 'DDoS защита', 'Snapshot бэкапы', 'API управление'],
     locations: ['Москва', 'Санкт-Петербург', 'Нидерланды'],
     trialDays: 0,
-    url: 'https://fornex.com',
+    url: 'https://fornex.com/c/ftefrn/',
     pros: ['Стабильная работа', 'Адекватные цены', 'Гибкая конфигурация', 'Хорошая поддержка'],
     cons: ['Нет тестового периода', 'Мало локаций', 'Базовая панель управления'],
     fz152Compliant: true,
