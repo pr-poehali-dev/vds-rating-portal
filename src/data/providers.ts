@@ -2,6 +2,129 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 25,
+    name: 'Яндекс Облако',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/30c049ff-e34d-4d12-94d2-d8da64bcc04d.jpg',
+    rating: 9.7,
+    basePrice: 0,
+    cpuPrice: 220,
+    ramPrice: 140,
+    storagePrice: 15,
+    features: ['NVMe диски', 'Глобальная сеть ЦОД', 'Автомасштабирование', 'GPU серверы'],
+    locations: ['Москва', 'Санкт-Петербург', 'Владимир', 'Франкфурт', 'Казахстан'],
+    trialDays: 60,
+    url: 'https://cloud.yandex.ru/services/compute',
+    pros: ['60 дней бесплатного использования', 'Экосистема Яндекса', 'Мощное API и CLI', 'Гарантия доступности 99.95%'],
+    cons: ['Высокая цена CPU', 'Сложная панель для новичков', 'Требуется банковская карта для активации'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '10 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Windows Server', 'Astra Linux'],
+      controlPanel: 'Yandex Cloud Console',
+      apiAccess: true,
+      ddosProtection: 'До 1 Тбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.95%',
+      supportResponseTime: '< 30 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 180,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 15 },
+        { months: 6, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Безналичный расчет'],
+      minPrice: 220
+    },
+    popularity: 500000,
+    promoText: '60 дней бесплатно для новых пользователей + $50 на счёт',
+    caseStudies: ['Highload системы', 'ML/AI проекты', 'Big Data', 'Корпоративные решения', 'Финтех'],
+    uptime30days: 99.96,
+    reviews: [
+      { author: 'Дмитрий К.', text: 'Использую для ML проектов. GPU инстансы работают отлично, масштабирование автоматическое. 60 дней бесплатного использования дали хорошо разобраться.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Алексей В.', text: 'Интеграция с Yandex Tracker, DataLens и другими сервисами Яндекса — огромный плюс. Панель сложная, но мощная. API на высоте!', rating: 5, date: '07 ноя 2025' },
+      { author: 'Мария С.', text: 'Экосистема Яндекса позволяет быстро развернуть инфраструктуру. Мониторинг встроенный, логи централизованные. Для корпораций — идеально!', rating: 5, date: '06 ноя 2025' },
+      { author: 'Сергей Н.', text: 'Цена выше чем у конкурентов, но надёжность и SLA 99.95% компенсируют. За 2 года ни одного критичного сбоя. Поддержка квалифицированная.', rating: 5, date: '05 ноя 2025' },
+      { author: 'Елена Т.', text: 'Панель управления сложная для новичков — пришлось неделю разбираться. Но функционал огромный. NVMe диски работают быстро!', rating: 4, date: '04 ноя 2025' }
+    ]
+  },
+  {
+    id: 24,
+    name: 'Selectel',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/b17e31dd-bcc7-4aa2-a0e7-b6cd2042a7a0.jpg',
+    rating: 9.5,
+    basePrice: 0,
+    cpuPrice: 195,
+    ramPrice: 115,
+    storagePrice: 12,
+    features: ['NVMe диски', 'Собственная сеть ЦОД', 'Kubernetes', 'S3-хранилище'],
+    locations: ['Москва', 'Санкт-Петербург', 'Новосибирск'],
+    trialDays: 14,
+    url: 'https://selectel.ru/services/cloud/servers/',
+    pros: ['25 лет на рынке', 'Собственные дата-центры в России', 'Гибкое ценообразование', 'Managed Kubernetes'],
+    cons: ['Нет зарубежных локаций', 'Средняя скорость поддержки', 'Сложная биллинговая система'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '10 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Astra Linux', 'Windows Server'],
+      controlPanel: 'Selectel Cloud Panel',
+      apiAccess: true,
+      ddosProtection: 'До 500 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.95%',
+      supportResponseTime: '< 20 мин',
+      moneyBackGuarantee: 14
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 150,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 18 },
+        { months: 6, percent: 12 },
+        { months: 3, percent: 8 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'Безналичный расчет'],
+      minPrice: 195
+    },
+    popularity: 350000,
+    promoText: 'Тестовый период 14 дней + скидка 18% при оплате года',
+    caseStudies: ['E-commerce', 'Финтех приложения', 'Highload API', 'Kubernetes кластеры', 'CDN сервисы'],
+    uptime30days: 99.94,
+    reviews: [
+      { author: 'Игорь Р.', text: 'Работаю с Selectel 5 лет. Собственные дата-центры — это надёжность. За всё время простоев практически не было. Managed K8s работает отлично!', rating: 5, date: '08 ноя 2025' },
+      { author: 'Анна М.', text: '25 лет на рынке внушают доверие. NVMe диски быстрые, производительность стабильная. Цена адекватная для такого качества сервиса.', rating: 5, date: '07 ноя 2025' },
+      { author: 'Максим Л.', text: 'Гибкое ценообразование позволяет оптимизировать расходы. S3-хранилище совместимое с AWS. API удобное, документация подробная.', rating: 5, date: '06 ноя 2025' },
+      { author: 'Светлана П.', text: 'Биллинговая система сложная — пришлось разбираться. Поддержка отвечает не моментально, но компетентно. В целом сервисом доволен!', rating: 4, date: '05 ноя 2025' },
+      { author: 'Дмитрий К.', text: 'Нет зарубежных локаций — для международных проектов минус. Но для российского рынка хватает. Kubernetes кластеры разворачиваются быстро.', rating: 4, date: '04 ноя 2025' }
+    ]
+  },
+  {
     id: 23,
     name: 'Adman',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/5add3136-cb6a-48cf-9c01-254f2d0d5952.jpg',
