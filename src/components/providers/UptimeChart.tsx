@@ -71,32 +71,64 @@ export const UptimeChart = ({ providers }: UptimeChartProps) => {
 
           {/* График всех провайдеров */}
           <div className="bg-gradient-to-br from-card via-card to-accent/20 border-2 border-border rounded-3xl p-8 shadow-xl mb-8">
-            <div className="relative h-[400px]">
-              <svg className="w-full h-full" viewBox="0 0 1000 400" preserveAspectRatio="none">
-                {/* Сетка */}
-                <line x1="50" y1="0" x2="50" y2="380" stroke="currentColor" strokeOpacity="0.1" />
-                <line x1="0" y1="380" x2="1000" y2="380" stroke="currentColor" strokeOpacity="0.1" />
+            <div className="relative h-[500px] bg-background/50 rounded-2xl p-6">
+              <svg className="w-full h-full" viewBox="0 0 1100 450" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <linearGradient id="gridGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="currentColor" stopOpacity="0.1" />
+                    <stop offset="100%" stopColor="currentColor" stopOpacity="0.02" />
+                  </linearGradient>
+                </defs>
+
+                {/* Вертикальные линии сетки (каждые 5 дней) */}
+                {Array.from({ length: 7 }, (_, i) => {
+                  const x = 80 + (i * (1000 / 6));
+                  return (
+                    <line 
+                      key={`v-${i}`}
+                      x1={x} 
+                      y1="20" 
+                      x2={x} 
+                      y2="400" 
+                      stroke="currentColor" 
+                      strokeOpacity="0.08"
+                      strokeDasharray="2 4"
+                    />
+                  );
+                })}
                 
                 {/* Горизонтальные линии для уровней */}
-                {[99, 99.5, 99.9, 99.95, 100].map((level, i) => {
-                  const y = 380 - ((level - 99) / 1) * 380;
+                {[99, 99.5, 99.9, 99.95, 100].map((level) => {
+                  const y = 400 - ((level - 99) / 1) * 380;
+                  const isImportant = level === 99.9 || level === 100;
                   return (
                     <g key={level}>
                       <line 
-                        x1="50" 
+                        x1="80" 
                         y1={y} 
-                        x2="1000" 
+                        x2="1080" 
                         y2={y} 
                         stroke="currentColor" 
-                        strokeOpacity="0.05"
-                        strokeDasharray="4 4"
+                        strokeOpacity={isImportant ? 0.15 : 0.06}
+                        strokeWidth={isImportant ? 1.5 : 1}
+                        strokeDasharray={isImportant ? "none" : "3 3"}
+                      />
+                      <rect 
+                        x="0" 
+                        y={y - 12} 
+                        width="72" 
+                        height="24" 
+                        fill="url(#gridGradient)" 
+                        rx="4"
                       />
                       <text 
-                        x="10" 
+                        x="36" 
                         y={y + 5} 
-                        fontSize="12" 
+                        fontSize="13" 
+                        fontWeight={isImportant ? "600" : "400"}
                         fill="currentColor" 
-                        opacity="0.5"
+                        opacity="0.7"
+                        textAnchor="middle"
                       >
                         {level}%
                       </text>
@@ -104,47 +136,54 @@ export const UptimeChart = ({ providers }: UptimeChartProps) => {
                   );
                 })}
 
-                {/* Линии для каждого провайдера */}
+                {/* Линии для каждого провайдера с улучшенной видимостью */}
                 {providersWithUptime.slice(0, 8).map((provider, idx) => {
                   const color = getUptimeColor(provider.uptime30days || 99.9);
                   const points = chartData.map((d, i) => {
-                    const x = 50 + (i / (chartData.length - 1)) * 950;
+                    const x = 80 + (i / (chartData.length - 1)) * 1000;
                     const value = d[provider.name] as number;
-                    const y = 380 - ((value - 99) / 1) * 380;
+                    const y = 400 - ((value - 99) / 1) * 380;
                     return `${x},${y}`;
                   }).join(' ');
 
                   return (
-                    <polyline
-                      key={provider.id}
-                      points={points}
-                      fill="none"
-                      stroke={color}
-                      strokeWidth="2.5"
-                      strokeOpacity="0.8"
-                      className="transition-all hover:stroke-opacity-100 hover:stroke-width-4"
-                    />
+                    <g key={provider.id}>
+                      <polyline
+                        points={points}
+                        fill="none"
+                        stroke={color}
+                        strokeWidth="3"
+                        strokeOpacity="0.9"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="transition-all hover:stroke-opacity-100 hover:stroke-width-5 cursor-pointer"
+                        filter="drop-shadow(0 2px 4px rgba(0,0,0,0.1))"
+                      />
+                    </g>
                   );
                 })}
               </svg>
 
-              {/* Подписи дней */}
-              <div className="absolute bottom-0 left-0 right-0 flex justify-between px-12 text-xs text-muted-foreground">
-                <span>{chartData[0]?.date}</span>
-                <span>{chartData[Math.floor(chartData.length / 2)]?.date}</span>
-                <span>{chartData[chartData.length - 1]?.date}</span>
+              {/* Подписи дней с улучшенным стилем */}
+              <div className="absolute bottom-2 left-0 right-0 flex justify-between px-20 text-xs font-semibold text-muted-foreground">
+                {[0, 7, 14, 21, 29].map(idx => (
+                  <div key={idx} className="text-center bg-background/80 px-2 py-1 rounded">
+                    <div className="text-[10px] opacity-60">День {idx + 1}</div>
+                    <div>{chartData[idx]?.date}</div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Легенда провайдеров */}
-            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
+            {/* Легенда провайдеров с улучшенной читаемостью */}
+            <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 bg-background/50 rounded-xl p-4">
               {providersWithUptime.slice(0, 8).map((provider, idx) => (
-                <div key={provider.id} className="flex items-center gap-2">
+                <div key={provider.id} className="flex items-center gap-2.5 bg-background border border-border/50 rounded-lg px-3 py-2 hover:border-primary/50 transition-all">
                   <div 
-                    className="w-3 h-3 rounded-full flex-shrink-0"
+                    className="w-4 h-4 rounded-full flex-shrink-0 shadow-sm"
                     style={{ backgroundColor: getUptimeColor(provider.uptime30days || 99.9) }}
                   ></div>
-                  <span className="text-xs font-medium text-foreground truncate">{provider.name}</span>
+                  <span className="text-sm font-semibold text-foreground truncate">{provider.name}</span>
                 </div>
               ))}
             </div>
