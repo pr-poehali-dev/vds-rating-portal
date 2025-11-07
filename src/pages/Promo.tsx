@@ -7,10 +7,9 @@ import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 
 const Promo = () => {
+  const allowedProviders = ['Timeweb Cloud', 'ServerSpace', 'SprintHost'];
   const providersWithPromo = providers.filter(p => 
-    p.promoText || 
-    (p.pricingDetails.discounts && p.pricingDetails.discounts.length > 0) ||
-    p.trialDays > 0
+    allowedProviders.includes(p.name)
   );
 
   return (
