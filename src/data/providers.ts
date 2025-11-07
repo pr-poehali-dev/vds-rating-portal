@@ -127,7 +127,7 @@ export const providers: Provider[] = [
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
-      virtualization: ['KVM', 'OpenVZ'],
+      virtualization: ['KVM', 'LXC'],
       guaranteedResources: true,
       ipv4: true,
       ipv6: true,
