@@ -26,6 +26,10 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   const [filterVirtualization, setFilterVirtualization] = useState<string | null>(() => {
     return localStorage.getItem('filterVirtualization') || null;
   });
+  const [filterMinDatacenters, setFilterMinDatacenters] = useState<number | null>(() => {
+    const saved = localStorage.getItem('filterMinDatacenters');
+    return saved ? parseInt(saved) : null;
+  });
   const [sortBy, setSortBy] = useState<'rating' | 'price'>(() => {
     const saved = localStorage.getItem('sortBy');
     return (saved as 'rating' | 'price') || 'rating';
@@ -103,6 +107,14 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   }, [filterVirtualization]);
 
   useEffect(() => {
+    if (filterMinDatacenters !== null) {
+      localStorage.setItem('filterMinDatacenters', filterMinDatacenters.toString());
+    } else {
+      localStorage.removeItem('filterMinDatacenters');
+    }
+  }, [filterMinDatacenters]);
+
+  useEffect(() => {
     localStorage.setItem('sortBy', sortBy);
   }, [sortBy]);
 
@@ -150,6 +162,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
       if (filterTrialPeriod && !p.trialDays) return false;
       if (filterLocation && !p.locations.includes(filterLocation)) return false;
       if (filterVirtualization && !p.technicalSpecs.virtualization.includes(filterVirtualization)) return false;
+      if (filterMinDatacenters !== null && p.locations.length < filterMinDatacenters) return false;
       return true;
     })
     .sort((a, b) => {
@@ -194,7 +207,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                     Найдено: {filteredProviders.length} {filteredProviders.length === 1 ? 'провайдер' : filteredProviders.length < 5 ? 'провайдера' : 'провайдеров'}
                   </span>
                 </div>
-                {(filterFZ152 || filterTrialPeriod || filterLocation || filterVirtualization) && (
+                {(filterFZ152 || filterTrialPeriod || filterLocation || filterVirtualization || filterMinDatacenters) && (
                   <Button
                     variant="ghost"
                     size="sm"
@@ -204,6 +217,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                       setFilterTrialPeriod(false);
                       setFilterLocation(null);
                       setFilterVirtualization(null);
+                      setFilterMinDatacenters(null);
                     }}
                   >
                     <Icon name="X" size={16} className="mr-1.5" />
@@ -287,6 +301,23 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
                   })}
                 </select>
                 <Icon name="Box" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
+                <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+              </div>
+
+              <div className="relative">
+                <select
+                  value={filterMinDatacenters || ''}
+                  onChange={(e) => setFilterMinDatacenters(e.target.value ? parseInt(e.target.value) : null)}
+                  className="h-10 pl-10 pr-10 text-sm font-semibold rounded-xl border-2 border-border bg-background hover:bg-accent hover:border-primary/50 transition-all cursor-pointer appearance-none"
+                >
+                  <option value="">Количество ЦОДов</option>
+                  <option value="2">От 2 ЦОДов</option>
+                  <option value="3">От 3 ЦОДов</option>
+                  <option value="4">От 4 ЦОДов</option>
+                  <option value="5">От 5 ЦОДов</option>
+                  <option value="6">От 6 ЦОДов</option>
+                </select>
+                <Icon name="Database" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
                 <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
               </div>
             </div>
