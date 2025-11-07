@@ -74,7 +74,7 @@ export const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium">
+                  <a href="/about" className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium">
                     О нас
                   </a>
                 </li>
