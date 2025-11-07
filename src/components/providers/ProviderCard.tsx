@@ -109,7 +109,7 @@ export const ProviderCard = ({
         </div>
       )}
       
-      <CardHeader className="p-6 md:p-8">
+      <CardHeader className={`p-6 md:p-8 ${index === 0 ? 'pt-12 md:pt-14' : ''}`}>
         <ProviderCardHeader
           provider={provider}
           index={index}
