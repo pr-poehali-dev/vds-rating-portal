@@ -42,10 +42,14 @@ export const TechnicalSpecsSection = ({ provider }: TechnicalSpecsSectionProps) 
           <Icon name="Box" size={16} className="text-primary mt-0.5" />
           <div>
             <div className="text-xs text-muted-foreground mb-0.5">Виртуализация</div>
-            <Badge className="bg-primary/10 border border-primary/30 text-primary font-bold text-xs transition-all duration-300 hover:bg-primary/20 hover:scale-105 hover:shadow-md cursor-default">
-              <Icon name="Box" size={12} className="mr-1" />
-              {technicalSpecs.virtualization}
-            </Badge>
+            <div className="flex flex-wrap gap-1.5">
+              {technicalSpecs.virtualization.map((virt, idx) => (
+                <Badge key={idx} className="bg-primary/10 border border-primary/30 text-primary font-bold text-xs transition-all duration-300 hover:bg-primary/20 hover:scale-105 hover:shadow-md cursor-default">
+                  <Icon name="Box" size={12} className="mr-1" />
+                  {virt}
+                </Badge>
+              ))}
+            </div>
           </div>
         </div>
         <div className="flex items-start gap-3">

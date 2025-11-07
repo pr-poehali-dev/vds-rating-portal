@@ -10,7 +10,7 @@ export interface Review {
 export interface TechnicalSpecs {
   diskType: 'NVMe' | 'SSD' | 'HDD';
   networkSpeed: string;
-  virtualization: 'KVM' | 'OpenVZ' | 'VMware' | 'Hyper-V';
+  virtualization: ('KVM' | 'OpenVZ' | 'VMware' | 'Hyper-V' | 'LXC' | 'Xen')[];
   guaranteedResources: boolean;
   ipv4: boolean;
   ipv6: boolean;

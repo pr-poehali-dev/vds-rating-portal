@@ -186,7 +186,7 @@ export const ProviderCard = ({
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <Icon name="Box" size={14} className="text-primary" />
-                  <span className="font-semibold text-foreground">Виртуализация: {provider.technicalSpecs.virtualization}</span>
+                  <span className="font-semibold text-foreground">Виртуализация: {provider.technicalSpecs.virtualization.join(', ')}</span>
                 </div>
                 {provider.popularity && (
                   <div className="flex items-center gap-2 text-sm">

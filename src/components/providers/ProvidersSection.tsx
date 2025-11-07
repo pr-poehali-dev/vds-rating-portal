@@ -141,7 +141,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   ).sort();
 
   const allVirtualizations = Array.from(
-    new Set(providersWithReviews.map(p => p.technicalSpecs.virtualization))
+    new Set(providersWithReviews.flatMap(p => p.technicalSpecs.virtualization))
   ).sort();
 
   const filteredProviders = providersWithReviews
@@ -149,7 +149,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
       if (filterFZ152 && !p.fz152Compliant) return false;
       if (filterTrialPeriod && !p.trialDays) return false;
       if (filterLocation && !p.locations.includes(filterLocation)) return false;
-      if (filterVirtualization && p.technicalSpecs.virtualization !== filterVirtualization) return false;
+      if (filterVirtualization && !p.technicalSpecs.virtualization.includes(filterVirtualization)) return false;
       return true;
     })
     .sort((a, b) => {

@@ -22,7 +22,7 @@ export const providers: Provider[] = [
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '10 Гбит/с',
-      virtualization: 'KVM',
+      virtualization: ['KVM'],
       guaranteedResources: true,
       ipv4: true,
       ipv6: true,
@@ -127,7 +127,7 @@ export const providers: Provider[] = [
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
-      virtualization: 'KVM',
+      virtualization: ['KVM'],
       guaranteedResources: true,
       ipv4: true,
       ipv6: true,
@@ -232,7 +232,7 @@ export const providers: Provider[] = [
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
-      virtualization: 'KVM',
+      virtualization: ['KVM'],
       guaranteedResources: true,
       ipv4: true,
       ipv6: true,
@@ -337,7 +337,7 @@ export const providers: Provider[] = [
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '10 Гбит/с',
-      virtualization: 'KVM',
+      virtualization: ['KVM'],
       guaranteedResources: true,
       ipv4: true,
       ipv6: true,
