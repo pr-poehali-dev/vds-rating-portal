@@ -1540,7 +1540,7 @@ export const providers: Provider[] = [
       minPrice: 210
     },
     popularity: 50000,
-    promoText: 'Скидка 20% на первый месяц при оплате годового тарифа',
+    promoText: 'Промокод на удвоение первого платежа - DOUBLE',
     caseStudies: ['E-commerce проекты', 'Highload API', 'SaaS платформы', 'Финтех приложения', 'Игровые серверы'],
     uptime30days: 99.98,
     reviews: [
