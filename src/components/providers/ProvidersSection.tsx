@@ -336,25 +336,30 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
             const calculatedPrice = calculatePrice(provider, config);
 
             return (
-              <ProviderCard
+              <div
                 key={provider.id}
-                provider={provider}
-                index={index}
-                config={config}
-                onUpdateConfig={(key, value) => updateConfig(provider.id, key, value)}
-                calculatedPrice={calculatedPrice}
-                configOpen={configOpen === provider.id}
-                onToggleConfig={() => setConfigOpen(configOpen === provider.id ? null : provider.id)}
-                showDetails={selectedProvider?.id === provider.id}
-                onToggleDetails={() => setSelectedProvider(selectedProvider?.id === provider.id ? null : provider)}
-                reviewsToShow={reviewsToShow[provider.id]}
-                onLoadMoreReviews={() => setReviewsToShow(prev => ({
-                  ...prev,
-                  [provider.id]: prev[provider.id] + 10
-                }))}
-                isSelected={selectedForComparison.includes(provider.id)}
-                onToggleCompare={() => toggleComparison(provider.id)}
-              />
+                className="animate-in fade-in slide-in-from-bottom-4 duration-500"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <ProviderCard
+                  provider={provider}
+                  index={index}
+                  config={config}
+                  onUpdateConfig={(key, value) => updateConfig(provider.id, key, value)}
+                  calculatedPrice={calculatedPrice}
+                  configOpen={configOpen === provider.id}
+                  onToggleConfig={() => setConfigOpen(configOpen === provider.id ? null : provider.id)}
+                  showDetails={selectedProvider?.id === provider.id}
+                  onToggleDetails={() => setSelectedProvider(selectedProvider?.id === provider.id ? null : provider)}
+                  reviewsToShow={reviewsToShow[provider.id]}
+                  onLoadMoreReviews={() => setReviewsToShow(prev => ({
+                    ...prev,
+                    [provider.id]: prev[provider.id] + 10
+                  }))}
+                  isSelected={selectedForComparison.includes(provider.id)}
+                  onToggleCompare={() => toggleComparison(provider.id)}
+                />
+              </div>
             );
           })}
         </div>

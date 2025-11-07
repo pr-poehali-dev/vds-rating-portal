@@ -136,4 +136,38 @@
     transform: translateY(-4px);
     box-shadow: 0 20px 40px rgba(212, 255, 0, 0.2);
   }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-in-from-bottom {
+    from {
+      transform: translateY(16px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .animate-in {
+    animation-fill-mode: both;
+  }
+
+  .fade-in {
+    animation-name: fade-in;
+  }
+
+  .slide-in-from-bottom-4 {
+    animation-name: slide-in-from-bottom;
+  }
+
+  .duration-500 {
+    animation-duration: 500ms;
+  }
 }
