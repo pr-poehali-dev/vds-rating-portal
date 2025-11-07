@@ -1,8 +1,14 @@
 import { useState, FormEvent } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
 
@@ -11,6 +17,7 @@ export const ContactForm = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { toast } = useToast();
 
   const handleSubmit = async (e: FormEvent) => {
@@ -40,6 +47,7 @@ export const ContactForm = () => {
         setName('');
         setEmail('');
         setMessage('');
+        setIsOpen(false);
       } else {
         toast({
           title: 'Ошибка',
@@ -59,15 +67,24 @@ export const ContactForm = () => {
   };
 
   return (
-    <Card className="border-2 border-primary/20">
-      <CardHeader>
-        <CardTitle className="text-2xl flex items-center gap-2">
-          <Icon name="Send" size={24} className="text-primary" />
-          Обратная связь
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+        <Button 
+          size="icon" 
+          variant="outline" 
+          className="rounded-xl hover:border-primary hover:bg-primary/10 hover:text-primary transition-all"
+        >
+          <Icon name="Send" size={18} />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[500px]">
+        <DialogHeader>
+          <DialogTitle className="text-2xl flex items-center gap-2">
+            <Icon name="Send" size={24} className="text-primary" />
+            Обратная связь
+          </DialogTitle>
+        </DialogHeader>
+        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <div>
             <label className="text-sm font-semibold text-foreground mb-2 block">
               Ваше имя
@@ -125,7 +142,7 @@ export const ContactForm = () => {
             )}
           </Button>
         </form>
-      </CardContent>
-    </Card>
+      </DialogContent>
+    </Dialog>
   );
 };

@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import { ContactForm } from '@/components/contact/ContactForm';
 
 export const Footer = () => {
   return (
@@ -24,14 +25,7 @@ export const Footer = () => {
                 Независимая платформа для сравнения VDS провайдеров. Помогаем найти идеальное решение для вашего проекта.
               </p>
               <div className="flex gap-3">
-                <Button 
-                  size="icon" 
-                  variant="outline" 
-                  className="rounded-xl hover:border-primary hover:bg-primary/10 hover:text-primary transition-all"
-                  onClick={() => window.location.href = '#contact'}
-                >
-                  <Icon name="Send" size={18} />
-                </Button>
+                <ContactForm />
                 <Button 
                   size="icon" 
                   variant="outline" 
