@@ -47,7 +47,7 @@ export const HeroSection = () => {
           <div className="grid grid-cols-3 gap-8 pt-16 max-w-4xl mx-auto">
             {[
               { icon: 'Users', value: '2,500+', label: 'Довольных клиентов' },
-              { icon: 'Star', value: '4.9', label: 'Средний рейтинг' },
+              { icon: 'Star', value: '4.6', label: 'Средний рейтинг' },
               { icon: 'Shield', value: '100%', label: 'Защита данных' }
             ].map((stat, idx) => (
               <div key={idx} className="group">
