@@ -1,5 +1,6 @@
 import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
+import { ContactForm } from '@/components/contact/ContactForm';
 
 export const AboutSection = () => {
   return (
@@ -184,16 +185,19 @@ export const AboutSection = () => {
                   Есть вопросы, предложения или хотите добавить своего провайдера в рейтинг? 
                   Мы всегда открыты для диалога и рады обратной связи!
                 </p>
-                <Button
-                  size="lg"
-                  className="h-12 px-8 bg-primary text-background font-bold rounded-xl"
-                  asChild
-                >
-                  <a href="https://t.me/top_vds_com" target="_blank" rel="noopener noreferrer">
-                    <Icon name="Send" size={18} className="mr-2" />
-                    Telegram
-                  </a>
-                </Button>
+                <div className="flex items-center justify-center gap-3">
+                  <ContactForm />
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    className="rounded-xl hover:border-primary hover:bg-primary/10 hover:text-primary transition-all"
+                    asChild
+                  >
+                    <a href="https://t.me/top_vds_com" target="_blank" rel="noopener noreferrer">
+                      <Icon name="Send" size={18} />
+                    </a>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
