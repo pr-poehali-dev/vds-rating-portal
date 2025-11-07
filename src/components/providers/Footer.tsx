@@ -17,7 +17,7 @@ export const Footer = () => {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-primary">VDS Rating</h3>
+                  <h3 className="text-xl font-bold text-primary">top-vds</h3>
                   <p className="text-xs text-muted-foreground font-medium">Топ хостингов</p>
                 </div>
               </div>
@@ -84,7 +84,7 @@ export const Footer = () => {
           
           <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground font-medium">
-              © 2025 VDS Rating. Все права защищены.
+              © 2025 top-vds. Все права защищены.
             </p>
             <div className="flex gap-6 text-sm text-muted-foreground font-medium">
               <a href="#" className="hover:text-primary transition-colors">Политика конфиденциальности</a>

@@ -14,7 +14,7 @@ export const Header = () => {
               </div>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-primary">VDS Rating</h1>
+              <h1 className="text-xl font-bold text-primary">top-vds</h1>
               <p className="text-xs text-muted-foreground font-medium">Топ хостингов</p>
             </div>
           </div>
