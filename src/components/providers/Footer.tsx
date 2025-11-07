@@ -58,7 +58,7 @@ export const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#providers" className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium">
+                  <a href="/promo" className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium">
                     Акции
                   </a>
                 </li>
