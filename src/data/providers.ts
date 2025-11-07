@@ -460,7 +460,7 @@ export const providers: Provider[] = [
     features: ['SSD диски', 'Панель ISPmanager', 'DDoS защита', 'IPv6'],
     locations: ['Москва', 'Санкт-Петербург', 'Казань', 'Франкфурт'],
     trialDays: 7,
-    url: 'https://firstvds.ru',
+    url: 'https://firstvds.ru/?from=1197983',
     pros: ['Стабильная работа', 'Удобная панель управления', 'Адекватные цены', 'Хорошая техподдержка'],
     cons: ['Нет NVMe дисков', 'Мало дата-центров за границей', 'Нет криптовалютных платежей'],
     fz152Compliant: true,
