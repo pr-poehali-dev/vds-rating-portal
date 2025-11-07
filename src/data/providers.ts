@@ -2,6 +2,67 @@ import { Provider } from '@/components/providers/types';
 
 export const providers: Provider[] = [
   {
+    id: 23,
+    name: 'Adman',
+    logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/5add3136-cb6a-48cf-9c01-254f2d0d5952.jpg',
+    rating: 9.2,
+    basePrice: 250,
+    cpuPrice: 150,
+    ramPrice: 85,
+    storagePrice: 7,
+    features: ['SSD диски', 'Панель управления', 'Техподдержка 24/7', 'DDoS защита'],
+    locations: ['Москва', 'Санкт-Петербург', 'Нидерланды'],
+    trialDays: 7,
+    url: 'https://adman.com/pages/index/25060',
+    pros: ['Тестовый период 7 дней', 'Стабильная работа', 'Адекватные цены', 'Быстрая техподдержка'],
+    cons: ['Нет NVMe дисков', 'Ограниченный выбор локаций', 'Средние характеристики'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Fedora'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'Базовая защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 20 мин',
+      moneyBackGuarantee: 7
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 70,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 15 },
+        { months: 6, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney'],
+      minPrice: 250
+    },
+    popularity: 12000,
+    promoText: 'Тестовый период 7 дней + скидка 15% при оплате года',
+    caseStudies: ['Корпоративные сайты', 'Интернет-магазины', 'Веб-приложения', 'Малый бизнес'],
+    uptime30days: 99.87,
+    reviews: [
+      { author: 'Алексей М.', text: 'Пользуюсь Adman уже 8 месяцев. Цены адекватные, сервер работает стабильно. Тестовая неделя помогла разобраться во всём.', rating: 5, date: '08 ноя 2025' },
+      { author: 'Мария К.', text: 'Техподдержка отвечает быстро, помогли с настройкой за 15 минут. Панель управления понятная и удобная.', rating: 5, date: '07 ноя 2025' },
+      { author: 'Дмитрий П.', text: 'За свои деньги отличный вариант. SSD диски работают быстро, для WordPress сайта хватает с головой.', rating: 5, date: '06 ноя 2025' },
+      { author: 'Елена В.', text: 'Нет NVMe дисков — для highload проектов может не хватить. Но для обычных задач SSD работает отлично.', rating: 4, date: '05 ноя 2025' },
+      { author: 'Игорь Н.', text: 'Локаций маловато — только 3 города. Но для моих задач хватает. Цена и стабильность на уровне.', rating: 4, date: '04 ноя 2025' }
+    ]
+  },
+  {
     id: 22,
     name: 'AdminVPS',
     logo: 'https://adminvps.ru/assets/img/logos/logo.svg',
