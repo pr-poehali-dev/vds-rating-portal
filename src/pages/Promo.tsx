@@ -85,22 +85,6 @@ const Promo = () => {
                         </div>
                       )}
 
-                      {provider.trialDays > 0 && (
-                        <div className="bg-primary/10 border-2 border-primary/30 rounded-xl p-4">
-                          <div className="flex items-start gap-3">
-                            <div className="flex-shrink-0 w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                              <Icon name="Clock" size={20} className="text-background" />
-                            </div>
-                            <div className="flex-1">
-                              <div className="text-xs font-bold text-primary uppercase mb-1">Тестовый период</div>
-                              <div className="text-sm font-semibold text-foreground">
-                                {provider.trialDays} {provider.trialDays === 1 ? 'день' : provider.trialDays < 5 ? 'дня' : 'дней'} бесплатного тестирования
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
                       {provider.pricingDetails.discounts && provider.pricingDetails.discounts.length > 0 && (
                         <div className="bg-accent border-2 border-border rounded-xl p-4">
                           <div className="flex items-start gap-3">
