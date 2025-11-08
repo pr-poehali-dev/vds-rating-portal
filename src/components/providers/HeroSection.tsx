@@ -57,22 +57,6 @@ export const HeroSection = () => {
               Как выбрать
             </Button>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 pt-12 sm:pt-16 max-w-4xl mx-auto px-4">
-            {[
-              { icon: 'Users', value: '2,500+', label: 'Довольных клиентов' },
-              { icon: 'Star', value: '4.6', label: 'Средний рейтинг' },
-              { icon: 'Shield', value: '100%', label: 'Защита данных' }
-            ].map((stat, idx) => (
-              <div key={idx} className="group">
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-accent border border-primary/20 rounded-2xl mb-4 group-hover:scale-110 group-hover:border-primary/50 group-hover:shadow-neon transition-all">
-                  <Icon name={stat.icon as any} size={24} className="text-primary" />
-                </div>
-                <div className="text-3xl md:text-4xl font-extrabold text-foreground mb-1">{stat.value}</div>
-                <div className="text-sm text-muted-foreground font-semibold">{stat.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
