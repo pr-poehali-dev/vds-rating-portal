@@ -1,5 +1,7 @@
 import { Provider } from '@/components/providers/types';
 
+export const lastUpdateDate = '08.11.2025';
+
 export const providers: Provider[] = [
   {
     id: 30,
