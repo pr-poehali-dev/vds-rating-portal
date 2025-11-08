@@ -64,7 +64,7 @@ export const ProviderCardHeader = ({
                 <span className="font-semibold text-foreground">
                   {provider.locations.length} {provider.locations.length === 1 ? t('common.datacenter') : provider.locations.length < 5 ? t('common.datacenters') : t('common.dataCenters')}
                 </span>
-                <span className="text-muted-foreground"> — {provider.locations.join(', ')}</span>
+                <span className="text-muted-foreground font-normal"> — {provider.locations.join(', ')}</span>
               </div>
             </div>
             <div className="flex items-center gap-2 text-sm">
