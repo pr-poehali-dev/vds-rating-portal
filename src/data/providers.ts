@@ -1500,7 +1500,7 @@ export const providers: Provider[] = [
     cpuPrice: 220,
     ramPrice: 130,
     storagePrice: 15,
-    features: ['DDoS защита', 'NVMe диски', '99.99% SLA', 'Поддержка 24/7'],
+    features: ['DDoS защита', 'NVMe диски', '99.98% SLA', 'Поддержка 24/7'],
     locations: ['Москва', 'Санкт-Петербург', 'Казань', 'Амстердам'],
     trialDays: 7,
     url: 'https://timeweb.com/ru/?i=123689',
