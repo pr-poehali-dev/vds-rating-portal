@@ -13,6 +13,29 @@ interface ComparisonTableProps {
 export const ComparisonTable = ({ providers, configs, onClose, calculatePrice }: ComparisonTableProps) => {
   if (providers.length === 0) return null;
 
+  const trackClick = async (providerId: number) => {
+    try {
+      await fetch('https://functions.poehali.dev/d0b8e2ce-45c2-4ab9-8d08-baf03c0268f4', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          provider_id: providerId,
+        }),
+      });
+    } catch (error) {
+      console.error('Error tracking click:', error);
+    }
+  };
+
+  const handleProviderClick = (provider: Provider) => {
+    if (provider.url) {
+      trackClick(provider.id);
+      window.open(provider.url, '_blank');
+    }
+  };
+
   const rows = [
     { label: 'Рейтинг', key: 'rating', icon: 'Star' },
     { label: 'Цена (с текущей конфигурацией)', key: 'price', icon: 'DollarSign' },
@@ -181,7 +204,7 @@ export const ComparisonTable = ({ providers, configs, onClose, calculatePrice }:
                       <td key={provider.id} className="p-6 text-center">
                         <Button 
                           className="w-full h-11 font-bold bg-primary text-background"
-                          onClick={() => provider.url && window.open(provider.url, '_blank')}
+                          onClick={() => handleProviderClick(provider)}
                           disabled={!provider.url}
                         >
                           Перейти
