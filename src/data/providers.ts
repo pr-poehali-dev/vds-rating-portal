@@ -9,14 +9,14 @@ export const providers: Provider[] = [
     logo: 'https://cdn.poehali.dev/files/7554b41f-b1d2-4a4a-ad1e-f4a02703cead.png',
     rating: 9.7,
     basePrice: 0,
-    cpuPrice: 180,
-    ramPrice: 95,
-    storagePrice: 8,
+    cpuPrice: 190,
+    ramPrice: 100,
+    storagePrice: 9,
     features: ['NVMe диски', 'Dedicated vCPU', 'Snapshots бесплатно', 'IPv6'],
     locations: ['Германия', 'Финляндия', 'США'],
     trialDays: 0,
     url: 'https://www.hetzner.com/',
-    pros: ['Лучшее соотношение цена/качество в Европе', 'Отличная сеть и скорость', 'Прозрачное ценообразование', 'Экологичные ЦОД'],
+    pros: ['Лучшее соотношение цена/качество в Европе', 'Новые тарифы Cost-Optimized от €3.49', 'Прозрачное ценообразование', 'Экологичные ЦОД'],
     cons: ['Нет ЦОД в России', 'Техподдержка на английском', 'Требуется верификация документов'],
     fz152Compliant: false,
     technicalSpecs: {
@@ -46,10 +46,11 @@ export const providers: Provider[] = [
     pricingDetails: {
       discounts: [],
       paymentMethods: ['Банковская карта', 'PayPal', 'SEPA'],
-      minPrice: 180
+      minPrice: 190
     },
     popularity: 500000,
-    promoText: '20€ бонус при регистрации для новых клиентов',
+    promoText: 'Новые тарифы октябрь 2025: Cost-Optimized от €3.49/мес',
+
     caseStudies: ['Международные проекты', 'Highload системы', 'DevOps инфраструктура', 'Kubernetes кластеры', 'CDN'],
     uptime30days: 99.95,
     reviews: [
@@ -315,15 +316,15 @@ export const providers: Provider[] = [
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/30c049ff-e34d-4d12-94d2-d8da64bcc04d.jpg',
     rating: 9.7,
     basePrice: 0,
-    cpuPrice: 220,
-    ramPrice: 140,
-    storagePrice: 15,
+    cpuPrice: 230,
+    ramPrice: 150,
+    storagePrice: 16,
     features: ['NVMe диски', 'Глобальная сеть ЦОД', 'Автомасштабирование', 'GPU серверы'],
     locations: ['Москва', 'Санкт-Петербург', 'Владимир', 'Франкфурт', 'Казахстан'],
     trialDays: 60,
     url: 'https://cloud.yandex.ru/services/compute',
     pros: ['60 дней бесплатного использования', 'Экосистема Яндекса', 'Мощное API и CLI', 'Гарантия доступности 99.95%'],
-    cons: ['Высокая цена CPU', 'Сложная панель для новичков', 'Требуется банковская карта для активации'],
+    cons: ['Повышение цен в мае 2025 (+5%)', 'Сложная панель для новичков', 'Требуется банковская карта для активации'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
     technicalSpecs: {
@@ -356,10 +357,10 @@ export const providers: Provider[] = [
         { months: 6, percent: 10 }
       ],
       paymentMethods: ['Банковская карта', 'ЮMoney', 'Безналичный расчет'],
-      minPrice: 220
+      minPrice: 230
     },
     popularity: 500000,
-    promoText: '60 дней бесплатно для новых пользователей + $50 на счёт',
+    promoText: '60 дней бесплатно для новых пользователей + 4000₽ на счёт',
     caseStudies: ['Highload системы', 'ML/AI проекты', 'Big Data', 'Корпоративные решения', 'Финтех'],
     uptime30days: 99.96,
     reviews: [
