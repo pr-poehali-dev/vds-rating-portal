@@ -18,11 +18,8 @@ export const HeroSection = () => {
           
           <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold leading-[1.1] tracking-tight">
             <span className="block text-foreground">Найди</span>
-            <span className="block">
-              <span className="gradient-text">идеальн</span>
-              <MatrixSuffix />
-              <span className="gradient-text"> </span>
-              <MatrixWord />
+            <span className="block text-foreground">
+              идеальн<MatrixSuffix /> <MatrixWord />
             </span>
             <span className="block text-foreground">для своего проекта</span>
           </h1>

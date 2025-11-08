@@ -53,7 +53,7 @@ export const MatrixWord = () => {
 
   return (
     <span className="relative inline-block">
-      <span className={`gradient-text ${isTransitioning ? 'matrix-glitch' : ''}`}>
+      <span className={`text-foreground ${isTransitioning ? 'matrix-glitch' : ''}`}>
         {displayText}
       </span>
     </span>

@@ -52,7 +52,7 @@ export const MatrixSuffix = () => {
   }, [currentSuffixIndex]);
 
   return (
-    <span className={`gradient-text ${isTransitioning ? 'matrix-glitch' : ''}`}>
+    <span className={`text-foreground ${isTransitioning ? 'matrix-glitch' : ''}`}>
       {displayText}
     </span>
   );
