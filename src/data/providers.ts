@@ -1543,7 +1543,7 @@ export const providers: Provider[] = [
       minPrice: 500
     },
     popularity: 50000,
-    promoText: '7 дней бесплатно + скидка 15% при годовой оплате (IPv4 +150₽/мес)',
+    promoText: 'Промокод удвоение первого платежа - DOUBLE',
     caseStudies: ['E-commerce проекты', 'Highload API', 'SaaS платформы', 'Финтех приложения', 'Игровые серверы'],
     uptime30days: 99.98,
     reviews: [
