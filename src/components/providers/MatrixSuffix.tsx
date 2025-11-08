@@ -14,6 +14,10 @@ export const MatrixSuffix = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
+    setDisplayText(SUFFIXES[currentSuffixIndex]);
+  }, [language]);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setIsTransitioning(true);
       
@@ -54,7 +58,7 @@ export const MatrixSuffix = () => {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [currentSuffixIndex]);
+  }, [currentSuffixIndex, language]);
 
   return (
     <span className={`text-foreground ${isTransitioning ? 'matrix-glitch' : ''}`}>

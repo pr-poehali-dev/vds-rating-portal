@@ -14,6 +14,10 @@ export const MatrixWord = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
+    setDisplayText(WORDS[currentWordIndex]);
+  }, [language]);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setIsTransitioning(true);
       
@@ -54,7 +58,7 @@ export const MatrixWord = () => {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [currentWordIndex]);
+  }, [currentWordIndex, language]);
 
   return (
     <span className="relative inline-block">
