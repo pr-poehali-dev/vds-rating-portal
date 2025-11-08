@@ -25,6 +25,9 @@ interface FilterPanelProps {
   allDiskTypes: string[];
   allPaymentMethods: string[];
   allOS: string[];
+  searchQuery: string;
+  setSearchQuery: (value: string) => void;
+  filteredCount: number;
 }
 
 export const FilterPanel = ({
@@ -50,11 +53,14 @@ export const FilterPanel = ({
   allVirtualizations,
   allDiskTypes,
   allPaymentMethods,
-  allOS
+  allOS,
+  searchQuery,
+  setSearchQuery,
+  filteredCount
 }: FilterPanelProps) => {
   const hasActiveFilters = filterFZ152 || filterTrialPeriod || filterLocation || 
                           filterVirtualization || filterMinDatacenters !== null || 
-                          filterDiskType || filterPaymentMethod || filterOS;
+                          filterDiskType || filterPaymentMethod || filterOS || searchQuery;
 
   const clearFilters = () => {
     setFilterFZ152(false);
@@ -66,6 +72,7 @@ export const FilterPanel = ({
     setFilterPaymentMethod(null);
     setFilterOS(null);
     setSortBy('rating');
+    setSearchQuery('');
   };
 
   return (
@@ -93,6 +100,36 @@ export const FilterPanel = ({
             <Icon name="X" size={14} className="mr-1" />
             Сбросить всё
           </Button>
+        )}
+      </div>
+
+      <div className="mb-6 relative z-10">
+        <label className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
+          <Icon name="Search" size={16} className="text-primary" />
+          Поиск по названию
+        </label>
+        <div className="relative">
+          <Icon name="Search" size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Найти провайдера..."
+            className="w-full pl-12 pr-12 py-3 bg-background border-2 border-border rounded-xl focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:text-muted-foreground font-semibold hover:border-primary/50 hover:shadow-md"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 hover:bg-accent rounded-lg transition-colors"
+            >
+              <Icon name="X" size={18} className="text-muted-foreground" />
+            </button>
+          )}
+        </div>
+        {searchQuery && (
+          <div className="mt-2 text-sm text-muted-foreground">
+            Найдено: <span className="font-bold text-foreground">{filteredCount}</span> провайдер(ов)
+          </div>
         )}
       </div>
       
