@@ -5,7 +5,7 @@ import { MatrixSuffix } from './MatrixSuffix';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export const HeroSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   return (
     <section className="relative pt-20 pb-32 overflow-hidden">
@@ -20,9 +20,9 @@ export const HeroSection = () => {
           </div>
           
           <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold leading-[1.1] tracking-tight">
-            <span className="block text-foreground">{t('hero.title1')}</span>
+            <span className="block text-foreground">{t('hero.title1')} </span>
             <span className="block text-foreground">
-              {t('hero.title2')}<MatrixSuffix /> <MatrixWord />
+              {t('hero.title2')}{language === 'ru' && <MatrixSuffix />} <MatrixWord />
             </span>
             <span className="block text-foreground">{t('hero.title3')}</span>
           </h1>
