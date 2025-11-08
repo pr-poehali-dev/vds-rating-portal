@@ -48,7 +48,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   });
   const [selectedForComparison, setSelectedForComparison] = useState<number[]>([]);
   const [showComparison, setShowComparison] = useState(false);
-  const [providersToShow, setProvidersToShow] = useState(999);
+  const [providersToShow, setProvidersToShow] = useState(10);
   const [reviewsToShow, setReviewsToShow] = useState<Record<number, number>>({
     1: 5,
     2: 5,
