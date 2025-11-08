@@ -269,6 +269,25 @@ const Admin = () => {
           </div>
         </div>
 
+        <div className="bg-card border-2 border-border rounded-2xl p-6 mb-6">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+              <Icon name="BarChart3" size={24} className="text-primary" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-foreground">Яндекс.Метрика</h2>
+              <p className="text-sm text-muted-foreground">Полная статистика посещений сайта</p>
+            </div>
+          </div>
+          <div className="relative w-full" style={{ paddingBottom: '75%' }}>
+            <iframe 
+              src="https://metrika.yandex.ru/dashboard/direct?id=105191874" 
+              className="absolute inset-0 w-full h-full border-2 border-border rounded-xl"
+              title="Яндекс.Метрика"
+            />
+          </div>
+        </div>
+
         <VisitorStatsSection
           visitorStats={visitorStats}
           isLoadingVisitors={isLoadingVisitors}
