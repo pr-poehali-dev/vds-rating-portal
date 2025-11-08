@@ -1,0 +1,45 @@
+{
+  "header": {
+    "title": "top-vds",
+    "subtitle": "Top Hosting",
+    "uptime": "Uptime",
+    "compare": "Compare",
+    "start": "Get Started"
+  },
+  "hero": {
+    "badge": "Top Providers 2025",
+    "title1": "Find the",
+    "title2": "perfect",
+    "title3": "for your project",
+    "word1": "hosting",
+    "word2": "cloud",
+    "suffix1": "",
+    "suffix2": "",
+    "description": "Compare features, prices and reviews. Choose the best solution in minutes.",
+    "viewRating": "View Rating",
+    "howToChoose": "How to Choose"
+  },
+  "common": {
+    "goTo": "Go to",
+    "price": "Price",
+    "from": "from",
+    "perMonth": "$/mo",
+    "discounts": "Discounts",
+    "uptime": "Uptime",
+    "reviews": "reviews",
+    "month": "mo",
+    "datacenter": "DC",
+    "datacenters": "DCs",
+    "dataCenters": "DCs",
+    "trialPeriod": "Trial Period",
+    "days": "days",
+    "day": "day",
+    "daysGenitive": "days",
+    "free": "free",
+    "absent": "none",
+    "compliant": "Compliant",
+    "disks": "Disks",
+    "virtualization": "Virtualization",
+    "users": "users"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "header": {
+    "title": "top-vds",
+    "subtitle": "Топ хостингов",
+    "uptime": "Аптайм",
+    "compare": "Сравнение",
+    "start": "Начать"
+  },
+  "hero": {
+    "badge": "Топ провайдеров 2025",
+    "title1": "Найди",
+    "title2": "идеальн",
+    "title3": "для своего проекта",
+    "word1": "хостинг",
+    "word2": "облако",
+    "suffix1": "ый",
+    "suffix2": "ое",
+    "description": "Сравни характеристики, цены и отзывы. Выбери лучшее решение за пару минут.",
+    "viewRating": "Посмотреть рейтинг",
+    "howToChoose": "Как выбрать"
+  },
+  "common": {
+    "goTo": "Перейти",
+    "price": "Цена",
+    "from": "от",
+    "perMonth": "₽/мес",
+    "discounts": "Скидки",
+    "uptime": "Uptime",
+    "reviews": "отзывов",
+    "month": "мес",
+    "datacenter": "ЦОД",
+    "datacenters": "ЦОДа",
+    "dataCenters": "ЦОДов",
+    "trialPeriod": "Тестовый период",
+    "days": "дней",
+    "day": "день",
+    "daysGenitive": "дня",
+    "free": "бесплатно",
+    "absent": "отсутствует",
+    "compliant": "Соответствует",
+    "disks": "Диски",
+    "virtualization": "Виртуализация",
+    "users": "пользователей"
+  }
+}

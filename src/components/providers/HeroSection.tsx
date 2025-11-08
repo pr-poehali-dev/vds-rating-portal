@@ -2,8 +2,11 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { MatrixWord } from './MatrixWord';
 import { MatrixSuffix } from './MatrixSuffix';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export const HeroSection = () => {
+  const { t } = useLanguage();
+  
   return (
     <section className="relative pt-20 pb-32 overflow-hidden">
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px]"></div>
@@ -13,19 +16,19 @@ export const HeroSection = () => {
         <div className="max-w-5xl mx-auto text-center space-y-8">
           <div className="inline-flex items-center gap-2 bg-accent border border-primary/30 rounded-full px-5 py-2.5">
             <div className="w-2 h-2 bg-primary rounded-full animate-pulse shadow-neon"></div>
-            <span className="text-sm font-bold text-primary">Топ провайдеров 2025</span>
+            <span className="text-sm font-bold text-primary">{t('hero.badge')}</span>
           </div>
           
           <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold leading-[1.1] tracking-tight">
-            <span className="block text-foreground">Найди</span>
+            <span className="block text-foreground">{t('hero.title1')}</span>
             <span className="block text-foreground">
-              идеальн<MatrixSuffix /> <MatrixWord />
+              {t('hero.title2')}<MatrixSuffix /> <MatrixWord />
             </span>
-            <span className="block text-foreground">для своего проекта</span>
+            <span className="block text-foreground">{t('hero.title3')}</span>
           </h1>
           
           <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
-            Сравни характеристики, цены и отзывы. Выбери лучшее решение за пару минут.
+            {t('hero.description')}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
@@ -39,7 +42,7 @@ export const HeroSection = () => {
                 }
               }}
             >
-              Посмотреть рейтинг
+              {t('hero.viewRating')}
               <Icon name="ArrowRight" size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button 
@@ -54,7 +57,7 @@ export const HeroSection = () => {
               }}
             >
               <Icon name="Lightbulb" size={18} className="mr-2" />
-              Как выбрать
+              {t('hero.howToChoose')}
             </Button>
           </div>
         </div>

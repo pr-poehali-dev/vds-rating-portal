@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
-const WORDS = ['хостинг', 'облако'];
 const CYRILLIC_CHARS = 'абвгдежзийклмнопрстуфхцчшщъыьэюя';
+const LATIN_CHARS = 'abcdefghijklmnopqrstuvwxyz';
 
 export const MatrixWord = () => {
+  const { t, language } = useLanguage();
+  const WORDS = [t('hero.word1'), t('hero.word2')];
+  const CHARS = language === 'ru' ? CYRILLIC_CHARS : LATIN_CHARS;
+  
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayText, setDisplayText] = useState(WORDS[0]);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -32,7 +37,7 @@ export const MatrixWord = () => {
             if (charProgress < 0.5) {
               newText += currentWord[i] || '';
             } else if (charProgress < 0.85) {
-              newText += CYRILLIC_CHARS[Math.floor(Math.random() * CYRILLIC_CHARS.length)];
+              newText += CHARS[Math.floor(Math.random() * CHARS.length)];
             } else {
               newText += nextWord[i] || '';
             }

@@ -1,7 +1,10 @@
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export const Header = () => {
+  const { language, setLanguage, t } = useLanguage();
+  
   return (
     <nav className="sticky top-0 z-50 backdrop-blur-xl bg-card/60 border-b border-border">
       <div className="container mx-auto px-4 lg:px-8">
@@ -14,14 +17,14 @@ export const Header = () => {
               </div>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-primary">top-vds</h1>
-              <p className="text-xs text-muted-foreground font-medium">Топ хостингов</p>
+              <h1 className="text-xl font-bold text-primary">{t('header.title')}</h1>
+              <p className="text-xs text-muted-foreground font-medium">{t('header.subtitle')}</p>
             </div>
           </a>
           <div className="hidden md:flex items-center gap-8">
             <a href="/uptime" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-colors flex items-center gap-1">
               <Icon name="Activity" size={14} />
-              Аптайм
+              {t('header.uptime')}
             </a>
             <a 
               href="#compare" 
@@ -40,17 +43,19 @@ export const Header = () => {
                 }
               }}
             >
-              Сравнение
+              {t('header.compare')}
             </a>
             <button 
               className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border hover:border-primary/50 hover:bg-accent transition-all"
-              onClick={() => alert('English version coming soon!')}
+              onClick={() => setLanguage(language === 'ru' ? 'en' : 'ru')}
             >
               <Icon name="Globe" size={16} className="text-foreground/70" />
-              <span className="text-sm font-semibold text-foreground/80">EN</span>
+              <span className="text-sm font-semibold text-foreground/80">
+                {language === 'ru' ? 'EN' : 'RU'}
+              </span>
             </button>
             <Button className="bg-primary text-background font-bold shadow-lg shadow-primary/30 hover:shadow-neon transition-all">
-              Начать
+              {t('header.start')}
               <Icon name="ArrowRight" size={16} className="ml-2" />
             </Button>
           </div>

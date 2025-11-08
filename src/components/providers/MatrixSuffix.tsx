@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
-const SUFFIXES = ['ый', 'ое'];
 const CYRILLIC_CHARS = 'абвгдежзийклмнопрстуфхцчшщъыьэюя';
+const LATIN_CHARS = 'abcdefghijklmnopqrstuvwxyz';
 
 export const MatrixSuffix = () => {
+  const { t, language } = useLanguage();
+  const SUFFIXES = [t('hero.suffix1'), t('hero.suffix2')];
+  const CHARS = language === 'ru' ? CYRILLIC_CHARS : LATIN_CHARS;
+  
   const [currentSuffixIndex, setCurrentSuffixIndex] = useState(0);
   const [displayText, setDisplayText] = useState(SUFFIXES[0]);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -32,7 +37,7 @@ export const MatrixSuffix = () => {
             if (charProgress < 0.5) {
               newText += currentSuffix[i] || '';
             } else if (charProgress < 0.85) {
-              newText += CYRILLIC_CHARS[Math.floor(Math.random() * CYRILLIC_CHARS.length)];
+              newText += CHARS[Math.floor(Math.random() * CHARS.length)];
             } else {
               newText += nextSuffix[i] || '';
             }
