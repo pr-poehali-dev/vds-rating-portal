@@ -175,19 +175,32 @@
     0%,
     100% {
       text-shadow:
-        0 0 10px rgba(212, 255, 0, 0.8),
-        0 0 20px rgba(212, 255, 0, 0.6);
+        0 0 8px rgba(212, 255, 0, 0.6),
+        0 0 16px rgba(212, 255, 0, 0.4);
+      opacity: 1;
+    }
+    25% {
+      text-shadow:
+        0 0 12px rgba(212, 255, 0, 0.7),
+        0 0 24px rgba(212, 255, 0, 0.5);
+      opacity: 0.95;
     }
     50% {
       text-shadow:
-        0 0 20px rgba(212, 255, 0, 1),
-        0 0 40px rgba(212, 255, 0, 0.8),
-        0 0 60px rgba(212, 255, 0, 0.6);
+        0 0 16px rgba(212, 255, 0, 0.8),
+        0 0 32px rgba(212, 255, 0, 0.6);
+      opacity: 1;
+    }
+    75% {
+      text-shadow:
+        0 0 12px rgba(212, 255, 0, 0.7),
+        0 0 24px rgba(212, 255, 0, 0.5);
+      opacity: 0.95;
     }
   }
 
   .matrix-glitch {
-    animation: matrix-glitch 0.05s infinite;
-    letter-spacing: 0.05em;
+    animation: matrix-glitch 0.15s ease-in-out infinite;
+    letter-spacing: 0.03em;
   }
 }

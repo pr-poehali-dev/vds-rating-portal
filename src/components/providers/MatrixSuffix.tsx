@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const SUFFIXES = ['ый', 'ое'];
-const MATRIX_CHARS = '01アイウエオカキクケコサシスセソタチツテト';
+const CYRILLIC_CHARS = 'абвгдежзийклмнопрстуфхцчшщъыьэюя';
 
 export const MatrixSuffix = () => {
   const [currentSuffixIndex, setCurrentSuffixIndex] = useState(0);
@@ -18,7 +18,7 @@ export const MatrixSuffix = () => {
       const maxLength = Math.max(currentSuffix.length, nextSuffix.length);
       
       let frame = 0;
-      const transitionFrames = 30;
+      const transitionFrames = 40;
       
       const animate = setInterval(() => {
         frame++;
@@ -29,10 +29,10 @@ export const MatrixSuffix = () => {
             const progress = frame / transitionFrames;
             const charProgress = Math.min(1, Math.max(0, progress * maxLength - i));
             
-            if (charProgress < 0.4) {
+            if (charProgress < 0.5) {
               newText += currentSuffix[i] || '';
-            } else if (charProgress < 0.8) {
-              newText += MATRIX_CHARS[Math.floor(Math.random() * MATRIX_CHARS.length)];
+            } else if (charProgress < 0.85) {
+              newText += CYRILLIC_CHARS[Math.floor(Math.random() * CYRILLIC_CHARS.length)];
             } else {
               newText += nextSuffix[i] || '';
             }
@@ -44,7 +44,7 @@ export const MatrixSuffix = () => {
           setCurrentSuffixIndex(nextIndex);
           clearInterval(animate);
         }
-      }, 40);
+      }, 35);
       
     }, 4000);
 
