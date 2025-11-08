@@ -20,9 +20,9 @@ export const ResourceConfigurator = ({
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <Icon name="Sliders" size={20} className="text-primary" />
-          <h4 className="text-lg font-bold text-foreground">Конфигуратор ресурсов</h4>
+          <h4 className="text-lg font-bold text-foreground">{t('resources.configurator')}</h4>
         </div>
-        <Badge className="bg-primary/20 text-primary border-0">Настрой под себя</Badge>
+        <Badge className="bg-primary/20 text-primary border-0">{t('resources.customizeYourself')}</Badge>
       </div>
       
       <div className="space-y-6">
@@ -101,10 +101,10 @@ export const ResourceConfigurator = ({
 
       <div className="mt-6 pt-6 border-t border-border">
         <div className="flex items-center justify-between">
-          <span className="text-sm text-muted-foreground">Трафик</span>
+          <span className="text-sm text-muted-foreground">{t('resources.traffic')}</span>
           <div className="flex items-center gap-2">
             <Icon name="Wifi" size={16} className="text-secondary" />
-            <span className="text-sm font-bold text-foreground">Безлимит</span>
+            <span className="text-sm font-bold text-foreground">{t('resources.unlimited')}</span>
           </div>
         </div>
       </div>

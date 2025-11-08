@@ -84,6 +84,40 @@
     "storage": "Storage",
     "cores": "cores",
     "core": "core",
-    "coresGenitive": "cores"
+    "coresGenitive": "cores",
+    "configurator": "Resource Configurator",
+    "customizeYourself": "Customize",
+    "traffic": "Traffic",
+    "unlimited": "Unlimited"
+  },
+  "comparison": {
+    "selected": "Selected",
+    "compare": "Compare"
+  },
+  "filters": {
+    "title": "Filters & Sorting",
+    "resetAll": "Reset All",
+    "searchByName": "Search by name",
+    "findProvider": "Find provider...",
+    "found": "Found",
+    "providers": "provider(s)",
+    "fz152Compliance": "Data Protection",
+    "onlyWithFz152": "Certified only",
+    "allProviders": "All providers",
+    "trialPeriod": "Trial Period",
+    "withTrialPeriod": "With trial period",
+    "datacenterLocation": "DC Location",
+    "anyLocation": "Any location",
+    "diskType": "Disk Type",
+    "anyDisk": "Any type",
+    "paymentMethod": "Payment Method",
+    "anyMethod": "Any method",
+    "operatingSystem": "Operating System",
+    "anyOS": "Any OS",
+    "sortBy": "Sort by",
+    "byRating": "By rating",
+    "byPrice": "By price",
+    "minDatacenters": "Min. DCs count",
+    "anyAmount": "Any amount"
   }
 }

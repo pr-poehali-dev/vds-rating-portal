@@ -84,6 +84,40 @@
     "storage": "Диск",
     "cores": "ядра",
     "core": "ядро",
-    "coresGenitive": "ядер"
+    "coresGenitive": "ядер",
+    "configurator": "Конфигуратор ресурсов",
+    "customizeYourself": "Настрой под себя",
+    "traffic": "Трафик",
+    "unlimited": "Безлимит"
+  },
+  "comparison": {
+    "selected": "Выбрано",
+    "compare": "Сравнить"
+  },
+  "filters": {
+    "title": "Фильтры и сортировка",
+    "resetAll": "Сбросить всё",
+    "searchByName": "Поиск по названию",
+    "findProvider": "Найти провайдера...",
+    "found": "Найдено",
+    "providers": "провайдер(ов)",
+    "fz152Compliance": "Соответствие 152-ФЗ",
+    "onlyWithFz152": "Только с 152-ФЗ",
+    "allProviders": "Все провайдеры",
+    "trialPeriod": "Тестовый период",
+    "withTrialPeriod": "С тестовым периодом",
+    "datacenterLocation": "Локация ЦОД",
+    "anyLocation": "Любая локация",
+    "diskType": "Тип дисков",
+    "anyDisk": "Любой тип",
+    "paymentMethod": "Способ оплаты",
+    "anyMethod": "Любой способ",
+    "operatingSystem": "Операционная система",
+    "anyOS": "Любая ОС",
+    "sortBy": "Сортировка",
+    "byRating": "По рейтингу",
+    "byPrice": "По цене",
+    "minDatacenters": "Мин. кол-во ЦОД",
+    "anyAmount": "Любое кол-во"
   }
 }

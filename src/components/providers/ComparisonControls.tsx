@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ComparisonControlsProps {
   selectedForComparison: number[];
@@ -10,6 +11,8 @@ export const ComparisonControls = ({
   selectedForComparison,
   compareProviders
 }: ComparisonControlsProps) => {
+  const { t } = useLanguage();
+  
   if (selectedForComparison.length === 0) {
     return null;
   }
@@ -20,7 +23,7 @@ export const ComparisonControls = ({
         <div className="flex items-center gap-2">
           <Icon name="GitCompare" size={20} className="text-primary" />
           <span className="text-sm font-semibold text-foreground">
-            Выбрано: {selectedForComparison.length}
+            {t('comparison.selected')}: {selectedForComparison.length}
           </span>
         </div>
         <Button
@@ -28,7 +31,7 @@ export const ComparisonControls = ({
           onClick={compareProviders}
           className="bg-primary text-background hover:bg-primary/90"
         >
-          Сравнить
+          {t('comparison.compare')}
           <Icon name="ArrowRight" size={16} className="ml-2" />
         </Button>
       </div>

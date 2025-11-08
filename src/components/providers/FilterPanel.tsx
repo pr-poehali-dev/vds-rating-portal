@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface FilterPanelProps {
   filterFZ152: boolean;
@@ -58,6 +59,8 @@ export const FilterPanel = ({
   setSearchQuery,
   filteredCount
 }: FilterPanelProps) => {
+  const { t } = useLanguage();
+  
   const hasActiveFilters = filterFZ152 || filterTrialPeriod || filterLocation || 
                           filterVirtualization || filterMinDatacenters !== null || 
                           filterDiskType || filterPaymentMethod || filterOS || searchQuery;
@@ -88,7 +91,7 @@ export const FilterPanel = ({
               <Icon name="Filter" size={16} className="text-background sm:w-5 sm:h-5" />
             </div>
           </div>
-          <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold text-foreground">Фильтры и сортировка</h3>
+          <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold text-foreground">{t('filters.title')}</h3>
         </div>
         {hasActiveFilters && (
           <Button
@@ -98,7 +101,7 @@ export const FilterPanel = ({
             className="text-[10px] sm:text-xs font-bold hover:bg-destructive hover:text-white hover:border-destructive transition-all shadow-lg hover:shadow-xl h-8 sm:h-9 px-2 sm:px-3 flex-shrink-0"
           >
             <Icon name="X" size={12} className="sm:mr-1" />
-            <span className="hidden sm:inline">Сбросить всё</span>
+            <span className="hidden sm:inline">{t('filters.resetAll')}</span>
           </Button>
         )}
       </div>
@@ -106,7 +109,7 @@ export const FilterPanel = ({
       <div className="mb-5 sm:mb-6 relative z-10">
         <label className="text-xs sm:text-sm font-bold text-foreground mb-2 sm:mb-3 flex items-center gap-2">
           <Icon name="Search" size={14} className="text-primary sm:w-4 sm:h-4" />
-          Поиск по названию
+          {t('filters.searchByName')}
         </label>
         <div className="relative">
           <Icon name="Search" size={18} className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
@@ -114,7 +117,7 @@ export const FilterPanel = ({
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Найти провайдера..."
+            placeholder={t('filters.findProvider')}
             className="w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-2.5 sm:py-3 bg-background border-2 border-border rounded-xl focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm sm:text-base text-foreground placeholder:text-muted-foreground font-semibold hover:border-primary/50 hover:shadow-md"
           />
           {searchQuery && (
@@ -128,7 +131,7 @@ export const FilterPanel = ({
         </div>
         {searchQuery && (
           <div className="mt-2 text-sm text-muted-foreground">
-            Найдено: <span className="font-bold text-foreground">{filteredCount}</span> провайдер(ов)
+            {t('filters.found')}: <span className="font-bold text-foreground">{filteredCount}</span> {t('filters.providers')}
           </div>
         )}
       </div>
@@ -137,7 +140,7 @@ export const FilterPanel = ({
         <div className="group">
           <label className="text-xs sm:text-sm font-bold text-foreground mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
             <Icon name="ShieldCheck" size={14} className="text-primary sm:w-4 sm:h-4" />
-            Соответствие 152-ФЗ
+            {t('filters.fz152Compliance')}
           </label>
           <Button
             variant={filterFZ152 ? "default" : "outline"}
@@ -153,14 +156,14 @@ export const FilterPanel = ({
             }`}>
               <Icon name="ShieldCheck" size={16} className={filterFZ152 ? 'text-background' : 'text-primary'} />
             </div>
-            <span className="truncate">{filterFZ152 ? 'Только с 152-ФЗ' : 'Все провайдеры'}</span>
+            <span className="truncate">{filterFZ152 ? t('filters.onlyWithFz152') : t('filters.allProviders')}</span>
           </Button>
         </div>
 
         <div className="group">
           <label className="text-xs sm:text-sm font-bold text-foreground mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
             <Icon name="Gift" size={14} className="text-primary sm:w-4 sm:h-4" />
-            Тестовый период
+            {t('filters.trialPeriod')}
           </label>
           <Button
             variant={filterTrialPeriod ? "default" : "outline"}
@@ -176,14 +179,14 @@ export const FilterPanel = ({
             }`}>
               <Icon name="Gift" size={16} className={filterTrialPeriod ? 'text-background' : 'text-primary'} />
             </div>
-            <span className="truncate">{filterTrialPeriod ? 'С тестовым периодом' : 'Все провайдеры'}</span>
+            <span className="truncate">{filterTrialPeriod ? t('filters.withTrialPeriod') : t('filters.allProviders')}</span>
           </Button>
         </div>
 
         <div className="group">
           <label className="text-xs sm:text-sm font-bold text-foreground mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
             <Icon name="MapPin" size={14} className="text-primary sm:w-4 sm:h-4" />
-            Локация ЦОД
+            {t('filters.datacenterLocation')}
           </label>
           <div className="relative">
             <div className="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -194,7 +197,7 @@ export const FilterPanel = ({
               value={filterLocation || ''}
               onChange={(e) => setFilterLocation(e.target.value || null)}
             >
-              <option value="">Все локации</option>
+              <option value="">{t('filters.anyLocation')}</option>
               {allLocations.map(loc => (
                 <option key={loc} value={loc}>{loc}</option>
               ))}
@@ -206,7 +209,7 @@ export const FilterPanel = ({
         <div className="group">
           <label className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
             <Icon name="Boxes" size={16} className="text-primary" />
-            Виртуализация
+            {t('common.virtualization')}
           </label>
           <div className="relative">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -217,7 +220,7 @@ export const FilterPanel = ({
               value={filterVirtualization || ''}
               onChange={(e) => setFilterVirtualization(e.target.value || null)}
             >
-              <option value="">Все типы</option>
+              <option value="">{t('filters.anyDisk')}</option>
               {allVirtualizations.map(virt => (
                 <option key={virt} value={virt}>{virt}</option>
               ))}
@@ -229,7 +232,7 @@ export const FilterPanel = ({
         <div className="group">
           <label className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
             <Icon name="HardDrive" size={16} className="text-primary" />
-            Тип дисков
+            {t('filters.diskType')}
           </label>
           <div className="relative">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -240,7 +243,7 @@ export const FilterPanel = ({
               value={filterDiskType || ''}
               onChange={(e) => setFilterDiskType(e.target.value || null)}
             >
-              <option value="">Все типы</option>
+              <option value="">{t('filters.anyDisk')}</option>
               {allDiskTypes.map(type => (
                 <option key={type} value={type}>{type}</option>
               ))}
@@ -252,7 +255,7 @@ export const FilterPanel = ({
         <div className="group">
           <label className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
             <Icon name="CreditCard" size={16} className="text-primary" />
-            Способ оплаты
+            {t('filters.paymentMethod')}
           </label>
           <div className="relative">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -263,7 +266,7 @@ export const FilterPanel = ({
               value={filterPaymentMethod || ''}
               onChange={(e) => setFilterPaymentMethod(e.target.value || null)}
             >
-              <option value="">Все способы</option>
+              <option value="">{t('filters.anyMethod')}</option>
               {allPaymentMethods.map(method => (
                 <option key={method} value={method}>{method}</option>
               ))}
@@ -275,7 +278,7 @@ export const FilterPanel = ({
         <div className="group">
           <label className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
             <Icon name="Monitor" size={16} className="text-primary" />
-            Операционная система
+            {t('filters.operatingSystem')}
           </label>
           <div className="relative">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -286,7 +289,7 @@ export const FilterPanel = ({
               value={filterOS || ''}
               onChange={(e) => setFilterOS(e.target.value || null)}
             >
-              <option value="">Все ОС</option>
+              <option value="">{t('filters.anyOS')}</option>
               {allOS.map(os => (
                 <option key={os} value={os}>{os}</option>
               ))}
@@ -298,7 +301,7 @@ export const FilterPanel = ({
         <div className="group">
           <label className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
             <Icon name="Server" size={16} className="text-primary" />
-            Мин. количество ЦОД
+            {t('filters.minDatacenters')}
           </label>
           <div className="relative">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -309,7 +312,7 @@ export const FilterPanel = ({
               value={filterMinDatacenters || ''}
               onChange={(e) => setFilterMinDatacenters(e.target.value ? parseInt(e.target.value) : null)}
             >
-              <option value="">Не важно</option>
+              <option value="">{t('filters.anyAmount')}</option>
               <option value="3">3+ ЦОДа</option>
               <option value="5">5+ ЦОДов</option>
               <option value="10">10+ ЦОДов</option>
@@ -321,7 +324,7 @@ export const FilterPanel = ({
         <div className="group md:col-span-2">
           <label className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
             <Icon name="ArrowUpDown" size={16} className="text-primary" />
-            Сортировка
+            {t('filters.sortBy')}
           </label>
           <div className="flex gap-3">
             <Button
@@ -338,7 +341,7 @@ export const FilterPanel = ({
               }`}>
                 <Icon name="Star" size={18} className={sortBy === 'rating' ? 'text-background' : 'text-primary'} />
               </div>
-              По рейтингу
+              {t('filters.byRating')}
             </Button>
             <Button
               variant={sortBy === 'price' ? "default" : "outline"}
@@ -354,7 +357,7 @@ export const FilterPanel = ({
               }`}>
                 <Icon name="DollarSign" size={18} className={sortBy === 'price' ? 'text-background' : 'text-primary'} />
               </div>
-              По цене
+              {t('filters.byPrice')}
             </Button>
           </div>
         </div>
