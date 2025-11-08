@@ -170,4 +170,24 @@
   .duration-500 {
     animation-duration: 500ms;
   }
+
+  @keyframes matrix-glitch {
+    0%,
+    100% {
+      text-shadow:
+        0 0 10px rgba(212, 255, 0, 0.8),
+        0 0 20px rgba(212, 255, 0, 0.6);
+    }
+    50% {
+      text-shadow:
+        0 0 20px rgba(212, 255, 0, 1),
+        0 0 40px rgba(212, 255, 0, 0.8),
+        0 0 60px rgba(212, 255, 0, 0.6);
+    }
+  }
+
+  .matrix-glitch {
+    animation: matrix-glitch 0.05s infinite;
+    letter-spacing: 0.05em;
+  }
 }

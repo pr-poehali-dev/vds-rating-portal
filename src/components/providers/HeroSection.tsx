@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import { MatrixWord } from './MatrixWord';
 
 export const HeroSection = () => {
   return (
@@ -16,7 +17,10 @@ export const HeroSection = () => {
           
           <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold leading-[1.1] tracking-tight">
             <span className="block text-foreground">Найди</span>
-            <span className="block gradient-text">идеальный хостинг</span>
+            <span className="block">
+              <span className="gradient-text">идеальный </span>
+              <MatrixWord />
+            </span>
             <span className="block text-foreground">для своего проекта</span>
           </h1>
           
