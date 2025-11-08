@@ -42,6 +42,13 @@ export const Header = () => {
             >
               Сравнение
             </a>
+            <button 
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border hover:border-primary/50 hover:bg-accent transition-all"
+              onClick={() => alert('English version coming soon!')}
+            >
+              <Icon name="Globe" size={16} className="text-foreground/70" />
+              <span className="text-sm font-semibold text-foreground/80">EN</span>
+            </button>
             <Button className="bg-primary text-background font-bold shadow-lg shadow-primary/30 hover:shadow-neon transition-all">
               Начать
               <Icon name="ArrowRight" size={16} className="ml-2" />
