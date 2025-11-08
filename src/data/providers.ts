@@ -1495,17 +1495,17 @@ export const providers: Provider[] = [
     name: 'Timeweb Cloud',
     logo: 'https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/c68c0760-0692-436d-8905-b2f1b5486586.jpg',
     rating: 9.8,
-    basePrice: 0,
-    cpuPrice: 210,
-    ramPrice: 120,
-    storagePrice: 12,
+    basePrice: 150,
+    cpuPrice: 220,
+    ramPrice: 130,
+    storagePrice: 15,
     features: ['DDoS защита', 'NVMe диски', '99.99% SLA', 'Поддержка 24/7'],
     locations: ['Москва', 'Санкт-Петербург', 'Казань', 'Амстердам'],
     trialDays: 7,
     url: 'https://timeweb.com/ru/?i=123689',
     pros: ['Самая быстрая техподдержка на рынке', 'NVMe диски в базе', 'Гибкое масштабирование ресурсов', 'Бесплатный тестовый период'],
 
-    cons: ['Высокая цена за CPU', 'Нет готовых образов приложений', 'Сложная панель для новичков'],
+    cons: ['Повышение цен в 2025 году', 'IPv4 адрес +150₽/мес дополнительно', 'Сложная панель для новичков'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
     technicalSpecs: {
@@ -1539,10 +1539,10 @@ export const providers: Provider[] = [
         { months: 3, percent: 5 }
       ],
       paymentMethods: ['Банковская карта', 'ЮMoney', 'Qiwi', 'Webmoney', 'Яндекс.Касса', 'PayPal'],
-      minPrice: 210
+      minPrice: 500
     },
     popularity: 50000,
-    promoText: 'Промокод на удвоение первого платежа - DOUBLE',
+    promoText: '7 дней бесплатно + скидка 15% при годовой оплате (IPv4 +150₽/мес)',
     caseStudies: ['E-commerce проекты', 'Highload API', 'SaaS платформы', 'Финтех приложения', 'Игровые серверы'],
     uptime30days: 99.98,
     reviews: [
