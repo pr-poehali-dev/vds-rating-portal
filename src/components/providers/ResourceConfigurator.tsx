@@ -2,6 +2,7 @@ import { Badge } from '@/components/ui/badge';
 import { Slider } from '@/components/ui/slider';
 import Icon from '@/components/ui/icon';
 import { ResourceConfig } from './types';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ResourceConfiguratorProps {
   config: ResourceConfig;
@@ -12,6 +13,8 @@ export const ResourceConfigurator = ({
   config,
   onUpdateConfig
 }: ResourceConfiguratorProps) => {
+  const { t } = useLanguage();
+  
   return (
     <div className="bg-accent/50 border border-primary/10 rounded-2xl p-6">
       <div className="flex items-center justify-between mb-4">
@@ -77,7 +80,7 @@ export const ResourceConfigurator = ({
               <div className="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
                 <Icon name="HardDrive" size={16} className="text-primary" />
               </div>
-              <span className="text-sm font-bold text-foreground">Диск</span>
+              <span className="text-sm font-bold text-foreground">{t('resources.storage')}</span>
             </div>
             <span className="text-lg font-black text-primary">{config.storage} GB</span>
           </div>

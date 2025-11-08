@@ -13,6 +13,7 @@ import {
 import { ProviderCardHeader } from './ProviderCardHeader';
 import { ResourceConfigurator } from './ResourceConfigurator';
 import { ProviderReviews } from './ProviderReviews';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ProviderCardProps {
   provider: Provider;
@@ -45,6 +46,8 @@ export const ProviderCard = ({
   isSelected = false,
   onToggleCompare
 }: ProviderCardProps) => {
+  const { t } = useLanguage();
+  
   const trackClick = async () => {
     try {
       await fetch('https://functions.poehali.dev/d0b8e2ce-45c2-4ab9-8d08-baf03c0268f4', {
@@ -85,12 +88,12 @@ export const ProviderCard = ({
             {isSelected ? (
               <>
                 <Icon name="CheckCircle" size={14} className="mr-1.5" />
-                Выбрано
+                {t('card.selected')}
               </>
             ) : (
               <>
                 <Icon name="GitCompare" size={14} className="mr-1.5" />
-                Сравнить
+                {t('card.compare')}
               </>
             )}
           </Button>
@@ -103,7 +106,7 @@ export const ProviderCard = ({
             <div className="absolute inset-0 bg-primary rounded-br-2xl rounded-tl-xl blur-lg"></div>
             <div className="relative bg-primary text-background font-bold px-5 py-2.5 rounded-br-2xl rounded-tl-xl shadow-lg flex items-center gap-2">
               <Icon name="Crown" size={16} />
-              Лидер рейтинга
+              {t('card.leader')}
             </div>
           </div>
         </div>
@@ -127,7 +130,7 @@ export const ProviderCard = ({
           >
             <div className="flex items-center gap-2">
               <Icon name="Settings" size={18} />
-              <span>Настроить конфигурацию</span>
+              <span>{t('card.configureResources')}</span>
             </div>
             <Icon name={configOpen ? "ChevronUp" : "ChevronDown"} size={18} />
           </Button>
@@ -146,7 +149,7 @@ export const ProviderCard = ({
           >
             <div className="flex items-center gap-2">
               <Icon name={showDetails ? "ThumbsDown" : "ThumbsUp"} size={18} />
-              <span>{showDetails ? "Скрыть" : "Показать"} плюсы и минусы</span>
+              <span>{showDetails ? t('card.hideProsCons') : t('card.showProsCons')}</span>
             </div>
             <Icon name={showDetails ? "ChevronUp" : "ChevronDown"} size={18} />
           </Button>
@@ -158,7 +161,7 @@ export const ProviderCard = ({
                   <div className="w-9 h-9 bg-secondary rounded-xl flex items-center justify-center shadow-lg">
                     <Icon name="Check" size={18} className="text-background" />
                   </div>
-                  <h4 className="text-base font-bold text-foreground">Преимущества</h4>
+                  <h4 className="text-base font-bold text-foreground">{t('card.pros')}</h4>
                 </div>
                 <ul className="space-y-2.5">
                   {provider.pros.map((pro, idx) => (
@@ -177,7 +180,7 @@ export const ProviderCard = ({
                   <div className="w-9 h-9 bg-destructive rounded-xl flex items-center justify-center shadow-lg">
                     <Icon name="AlertCircle" size={18} className="text-white" />
                   </div>
-                  <h4 className="text-base font-bold text-foreground">Недостатки</h4>
+                  <h4 className="text-base font-bold text-foreground">{t('card.cons')}</h4>
                 </div>
                 <ul className="space-y-2.5">
                   {provider.cons.map((con, idx) => (
@@ -197,15 +200,13 @@ export const ProviderCard = ({
                     <div className="w-9 h-9 bg-primary/20 rounded-xl flex items-center justify-center">
                       <Icon name="ShieldCheck" size={18} className="text-primary" />
                     </div>
-                    <h4 className="text-base font-bold text-foreground">Соответствие 152-ФЗ</h4>
+                    <h4 className="text-base font-bold text-foreground">{t('card.fz152')}</h4>
                     {provider.fz152Level && (
                       <Badge className="bg-primary/20 text-primary border-0 ml-auto">{provider.fz152Level}</Badge>
                     )}
                   </div>
                   <p className="text-sm text-foreground leading-relaxed">
-                    Провайдер имеет сертификат соответствия требованиям 152-ФЗ "О персональных данных". 
-                    Это означает, что все дата-центры соответствуют требованиям законодательства РФ по защите персональных данных, 
-                    что особенно важно для организаций, работающих с конфиденциальной информацией клиентов.
+                    {t('card.fz152Description')}
                   </p>
                 </div>
               )}

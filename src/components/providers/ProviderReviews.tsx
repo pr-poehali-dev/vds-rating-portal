@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
 import { Provider } from './types';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ProviderReviewsProps {
   provider: Provider;
@@ -16,6 +17,7 @@ export const ProviderReviews = ({
   reviewsToShow,
   onLoadMoreReviews
 }: ProviderReviewsProps) => {
+  const { t } = useLanguage();
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [reviewForm, setReviewForm] = useState({ author: '', text: '', rating: 5 });
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -60,7 +62,7 @@ export const ProviderReviews = ({
         <div className="w-9 h-9 bg-primary/20 rounded-xl flex items-center justify-center">
           <Icon name="MessageSquare" size={18} className="text-primary" />
         </div>
-        <h4 className="text-base font-bold text-foreground">Отзывы клиентов</h4>
+        <h4 className="text-base font-bold text-foreground">{t('card.reviewsTitle')}</h4>
       </div>
 
       <div className="bg-accent border border-primary/10 rounded-2xl p-5 mb-4">
@@ -79,7 +81,7 @@ export const ProviderReviews = ({
                 />
               ))}
             </div>
-            <span className="text-xs text-muted-foreground font-medium">Средний рейтинг</span>
+            <span className="text-xs text-muted-foreground font-medium">{t('common.uptime')}</span>
           </div>
 
           <div className="text-center border-x border-border">
@@ -87,7 +89,7 @@ export const ProviderReviews = ({
               {provider.reviews.length}
             </div>
             <Icon name="Users" size={20} className="text-primary mx-auto mb-1" />
-            <span className="text-xs text-muted-foreground font-medium">Всего отзывов</span>
+            <span className="text-xs text-muted-foreground font-medium">{t('common.reviews')}</span>
           </div>
 
           <div className="text-center">
@@ -142,7 +144,7 @@ export const ProviderReviews = ({
             className="w-full h-11 text-sm font-semibold border-2 border-border hover:bg-accent hover:border-primary/50 rounded-xl"
             onClick={onLoadMoreReviews}
           >
-            Показать ещё отзывы
+            {t('card.loadMoreReviews')}
             <Icon name="ChevronDown" size={18} className="ml-2" />
             <span className="ml-2 text-muted-foreground">
               ({provider.reviews.length - reviewsToShow} осталось)
@@ -165,7 +167,7 @@ export const ProviderReviews = ({
             className="w-full h-12 text-sm font-bold bg-primary text-background hover:bg-primary/90 rounded-xl"
           >
             <Icon name="PenLine" size={18} className="mr-2" />
-            Оставить отзыв
+            {t('card.readReviews')}
           </Button>
         ) : (
           <div className="bg-accent border border-primary/10 rounded-2xl p-6">

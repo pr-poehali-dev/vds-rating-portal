@@ -2,6 +2,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { Provider } from './types';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ProviderCardHeaderProps {
   provider: Provider;
@@ -16,6 +17,7 @@ export const ProviderCardHeader = ({
   calculatedPrice,
   onProviderClick
 }: ProviderCardHeaderProps) => {
+  const { t, language } = useLanguage();
   const avgRating = provider.reviews.reduce((sum, r) => sum + r.rating, 0) / provider.reviews.length;
 
   return (
@@ -60,7 +62,7 @@ export const ProviderCardHeader = ({
               <Icon name="Database" size={14} className="text-primary mt-0.5" />
               <div>
                 <span className="font-semibold text-foreground">
-                  {provider.locations.length} {provider.locations.length === 1 ? 'ЦОД' : provider.locations.length < 5 ? 'ЦОДа' : 'ЦОДов'}
+                  {provider.locations.length} {provider.locations.length === 1 ? t('common.datacenter') : provider.locations.length < 5 ? t('common.datacenters') : t('common.dataCenters')}
                 </span>
                 <span className="text-muted-foreground"> — {provider.locations.join(', ')}</span>
               </div>
@@ -68,22 +70,22 @@ export const ProviderCardHeader = ({
             <div className="flex items-center gap-2 text-sm">
               <Icon name="Gift" size={14} className={provider.trialDays ? "text-primary" : "text-muted-foreground"} />
               <span className="font-semibold text-foreground">
-                Тестовый период: {provider.trialDays ? `${provider.trialDays} ${provider.trialDays === 1 ? 'день' : provider.trialDays < 5 ? 'дня' : 'дней'} бесплатно` : 'отсутствует'}
+                {t('common.trialPeriod')}: {provider.trialDays ? `${provider.trialDays} ${provider.trialDays === 1 ? t('common.day') : provider.trialDays < 5 ? t('common.daysGenitive') : t('common.days')} ${t('common.free')}` : t('common.absent')}
               </span>
             </div>
             {provider.fz152Compliant && (
               <div className="flex items-center gap-2 text-sm">
                 <Icon name="ShieldCheck" size={14} className="text-primary" />
-                <span className="font-semibold text-foreground">152-ФЗ: {provider.fz152Level || 'Соответствует'}</span>
+                <span className="font-semibold text-foreground">152-ФЗ: {provider.fz152Level || t('common.compliant')}</span>
               </div>
             )}
             <div className="flex items-center gap-2 text-sm">
               <Icon name="HardDrive" size={14} className="text-primary" />
-              <span className="font-semibold text-foreground">Диски: {provider.technicalSpecs.diskType}</span>
+              <span className="font-semibold text-foreground">{t('common.disks')}: {provider.technicalSpecs.diskType}</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
               <Icon name="Box" size={14} className="text-primary" />
-              <span className="font-semibold text-foreground">Виртуализация:</span>
+              <span className="font-semibold text-foreground">{t('common.virtualization')}:</span>
               <div className="flex flex-wrap gap-1.5">
                 {provider.technicalSpecs.virtualization.map((virt, idx) => {
                   const getVirtColor = (type: string) => {
@@ -108,7 +110,7 @@ export const ProviderCardHeader = ({
             {provider.popularity && (
               <div className="flex items-center gap-2 text-sm">
                 <Icon name="Users" size={14} className="text-primary" />
-                <span className="text-muted-foreground">{provider.popularity.toLocaleString('ru-RU')}+ пользователей</span>
+                <span className="text-muted-foreground">{provider.popularity.toLocaleString(language === 'ru' ? 'ru-RU' : 'en-US')}+ {t('common.users')}</span>
               </div>
             )}
           </div>
@@ -124,20 +126,20 @@ export const ProviderCardHeader = ({
               </div>
             )}
           </div>
-          <div className="text-xs font-bold text-primary uppercase tracking-wider mb-2">Цена</div>
+          <div className="text-xs font-bold text-primary uppercase tracking-wider mb-2">{t('common.price')}</div>
           <div className="flex items-baseline justify-center gap-1 sm:gap-2 mb-4">
-            <span className="text-sm sm:text-lg text-muted-foreground font-semibold">от</span>
+            <span className="text-sm sm:text-lg text-muted-foreground font-semibold">{t('common.from')}</span>
             <span className="text-3xl sm:text-4xl md:text-5xl font-black text-primary">{calculatedPrice}</span>
-            <span className="text-base sm:text-xl text-muted-foreground">₽/мес</span>
+            <span className="text-base sm:text-xl text-muted-foreground">{t('common.perMonth')}</span>
           </div>
           <div className="min-h-[72px] mb-4">
             {provider.pricingDetails.discounts && provider.pricingDetails.discounts.length > 0 && (
               <div>
-                <div className="text-xs text-muted-foreground mb-1.5">Скидки:</div>
+                <div className="text-xs text-muted-foreground mb-1.5">{t('common.discounts')}:</div>
                 <div className="flex flex-wrap gap-1 justify-center">
                   {provider.pricingDetails.discounts.map((d, idx) => (
                     <Badge key={idx} variant="outline" className="text-xs bg-secondary/10 text-secondary border-secondary/30">
-                      -{d.percent}% на {d.months} мес
+                      -{d.percent}% {d.months} {t('common.month')}
                     </Badge>
                   ))}
                 </div>
@@ -149,13 +151,13 @@ export const ProviderCardHeader = ({
             onClick={onProviderClick}
             disabled={!provider.url}
           >
-            Перейти
+            {t('common.goTo')}
             <Icon name="ExternalLink" size={16} className="ml-2" />
           </Button>
           {provider.uptime30days && (
             <div className="flex items-center justify-center gap-2 text-xs">
               <div className="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
-              <span className="text-muted-foreground">Uptime: {provider.uptime30days}%</span>
+              <span className="text-muted-foreground">{t('common.uptime')}: {provider.uptime30days}%</span>
             </div>
           )}
         </div>
