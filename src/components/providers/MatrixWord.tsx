@@ -18,7 +18,7 @@ export const MatrixWord = () => {
       const maxLength = Math.max(currentWord.length, nextWord.length);
       
       let frame = 0;
-      const transitionFrames = 20;
+      const transitionFrames = 30;
       
       const animate = setInterval(() => {
         frame++;
@@ -29,9 +29,9 @@ export const MatrixWord = () => {
             const progress = frame / transitionFrames;
             const charProgress = Math.min(1, Math.max(0, progress * maxLength - i));
             
-            if (charProgress < 0.3) {
+            if (charProgress < 0.4) {
               newText += currentWord[i] || '';
-            } else if (charProgress < 0.7) {
+            } else if (charProgress < 0.8) {
               newText += MATRIX_CHARS[Math.floor(Math.random() * MATRIX_CHARS.length)];
             } else {
               newText += nextWord[i] || '';
@@ -44,9 +44,9 @@ export const MatrixWord = () => {
           setCurrentWordIndex(nextIndex);
           clearInterval(animate);
         }
-      }, 50);
+      }, 40);
       
-    }, 3000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [currentWordIndex]);
