@@ -61,7 +61,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         
         with conn.cursor() as cur:
             cur.execute(
-                "INSERT INTO provider_clicks (provider_id, user_ip) VALUES (%s, %s) ON CONFLICT (provider_id, user_ip) DO NOTHING",
+                "INSERT INTO provider_clicks (provider_id, user_ip) VALUES (%s, %s) ON CONFLICT (provider_id, user_ip) DO UPDATE SET clicked_at = CURRENT_TIMESTAMP",
                 (provider_id, user_ip)
             )
             conn.commit()
@@ -90,7 +90,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     SELECT 
                         provider_id,
                         DATE(clicked_at) as date,
-                        COUNT(DISTINCT user_ip) as clicks
+                        COUNT(*) as clicks
                     FROM provider_clicks
                     WHERE clicked_at >= CURRENT_DATE - %s
                     GROUP BY provider_id, DATE(clicked_at)
@@ -123,7 +123,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 cur.execute("""
                     SELECT 
                         provider_id,
-                        COUNT(DISTINCT user_ip) as clicks,
+                        COUNT(*) as clicks,
                         MIN(clicked_at) as first_click,
                         MAX(clicked_at) as last_click
                     FROM provider_clicks
