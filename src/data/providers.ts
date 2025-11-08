@@ -32,7 +32,7 @@ export const providers: Provider[] = [
       ddosProtection: 'Базовая защита'
     },
     serviceGuarantees: {
-      uptimeSLA: '99.9%',
+      uptimeSLA: 'Нет официального SLA',
       supportResponseTime: '< 30 мин',
       moneyBackGuarantee: 0
     },
@@ -400,7 +400,7 @@ export const providers: Provider[] = [
       ddosProtection: 'До 500 Гбит/с'
     },
     serviceGuarantees: {
-      uptimeSLA: '99.95%',
+      uptimeSLA: '99.98%',
       supportResponseTime: '< 20 мин',
       moneyBackGuarantee: 14
     },
@@ -1521,7 +1521,7 @@ export const providers: Provider[] = [
       ddosProtection: 'До 500 Гбит/с'
     },
     serviceGuarantees: {
-      uptimeSLA: '99.99%',
+      uptimeSLA: '99.98%',
       supportResponseTime: '< 5 мин',
       moneyBackGuarantee: 7
     },
