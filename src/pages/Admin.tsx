@@ -269,22 +269,24 @@ const Admin = () => {
           </div>
         </div>
 
-        <div className="bg-card border-2 border-border rounded-2xl p-6 mb-6">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-              <Icon name="BarChart3" size={24} className="text-primary" />
+        <div className="bg-gradient-to-br from-card to-card/50 border-2 border-border rounded-2xl p-6 mb-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                <Icon name="BarChart3" size={24} className="text-primary" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-foreground">Яндекс.Метрика</h2>
+                <p className="text-sm text-muted-foreground">Полная статистика посещений сайта</p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-2xl font-bold text-foreground">Яндекс.Метрика</h2>
-              <p className="text-sm text-muted-foreground">Полная статистика посещений сайта</p>
-            </div>
-          </div>
-          <div className="relative w-full" style={{ paddingBottom: '75%' }}>
-            <iframe 
-              src="https://metrika.yandex.ru/dashboard/direct?id=105191874" 
-              className="absolute inset-0 w-full h-full border-2 border-border rounded-xl"
-              title="Яндекс.Метрика"
-            />
+            <Button
+              onClick={() => window.open('https://metrika.yandex.ru/dashboard?id=105191874', '_blank')}
+              className="bg-primary text-background hover:shadow-neon transition-all flex items-center gap-2"
+            >
+              <Icon name="ExternalLink" size={18} />
+              Открыть дашборд
+            </Button>
           </div>
         </div>
 
