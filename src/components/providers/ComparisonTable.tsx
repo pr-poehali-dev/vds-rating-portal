@@ -50,26 +50,26 @@ export const ComparisonTable = ({ providers, configs, onClose, calculatePrice }:
 
   return (
     <div className="fixed inset-0 bg-background/95 backdrop-blur-sm z-50 overflow-y-auto">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-primary/20 rounded-2xl flex items-center justify-center">
-                <Icon name="GitCompare" size={24} className="text-primary" />
+          <div className="flex items-center justify-between mb-4 sm:mb-6 gap-2">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/20 rounded-2xl flex items-center justify-center">
+                <Icon name="GitCompare" size={20} className="text-primary sm:w-6 sm:h-6" />
               </div>
               <div>
-                <h2 className="text-3xl font-bold text-foreground">Сравнение провайдеров</h2>
-                <p className="text-sm text-muted-foreground">Выбрано: {providers.length}</p>
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">Сравнение провайдеров</h2>
+                <p className="text-xs sm:text-sm text-muted-foreground">Выбрано: {providers.length}</p>
               </div>
             </div>
             <Button
-              size="lg"
+              size="sm"
               variant="outline"
               onClick={onClose}
-              className="h-12 px-6 rounded-xl border-2"
+              className="h-9 sm:h-12 px-3 sm:px-6 rounded-xl border-2 flex-shrink-0"
             >
-              <Icon name="X" size={18} className="mr-2" />
-              Закрыть
+              <Icon name="X" size={16} className="sm:mr-2" />
+              <span className="hidden sm:inline">Закрыть</span>
             </Button>
           </div>
 
@@ -78,16 +78,16 @@ export const ComparisonTable = ({ providers, configs, onClose, calculatePrice }:
               <table className="w-full">
                 <thead>
                   <tr className="border-b-2 border-border bg-accent/50">
-                    <th className="text-left p-6 font-bold text-foreground sticky left-0 bg-accent/50 z-10">
+                    <th className="text-left p-3 sm:p-4 md:p-6 font-bold text-foreground sticky left-0 bg-accent/50 z-10 text-xs sm:text-sm md:text-base">
                       Характеристика
                     </th>
                     {providers.map((provider) => (
-                      <th key={provider.id} className="p-6 min-w-[250px]">
-                        <div className="flex flex-col items-center gap-3">
-                          <div className="w-16 h-16 rounded-xl bg-accent border border-primary/10 flex items-center justify-center">
-                            <img src={provider.logo} alt={provider.name} className="w-12 h-12 object-contain" />
+                      <th key={provider.id} className="p-3 sm:p-4 md:p-6 min-w-[180px] sm:min-w-[220px] md:min-w-[250px]">
+                        <div className="flex flex-col items-center gap-2 sm:gap-3">
+                          <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl bg-accent border border-primary/10 flex items-center justify-center">
+                            <img src={provider.logo} alt={provider.name} className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 object-contain" />
                           </div>
-                          <div className="text-lg font-bold text-foreground text-center">{provider.name}</div>
+                          <div className="text-sm sm:text-base md:text-lg font-bold text-foreground text-center">{provider.name}</div>
                         </div>
                       </th>
                     ))}
@@ -96,10 +96,10 @@ export const ComparisonTable = ({ providers, configs, onClose, calculatePrice }:
                 <tbody>
                   {rows.map((row, idx) => (
                     <tr key={row.key} className={idx % 2 === 0 ? 'bg-accent/20' : ''}>
-                      <td className="p-6 font-semibold text-foreground border-r-2 border-border sticky left-0 bg-card z-10">
-                        <div className="flex items-center gap-2">
-                          <Icon name={row.icon as any} size={18} className="text-primary" />
-                          {row.label}
+                      <td className="p-3 sm:p-4 md:p-6 font-semibold text-foreground border-r-2 border-border sticky left-0 bg-card z-10 text-xs sm:text-sm md:text-base">
+                        <div className="flex items-center gap-1.5 sm:gap-2">
+                          <Icon name={row.icon as any} size={14} className="text-primary sm:w-[18px] sm:h-[18px] flex-shrink-0" />
+                          <span className="leading-tight">{row.label}</span>
                         </div>
                       </td>
                       {providers.map((provider) => {
@@ -188,7 +188,7 @@ export const ComparisonTable = ({ providers, configs, onClose, calculatePrice }:
                         }
                         
                         return (
-                          <td key={provider.id} className="p-6 text-center">
+                          <td key={provider.id} className="p-3 sm:p-4 md:p-6 text-center">
                             {content}
                           </td>
                         );
@@ -197,18 +197,18 @@ export const ComparisonTable = ({ providers, configs, onClose, calculatePrice }:
                   ))}
                   
                   <tr className="bg-accent/30 border-t-2 border-border">
-                    <td className="p-6 font-bold text-foreground sticky left-0 bg-accent/30 z-10">
+                    <td className="p-3 sm:p-4 md:p-6 font-bold text-foreground sticky left-0 bg-accent/30 z-10 text-xs sm:text-sm md:text-base">
                       Действия
                     </td>
                     {providers.map((provider) => (
-                      <td key={provider.id} className="p-6 text-center">
+                      <td key={provider.id} className="p-3 sm:p-4 md:p-6 text-center">
                         <Button 
-                          className="w-full h-11 font-bold bg-primary text-background"
+                          className="w-full h-9 sm:h-10 md:h-11 font-bold bg-primary text-background text-xs sm:text-sm"
                           onClick={() => handleProviderClick(provider)}
                           disabled={!provider.url}
                         >
-                          Перейти
-                          <Icon name="ExternalLink" size={16} className="ml-2" />
+                          <span className="hidden sm:inline">Перейти</span>
+                          <Icon name="ExternalLink" size={16} className="sm:ml-2" />
                         </Button>
                       </td>
                     ))}

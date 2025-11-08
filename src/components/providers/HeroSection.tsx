@@ -14,13 +14,13 @@ export const HeroSection = () => {
             <span className="text-sm font-bold text-primary">Топ провайдеров 2025</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-[1.1] tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold leading-[1.1] tracking-tight">
             <span className="block text-foreground">Найди</span>
             <span className="block gradient-text">идеальный хостинг</span>
             <span className="block text-foreground">для своего проекта</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
             Сравни характеристики, цены и отзывы. Выбери лучшее решение за пару минут.
           </p>
           
@@ -54,7 +54,7 @@ export const HeroSection = () => {
             </Button>
           </div>
 
-          <div className="grid grid-cols-3 gap-8 pt-16 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 pt-12 sm:pt-16 max-w-4xl mx-auto px-4">
             {[
               { icon: 'Users', value: '2,500+', label: 'Довольных клиентов' },
               { icon: 'Star', value: '4.6', label: 'Средний рейтинг' },

@@ -20,10 +20,10 @@ export const ProviderCardHeader = ({
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
-      <div className="flex items-start gap-6 flex-1">
+      <div className="flex items-start gap-4 sm:gap-6 flex-1">
         <div className="relative flex-shrink-0">
-          <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden bg-white border border-primary/10 shadow-soft flex items-center justify-center">
-            <img src={provider.logo} alt={provider.name} className="w-16 h-16 md:w-20 md:h-20 object-contain" />
+          <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden bg-white border border-primary/10 shadow-soft flex items-center justify-center">
+            <img src={provider.logo} alt={provider.name} className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain" />
           </div>
           <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-primary rounded-xl flex items-center justify-center shadow-lg text-background text-sm font-bold">
             {index + 1}
@@ -31,7 +31,7 @@ export const ProviderCardHeader = ({
         </div>
         
         <div className="flex-1 min-w-0">
-          <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2">{provider.name}</h3>
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-2">{provider.name}</h3>
           <div className="flex items-center gap-3 mb-3">
             <div className="flex items-center gap-1">
               {[...Array(5)].map((_, i) => (
@@ -43,7 +43,7 @@ export const ProviderCardHeader = ({
                 />
               ))}
             </div>
-            <span className="text-xl font-bold text-foreground">
+            <span className="text-lg sm:text-xl font-bold text-foreground">
               {avgRating.toFixed(1)}
             </span>
             <span className="text-muted-foreground text-sm">из 5</span>
@@ -116,19 +116,19 @@ export const ProviderCardHeader = ({
       </div>
       
       <div className="w-full lg:w-[280px] flex-shrink-0">
-        <div className="bg-accent border-2 border-primary/20 rounded-2xl p-6 text-center flex flex-col h-full">
-          <div className="min-h-[60px] flex items-center justify-center mb-3">
+        <div className="bg-accent border-2 border-primary/20 rounded-2xl p-4 sm:p-6 text-center flex flex-col h-full">
+          <div className="min-h-[48px] sm:min-h-[60px] flex items-center justify-center mb-3">
             {provider.promoText && (
-              <div className="bg-secondary/20 border border-secondary rounded-xl px-3 py-1.5">
-                <p className="text-xs font-bold text-secondary">{provider.promoText}</p>
+              <div className="bg-secondary/20 border border-secondary rounded-xl px-2 sm:px-3 py-1.5">
+                <p className="text-[10px] sm:text-xs font-bold text-secondary">{provider.promoText}</p>
               </div>
             )}
           </div>
           <div className="text-xs font-bold text-primary uppercase tracking-wider mb-2">Цена</div>
-          <div className="flex items-baseline justify-center gap-2 mb-4">
-            <span className="text-lg text-muted-foreground font-semibold">от</span>
-            <span className="text-4xl md:text-5xl font-black text-primary">{calculatedPrice}</span>
-            <span className="text-xl text-muted-foreground">₽/мес</span>
+          <div className="flex items-baseline justify-center gap-1 sm:gap-2 mb-4">
+            <span className="text-sm sm:text-lg text-muted-foreground font-semibold">от</span>
+            <span className="text-3xl sm:text-4xl md:text-5xl font-black text-primary">{calculatedPrice}</span>
+            <span className="text-base sm:text-xl text-muted-foreground">₽/мес</span>
           </div>
           <div className="min-h-[72px] mb-4">
             {provider.pricingDetails.discounts && provider.pricingDetails.discounts.length > 0 && (
@@ -145,7 +145,7 @@ export const ProviderCardHeader = ({
             )}
           </div>
           <Button 
-            className="w-full h-12 text-sm font-bold bg-primary text-background shadow-lg shadow-primary/30 hover:shadow-neon transition-all group mb-3"
+            className="w-full h-11 sm:h-12 text-sm font-bold bg-primary text-background shadow-lg shadow-primary/30 hover:shadow-neon transition-all group mb-3"
             onClick={onProviderClick}
             disabled={!provider.url}
           >

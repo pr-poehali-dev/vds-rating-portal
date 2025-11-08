@@ -152,8 +152,8 @@ export const ProviderCard = ({
           </Button>
 
           {showDetails && (
-            <div className="pt-4 border-t border-border grid md:grid-cols-2 gap-4">
-              <div className="bg-accent border border-secondary/30 rounded-2xl p-5">
+            <div className="pt-4 border-t border-border grid md:grid-cols-2 gap-3 sm:gap-4">
+              <div className="bg-accent border border-secondary/30 rounded-2xl p-4 sm:p-5">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-9 h-9 bg-secondary rounded-xl flex items-center justify-center shadow-lg">
                     <Icon name="Check" size={18} className="text-background" />
@@ -172,7 +172,7 @@ export const ProviderCard = ({
                 </ul>
               </div>
               
-              <div className="bg-accent border border-destructive/30 rounded-2xl p-5">
+              <div className="bg-accent border border-destructive/30 rounded-2xl p-4 sm:p-5">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-9 h-9 bg-destructive rounded-xl flex items-center justify-center shadow-lg">
                     <Icon name="AlertCircle" size={18} className="text-white" />
@@ -192,7 +192,7 @@ export const ProviderCard = ({
               </div>
 
               {provider.fz152Compliant && (
-                <div className="md:col-span-2 bg-primary/5 border border-primary/20 rounded-2xl p-5">
+                <div className="md:col-span-2 bg-primary/5 border border-primary/20 rounded-2xl p-4 sm:p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-9 h-9 bg-primary/20 rounded-xl flex items-center justify-center">
                       <Icon name="ShieldCheck" size={18} className="text-primary" />
