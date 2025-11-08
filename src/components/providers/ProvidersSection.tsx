@@ -14,6 +14,7 @@ interface ProvidersSectionProps {
 export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
   const [configOpen, setConfigOpen] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
   const [filterFZ152, setFilterFZ152] = useState(() => {
     const saved = localStorage.getItem('filterFZ152');
     return saved ? JSON.parse(saved) : false;
@@ -257,6 +258,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
 
   const filteredProviders = providersWithReviews
     .filter(p => {
+      if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
       if (filterFZ152 && !p.fz152Compliant) return false;
       if (filterTrialPeriod && p.trialDays === 0) return false;
       if (filterLocation && !p.locations.includes(filterLocation)) return false;
@@ -293,7 +295,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
 
   return (
     <section id="providers" className="container mx-auto px-4 py-8">
-      <div className="mb-8 flex items-center justify-between flex-wrap gap-4">
+      <div className="mb-6 flex items-center justify-between flex-wrap gap-4">
         <div className="flex items-center gap-3 bg-gradient-to-r from-green-500/10 to-primary/10 border border-green-500/30 rounded-full px-5 py-2.5 shadow-sm">
           <Icon name="CalendarCheck" size={18} className="text-green-600" />
           <span className="text-sm font-semibold text-foreground">
@@ -303,6 +305,32 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
         <div className="text-sm text-muted-foreground">
           Всего провайдеров: <span className="font-bold text-foreground">{providersWithReviews.length}</span>
         </div>
+      </div>
+
+      <div className="mb-8 relative">
+        <div className="relative max-w-md">
+          <Icon name="Search" size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Найти провайдера по названию..."
+            className="w-full pl-12 pr-4 py-3 bg-background border-2 border-border rounded-xl focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-accent rounded-lg transition-colors"
+            >
+              <Icon name="X" size={18} className="text-muted-foreground" />
+            </button>
+          )}
+        </div>
+        {searchQuery && (
+          <div className="mt-3 text-sm text-muted-foreground">
+            Найдено: <span className="font-bold text-foreground">{filteredProviders.length}</span> провайдер(ов)
+          </div>
+        )}
       </div>
       
       <FilterPanel
