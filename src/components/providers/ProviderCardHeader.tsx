@@ -122,7 +122,6 @@ export const ProviderCardHeader = ({
             )}
           </div>
         </div>
-      </div>
     </div>
   );
 };
