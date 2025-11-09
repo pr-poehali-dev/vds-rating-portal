@@ -72,29 +72,31 @@ export const ProviderCard = ({
   };
 
   return (
-    <Card 
-      className={`group border-0 transition-all duration-300 hover-lift overflow-visible relative rounded-[3rem] ${
-        isSelected ? 'shadow-lg shadow-primary/30 bg-[#1a1a1a]' : 'bg-[#1a1a1a] hover:shadow-xl'
-      }`}
-      style={{
-        clipPath: 'polygon(0 0, calc(100% - 140px) 0, calc(100% - 140px) 30px, calc(100% - 110px) 60px, calc(100% - 60px) 60px, calc(100% - 30px) 30px, 100% 30px, 100% 100%, 0 100%)'
-      }}
-    >
-      <div className="absolute -top-2 -right-2 z-30 flex gap-3">
-        <button className="w-14 h-14 rounded-full bg-[#2a2a2a] flex items-center justify-center shadow-lg hover:bg-[#3a3a3a] transition-colors">
-          <Icon name="Bell" size={20} className="text-white" />
+    <>
+      <div className="absolute top-0 right-0 z-40 flex gap-3 pr-4 pt-4">
+        <button className="w-16 h-16 rounded-full bg-[#2a2a2a] flex items-center justify-center shadow-2xl hover:bg-[#3a3a3a] transition-colors">
+          <Icon name="Bell" size={22} className="text-white" />
         </button>
         {onToggleCompare && (
           <button 
             onClick={onToggleCompare}
-            className={`w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-colors ${
+            className={`w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition-colors ${
               isSelected ? 'bg-primary hover:bg-primary/90' : 'bg-primary hover:bg-primary/90'
             }`}
           >
-            <Icon name={isSelected ? "Check" : "ArrowUpRight"} size={20} className="text-[#2a2a2a]" />
+            <Icon name={isSelected ? "Check" : "ArrowUpRight"} size={22} className="text-[#2a2a2a]" />
           </button>
         )}
       </div>
+      
+      <Card 
+        className={`group border-0 transition-all duration-300 hover-lift overflow-visible relative rounded-[3rem] ${
+          isSelected ? 'shadow-lg shadow-primary/30 bg-[#1a1a1a]' : 'bg-[#1a1a1a] hover:shadow-xl'
+        }`}
+        style={{
+          clipPath: 'polygon(0 0, calc(100% - 150px) 0, calc(100% - 145px) 8px, calc(100% - 135px) 20px, calc(100% - 120px) 35px, calc(100% - 100px) 48px, calc(100% - 76px) 58px, calc(100% - 50px) 64px, calc(100% - 24px) 66px, calc(100% - 8px) 64px, 100% 58px, 100% 100%, 0 100%)'
+        }}
+      >
 
       {index === 0 && (
         <div className="absolute -top-1 -left-1 z-10">
@@ -223,5 +225,6 @@ export const ProviderCard = ({
         </div>
       </CardContent>
     </Card>
+    </>
   );
 };
