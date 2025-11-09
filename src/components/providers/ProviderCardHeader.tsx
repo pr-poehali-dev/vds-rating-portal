@@ -53,21 +53,29 @@ export const ProviderCardHeader = ({
           <div className="flex flex-col gap-1">
             <div className="flex items-start gap-1.5 text-sm">
               <Icon name="MapPin" size={12} className="text-primary mt-0.5 flex-shrink-0" />
-              <div className="flex flex-wrap items-center gap-1">
+              <div className="flex items-center gap-1">
                 <span className="font-semibold text-foreground">Локации:</span>
-                {(showAllLocations ? provider.locations : provider.locations.slice(0, 3)).map((location, idx) => (
-                  <Badge key={idx} className="bg-accent border border-primary/20 text-foreground font-semibold text-[10px] px-1.5 py-0.5">
-                    {location}
-                  </Badge>
-                ))}
-                {provider.locations.length > 3 && (
-                  <Badge 
-                    onClick={() => setShowAllLocations(!showAllLocations)}
-                    className="bg-muted border border-border text-muted-foreground font-semibold text-[10px] px-1.5 py-0.5 cursor-pointer hover:bg-primary/20 hover:text-primary transition-colors"
-                  >
-                    {showAllLocations ? 'Скрыть' : `+${provider.locations.length - 3}`}
-                  </Badge>
-                )}
+                <span className="text-foreground">
+                  {showAllLocations 
+                    ? provider.locations.join(', ')
+                    : provider.locations.slice(0, 3).join(', ')}
+                  {provider.locations.length > 3 && !showAllLocations && (
+                    <button 
+                      onClick={() => setShowAllLocations(true)}
+                      className="text-primary hover:underline ml-1"
+                    >
+                      +{provider.locations.length - 3}
+                    </button>
+                  )}
+                  {showAllLocations && provider.locations.length > 3 && (
+                    <button 
+                      onClick={() => setShowAllLocations(false)}
+                      className="text-primary hover:underline ml-1"
+                    >
+                      скрыть
+                    </button>
+                  )}
+                </span>
               </div>
             </div>
             <div className="flex items-center gap-1.5 text-sm">
