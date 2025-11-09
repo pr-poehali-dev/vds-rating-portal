@@ -54,7 +54,6 @@ export const ProviderCardHeader = ({
             <div className="flex items-start gap-1.5 text-sm">
               <Icon name="MapPin" size={12} className="text-primary mt-0.5 flex-shrink-0" />
               <div className="flex items-center gap-1">
-                <span className="font-semibold text-foreground">Локации:</span>
                 <span className="text-foreground">
                   {showAllLocations 
                     ? provider.locations.join(', ')
