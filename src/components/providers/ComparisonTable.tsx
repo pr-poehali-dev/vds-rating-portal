@@ -125,7 +125,8 @@ export const ComparisonTable = ({ providers, configs, onClose, calculatePrice }:
                             );
                             break;
                           case 'price':
-                            const price = calculatePrice(provider, configs[provider.id]);
+                            const config = configs[provider.id] || { cpu: 1, ram: 1, storage: 10 };
+                            const price = calculatePrice(provider, config);
                             content = (
                               <div className="text-center">
                                 <span className="text-2xl font-black text-primary">{price}₽</span>
