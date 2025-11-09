@@ -58,9 +58,9 @@ export const ProviderCardHeader = ({
           </div>
           <div className="flex flex-col gap-1">
             <div className="flex items-start gap-1.5 text-xs">
-              <Icon name="Database" size={12} className="text-primary mt-0.5 flex-shrink-0" />
+              <Icon name="MapPin" size={12} className="text-primary mt-0.5 flex-shrink-0" />
               <span className="font-semibold text-foreground truncate">
-                {provider.locations.length} {provider.locations.length === 1 ? t('common.datacenter') : provider.locations.length < 5 ? t('common.datacenters') : t('common.dataCenters')}
+                {provider.locations.length} {provider.locations.length === 1 ? 'локация' : provider.locations.length < 5 ? 'локации' : 'локаций'}
               </span>
             </div>
             <div className="flex items-center gap-1.5 text-xs">
