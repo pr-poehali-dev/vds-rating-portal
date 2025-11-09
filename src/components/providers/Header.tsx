@@ -1,9 +1,11 @@
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useState } from 'react';
 
 export const Header = () => {
   const { language, setLanguage, t } = useLanguage();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   return (
     <nav className="sticky top-0 z-50 backdrop-blur-xl bg-card/60 border-b border-border">
@@ -66,7 +68,73 @@ export const Header = () => {
               <Icon name="ArrowRight" size={16} className="ml-2" />
             </Button>
           </div>
+
+          <button 
+            className="md:hidden p-2 hover:bg-accent rounded-lg transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} className="text-foreground" />
+          </button>
         </div>
+
+        {mobileMenuOpen && (
+          <div className="md:hidden py-4 border-t border-border">
+            <div className="flex flex-col gap-4">
+              <a 
+                href="/blog" 
+                className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-foreground/80 hover:text-primary hover:bg-accent rounded-lg transition-all"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Icon name="BookOpen" size={16} />
+                Блог
+              </a>
+              <a 
+                href="/uptime" 
+                className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-foreground/80 hover:text-primary hover:bg-accent rounded-lg transition-all"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Icon name="Activity" size={16} />
+                {t('header.uptime')}
+              </a>
+              <a 
+                href="#compare" 
+                className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-foreground/80 hover:text-primary hover:bg-accent rounded-lg transition-all"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMobileMenuOpen(false);
+                  const providersSection = document.querySelector('[id="providers"]');
+                  if (providersSection) {
+                    providersSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+              >
+                <Icon name="GitCompare" size={16} />
+                {t('header.compare')}
+              </a>
+              <button 
+                className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-foreground/80 hover:text-primary hover:bg-accent rounded-lg transition-all text-left"
+                onClick={() => {
+                  setLanguage(language === 'ru' ? 'en' : 'ru');
+                  setMobileMenuOpen(false);
+                }}
+              >
+                <Icon name="Globe" size={16} />
+                {language === 'ru' ? 'English' : 'Русский'}
+              </button>
+              <Button 
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  window.location.href = '/';
+                }}
+                className="bg-primary text-background font-bold shadow-lg shadow-primary/30 w-full"
+              >
+                {t('header.start')}
+                <Icon name="ArrowRight" size={16} className="ml-2" />
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
