@@ -366,12 +366,12 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
       {filteredProviders.length > providersToShow && (
         <div className="flex justify-center mt-8">
           <button
-            onClick={() => setProvidersToShow(prev => prev + 10)}
+            onClick={() => setProvidersToShow(prev => prev + 9)}
             className="group relative px-8 py-4 bg-gradient-to-r from-primary to-primary/80 text-background font-bold text-lg rounded-2xl shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-all hover:scale-[1.02] active:scale-[0.98]"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/20 to-primary/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <span className="relative flex items-center gap-2">
-              Показать ещё 10 провайдеров
+              Показать ещё 9 провайдеров
               <svg className="w-5 h-5 group-hover:translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
