@@ -31,7 +31,7 @@ export const GlobalResourceConfig = ({ onApplyConfig }: GlobalResourceConfigProp
   };
 
   return (
-    <div className="bg-[#1a1a1a] border border-primary/20 rounded-2xl shadow-lg">
+    <div className="bg-[#1a1a1a] border border-primary/20 rounded-2xl shadow-lg h-full">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full px-6 py-4 flex items-center justify-between hover:bg-primary/5 transition-colors rounded-2xl"
