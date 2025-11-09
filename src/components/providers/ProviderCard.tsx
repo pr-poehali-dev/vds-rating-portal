@@ -72,33 +72,34 @@ export const ProviderCard = ({
   };
 
   return (
-    <Card 
-      className={`group border-0 transition-all duration-300 hover-lift overflow-hidden relative rounded-[3rem] ${
-        isSelected ? 'shadow-lg shadow-primary/30 bg-[#1a1a1a]' : 'bg-[#1a1a1a] hover:shadow-xl'
-      }`}
-    >
-      {onToggleCompare && (
-        <div className="absolute top-4 right-4 z-20">
-          <Button
-            size="sm"
-            variant={isSelected ? "default" : "outline"}
-            className="h-9 px-3 text-xs font-bold rounded-lg shadow-lg"
+    <div className="relative">
+      <div className="absolute -top-2 -right-2 z-50 flex gap-3">
+        {onToggleCompare && (
+          <button 
             onClick={onToggleCompare}
+            className={`w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition-all ${
+              isSelected ? 'bg-[#3a3a3a] hover:bg-[#4a4a4a]' : 'bg-[#2a2a2a] hover:bg-[#3a3a3a]'
+            }`}
           >
-            {isSelected ? (
-              <>
-                <Icon name="CheckCircle" size={14} className="mr-1.5" />
-                {t('card.selected')}
-              </>
-            ) : (
-              <>
-                <Icon name="GitCompare" size={14} className="mr-1.5" />
-                {t('card.compare')}
-              </>
-            )}
-          </Button>
-        </div>
-      )}
+            <Icon name={isSelected ? "Check" : "GitCompare"} size={20} className="text-white" />
+          </button>
+        )}
+        <button 
+          onClick={handleProviderClick}
+          className="w-16 h-16 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center shadow-2xl transition-all"
+        >
+          <Icon name="ArrowUpRight" size={20} className="text-[#2a2a2a]" />
+        </button>
+      </div>
+      
+      <Card 
+        className={`group border-0 transition-all duration-300 hover-lift overflow-visible relative rounded-[3rem] ${
+          isSelected ? 'shadow-lg shadow-primary/30 bg-[#1a1a1a]' : 'bg-[#1a1a1a] hover:shadow-xl'
+        }`}
+        style={{
+          clipPath: 'path("M 0,48 Q 0,0 48,0 L calc(100% - 170px),0 Q calc(100% - 165px),2 calc(100% - 160px),7 Q calc(100% - 150px),17 calc(100% - 135px),32 Q calc(100% - 115px),52 calc(100% - 90px),65 Q calc(100% - 65px),78 calc(100% - 35px),82 Q calc(100% - 15px),84 0,84 Q 5,84 15,82 Q 35,78 60,65 Q 85,52 105,32 Q 120,17 130,7 Q 135,2 140,0 L calc(100% - 48),0 Q 100%,0 100%,48 L 100%,calc(100% - 48) Q 100%,100% calc(100% - 48),100% L 48,100% Q 0,100% 0,calc(100% - 48) Z")'
+        }}
+      >
 
       {index === 0 && (
         <div className="absolute -top-1 -left-1 z-10">
@@ -227,5 +228,6 @@ export const ProviderCard = ({
         </div>
       </CardContent>
     </Card>
+    </div>
   );
 };
