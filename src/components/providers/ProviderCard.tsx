@@ -77,18 +77,18 @@ export const ProviderCard = ({
         {onToggleCompare && (
           <button 
             onClick={onToggleCompare}
-            className={`w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition-all ${
+            className={`w-20 h-20 rounded-full flex items-center justify-center shadow-2xl transition-all ${
               isSelected ? 'bg-[#3a3a3a] hover:bg-[#4a4a4a]' : 'bg-[#2a2a2a] hover:bg-[#3a3a3a]'
             }`}
           >
-            <Icon name={isSelected ? "Check" : "GitCompare"} size={20} className="text-white" />
+            <Icon name={isSelected ? "Check" : "GitCompare"} size={24} className="text-white" />
           </button>
         )}
         <button 
           onClick={handleProviderClick}
-          className="w-16 h-16 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center shadow-2xl transition-all"
+          className="w-20 h-20 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center shadow-2xl transition-all"
         >
-          <Icon name="ArrowUpRight" size={20} className="text-[#2a2a2a]" />
+          <Icon name="ArrowUpRight" size={24} className="text-[#2a2a2a]" />
         </button>
       </div>
       
