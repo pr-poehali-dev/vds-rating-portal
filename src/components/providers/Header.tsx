@@ -58,7 +58,10 @@ export const Header = () => {
                 {language === 'ru' ? 'EN' : 'RU'}
               </span>
             </button>
-            <Button className="bg-primary text-background font-bold shadow-lg shadow-primary/30 hover:shadow-neon transition-all">
+            <Button 
+              onClick={() => window.location.href = '/'}
+              className="bg-primary text-background font-bold shadow-lg shadow-primary/30 hover:shadow-neon transition-all"
+            >
               {t('header.start')}
               <Icon name="ArrowRight" size={16} className="ml-2" />
             </Button>
