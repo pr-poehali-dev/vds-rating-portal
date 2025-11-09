@@ -81,7 +81,7 @@ export const FilterPanel = ({
   };
 
   return (
-    <div className={`bg-gradient-to-br from-card via-card to-accent/30 border-2 border-border rounded-xl sm:rounded-2xl p-2 sm:p-3 md:p-4 mb-3 sm:mb-4 shadow-xl relative overflow-hidden transition-all duration-700 ease-in-out h-full ${isExpanded ? 'max-w-full' : 'max-w-[190px] sm:max-w-[230px]'}`}>
+    <div className={`bg-gradient-to-br from-card via-card to-accent/30 border-2 border-border rounded-xl sm:rounded-2xl p-2 sm:p-3 md:p-4 mb-3 sm:mb-4 shadow-xl relative overflow-hidden transition-all duration-700 ease-in-out ${isExpanded ? 'max-w-full' : 'max-w-[190px] sm:max-w-[230px]'}`}>
       <div className="absolute top-0 right-0 w-16 h-16 bg-primary/10 rounded-full blur-xl"></div>
       <div className="absolute bottom-0 left-0 w-12 h-12 bg-secondary/10 rounded-full blur-xl"></div>
       
