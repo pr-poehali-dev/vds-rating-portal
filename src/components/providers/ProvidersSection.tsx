@@ -316,7 +316,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-4 mb-6">
+      <div className="flex flex-col lg:flex-row gap-4 mb-6 items-start">
         <GlobalResourceConfig onApplyConfig={applyGlobalConfig} />
         <FilterPanel
           filterFZ152={filterFZ152}
