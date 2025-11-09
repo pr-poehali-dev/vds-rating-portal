@@ -115,11 +115,6 @@ export const ProviderCardHeader = ({
               <span className="font-semibold text-foreground">{t('common.from')} </span>
               <span className="text-base font-black text-primary">{calculatedPrice}</span>
               <span className="text-xs text-muted-foreground">{t('common.perMonth')}</span>
-              {provider.pricingDetails.discounts && provider.pricingDetails.discounts.length > 0 && (
-                <Badge variant="outline" className="text-[9px] bg-secondary/10 text-secondary border-secondary/30 px-1 py-0 ml-1">
-                  -{provider.pricingDetails.discounts[0].percent}%
-                </Badge>
-              )}
             </div>
             {provider.uptime30days && (
               <div className="flex items-center gap-1.5 text-sm mt-1">
