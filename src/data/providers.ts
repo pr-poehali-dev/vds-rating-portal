@@ -4,6 +4,69 @@ export const lastUpdateDate = '08.11.2025';
 
 export const providers: Provider[] = [
   {
+    id: 31,
+    name: 'Aeza',
+    logo: 'https://cdn.poehali.dev/files/aeza-logo.png',
+    rating: 9.6,
+    basePrice: 0,
+    cpuPrice: 180,
+    ramPrice: 95,
+    storagePrice: 8,
+    features: ['NVMe диски', 'DDoS защита', '12 локаций', 'Почасовая оплата'],
+    locations: ['Москва', 'Санкт-Петербург', 'Германия', 'Нидерланды', 'Польша', 'Финляндия', 'Франция', 'Чехия', 'Болгария', 'США', 'Казахстан', 'Украина'],
+    trialDays: 0,
+    url: 'https://aeza.net/?ref=766003',
+    pros: ['12 локаций по всему миру', 'Почасовая оплата', 'Быстрая DDoS защита', 'Современный интерфейс', 'Гибкая тарификация'],
+    cons: ['Относительно молодая компания', 'Нет официального SLA', 'Техподдержка не 24/7'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Alma Linux', 'Rocky Linux', 'Windows Server', 'Arch Linux'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'До 100 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: 'Нет официального SLA',
+      supportResponseTime: '< 15 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 80,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 10 },
+        { months: 3, percent: 5 }
+      ],
+      paymentMethods: ['Банковская карта', 'СБП', 'ЮMoney', 'Криптовалюта', 'QIWI', 'WebMoney'],
+      minPrice: 180
+    },
+    popularity: 85000,
+    promoText: 'Почасовая оплата от 0.25₽/час + DDoS защита в подарок',
+    caseStudies: ['Игровые серверы', 'VPN сервисы', 'Discord/Telegram боты', 'Веб-разработка', 'Стриминг'],
+    uptime30days: 99.87,
+    reviews: [
+      { author: 'Артём К.', text: '12 локаций — это бомба! Разместил VPN серверы по всему миру за пару часов. Интерфейс удобный, всё понятно даже новичку.', rating: 5, date: '09 ноя 2025' },
+      { author: 'Никита В.', text: 'Почасовая оплата спасла бюджет! Тестировал конфиги — платил только за реальное время. Для разработки идеально!', rating: 5, date: '08 ноя 2025' },
+      { author: 'Мария Л.', text: 'DDoS защита сработала отлично — игровой сервер выдержал атаку 80 Гбит/с. Ребята молодцы, реагируют быстро!', rating: 5, date: '07 ноя 2025' },
+      { author: 'Дмитрий П.', text: 'NVMe диски быстрые, база данных летает. Цена адекватная. Техподдержка отвечает в течение 10-15 минут — очень оперативно!', rating: 5, date: '06 ноя 2025' },
+      { author: 'Сергей Н.', text: 'Молодая компания, но работают на совесть. Нет официального SLA — немного напрягает для продакшна. Но за свои деньги отлично!', rating: 4, date: '05 ноя 2025' },
+      { author: 'Ольга Р.', text: 'Принимают криптовалюту и СБП — удобно! ЦОД в Европе работают стабильно. За 6 месяцев ни одного серьёзного сбоя.', rating: 5, date: '04 ноя 2025' },
+      { author: 'Алексей М.', text: 'Гибкая тарификация позволяет собрать нужную конфигурацию. API работает шустро, автоматизация через Terraform — без проблем!', rating: 5, date: '03 ноя 2025' }
+    ]
+  },
+  {
     id: 30,
     name: 'Hetzner',
     logo: 'https://cdn.poehali.dev/files/7554b41f-b1d2-4a4a-ad1e-f4a02703cead.png',
