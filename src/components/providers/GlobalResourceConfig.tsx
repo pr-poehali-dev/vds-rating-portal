@@ -37,11 +37,11 @@ export const GlobalResourceConfig = ({ onApplyConfig }: GlobalResourceConfigProp
         className="w-full px-6 py-4 flex items-center justify-between hover:bg-primary/5 transition-colors rounded-2xl"
       >
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center">
-            <Icon name="Sliders" size={20} className="text-primary" />
+          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary/20 rounded-xl flex items-center justify-center">
+            <Icon name="Sliders" size={16} className="text-primary sm:w-5 sm:h-5" />
           </div>
           <div className="text-left">
-            <h3 className="text-base font-bold text-foreground">{t('resources.configurator')}</h3>
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground">{t('resources.configurator')}</h3>
             <p className="text-xs text-muted-foreground">
               CPU: {config.cpu} • RAM: {config.ram}GB • {t('resources.storage')}: {config.storage}GB
             </p>
@@ -49,8 +49,8 @@ export const GlobalResourceConfig = ({ onApplyConfig }: GlobalResourceConfigProp
         </div>
         <Icon 
           name={isOpen ? "ChevronUp" : "ChevronDown"} 
-          size={20} 
-          className="text-muted-foreground"
+          size={24} 
+          className="text-muted-foreground transition-transform"
         />
       </button>
 
