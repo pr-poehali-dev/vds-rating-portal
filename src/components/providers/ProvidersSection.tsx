@@ -50,65 +50,19 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   const [selectedForComparison, setSelectedForComparison] = useState<number[]>([]);
   const [showComparison, setShowComparison] = useState(false);
   const [providersToShow, setProvidersToShow] = useState(9);
-  const [reviewsToShow, setReviewsToShow] = useState<Record<number, number>>({
-    1: 5,
-    2: 5,
-    3: 5,
-    4: 5,
-    5: 5,
-    6: 5,
-    7: 5,
-    8: 5,
-    9: 5,
-    10: 5,
-    11: 5,
-    12: 5,
-    13: 5,
-    14: 5,
-    15: 5,
-    16: 5,
-    17: 5,
-    18: 5,
-    19: 5,
-    20: 5,
-    21: 5,
-    22: 5,
-    23: 5,
-    24: 5,
-    25: 5,
-    26: 5,
-    27: 5,
-    28: 5
+  const [reviewsToShow, setReviewsToShow] = useState<Record<number, number>>(() => {
+    const initialReviews: Record<number, number> = {};
+    providers.forEach(provider => {
+      initialReviews[provider.id] = 5;
+    });
+    return initialReviews;
   });
-  const [configs, setConfigs] = useState<Record<number, ResourceConfig>>({
-    1: { cpu: 1, ram: 1, storage: 10 },
-    2: { cpu: 1, ram: 1, storage: 10 },
-    3: { cpu: 1, ram: 1, storage: 10 },
-    4: { cpu: 1, ram: 1, storage: 10 },
-    5: { cpu: 1, ram: 1, storage: 10 },
-    6: { cpu: 1, ram: 1, storage: 10 },
-    7: { cpu: 1, ram: 1, storage: 10 },
-    8: { cpu: 1, ram: 1, storage: 10 },
-    9: { cpu: 1, ram: 1, storage: 10 },
-    10: { cpu: 1, ram: 1, storage: 10 },
-    11: { cpu: 1, ram: 1, storage: 10 },
-    12: { cpu: 1, ram: 1, storage: 10 },
-    13: { cpu: 1, ram: 1, storage: 10 },
-    14: { cpu: 1, ram: 1, storage: 10 },
-    15: { cpu: 1, ram: 1, storage: 10 },
-    16: { cpu: 1, ram: 1, storage: 10 },
-    17: { cpu: 1, ram: 1, storage: 10 },
-    18: { cpu: 1, ram: 1, storage: 10 },
-    19: { cpu: 1, ram: 1, storage: 10 },
-    20: { cpu: 1, ram: 1, storage: 10 },
-    21: { cpu: 1, ram: 1, storage: 10 },
-    22: { cpu: 1, ram: 1, storage: 10 },
-    23: { cpu: 1, ram: 1, storage: 10 },
-    24: { cpu: 1, ram: 1, storage: 10 },
-    25: { cpu: 1, ram: 1, storage: 10 },
-    26: { cpu: 1, ram: 1, storage: 10 },
-    27: { cpu: 1, ram: 1, storage: 10 },
-    28: { cpu: 1, ram: 1, storage: 10 }
+  const [configs, setConfigs] = useState<Record<number, ResourceConfig>>(() => {
+    const initialConfigs: Record<number, ResourceConfig> = {};
+    providers.forEach(provider => {
+      initialConfigs[provider.id] = { cpu: 1, ram: 1, storage: 10 };
+    });
+    return initialConfigs;
   });
   const [loadedReviews, setLoadedReviews] = useState<Record<number, Review[]>>({});
   const [providersWithReviews, setProvidersWithReviews] = useState<Provider[]>(providers);
