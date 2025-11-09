@@ -74,7 +74,7 @@ export const ProviderCardHeader = ({
             <div className="flex items-center gap-1.5 text-xs">
               <Icon name="Gift" size={12} className={provider.trialDays ? "text-primary" : "text-muted-foreground"} />
               <span className="font-semibold text-foreground truncate">
-                {provider.trialDays ? `${provider.trialDays} ${provider.trialDays === 1 ? t('common.day') : provider.trialDays < 5 ? t('common.daysGenitive') : t('common.days')} ${t('common.free')}` : 'Тестовый период: информация отсутствует'}
+                {provider.trialDays ? `${provider.trialDays} ${provider.trialDays === 1 ? t('common.day') : provider.trialDays < 5 ? t('common.daysGenitive') : t('common.days')} ${t('common.free')}` : 'Тест по запросу'}
               </span>
             </div>
             {provider.fz152Compliant && (
