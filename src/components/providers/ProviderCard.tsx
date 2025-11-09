@@ -73,8 +73,8 @@ export const ProviderCard = ({
 
   return (
     <Card 
-      className={`group border-2 transition-all duration-300 hover-lift overflow-hidden relative bg-card ${
-        isSelected ? 'border-primary shadow-lg shadow-primary/20' : 'border-border hover:border-primary/50'
+      className={`group border-2 transition-all duration-300 hover-lift overflow-hidden relative rounded-[2.5rem] ${
+        isSelected ? 'border-primary shadow-lg shadow-primary/20 bg-primary/5' : 'border-border hover:border-primary/50 bg-gradient-to-br from-primary/10 via-card to-card'
       }`}
     >
       {onToggleCompare && (
