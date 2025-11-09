@@ -59,9 +59,18 @@ export const ProviderCardHeader = ({
           <div className="flex flex-col gap-1">
             <div className="flex items-start gap-1.5 text-xs">
               <Icon name="MapPin" size={12} className="text-primary mt-0.5 flex-shrink-0" />
-              <span className="font-semibold text-foreground truncate">
-                {provider.locations.length} {provider.locations.length === 1 ? 'локация' : provider.locations.length < 5 ? 'локации' : 'локаций'}
-              </span>
+              <div className="flex flex-wrap gap-1">
+                {provider.locations.slice(0, 3).map((location, idx) => (
+                  <Badge key={idx} className="bg-accent border border-primary/20 text-foreground font-semibold text-[10px] px-1.5 py-0.5">
+                    {location}
+                  </Badge>
+                ))}
+                {provider.locations.length > 3 && (
+                  <Badge className="bg-muted border border-border text-muted-foreground font-semibold text-[10px] px-1.5 py-0.5">
+                    +{provider.locations.length - 3}
+                  </Badge>
+                )}
+              </div>
             </div>
             <div className="flex items-center gap-1.5 text-xs">
               <Icon name="Gift" size={12} className={provider.trialDays ? "text-primary" : "text-muted-foreground"} />
