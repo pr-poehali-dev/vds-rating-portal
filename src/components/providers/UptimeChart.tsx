@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Provider } from './types';
 import Icon from '@/components/ui/icon';
 
@@ -6,8 +7,11 @@ interface UptimeChartProps {
 }
 
 export const UptimeChart = ({ providers }: UptimeChartProps) => {
+  const [searchQuery, setSearchQuery] = useState('');
+  
   const providersWithUptime = providers
     .filter(p => p.uptime30days !== undefined)
+    .filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.uptime30days || 0) - (a.uptime30days || 0));
 
   const getUptimeColor = (uptime: number) => {
@@ -72,7 +76,28 @@ export const UptimeChart = ({ providers }: UptimeChartProps) => {
 
           {/* Компактный список провайдеров */}
           <div className="bg-gradient-to-br from-card via-card to-accent/20 border-2 border-border rounded-3xl p-8 shadow-xl">
-            <h3 className="text-2xl font-bold text-foreground mb-6">Топ провайдеров по Uptime</h3>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+              <h3 className="text-2xl font-bold text-foreground">Топ провайдеров по Uptime</h3>
+              
+              <div className="relative w-full sm:w-80">
+                <Icon name="Search" size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Найти провайдера..."
+                  className="w-full pl-12 pr-12 h-12 bg-background border-2 border-border rounded-xl focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm text-foreground placeholder:text-muted-foreground font-semibold hover:border-primary/50 hover:shadow-md"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 hover:bg-accent rounded-lg transition-colors"
+                  >
+                    <Icon name="X" size={18} className="text-muted-foreground" />
+                  </button>
+                )}
+              </div>
+            </div>
             
             <div className="grid md:grid-cols-2 gap-4">
               {providersWithUptime.map((provider, index) => {
