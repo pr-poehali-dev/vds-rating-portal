@@ -61,7 +61,7 @@ export const FilterPanel = ({
   filteredCount
 }: FilterPanelProps) => {
   const { t } = useLanguage();
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
   
   const hasActiveFilters = filterFZ152 || filterTrialPeriod || filterLocation || 
                           filterVirtualization || filterMinDatacenters !== null || 
@@ -91,15 +91,15 @@ export const FilterPanel = ({
           className="flex items-center gap-2 hover:text-primary transition-colors"
         >
           <div className="relative group">
-            <div className="absolute inset-0 bg-primary rounded-xl blur-md opacity-50 group-hover:opacity-75 transition-opacity"></div>
-            <div className="relative w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg">
-              <Icon name="Filter" size={16} className="text-background sm:w-5 sm:h-5" />
+            <div className="absolute inset-0 bg-primary rounded-lg blur-sm opacity-50 group-hover:opacity-75 transition-opacity"></div>
+            <div className="relative w-6 h-6 bg-primary rounded-lg flex items-center justify-center shadow-lg">
+              <Icon name="Filter" size={12} className="text-background" />
             </div>
           </div>
-          <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold text-foreground">{t('filters.title')}</h3>
+          <h3 className="text-sm font-bold text-foreground">Фильтры</h3>
           <Icon 
             name={isExpanded ? "ChevronUp" : "ChevronDown"} 
-            size={24} 
+            size={16} 
             className="text-muted-foreground transition-transform"
           />
         </button>
