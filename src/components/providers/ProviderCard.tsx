@@ -129,11 +129,11 @@ export const ProviderCard = ({
         </div>
 
         <div 
-          className={`overflow-hidden transition-all duration-500 ease-in-out ${
+          className={`overflow-hidden transition-all duration-500 ease-in-out -mx-5 ${
             showDetails ? 'max-h-[10000px] opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="pt-3 border-t border-border mt-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+          <div className="pt-5 px-5 border-t border-border grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
               <div className="bg-accent border border-secondary/30 rounded-2xl p-4">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-9 h-9 bg-secondary rounded-xl flex items-center justify-center shadow-lg">
