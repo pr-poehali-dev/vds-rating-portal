@@ -127,7 +127,11 @@ export const ProviderCard = ({
             <Icon name={showDetails ? "ChevronUp" : "ChevronDown"} size={18} />
           </Button>
 
-          {showDetails && (
+          <div 
+            className={`overflow-hidden transition-all duration-500 ease-in-out ${
+              showDetails ? 'max-h-[10000px] opacity-100' : 'max-h-0 opacity-0'
+            }`}
+          >
             <div className="pt-3 border-t border-border grid grid-cols-1 gap-3">
               <div className="bg-accent border border-secondary/30 rounded-2xl p-4">
                 <div className="flex items-center gap-2 mb-4">
@@ -196,7 +200,7 @@ export const ProviderCard = ({
                 onLoadMoreReviews={onLoadMoreReviews}
               />
             </div>
-          )}
+          </div>
         </div>
       </CardContent>
     </Card>
