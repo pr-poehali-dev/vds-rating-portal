@@ -20,6 +20,7 @@ export const providers: Provider[] = [
     cons: ['Относительно молодая компания', 'Нет официального SLA', 'Техподдержка не 24/7'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '1 Гбит/с',
@@ -82,6 +83,7 @@ export const providers: Provider[] = [
     pros: ['Лучшее соотношение цена/качество в Европе', 'Новые тарифы Cost-Optimized от €3.49', 'Прозрачное ценообразование', 'Экологичные ЦОД'],
     cons: ['Нет ЦОД в России', 'Техподдержка на английском', 'Требуется верификация документов'],
     fz152Compliant: false,
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '20 Гбит/с',
@@ -143,6 +145,7 @@ export const providers: Provider[] = [
     cons: ['Нет тестового периода', 'Цены в долларах', 'Техподдержка иногда медленная'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '10 Гбит/с',
@@ -206,6 +209,8 @@ export const providers: Provider[] = [
     cons: ['Средняя цена', 'Мало локаций за рубежом', 'Привязка к экосистеме VK'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: true,
+    fstekLevel: 'K2',
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '10 Гбит/с',
@@ -267,6 +272,8 @@ export const providers: Provider[] = [
     cons: ['Нет зарубежных локаций', 'Средняя скорость техподдержки', 'Сложная биллинговая система'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: true,
+    fstekLevel: 'K1',
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '10 Гбит/с',
@@ -329,6 +336,7 @@ export const providers: Provider[] = [
     cons: ['Интерфейс только на английском', 'Мало русскоязычных материалов', 'Молодая компания'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '10 Гбит/с',
@@ -390,6 +398,8 @@ export const providers: Provider[] = [
     cons: ['Повышение цен в мае 2025 (+5%)', 'Сложная панель для новичков', 'Требуется банковская карта для активации'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: true,
+    fstekLevel: 'K1',
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '10 Гбит/с',
@@ -451,6 +461,8 @@ export const providers: Provider[] = [
     cons: ['Нет зарубежных локаций', 'Средняя скорость поддержки', 'Сложная биллинговая система'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: true,
+    fstekLevel: 'K2',
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '10 Гбит/с',
@@ -513,6 +525,7 @@ export const providers: Provider[] = [
     cons: ['Нет NVMe дисков', 'Ограниченный выбор локаций', 'Средние характеристики'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -574,6 +587,7 @@ export const providers: Provider[] = [
     cons: ['Нет тестового периода', 'Средние цены', 'Ограниченный выбор локаций'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -635,6 +649,7 @@ export const providers: Provider[] = [
     cons: ['Нет NVMe дисков', 'Ограниченный выбор локаций', 'Молодая компания'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -696,6 +711,7 @@ export const providers: Provider[] = [
     cons: ['Нет NVMe дисков', 'Ограниченный выбор локаций', 'Нет зарубежных ЦОДов'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -757,6 +773,7 @@ export const providers: Provider[] = [
     cons: ['Нет тестового периода', 'Мало локаций', 'Нет NVMe дисков'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -818,6 +835,7 @@ export const providers: Provider[] = [
     cons: ['Молодая компания', 'Ограниченный выбор локаций', 'Мало отзывов'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '1 Гбит/с',
@@ -879,6 +897,7 @@ export const providers: Provider[] = [
     cons: ['Нет тестового периода', 'Базовые цены выше среднего', 'Нет NVMe дисков'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -940,6 +959,7 @@ export const providers: Provider[] = [
     cons: ['Нет тестового периода', 'Только 2 локации', 'Нет NVMe дисков'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -1001,6 +1021,7 @@ export const providers: Provider[] = [
     cons: ['Цены в долларах', 'Нет тестового периода', 'Сложный интерфейс для новичков'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '300-400 Мбит/с',
@@ -1071,6 +1092,7 @@ export const providers: Provider[] = [
     cons: ['Нет тестового периода', 'Всего 2 локации', 'Средняя цена'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '1 Гбит/с',
@@ -1140,6 +1162,7 @@ export const providers: Provider[] = [
     cons: ['Только одна локация', 'Нет тестового периода', 'Базовая поддержка'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -1202,6 +1225,7 @@ export const providers: Provider[] = [
     cons: ['Нет тестового периода', 'Мало локаций', 'Базовая панель управления'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -1263,6 +1287,7 @@ export const providers: Provider[] = [
     cons: ['Только одна локация', 'Базовая производительность', 'Мало ЦОДов'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -1324,6 +1349,7 @@ export const providers: Provider[] = [
     cons: ['Нет тестового периода', 'Цены выше среднего', 'Интерфейс панели устарел'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '1 Гбит/с',
@@ -1385,6 +1411,7 @@ export const providers: Provider[] = [
     cons: ['Только одна локация', 'Интерфейс может показаться сложным'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '1 Гбит/с',
@@ -1449,6 +1476,7 @@ export const providers: Provider[] = [
     cons: ['Средние цены', 'Нет тестового периода', 'Интерфейс сайта устарел'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -1510,6 +1538,7 @@ export const providers: Provider[] = [
     cons: ['Нет тестового периода', 'Ограниченный выбор локаций', 'Молодая компания'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '10 Гбит/с',
@@ -1572,6 +1601,7 @@ export const providers: Provider[] = [
     cons: ['Повышение цен в 2025 году', 'IPv4 адрес +150₽/мес дополнительно', 'Сложная панель для новичков'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '10 Гбит/с',
@@ -1676,6 +1706,7 @@ export const providers: Provider[] = [
     cons: ['Ограниченная производительность', 'Медленная работа техподдержки', 'Нет выделенных IP в базе'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -1781,6 +1812,7 @@ export const providers: Provider[] = [
     cons: ['Средняя скорость поддержки', 'Интерфейс устарел визуально', 'Меньше дата-центров'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -1886,6 +1918,7 @@ export const providers: Provider[] = [
     cons: ['Короткий тестовый период', 'Поддержка медленнее конкурентов', 'Цены выше среднего'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -1953,6 +1986,7 @@ export const providers: Provider[] = [
     cons: ['Нет NVMe дисков', 'Мало дата-центров за границей', 'Нет криптовалютных платежей'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -2019,6 +2053,8 @@ export const providers: Provider[] = [
     cons: ['Высокая цена', 'Нет тестового периода', 'Только 2 локации'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: true,
+    fstekLevel: 'K1',
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '10 Гбит/с',
@@ -2071,6 +2107,7 @@ export const providers: Provider[] = [
     cons: ['Нет NVMe дисков', 'Устаревший интерфейс', 'Мало локаций'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -2125,6 +2162,7 @@ export const providers: Provider[] = [
     cons: ['Нет NVMe', 'Нет тестового периода', 'Только российские ЦОД'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -2177,6 +2215,8 @@ export const providers: Provider[] = [
     cons: ['Высокая цена', 'Только 2 локации', 'Фокус на корпоративный сектор'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: true,
+    fstekLevel: 'K1',
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '10 Гбит/с',
@@ -2231,6 +2271,8 @@ export const providers: Provider[] = [
     cons: ['Высокая цена', 'Нет тестового периода', 'Сложная процедура подключения'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: true,
+    fstekLevel: 'K1',
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '10 Гбит/с',
@@ -2283,6 +2325,7 @@ export const providers: Provider[] = [
     cons: ['Нет NVMe', 'Устаревший интерфейс', 'Мало локаций'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -2337,6 +2380,7 @@ export const providers: Provider[] = [
     cons: ['Короткий тестовый период', 'Не очень известная компания', 'Базовая поддержка'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '1 Гбит/с',
@@ -2392,6 +2436,8 @@ export const providers: Provider[] = [
     cons: ['Высокая цена', 'Нет тестового периода', 'Только 2 локации'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: true,
+    fstekLevel: 'K2',
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '10 Гбит/с',
@@ -2444,6 +2490,7 @@ export const providers: Provider[] = [
     cons: ['Нет NVMe', 'Мало локаций', 'Базовая поддержка'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -2498,6 +2545,7 @@ export const providers: Provider[] = [
     cons: ['Нет тестового периода', 'Нет NVMe', 'Высокая цена'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '10 Гбит/с',
@@ -2550,6 +2598,7 @@ export const providers: Provider[] = [
     cons: ['Нет NVMe', 'Только 2 локации', 'Короткий тестовый период'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'SSD',
       networkSpeed: '1 Гбит/с',
@@ -2604,6 +2653,7 @@ export const providers: Provider[] = [
     cons: ['Мало локаций', 'Молодая компания', 'Базовая поддержка'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '1 Гбит/с',
@@ -2659,6 +2709,7 @@ export const providers: Provider[] = [
     cons: ['Мало локаций', 'Средняя известность', 'Нет IPv6'],
     fz152Compliant: true,
     fz152Level: 'УЗ-1',
+    fstekCompliant: false,
     technicalSpecs: {
       diskType: 'NVMe',
       networkSpeed: '1 Гбит/с',

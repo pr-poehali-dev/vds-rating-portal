@@ -61,6 +61,8 @@ export interface Provider {
   reviews: Review[];
   fz152Compliant: boolean;
   fz152Level?: string;
+  fstekCompliant: boolean;
+  fstekLevel?: string;
   technicalSpecs: TechnicalSpecs;
   serviceGuarantees: ServiceGuarantees;
   additionalServices: AdditionalServices;
