@@ -198,12 +198,11 @@ export const ProviderCard = ({
               <PaymentMethodsSection provider={provider} />
               <CaseStudiesSection provider={provider} />
 
-              <ProviderReviews
-                provider={provider}
-                reviewsToShow={reviewsToShow}
-                onLoadMoreReviews={onLoadMoreReviews}
-              />
-            </div>
+            <ProviderReviews
+              provider={provider}
+              reviewsToShow={reviewsToShow}
+              onLoadMoreReviews={onLoadMoreReviews}
+            />
           </div>
         </div>
       </div>
