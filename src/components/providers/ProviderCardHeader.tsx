@@ -121,7 +121,7 @@ export const ProviderCardHeader = ({
             <div className="flex items-center gap-1.5 text-xs mt-2">
               <Icon name="DollarSign" size={12} className="text-primary flex-shrink-0" />
               <span className="font-semibold text-foreground">{t('common.from')} </span>
-              <span className="text-lg font-black text-primary">{calculatedPrice}</span>
+              <span className="text-base font-black text-primary">{calculatedPrice}</span>
               <span className="text-xs text-muted-foreground">{t('common.perMonth')}</span>
               {provider.pricingDetails.discounts && provider.pricingDetails.discounts.length > 0 && (
                 <Badge variant="outline" className="text-[9px] bg-secondary/10 text-secondary border-secondary/30 px-1 py-0 ml-1">
