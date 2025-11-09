@@ -83,12 +83,13 @@ export const FilterPanel = ({
       <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-48 h-48 bg-secondary/10 rounded-full blur-3xl"></div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 relative z-10 mb-5 sm:mb-6">
-        <div className="group">
-          <label className="text-xs sm:text-sm font-bold text-foreground mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
-            <Icon name="ShieldCheck" size={14} className="text-primary sm:w-4 sm:h-4" />
-            {t('filters.fz152Compliance')}
-          </label>
+      <div className="space-y-5 sm:space-y-6 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+          <div className="group">
+            <label className="text-xs sm:text-sm font-bold text-foreground mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
+              <Icon name="ShieldCheck" size={14} className="text-primary sm:w-4 sm:h-4" />
+              {t('filters.fz152Compliance')}
+            </label>
           <Button
             variant={filterFZ152 ? "default" : "outline"}
             className={`w-full justify-start h-10 sm:h-11 md:h-12 rounded-xl font-semibold transition-all text-xs sm:text-sm ${
@@ -267,70 +268,73 @@ export const FilterPanel = ({
             <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-muted-foreground" />
           </div>
         </div>
-
-        <div className="group">
-          <label className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
-            <Icon name="ArrowUpDown" size={16} className="text-primary" />
-            {t('filters.sortBy')}
-          </label>
-          <div className="flex gap-3">
-            <Button
-              variant={sortBy === 'rating' ? "default" : "outline"}
-              className={`flex-1 justify-center h-12 rounded-xl font-bold transition-all ${
-                sortBy === 'rating' 
-                  ? 'shadow-lg shadow-primary/30 scale-[1.02]' 
-                  : 'hover:scale-[1.02] hover:shadow-md hover:border-primary/50'
-              }`}
-              onClick={() => setSortBy('rating')}
-            >
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-2 ${
-                sortBy === 'rating' ? 'bg-background/20' : 'bg-primary/10'
-              }`}>
-                <Icon name="Star" size={18} className={sortBy === 'rating' ? 'text-background' : 'text-primary'} />
-              </div>
-              {t('filters.byRating')}
-            </Button>
-            <Button
-              variant={sortBy === 'price' ? "default" : "outline"}
-              className={`flex-1 justify-center h-12 rounded-xl font-bold transition-all ${
-                sortBy === 'price' 
-                  ? 'shadow-lg shadow-primary/30 scale-[1.02]' 
-                  : 'hover:scale-[1.02] hover:shadow-md hover:border-primary/50'
-              }`}
-              onClick={() => setSortBy('price')}
-            >
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-2 ${
-                sortBy === 'price' ? 'bg-background/20' : 'bg-primary/10'
-              }`}>
-                <Icon name="DollarSign" size={18} className={sortBy === 'price' ? 'text-background' : 'text-primary'} />
-              </div>
-              {t('filters.byPrice')}
-            </Button>
-          </div>
         </div>
 
-        <div className="group">
-          <label className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
-            <Icon name="Search" size={16} className="text-primary" />
-            {t('filters.searchByName')}
-          </label>
-          <div className="relative">
-            <Icon name="Search" size={18} className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={t('filters.findProvider')}
-              className="w-full pl-10 sm:pl-12 pr-10 sm:pr-12 h-12 bg-background border-2 border-border rounded-xl focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm sm:text-base text-foreground placeholder:text-muted-foreground font-semibold hover:border-primary/50 hover:shadow-md"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 hover:bg-accent rounded-lg transition-colors"
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
+          <div className="group">
+            <label className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
+              <Icon name="ArrowUpDown" size={16} className="text-primary" />
+              {t('filters.sortBy')}
+            </label>
+            <div className="flex gap-3">
+              <Button
+                variant={sortBy === 'rating' ? "default" : "outline"}
+                className={`flex-1 justify-center h-12 rounded-xl font-bold transition-all ${
+                  sortBy === 'rating' 
+                    ? 'shadow-lg shadow-primary/30 scale-[1.02]' 
+                    : 'hover:scale-[1.02] hover:shadow-md hover:border-primary/50'
+                }`}
+                onClick={() => setSortBy('rating')}
               >
-                <Icon name="X" size={18} className="text-muted-foreground" />
-              </button>
-            )}
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-2 ${
+                  sortBy === 'rating' ? 'bg-background/20' : 'bg-primary/10'
+                }`}>
+                  <Icon name="Star" size={18} className={sortBy === 'rating' ? 'text-background' : 'text-primary'} />
+                </div>
+                {t('filters.byRating')}
+              </Button>
+              <Button
+                variant={sortBy === 'price' ? "default" : "outline"}
+                className={`flex-1 justify-center h-12 rounded-xl font-bold transition-all ${
+                  sortBy === 'price' 
+                    ? 'shadow-lg shadow-primary/30 scale-[1.02]' 
+                    : 'hover:scale-[1.02] hover:shadow-md hover:border-primary/50'
+                }`}
+                onClick={() => setSortBy('price')}
+              >
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-2 ${
+                  sortBy === 'price' ? 'bg-background/20' : 'bg-primary/10'
+                }`}>
+                  <Icon name="DollarSign" size={18} className={sortBy === 'price' ? 'text-background' : 'text-primary'} />
+                </div>
+                {t('filters.byPrice')}
+              </Button>
+            </div>
+          </div>
+
+          <div className="group">
+            <label className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
+              <Icon name="Search" size={16} className="text-primary" />
+              {t('filters.searchByName')}
+            </label>
+            <div className="relative">
+              <Icon name="Search" size={18} className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={t('filters.findProvider')}
+                className="w-full pl-10 sm:pl-12 pr-10 sm:pr-12 h-12 bg-background border-2 border-border rounded-xl focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm sm:text-base text-foreground placeholder:text-muted-foreground font-semibold hover:border-primary/50 hover:shadow-md"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 hover:bg-accent rounded-lg transition-colors"
+                >
+                  <Icon name="X" size={18} className="text-muted-foreground" />
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
