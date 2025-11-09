@@ -51,13 +51,6 @@ export const ProviderCardHeader = ({
             </span>
             <span className="text-muted-foreground text-xs">из 5</span>
           </div>
-          <div className="flex flex-wrap gap-1.5 mb-2">
-            {provider.features.slice(0, 2).map((feature, idx) => (
-              <Badge key={idx} className="bg-accent border border-primary/20 text-foreground font-semibold text-[10px] px-1.5 py-0.5">
-                {feature}
-              </Badge>
-            ))}
-          </div>
           <div className="flex flex-col gap-1">
             <div className="flex items-start gap-1.5 text-xs">
               <Icon name="MapPin" size={12} className="text-primary mt-0.5 flex-shrink-0" />
