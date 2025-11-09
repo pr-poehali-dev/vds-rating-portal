@@ -77,6 +77,11 @@ export const ProviderCard = ({
         isSelected ? 'border-primary shadow-lg shadow-primary/20 bg-primary/5' : 'border-border hover:border-primary/50 bg-gradient-to-br from-primary/10 via-card to-card'
       }`}
     >
+      <div className="absolute top-8 right-12 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
+      <div className="absolute bottom-12 right-8 w-24 h-24 rounded-full border-2 border-primary/20" style={{background: 'repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(212, 255, 0, 0.1) 4px, rgba(212, 255, 0, 0.1) 8px)'}}></div>
+      <div className="absolute top-1/3 right-16 w-20 h-20 rounded-full" style={{background: 'radial-gradient(circle at 30% 30%, rgba(212, 255, 0, 0.15), transparent), repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 2px, rgba(212, 255, 0, 0.08) 2px, rgba(212, 255, 0, 0.08) 4px)'}}></div>
+      <div className="absolute bottom-24 left-8 w-16 h-16 bg-accent/50 rounded-full"></div>
+      
       {onToggleCompare && (
         <div className="absolute top-4 right-4 z-20">
           <Button
