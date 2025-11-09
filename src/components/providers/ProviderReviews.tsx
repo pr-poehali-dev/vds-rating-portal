@@ -167,7 +167,7 @@ export const ProviderReviews = ({
             className="w-full h-12 text-sm font-bold bg-primary text-background hover:bg-primary/90 rounded-xl"
           >
             <Icon name="PenLine" size={18} className="mr-2" />
-            {t('card.readReviews')}
+            Написать отзыв
           </Button>
         ) : (
           <div className="bg-accent border border-primary/10 rounded-2xl p-6">
