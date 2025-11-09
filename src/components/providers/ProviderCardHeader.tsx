@@ -59,7 +59,8 @@ export const ProviderCardHeader = ({
           <div className="flex flex-col gap-1">
             <div className="flex items-start gap-1.5 text-xs">
               <Icon name="MapPin" size={12} className="text-primary mt-0.5 flex-shrink-0" />
-              <div className="flex flex-wrap gap-1">
+              <div className="flex flex-wrap items-center gap-1">
+                <span className="font-semibold text-foreground">Локации:</span>
                 {provider.locations.slice(0, 3).map((location, idx) => (
                   <Badge key={idx} className="bg-accent border border-primary/20 text-foreground font-semibold text-[10px] px-1.5 py-0.5">
                     {location}
