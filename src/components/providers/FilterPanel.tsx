@@ -81,29 +81,28 @@ export const FilterPanel = ({
   };
 
   return (
-    <div className={`bg-gradient-to-br from-card via-card to-accent/30 border-2 border-border rounded-xl sm:rounded-2xl p-2 sm:p-3 md:p-4 mb-3 sm:mb-4 shadow-xl relative overflow-hidden transition-all duration-700 ease-in-out ${isExpanded ? 'max-w-full' : 'max-w-[190px] sm:max-w-[230px]'}`}>
-      <div className="absolute top-0 right-0 w-16 h-16 bg-primary/10 rounded-full blur-xl"></div>
-      <div className="absolute bottom-0 left-0 w-12 h-12 bg-secondary/10 rounded-full blur-xl"></div>
-      
-      <div className="flex items-center justify-between mb-4 relative z-10">
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-2 hover:text-primary transition-colors"
-        >
-          <div className="relative group">
-            <div className="absolute inset-0 bg-primary rounded-lg blur-sm opacity-50 group-hover:opacity-75 transition-opacity"></div>
-            <div className="relative w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-lg flex items-center justify-center shadow-lg">
-              <Icon name="Filter" size={16} className="text-background sm:w-5 sm:h-5" />
-            </div>
+    <div className={`bg-[#1a1a1a] border border-primary/20 rounded-2xl shadow-lg mb-3 sm:mb-4 relative overflow-hidden transition-all duration-700 ease-in-out ${isExpanded ? 'max-w-full' : 'max-w-[190px] sm:max-w-[230px]'}`}>
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="w-full px-6 py-4 flex items-center justify-between hover:bg-primary/5 transition-colors rounded-2xl"
+      >
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary/20 rounded-xl flex items-center justify-center">
+            <Icon name="Filter" size={16} className="text-primary sm:w-5 sm:h-5" />
           </div>
           <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground">Фильтры</h3>
+        </div>
+        <div className="flex items-center gap-2">
           <Icon 
             name={isExpanded ? "ChevronUp" : "ChevronDown"} 
             size={24} 
             className="text-muted-foreground transition-transform"
           />
-        </button>
-        {hasActiveFilters && (
+        </div>
+      </button>
+      
+      {hasActiveFilters && (
+        <div className="flex items-center justify-end px-6 pb-2">
           <Button
             variant="outline"
             size="sm"
@@ -113,11 +112,11 @@ export const FilterPanel = ({
             <Icon name="X" size={12} className="sm:mr-1" />
             <span className="hidden sm:inline">{t('filters.resetAll')}</span>
           </Button>
-        )}
-      </div>
+        </div>
+      )}
 
       {isExpanded && (
-        <div className="space-y-5 sm:space-y-6 relative z-10">
+        <div className="space-y-5 sm:space-y-6 px-6 pb-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
           <div className="group">
             <label className="text-xs sm:text-sm font-bold text-foreground mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
