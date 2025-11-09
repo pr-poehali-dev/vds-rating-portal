@@ -114,7 +114,7 @@ export const ProviderCard = ({
         </div>
       )}
       
-      <CardHeader className={`p-6 md:p-8 ${index === 0 ? 'pt-12 md:pt-14' : ''}`}>
+      <CardHeader className={`p-4 md:p-6 ${index === 0 ? 'pt-12 md:pt-14' : ''}`}>
         <ProviderCardHeader
           provider={provider}
           index={index}
@@ -123,8 +123,8 @@ export const ProviderCard = ({
         />
       </CardHeader>
       
-      <CardContent className="px-6 md:px-8 pb-6 md:pb-8">
-        <div className="space-y-4">
+      <CardContent className="px-4 md:px-6 pb-4 md:pb-6">
+        <div className="space-y-3">
           <Button 
             variant="ghost" 
             className="w-full text-sm font-semibold hover:bg-accent/50 hover:text-primary justify-between"
@@ -157,8 +157,8 @@ export const ProviderCard = ({
           </Button>
 
           {showDetails && (
-            <div className="pt-4 border-t border-border grid md:grid-cols-2 gap-3 sm:gap-4">
-              <div className="bg-accent border border-secondary/30 rounded-2xl p-4 sm:p-5">
+            <div className="pt-3 border-t border-border grid grid-cols-1 gap-3">
+              <div className="bg-accent border border-secondary/30 rounded-2xl p-3 sm:p-4">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-9 h-9 bg-secondary rounded-xl flex items-center justify-center shadow-lg">
                     <Icon name="Check" size={18} className="text-background" />
@@ -177,7 +177,7 @@ export const ProviderCard = ({
                 </ul>
               </div>
               
-              <div className="bg-accent border border-destructive/30 rounded-2xl p-4 sm:p-5">
+              <div className="bg-accent border border-destructive/30 rounded-2xl p-3 sm:p-4">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-9 h-9 bg-destructive rounded-xl flex items-center justify-center shadow-lg">
                     <Icon name="AlertCircle" size={18} className="text-white" />
