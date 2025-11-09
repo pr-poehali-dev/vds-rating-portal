@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useState } from 'react';
 
 interface FilterPanelProps {
   filterFZ152: boolean;
@@ -60,6 +61,7 @@ export const FilterPanel = ({
   filteredCount
 }: FilterPanelProps) => {
   const { t } = useLanguage();
+  const [isExpanded, setIsExpanded] = useState(true);
   
   const hasActiveFilters = filterFZ152 || filterTrialPeriod || filterLocation || 
                           filterVirtualization || filterMinDatacenters !== null || 
@@ -83,7 +85,39 @@ export const FilterPanel = ({
       <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-48 h-48 bg-secondary/10 rounded-full blur-3xl"></div>
       
-      <div className="space-y-5 sm:space-y-6 relative z-10">
+      <div className="flex items-center justify-between mb-4 relative z-10">
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="flex items-center gap-2 hover:text-primary transition-colors"
+        >
+          <div className="relative group">
+            <div className="absolute inset-0 bg-primary rounded-xl blur-md opacity-50 group-hover:opacity-75 transition-opacity"></div>
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg">
+              <Icon name="Filter" size={16} className="text-background sm:w-5 sm:h-5" />
+            </div>
+          </div>
+          <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold text-foreground">{t('filters.title')}</h3>
+          <Icon 
+            name={isExpanded ? "ChevronUp" : "ChevronDown"} 
+            size={24} 
+            className="text-muted-foreground transition-transform"
+          />
+        </button>
+        {hasActiveFilters && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={clearFilters}
+            className="text-[10px] sm:text-xs font-bold hover:bg-destructive hover:text-white hover:border-destructive transition-all shadow-lg hover:shadow-xl h-8 sm:h-9 px-2 sm:px-3"
+          >
+            <Icon name="X" size={12} className="sm:mr-1" />
+            <span className="hidden sm:inline">{t('filters.resetAll')}</span>
+          </Button>
+        )}
+      </div>
+
+      {isExpanded && (
+        <div className="space-y-5 sm:space-y-6 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
           <div className="group">
             <label className="text-xs sm:text-sm font-bold text-foreground mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
@@ -337,27 +371,13 @@ export const FilterPanel = ({
             </div>
           </div>
         </div>
-      </div>
 
-      {(searchQuery || hasActiveFilters) && (
-        <div className="flex items-center justify-between mt-4 relative z-10">
-          {searchQuery && (
-            <div className="text-sm text-muted-foreground">
-              {t('filters.found')}: <span className="font-bold text-foreground">{filteredCount}</span> {t('filters.providers')}
-            </div>
-          )}
-          {hasActiveFilters && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={clearFilters}
-              className="text-[10px] sm:text-xs font-bold hover:bg-destructive hover:text-white hover:border-destructive transition-all shadow-lg hover:shadow-xl h-9 px-3 sm:px-4 flex-shrink-0 ml-auto"
-            >
-              <Icon name="X" size={12} className="sm:mr-1" />
-              <span className="hidden sm:inline">{t('filters.resetAll')}</span>
-            </Button>
-          )}
-        </div>
+        {searchQuery && (
+          <div className="text-sm text-muted-foreground relative z-10">
+            {t('filters.found')}: <span className="font-bold text-foreground">{filteredCount}</span> {t('filters.providers')}
+          </div>
+        )}
+      </div>
       )}
     </div>
   );
