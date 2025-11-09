@@ -127,16 +127,13 @@ export const ProviderCard = ({
             <Icon name={showDetails ? "ChevronUp" : "ChevronDown"} size={18} />
           </Button>
         </div>
-      </CardContent>
-    </Card>
-    
-    <div 
-      className={`overflow-hidden transition-all duration-500 ease-in-out ${
-        showDetails ? 'max-h-[10000px] opacity-100 mt-4' : 'max-h-0 opacity-0'
-      }`}
-    >
-      <div className="bg-[#1a1a1a] border border-primary/20 rounded-2xl p-5">
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+
+        <div 
+          className={`overflow-hidden transition-all duration-500 ease-in-out ${
+            showDetails ? 'max-h-[10000px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="pt-3 border-t border-border mt-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
               <div className="bg-accent border border-secondary/30 rounded-2xl p-4">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-9 h-9 bg-secondary rounded-xl flex items-center justify-center shadow-lg">
@@ -205,7 +202,8 @@ export const ProviderCard = ({
             />
           </div>
         </div>
-      </div>
+      </CardContent>
+    </Card>
     </div>
   );
 };
