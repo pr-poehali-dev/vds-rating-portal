@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
@@ -19,6 +20,7 @@ export const ProviderCardHeader = ({
 }: ProviderCardHeaderProps) => {
   const { t, language } = useLanguage();
   const avgRating = provider.reviews.reduce((sum, r) => sum + r.rating, 0) / provider.reviews.length;
+  const [showAllLocations, setShowAllLocations] = useState(false);
 
   return (
     <div className="flex items-start gap-3 flex-1">
@@ -61,14 +63,17 @@ export const ProviderCardHeader = ({
               <Icon name="MapPin" size={12} className="text-primary mt-0.5 flex-shrink-0" />
               <div className="flex flex-wrap items-center gap-1">
                 <span className="font-semibold text-foreground">Локации:</span>
-                {provider.locations.slice(0, 3).map((location, idx) => (
+                {(showAllLocations ? provider.locations : provider.locations.slice(0, 3)).map((location, idx) => (
                   <Badge key={idx} className="bg-accent border border-primary/20 text-foreground font-semibold text-[10px] px-1.5 py-0.5">
                     {location}
                   </Badge>
                 ))}
                 {provider.locations.length > 3 && (
-                  <Badge className="bg-muted border border-border text-muted-foreground font-semibold text-[10px] px-1.5 py-0.5">
-                    +{provider.locations.length - 3}
+                  <Badge 
+                    onClick={() => setShowAllLocations(!showAllLocations)}
+                    className="bg-muted border border-border text-muted-foreground font-semibold text-[10px] px-1.5 py-0.5 cursor-pointer hover:bg-primary/20 hover:text-primary transition-colors"
+                  >
+                    {showAllLocations ? 'Скрыть' : `+${provider.locations.length - 3}`}
                   </Badge>
                 )}
               </div>
