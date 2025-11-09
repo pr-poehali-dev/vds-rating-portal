@@ -82,15 +82,8 @@ export const UptimeChart = ({ providers }: UptimeChartProps) => {
                 return (
                   <div 
                     key={provider.id} 
-                    className="relative group bg-background border border-border rounded-xl p-4 hover:border-primary/50 transition-all"
+                    className="group bg-background border border-border rounded-xl p-4 hover:border-primary/50 transition-all"
                   >
-                    <button 
-                      onClick={() => handleProviderClick(provider)}
-                      className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center shadow-lg transition-all z-10"
-                    >
-                      <Icon name="ArrowUpRight" size={14} className="text-[#2a2a2a]" />
-                    </button>
-
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3 flex-1 min-w-0">
                         <div className="flex-shrink-0 w-10 h-10 rounded-lg overflow-hidden bg-white border border-primary/10 flex items-center justify-center">
@@ -101,7 +94,13 @@ export const UptimeChart = ({ providers }: UptimeChartProps) => {
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="font-bold text-foreground truncate">{provider.name}</h4>
+                          <button
+                            onClick={() => handleProviderClick(provider)}
+                            className="font-bold text-foreground truncate hover:text-primary transition-colors flex items-center gap-1 group/name"
+                          >
+                            {provider.name}
+                            <Icon name="ExternalLink" size={14} className="opacity-0 group-hover/name:opacity-100 transition-opacity" />
+                          </button>
                           <div className="flex items-center gap-2 text-xs text-muted-foreground">
                             <span>Простой: {downtimeText}</span>
                             <span>•</span>
