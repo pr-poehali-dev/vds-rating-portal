@@ -23,34 +23,38 @@ export const ProviderCardHeader = ({
   const [showAllLocations, setShowAllLocations] = useState(false);
 
   return (
-    <div className="flex items-start gap-3 flex-1">
-        <div className="relative flex-shrink-0">
-          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden bg-white border border-primary/10 shadow-soft flex items-center justify-center">
-            <img src={provider.logo} alt={provider.name} className="w-10 h-10 sm:w-12 sm:h-12 object-contain" />
+    <div className="flex flex-col gap-3 flex-1">
+        <div className="flex items-start gap-3">
+          <div className="relative flex-shrink-0">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden bg-white border border-primary/10 shadow-soft flex items-center justify-center">
+              <img src={provider.logo} alt={provider.name} className="w-10 h-10 sm:w-12 sm:h-12 object-contain" />
+            </div>
+            <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-lg flex items-center justify-center shadow-lg text-background text-xs font-bold">
+              {index + 1}
+            </div>
           </div>
-          <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-lg flex items-center justify-center shadow-lg text-background text-xs font-bold">
-            {index + 1}
+          
+          <div className="flex-1 min-w-0">
+            <h3 className="text-lg sm:text-xl font-bold text-foreground mb-1.5 truncate">{provider.name}</h3>
+            <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Icon 
+                    key={i}
+                    name="Star" 
+                    size={16} 
+                    className={i < Math.round(avgRating) ? "fill-primary text-primary" : "text-muted"}
+                  />
+                ))}
+              </div>
+              <span className="text-base font-bold text-foreground">
+                {avgRating.toFixed(1)}
+              </span>
+            </div>
           </div>
         </div>
         
-        <div className="flex-1 min-w-0">
-          <h3 className="text-lg sm:text-xl font-bold text-foreground mb-1.5 truncate">{provider.name}</h3>
-          <div className="flex items-center gap-2 mb-2">
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Icon 
-                  key={i}
-                  name="Star" 
-                  size={16} 
-                  className={i < Math.round(avgRating) ? "fill-primary text-primary" : "text-muted"}
-                />
-              ))}
-            </div>
-            <span className="text-base font-bold text-foreground">
-              {avgRating.toFixed(1)}
-            </span>
-          </div>
-          <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1">
             <div className="flex items-start gap-1.5 text-sm">
               <Icon name="MapPin" size={12} className="text-primary mt-0.5 flex-shrink-0" />
               <div className="flex items-center gap-1">
@@ -123,13 +127,12 @@ export const ProviderCardHeader = ({
               <span className="text-base font-black text-primary">{calculatedPrice}</span>
               <span className="text-xs text-muted-foreground">{t('common.perMonth')}</span>
             </div>
-            {provider.uptime30days && (
-              <div className="flex items-center gap-1.5 text-sm mt-1">
-                <Icon name="Activity" size={12} className="text-secondary flex-shrink-0" />
-                <span className="font-semibold text-foreground">{t('common.uptime')}: {provider.uptime30days}%</span>
-              </div>
-            )}
-          </div>
+          {provider.uptime30days && (
+            <div className="flex items-center gap-1.5 text-sm mt-1">
+              <Icon name="Activity" size={12} className="text-secondary flex-shrink-0" />
+              <span className="font-semibold text-foreground">{t('common.uptime')}: {provider.uptime30days}%</span>
+            </div>
+          )}
         </div>
     </div>
   );
