@@ -33,10 +33,10 @@ export const ProvidersList = ({
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 auto-rows-min">
       {filteredProviders.map((provider, index) => (
-        <div key={provider.id}>
-          <ProviderCard
-            provider={provider}
-            index={index}
+        <ProviderCard
+          key={provider.id}
+          provider={provider}
+          index={index}
           config={configs[provider.id]}
           onUpdateConfig={(key, value) => updateConfig(provider.id, key, value)}
           calculatedPrice={calculatePrice(provider, configs[provider.id])}
@@ -51,8 +51,7 @@ export const ProvidersList = ({
           })}
           isSelected={selectedForComparison.includes(provider.id)}
           onToggleCompare={() => toggleComparison(provider.id)}
-          />
-        </div>
+        />
       ))}
     </div>
   );
