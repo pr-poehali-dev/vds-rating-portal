@@ -98,7 +98,7 @@ export const ProviderCard = ({
         }`}
         style={{
           borderRadius: '3rem',
-          clipPath: 'polygon(0 3rem, 0 0, 3rem 0, calc(100% - 11rem) 0, calc(100% - 11rem) 0.5rem, calc(100% - 10.5rem) 1rem, calc(100% - 10rem) 1.5rem, calc(100% - 9.5rem) 2rem, calc(100% - 9rem) 2.5rem, calc(100% - 8.5rem) 3rem, calc(100% - 8rem) 3.5rem, calc(100% - 7.5rem) 4rem, calc(100% - 7rem) 4.3rem, calc(100% - 6.5rem) 4.5rem, calc(100% - 6rem) 4.6rem, calc(100% - 5.5rem) 4.65rem, calc(100% - 5rem) 4.7rem, calc(100% - 4.5rem) 4.65rem, calc(100% - 4rem) 4.6rem, calc(100% - 3.5rem) 4.5rem, calc(100% - 3rem) 4.3rem, calc(100% - 2.5rem) 4rem, calc(100% - 2rem) 3.5rem, calc(100% - 1.5rem) 3rem, calc(100% - 1rem) 2.5rem, calc(100% - 0.5rem) 2rem, 100% 1.5rem, 100% 100%, calc(100% - 3rem) 100%, 3rem 100%, 0 calc(100% - 3rem))'
+          clipPath: 'polygon(0 3rem, 0 0, 3rem 0, calc(100% - 9.5rem) 0, calc(100% - 9.5rem) 1rem, calc(100% - 9.5rem) 5rem, 100% 5rem, 100% 100%, calc(100% - 3rem) 100%, 3rem 100%, 0 calc(100% - 3rem))'
         }}
       >
 
