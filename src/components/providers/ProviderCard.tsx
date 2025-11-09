@@ -74,7 +74,7 @@ export const ProviderCard = ({
   return (
     <Card 
       className={`group border-0 transition-all duration-300 hover-lift overflow-hidden relative rounded-[3rem] ${
-        isSelected ? 'shadow-lg shadow-primary/30 bg-primary' : 'bg-primary hover:shadow-xl'
+        isSelected ? 'shadow-lg shadow-primary/30 bg-[#1a1a1a]' : 'bg-[#1a1a1a] hover:shadow-xl'
       }`}
     >
       {onToggleCompare && (

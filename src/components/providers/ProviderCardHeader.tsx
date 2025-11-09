@@ -118,7 +118,7 @@ export const ProviderCardHeader = ({
       </div>
       
       <div className="w-full lg:w-[280px] flex-shrink-0">
-        <div className="bg-accent border-2 border-primary/20 rounded-2xl p-4 sm:p-6 text-center flex flex-col h-full">
+        <div className="bg-[#0a0a0a] border-0 rounded-[2rem] p-4 sm:p-6 text-center flex flex-col h-full">
           <div className="min-h-[48px] sm:min-h-[60px] flex items-center justify-center mb-3">
             {provider.promoText && (
               <div className="bg-secondary/20 border border-secondary rounded-xl px-2 sm:px-3 py-1.5">
