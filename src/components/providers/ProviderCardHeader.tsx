@@ -56,7 +56,7 @@ export const ProviderCardHeader = ({
         
         <div className="flex flex-col gap-1">
             <div className="flex items-start gap-1.5 text-sm">
-              <Icon name="MapPin" size={12} className="text-primary mt-0.5 flex-shrink-0" />
+              <Icon name="MapPin" size={14} className="text-primary mt-0.5 flex-shrink-0" />
               <div className="flex items-center gap-1">
                 <span className="text-foreground">
                   {showAllLocations 
@@ -82,23 +82,23 @@ export const ProviderCardHeader = ({
               </div>
             </div>
             <div className="flex items-center gap-1.5 text-sm">
-              <Icon name="Gift" size={12} className={provider.trialDays ? "text-primary" : "text-muted-foreground"} />
+              <Icon name="Gift" size={14} className={provider.trialDays ? "text-primary" : "text-muted-foreground"} />
               <span className="font-semibold text-foreground truncate">
                 {provider.trialDays ? `${provider.trialDays} ${provider.trialDays === 1 ? t('common.day') : provider.trialDays < 5 ? t('common.daysGenitive') : t('common.days')} ${t('common.free')}` : 'Тест по запросу'}
               </span>
             </div>
             {provider.fz152Compliant && (
               <div className="flex items-center gap-1.5 text-sm">
-                <Icon name="ShieldCheck" size={12} className="text-primary flex-shrink-0" />
+                <Icon name="ShieldCheck" size={14} className="text-primary flex-shrink-0" />
                 <span className="font-semibold text-foreground truncate">152-ФЗ</span>
               </div>
             )}
             <div className="flex items-center gap-1.5 text-sm">
-              <Icon name="HardDrive" size={12} className="text-primary flex-shrink-0" />
+              <Icon name="HardDrive" size={14} className="text-primary flex-shrink-0" />
               <span className="font-semibold text-foreground truncate">{provider.technicalSpecs.diskType}</span>
             </div>
             <div className="flex items-center gap-1.5 text-sm">
-              <Icon name="Box" size={12} className="text-primary flex-shrink-0" />
+              <Icon name="Box" size={14} className="text-primary flex-shrink-0" />
               <div className="flex flex-wrap gap-1">
                 {provider.technicalSpecs.virtualization.slice(0, 2).map((virt, idx) => {
                   const getVirtColor = (type: string) => {
@@ -122,14 +122,14 @@ export const ProviderCardHeader = ({
             </div>
 
             <div className="flex items-center gap-1.5 text-sm mt-2">
-              <Icon name="CreditCard" size={12} className="text-primary flex-shrink-0" />
+              <Icon name="CreditCard" size={14} className="text-primary flex-shrink-0" />
               <span className="font-semibold text-foreground">{t('common.from')} </span>
               <span className="text-base font-black text-primary">{calculatedPrice}</span>
               <span className="text-xs text-muted-foreground">{t('common.perMonth')}</span>
             </div>
           {provider.uptime30days && (
             <div className="flex items-center gap-1.5 text-sm mt-1">
-              <Icon name="Activity" size={12} className="text-secondary flex-shrink-0" />
+              <Icon name="Activity" size={14} className="text-secondary flex-shrink-0" />
               <span className="font-semibold text-foreground">{t('common.uptime')}: {provider.uptime30days}%</span>
             </div>
           )}
