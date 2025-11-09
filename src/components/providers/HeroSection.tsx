@@ -8,7 +8,7 @@ export const HeroSection = () => {
   const { t, language } = useLanguage();
   
   return (
-    <section className="relative pt-20 pb-32 overflow-hidden">
+    <section className="relative pt-20 pb-32 overflow-hidden" itemScope itemType="https://schema.org/WebPageElement">
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px]"></div>
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[120px]"></div>
       

@@ -15,3 +15,7 @@ Allow: /
 User-agent: *
 Allow: /
 Disallow: /admin
+
+Sitemap: https://vps-rating.poehali.dev/sitemap.xml
+
+Host: https://vps-rating.poehali.dev

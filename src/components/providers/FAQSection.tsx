@@ -58,7 +58,7 @@ export const FAQSection = () => {
   };
 
   return (
-    <section id="faq" className="py-24 relative">
+    <section id="faq" className="py-24 relative" itemScope itemType="https://schema.org/FAQPage">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16 space-y-4">
@@ -66,9 +66,9 @@ export const FAQSection = () => {
               <Icon name="HelpCircle" size={16} className="text-primary" />
               <span className="text-sm font-bold text-primary">Часто задаваемые вопросы</span>
             </div>
-            <h2 className="text-5xl md:text-6xl font-extrabold text-foreground">
-              FAQ
-            </h2>
+            <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
+              FAQ по VPS хостингу
+            </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Ответы на популярные вопросы о VDS хостинге
             </p>
@@ -79,6 +79,9 @@ export const FAQSection = () => {
               <div
                 key={index}
                 className="bg-card border-2 border-border rounded-2xl overflow-hidden transition-all duration-300 hover:border-primary/50"
+                itemScope
+                itemProp="mainEntity"
+                itemType="https://schema.org/Question"
               >
                 <Button
                   variant="ghost"
@@ -89,7 +92,7 @@ export const FAQSection = () => {
                     <div className="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
                       <Icon name="MessageCircle" size={16} className="text-primary" />
                     </div>
-                    <span className="text-base md:text-lg font-bold text-foreground text-left">
+                    <span className="text-base md:text-lg font-bold text-foreground text-left" itemProp="name">
                       {item.question}
                     </span>
                   </div>
@@ -101,9 +104,9 @@ export const FAQSection = () => {
                 </Button>
                 
                 {openIndex === index && (
-                  <div className="px-6 pb-6 animate-in slide-in-from-top-2 duration-300">
+                  <div className="px-6 pb-6 animate-in slide-in-from-top-2 duration-300" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
                     <div className="pl-12 pr-4">
-                      <p className="text-muted-foreground leading-relaxed">
+                      <p className="text-muted-foreground leading-relaxed" itemProp="text">
                         {item.answer}
                       </p>
                     </div>
