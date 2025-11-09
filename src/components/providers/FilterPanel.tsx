@@ -268,7 +268,7 @@ export const FilterPanel = ({
           </div>
         </div>
 
-        <div className="group md:col-span-2">
+        <div className="group">
           <label className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
             <Icon name="ArrowUpDown" size={16} className="text-primary" />
             {t('filters.sortBy')}
@@ -308,10 +308,12 @@ export const FilterPanel = ({
             </Button>
           </div>
         </div>
-      </div>
 
-      <div className="flex items-center justify-between gap-4 relative z-10">
-        <div className="flex-1 max-w-md ml-auto">
+        <div className="group">
+          <label className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
+            <Icon name="Search" size={16} className="text-primary" />
+            {t('filters.searchByName')}
+          </label>
           <div className="relative">
             <Icon name="Search" size={18} className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <input
@@ -319,7 +321,7 @@ export const FilterPanel = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t('filters.findProvider')}
-              className="w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-2.5 sm:py-3 bg-background border-2 border-border rounded-xl focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm sm:text-base text-foreground placeholder:text-muted-foreground font-semibold hover:border-primary/50 hover:shadow-md"
+              className="w-full pl-10 sm:pl-12 pr-10 sm:pr-12 h-12 bg-background border-2 border-border rounded-xl focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm sm:text-base text-foreground placeholder:text-muted-foreground font-semibold hover:border-primary/50 hover:shadow-md"
             />
             {searchQuery && (
               <button
@@ -330,25 +332,29 @@ export const FilterPanel = ({
               </button>
             )}
           </div>
+        </div>
+      </div>
+
+      {(searchQuery || hasActiveFilters) && (
+        <div className="flex items-center justify-between mt-4 relative z-10">
           {searchQuery && (
-            <div className="mt-2 text-sm text-muted-foreground text-right">
+            <div className="text-sm text-muted-foreground">
               {t('filters.found')}: <span className="font-bold text-foreground">{filteredCount}</span> {t('filters.providers')}
             </div>
           )}
+          {hasActiveFilters && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={clearFilters}
+              className="text-[10px] sm:text-xs font-bold hover:bg-destructive hover:text-white hover:border-destructive transition-all shadow-lg hover:shadow-xl h-9 px-3 sm:px-4 flex-shrink-0 ml-auto"
+            >
+              <Icon name="X" size={12} className="sm:mr-1" />
+              <span className="hidden sm:inline">{t('filters.resetAll')}</span>
+            </Button>
+          )}
         </div>
-        
-        {hasActiveFilters && (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={clearFilters}
-            className="text-[10px] sm:text-xs font-bold hover:bg-destructive hover:text-white hover:border-destructive transition-all shadow-lg hover:shadow-xl h-10 sm:h-11 px-3 sm:px-4 flex-shrink-0"
-          >
-            <Icon name="X" size={12} className="sm:mr-1" />
-            <span className="hidden sm:inline">{t('filters.resetAll')}</span>
-          </Button>
-        )}
-      </div>
+      )}
     </div>
   );
 };
