@@ -49,7 +49,6 @@ export const ProviderCardHeader = ({
             <span className="text-base font-bold text-foreground">
               {avgRating.toFixed(1)}
             </span>
-            <span className="text-muted-foreground text-xs">из 5</span>
           </div>
           <div className="flex flex-col gap-1">
             <div className="flex items-start gap-1.5 text-sm">
