@@ -31,12 +31,27 @@ export const ProvidersList = ({
   toggleComparison
 }: ProvidersListProps) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+    <div className="flex flex-wrap gap-6">
+      <style>{`
+        @media (min-width: 1024px) {
+          .provider-card-wrapper {
+            width: calc(50% - 12px);
+          }
+        }
+        @media (min-width: 1280px) {
+          .provider-card-wrapper {
+            width: calc(33.333% - 16px);
+          }
+        }
+        .provider-card-wrapper {
+          width: 100%;
+        }
+      `}</style>
       {filteredProviders.map((provider, index) => (
-        <ProviderCard
-          key={provider.id}
-          provider={provider}
-          index={index}
+        <div key={provider.id} className="provider-card-wrapper">
+          <ProviderCard
+            provider={provider}
+            index={index}
           config={configs[provider.id]}
           onUpdateConfig={(key, value) => updateConfig(provider.id, key, value)}
           calculatedPrice={calculatePrice(provider, configs[provider.id])}
@@ -51,7 +66,8 @@ export const ProvidersList = ({
           })}
           isSelected={selectedForComparison.includes(provider.id)}
           onToggleCompare={() => toggleComparison(provider.id)}
-        />
+          />
+        </div>
       ))}
     </div>
   );
