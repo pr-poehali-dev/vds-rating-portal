@@ -114,7 +114,7 @@ export const ProviderCard = ({
         </div>
       )}
       
-      <CardHeader className={`p-4 md:p-6 ${index === 0 ? 'pt-12 md:pt-14' : ''}`}>
+      <CardHeader className={`p-5 ${index === 0 ? 'pt-14' : ''}`}>
         <ProviderCardHeader
           provider={provider}
           index={index}
@@ -123,7 +123,7 @@ export const ProviderCard = ({
         />
       </CardHeader>
       
-      <CardContent className="px-4 md:px-6 pb-4 md:pb-6">
+      <CardContent className="px-5 pb-5">
         <div className="space-y-3">
           <Button 
             variant="ghost" 
@@ -158,7 +158,7 @@ export const ProviderCard = ({
 
           {showDetails && (
             <div className="pt-3 border-t border-border grid grid-cols-1 gap-3">
-              <div className="bg-accent border border-secondary/30 rounded-2xl p-3 sm:p-4">
+              <div className="bg-accent border border-secondary/30 rounded-2xl p-4">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-9 h-9 bg-secondary rounded-xl flex items-center justify-center shadow-lg">
                     <Icon name="Check" size={18} className="text-background" />
@@ -177,7 +177,7 @@ export const ProviderCard = ({
                 </ul>
               </div>
               
-              <div className="bg-accent border border-destructive/30 rounded-2xl p-3 sm:p-4">
+              <div className="bg-accent border border-destructive/30 rounded-2xl p-4">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-9 h-9 bg-destructive rounded-xl flex items-center justify-center shadow-lg">
                     <Icon name="AlertCircle" size={18} className="text-white" />
@@ -197,7 +197,7 @@ export const ProviderCard = ({
               </div>
 
               {provider.fz152Compliant && (
-                <div className="md:col-span-2 bg-primary/5 border border-primary/20 rounded-2xl p-4 sm:p-5">
+                <div className="md:col-span-2 bg-primary/5 border border-primary/20 rounded-2xl p-4">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-9 h-9 bg-primary/20 rounded-xl flex items-center justify-center">
                       <Icon name="ShieldCheck" size={18} className="text-primary" />
