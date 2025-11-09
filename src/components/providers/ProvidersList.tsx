@@ -31,19 +31,9 @@ export const ProvidersList = ({
   toggleComparison
 }: ProvidersListProps) => {
   return (
-    <div className="flex flex-wrap gap-6">
-      <style>{`
-        .provider-card-wrapper {
-          width: 100%;
-        }
-        @media (min-width: 1024px) {
-          .provider-card-wrapper {
-            width: calc(33.333% - 16px);
-          }
-        }
-      `}</style>
+    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 auto-rows-min">
       {filteredProviders.map((provider, index) => (
-        <div key={provider.id} className="provider-card-wrapper">
+        <div key={provider.id}>
           <ProviderCard
             provider={provider}
             index={index}
