@@ -21,7 +21,7 @@ export const ProviderCardHeader = ({
   const avgRating = provider.reviews.reduce((sum, r) => sum + r.rating, 0) / provider.reviews.length;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
+    <div className="flex flex-col lg:flex-row-reverse gap-6 items-start lg:items-center justify-between">
       <div className="flex items-start gap-4 sm:gap-6 flex-1">
         <div className="relative flex-shrink-0">
           <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden bg-white border border-primary/10 shadow-soft flex items-center justify-center">
