@@ -72,7 +72,7 @@ export const ProviderCard = ({
   };
 
   return (
-    <div className={`relative flex flex-col group transition-all duration-500 ${showDetails ? 'col-span-1 lg:col-span-2 xl:col-span-3' : ''}`}>
+    <div className={`relative flex flex-col group transition-all duration-500 ${showDetails ? 'z-10' : ''}`}>
       <div className="absolute top-0.5 right-0 z-50 flex gap-2 hover-lift">
         {onToggleCompare && (
           <button 
@@ -129,8 +129,8 @@ export const ProviderCard = ({
         </div>
 
         <div 
-          className={`overflow-hidden transition-all duration-500 ease-in-out -mx-5 ${
-            showDetails ? 'max-h-[10000px] opacity-100' : 'max-h-0 opacity-0'
+          className={`overflow-hidden transition-all duration-500 ease-in-out ${
+            showDetails ? 'max-h-[10000px] opacity-100 -mx-5' : 'max-h-0 opacity-0'
           }`}
         >
           <div className="pt-3 px-5 border-t border-border grid grid-cols-1 gap-3">
