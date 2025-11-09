@@ -27,6 +27,29 @@ export const UptimeChart = ({ providers }: UptimeChartProps) => {
     return `${Math.round(downtimeMinutes / 60)} ч`;
   };
 
+  const trackClick = async (providerId: number) => {
+    try {
+      await fetch('https://functions.poehali.dev/d0b8e2ce-45c2-4ab9-8d08-baf03c0268f4', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          provider_id: providerId,
+        }),
+      });
+    } catch (error) {
+      console.error('Error tracking click:', error);
+    }
+  };
+
+  const handleProviderClick = (provider: Provider) => {
+    if (provider.url) {
+      trackClick(provider.id);
+      window.open(provider.url, '_blank');
+    }
+  };
+
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="absolute top-20 right-10 w-[400px] h-[400px] bg-green-500/10 rounded-full blur-[100px]"></div>
@@ -59,8 +82,15 @@ export const UptimeChart = ({ providers }: UptimeChartProps) => {
                 return (
                   <div 
                     key={provider.id} 
-                    className="group bg-background border border-border rounded-xl p-4 hover:border-primary/50 transition-all"
+                    className="relative group bg-background border border-border rounded-xl p-4 hover:border-primary/50 transition-all"
                   >
+                    <button 
+                      onClick={() => handleProviderClick(provider)}
+                      className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center shadow-lg transition-all z-10"
+                    >
+                      <Icon name="ArrowUpRight" size={14} className="text-[#2a2a2a]" />
+                    </button>
+
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3 flex-1 min-w-0">
                         <div className="flex-shrink-0 w-10 h-10 rounded-lg overflow-hidden bg-white border border-primary/10 flex items-center justify-center">
