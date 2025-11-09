@@ -128,25 +128,6 @@ export const ProviderCard = ({
           <Button 
             variant="ghost" 
             className="w-full text-sm font-semibold hover:bg-accent/50 hover:text-primary justify-between"
-            onClick={onToggleConfig}
-          >
-            <div className="flex items-center gap-2">
-              <Icon name="Settings" size={18} />
-              <span>{t('card.configureResources')}</span>
-            </div>
-            <Icon name={configOpen ? "ChevronUp" : "ChevronDown"} size={18} />
-          </Button>
-
-          {configOpen && (
-            <ResourceConfigurator
-              config={config}
-              onUpdateConfig={onUpdateConfig}
-            />
-          )}
-
-          <Button 
-            variant="ghost" 
-            className="w-full text-sm font-semibold hover:bg-accent/50 hover:text-primary justify-between"
             onClick={onToggleDetails}
           >
             <div className="flex items-center gap-2">

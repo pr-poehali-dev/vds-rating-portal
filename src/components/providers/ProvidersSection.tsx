@@ -4,6 +4,7 @@ import { ComparisonTable } from './ComparisonTable';
 import { FilterPanel } from './FilterPanel';
 import { ComparisonControls } from './ComparisonControls';
 import { ProvidersList } from './ProvidersList';
+import { GlobalResourceConfig } from './GlobalResourceConfig';
 import { lastUpdateDate } from '@/data/providers';
 import Icon from '@/components/ui/icon';
 
@@ -236,6 +237,14 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     }));
   };
 
+  const applyGlobalConfig = (config: ResourceConfig) => {
+    const updatedConfigs: Record<number, ResourceConfig> = {};
+    providersWithReviews.forEach(provider => {
+      updatedConfigs[provider.id] = { ...config };
+    });
+    setConfigs(updatedConfigs);
+  };
+
   const allLocations = Array.from(
     new Set(providersWithReviews.flatMap(p => p.locations))
   ).sort();
@@ -307,34 +316,37 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
         </div>
       </div>
       
-      <FilterPanel
-        filterFZ152={filterFZ152}
-        setFilterFZ152={setFilterFZ152}
-        filterTrialPeriod={filterTrialPeriod}
-        setFilterTrialPeriod={setFilterTrialPeriod}
-        filterLocation={filterLocation}
-        setFilterLocation={setFilterLocation}
-        filterVirtualization={filterVirtualization}
-        setFilterVirtualization={setFilterVirtualization}
-        filterMinDatacenters={filterMinDatacenters}
-        setFilterMinDatacenters={setFilterMinDatacenters}
-        filterDiskType={filterDiskType}
-        setFilterDiskType={setFilterDiskType}
-        filterPaymentMethod={filterPaymentMethod}
-        setFilterPaymentMethod={setFilterPaymentMethod}
-        filterOS={filterOS}
-        setFilterOS={setFilterOS}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        allLocations={allLocations}
-        allVirtualizations={allVirtualizations}
-        allDiskTypes={allDiskTypes}
-        allPaymentMethods={allPaymentMethods}
-        allOS={allOS}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        filteredCount={filteredProviders.length}
-      />
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 mb-6">
+        <FilterPanel
+          filterFZ152={filterFZ152}
+          setFilterFZ152={setFilterFZ152}
+          filterTrialPeriod={filterTrialPeriod}
+          setFilterTrialPeriod={setFilterTrialPeriod}
+          filterLocation={filterLocation}
+          setFilterLocation={setFilterLocation}
+          filterVirtualization={filterVirtualization}
+          setFilterVirtualization={setFilterVirtualization}
+          filterMinDatacenters={filterMinDatacenters}
+          setFilterMinDatacenters={setFilterMinDatacenters}
+          filterDiskType={filterDiskType}
+          setFilterDiskType={setFilterDiskType}
+          filterPaymentMethod={filterPaymentMethod}
+          setFilterPaymentMethod={setFilterPaymentMethod}
+          filterOS={filterOS}
+          setFilterOS={setFilterOS}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          allLocations={allLocations}
+          allVirtualizations={allVirtualizations}
+          allDiskTypes={allDiskTypes}
+          allPaymentMethods={allPaymentMethods}
+          allOS={allOS}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          filteredCount={filteredProviders.length}
+        />
+        <GlobalResourceConfig onApplyConfig={applyGlobalConfig} />
+      </div>
 
       <ProvidersList
         filteredProviders={filteredProviders.slice(0, providersToShow)}
