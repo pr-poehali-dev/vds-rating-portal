@@ -102,19 +102,9 @@ export const ProviderCard = ({
         }}
       >
 
-      {index === 0 && (
-        <div className="absolute -top-1 -left-1 z-10">
-          <div className="relative">
-            <div className="absolute inset-0 bg-primary rounded-br-2xl rounded-tl-2xl blur-lg"></div>
-            <div className="relative bg-primary text-background font-bold px-5 py-2.5 rounded-br-2xl rounded-tl-2xl shadow-lg flex items-center gap-2">
-              <Icon name="Crown" size={16} />
-              {t('card.leader')}
-            </div>
-          </div>
-        </div>
-      )}
+
       
-      <CardHeader className={`p-5 ${index === 0 ? 'pt-14' : ''}`}>
+      <CardHeader className="p-5">
         <ProviderCardHeader
           provider={provider}
           index={index}
