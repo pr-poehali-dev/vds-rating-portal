@@ -15,6 +15,10 @@ export const ResourceConfigurator = ({
 }: ResourceConfiguratorProps) => {
   const { t } = useLanguage();
   
+  if (!config) {
+    return null;
+  }
+  
   return (
     <div className="bg-accent/50 border border-primary/10 rounded-2xl p-6">
       <div className="flex items-center justify-between mb-4">
