@@ -2001,5 +2001,700 @@ export const providers: Provider[] = [
       { author: 'Павел Ж.', text: 'Тестовая неделя дала время всё проверить. SSD диски работают быстро, хотя не NVMe. Для WordPress сайта хватает.', rating: 4, date: '23 окт 2025' },
       { author: 'Наталья Д.', text: 'Панель ISPmanager удобнее собственных панелей других провайдеров. Привыкла к интерфейсу за день. Очень довольна!', rating: 5, date: '21 окт 2025' }
     ]
+  },
+  {
+    id: 32,
+    name: 'T1 Cloud',
+    logo: 'https://cdn.poehali.dev/files/t1cloud-logo.png',
+    rating: 8.8,
+    basePrice: 0,
+    cpuPrice: 220,
+    ramPrice: 110,
+    storagePrice: 12,
+    features: ['NVMe диски', 'ЦОД Tier III', '152-ФЗ', 'Техподдержка 24/7'],
+    locations: ['Москва', 'Санкт-Петербург'],
+    trialDays: 0,
+    url: 'https://t1-cloud.ru/',
+    pros: ['ЦОД уровня Tier III', 'Полное соответствие 152-ФЗ', 'Корпоративная поддержка', 'Российская компания'],
+    cons: ['Высокая цена', 'Нет тестового периода', 'Только 2 локации'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '10 Гбит/с',
+      virtualization: ['KVM', 'VMware'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Astra Linux'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'По запросу'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.95%',
+      supportResponseTime: '< 15 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 150,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [],
+      paymentMethods: ['Безналичный расчёт', 'Банковская карта'],
+      minPrice: 220
+    },
+    popularity: 15000,
+    promoText: 'Корпоративные облачные решения с SLA 99.95%',
+    caseStudies: ['Государственные проекты', 'Банковский сектор', 'Корпоративные приложения'],
+    uptime30days: 99.94,
+    reviews: []
+  },
+  {
+    id: 33,
+    name: 'MWS',
+    logo: 'https://cdn.poehali.dev/files/mws-logo.png',
+    rating: 8.5,
+    basePrice: 0,
+    cpuPrice: 200,
+    ramPrice: 95,
+    storagePrice: 10,
+    features: ['SSD диски', '152-ФЗ', 'Managed услуги', 'ISPmanager'],
+    locations: ['Москва', 'Санкт-Петербург', 'Новосибирск'],
+    trialDays: 7,
+    url: 'https://mws.ru/',
+    pros: ['Тестовая неделя', 'Managed услуги', 'Опыт с 2003 года', '152-ФЗ'],
+    cons: ['Нет NVMe дисков', 'Устаревший интерфейс', 'Мало локаций'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM', 'OpenVZ'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: false,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server'],
+      controlPanel: 'ISPmanager',
+      apiAccess: true,
+      ddosProtection: 'Базовая защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.5%',
+      supportResponseTime: '< 30 мин',
+      moneyBackGuarantee: 7
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 120,
+      monitoring: true,
+      snapshots: false,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Безналичный расчёт'],
+      minPrice: 200
+    },
+    popularity: 8000,
+    promoText: '7 дней тест для новых клиентов',
+    caseStudies: ['Корпоративные сайты', 'CMS-проекты', 'Базы данных'],
+    uptime30days: 99.52,
+    reviews: []
+  },
+  {
+    id: 34,
+    name: 'Rosukrep',
+    logo: 'https://cdn.poehali.dev/files/rosukrep-logo.png',
+    rating: 8.3,
+    basePrice: 0,
+    cpuPrice: 195,
+    ramPrice: 100,
+    storagePrice: 11,
+    features: ['SSD диски', '152-ФЗ', 'DDoS защита', 'Российские ЦОД'],
+    locations: ['Москва', 'Санкт-Петербург', 'Новосибирск', 'Краснодар'],
+    trialDays: 0,
+    url: 'https://www.rosukrep.ru/',
+    pros: ['4 локации в России', 'Соответствие 152-ФЗ', 'DDoS защита', 'Российская компания'],
+    cons: ['Нет NVMe', 'Нет тестового периода', 'Только российские ЦОД'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: false,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Astra Linux'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'До 50 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.5%',
+      supportResponseTime: '< 20 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 110,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [],
+      paymentMethods: ['Банковская карта', 'Безналичный расчёт'],
+      minPrice: 195
+    },
+    popularity: 6000,
+    promoText: 'Российские ЦОД с соответствием 152-ФЗ',
+    caseStudies: ['Государственные проекты', 'Корпоративные сайты', 'E-commerce'],
+    uptime30days: 99.48,
+    reviews: []
+  },
+  {
+    id: 35,
+    name: 'IT-GRAD',
+    logo: 'https://cdn.poehali.dev/files/itgrad-logo.png',
+    rating: 8.9,
+    basePrice: 0,
+    cpuPrice: 230,
+    ramPrice: 120,
+    storagePrice: 13,
+    features: ['NVMe диски', 'ЦОД Tier III', 'Managed услуги', '152-ФЗ'],
+    locations: ['Москва', 'Санкт-Петербург'],
+    trialDays: 14,
+    url: 'https://it-grad.ru/',
+    pros: ['Тест 14 дней', 'ЦОД Tier III', 'Managed услуги', 'Высокий SLA'],
+    cons: ['Высокая цена', 'Только 2 локации', 'Фокус на корпоративный сектор'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '10 Гбит/с',
+      virtualization: ['KVM', 'VMware'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Astra Linux', 'Red Hat'],
+      controlPanel: 'VMware vCloud Director',
+      apiAccess: true,
+      ddosProtection: 'Корпоративная защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.95%',
+      supportResponseTime: '< 10 мин',
+      moneyBackGuarantee: 14
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 180,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 15 }
+      ],
+      paymentMethods: ['Безналичный расчёт', 'Банковская карта'],
+      minPrice: 230
+    },
+    popularity: 12000,
+    promoText: '14 дней тест + корпоративная техподдержка',
+    caseStudies: ['Банки', 'Корпоративные системы', 'SAP', '1C на облаке'],
+    uptime30days: 99.96,
+    reviews: []
+  },
+  {
+    id: 36,
+    name: 'РТК ЦОД',
+    logo: 'https://cdn.poehali.dev/files/rtk-logo.png',
+    rating: 8.6,
+    basePrice: 0,
+    cpuPrice: 240,
+    ramPrice: 125,
+    storagePrice: 14,
+    features: ['NVMe диски', 'ЦОД Tier III', '152-ФЗ', 'РТК инфраструктура'],
+    locations: ['Москва', 'Санкт-Петербург', 'Ростов-на-Дону'],
+    trialDays: 0,
+    url: 'https://www.dc.rt.ru/',
+    pros: ['Инфраструктура Ростелекома', 'ЦОД Tier III', 'Высокий SLA', 'Государственные проекты'],
+    cons: ['Высокая цена', 'Нет тестового периода', 'Сложная процедура подключения'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '10 Гбит/с',
+      virtualization: ['KVM', 'VMware'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Astra Linux'],
+      controlPanel: 'VMware vCloud Director',
+      apiAccess: true,
+      ddosProtection: 'Корпоративная защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.95%',
+      supportResponseTime: '< 15 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 200,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [],
+      paymentMethods: ['Безналичный расчёт'],
+      minPrice: 240
+    },
+    popularity: 10000,
+    promoText: 'ЦОД уровня Tier III на инфраструктуре Ростелекома',
+    caseStudies: ['Государственные системы', 'Телеком проекты', 'Банковский сектор'],
+    uptime30days: 99.93,
+    reviews: []
+  },
+  {
+    id: 37,
+    name: 'Айтеко',
+    logo: 'https://cdn.poehali.dev/files/iteco-logo.png',
+    rating: 8.4,
+    basePrice: 0,
+    cpuPrice: 210,
+    ramPrice: 105,
+    storagePrice: 11,
+    features: ['SSD диски', '152-ФЗ', 'Managed услуги', 'Российские ЦОД'],
+    locations: ['Москва', 'Санкт-Петербург', 'Екатеринбург'],
+    trialDays: 7,
+    url: 'https://iteco.ru/',
+    pros: ['Тестовая неделя', 'Managed услуги', 'Опыт с 2000 года', '152-ФЗ'],
+    cons: ['Нет NVMe', 'Устаревший интерфейс', 'Мало локаций'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM', 'VMware'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: false,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Astra Linux'],
+      controlPanel: 'ISPmanager',
+      apiAccess: true,
+      ddosProtection: 'Базовая защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.5%',
+      supportResponseTime: '< 25 мин',
+      moneyBackGuarantee: 7
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 130,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 12 }
+      ],
+      paymentMethods: ['Банковская карта', 'Безналичный расчёт', 'ЮMoney'],
+      minPrice: 210
+    },
+    popularity: 7000,
+    promoText: '7 дней тест + managed услуги',
+    caseStudies: ['Корпоративные проекты', '1C на облаке', 'CMS-системы'],
+    uptime30days: 99.51,
+    reviews: []
+  },
+  {
+    id: 38,
+    name: 'Linx',
+    logo: 'https://cdn.poehali.dev/files/linx-logo.png',
+    rating: 8.7,
+    basePrice: 0,
+    cpuPrice: 185,
+    ramPrice: 90,
+    storagePrice: 9,
+    features: ['NVMe диски', '152-ФЗ', 'DDoS защита', 'Почасовая оплата'],
+    locations: ['Москва', 'Санкт-Петербург', 'Нижний Новгород', 'Екатеринбург'],
+    trialDays: 3,
+    url: 'https://linx-host.ru/',
+    pros: ['Почасовая оплата', 'NVMe диски', '4 локации', 'Доступные цены'],
+    cons: ['Короткий тестовый период', 'Не очень известная компания', 'Базовая поддержка'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Windows Server'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'До 80 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.5%',
+      supportResponseTime: '< 30 мин',
+      moneyBackGuarantee: 3
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 90,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 10 },
+        { months: 6, percent: 5 }
+      ],
+      paymentMethods: ['Банковская карта', 'СБП', 'ЮMoney'],
+      minPrice: 185
+    },
+    popularity: 5000,
+    promoText: 'Почасовая оплата + NVMe диски от 185₽/мес',
+    caseStudies: ['Веб-разработка', 'Discord боты', 'Игровые серверы'],
+    uptime30days: 99.54,
+    reviews: []
+  },
+  {
+    id: 39,
+    name: 'Софтлайн',
+    logo: 'https://cdn.poehali.dev/files/softline-logo.png',
+    rating: 8.5,
+    basePrice: 0,
+    cpuPrice: 235,
+    ramPrice: 115,
+    storagePrice: 13,
+    features: ['NVMe диски', 'ЦОД Tier III', 'Managed услуги', '152-ФЗ'],
+    locations: ['Москва', 'Санкт-Петербург'],
+    trialDays: 0,
+    url: 'https://softline.ru/',
+    pros: ['Крупная IT-компания', 'Managed услуги', 'ЦОД Tier III', 'Корпоративная поддержка'],
+    cons: ['Высокая цена', 'Нет тестового периода', 'Только 2 локации'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '10 Гбит/с',
+      virtualization: ['KVM', 'VMware'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Astra Linux', 'Red Hat'],
+      controlPanel: 'VMware vCloud Director',
+      apiAccess: true,
+      ddosProtection: 'Корпоративная защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 15 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 170,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [],
+      paymentMethods: ['Безналичный расчёт', 'Банковская карта'],
+      minPrice: 235
+    },
+    popularity: 9000,
+    promoText: 'Корпоративные облачные решения с SLA 99.9%',
+    caseStudies: ['Корпоративные системы', 'SAP', '1C на облаке', 'Microsoft инфраструктура'],
+    uptime30days: 99.89,
+    reviews: []
+  },
+  {
+    id: 40,
+    name: 'LANcloud',
+    logo: 'https://cdn.poehali.dev/files/lancloud-logo.png',
+    rating: 8.2,
+    basePrice: 0,
+    cpuPrice: 205,
+    ramPrice: 100,
+    storagePrice: 10,
+    features: ['SSD диски', '152-ФЗ', 'ISPmanager', 'Российские ЦОД'],
+    locations: ['Москва', 'Санкт-Петербург', 'Новосибирск'],
+    trialDays: 5,
+    url: 'https://lancloud.ru/',
+    pros: ['Тест 5 дней', 'ISPmanager', 'Российская компания', '152-ФЗ'],
+    cons: ['Нет NVMe', 'Мало локаций', 'Базовая поддержка'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: false,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server'],
+      controlPanel: 'ISPmanager',
+      apiAccess: true,
+      ddosProtection: 'Базовая защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.5%',
+      supportResponseTime: '< 30 мин',
+      moneyBackGuarantee: 5
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 100,
+      monitoring: true,
+      snapshots: false,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 10 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Безналичный расчёт'],
+      minPrice: 205
+    },
+    popularity: 4500,
+    promoText: '5 дней тест + ISPmanager в подарок',
+    caseStudies: ['Корпоративные сайты', 'CMS-проекты', 'E-commerce'],
+    uptime30days: 99.47,
+    reviews: []
+  },
+  {
+    id: 41,
+    name: 'Cloud Beeline',
+    logo: 'https://cdn.poehali.dev/files/beeline-logo.png',
+    rating: 8.3,
+    basePrice: 0,
+    cpuPrice: 225,
+    ramPrice: 110,
+    storagePrice: 12,
+    features: ['SSD диски', '152-ФЗ', 'ЦОД Tier III', 'Beeline инфраструктура'],
+    locations: ['Москва', 'Санкт-Петербург', 'Екатеринбург'],
+    trialDays: 0,
+    url: 'https://cloud.beeline.ru/',
+    pros: ['Инфраструктура Билайн', 'ЦОД Tier III', 'Корпоративная поддержка', '152-ФЗ'],
+    cons: ['Нет тестового периода', 'Нет NVMe', 'Высокая цена'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '10 Гбит/с',
+      virtualization: ['KVM', 'VMware'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: false,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Astra Linux'],
+      controlPanel: 'VMware vCloud Director',
+      apiAccess: true,
+      ddosProtection: 'Корпоративная защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.9%',
+      supportResponseTime: '< 20 мин',
+      moneyBackGuarantee: 0
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 140,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [],
+      paymentMethods: ['Безналичный расчёт', 'Банковская карта'],
+      minPrice: 225
+    },
+    popularity: 8500,
+    promoText: 'Облачная инфраструктура на базе ЦОД Билайн',
+    caseStudies: ['Корпоративные проекты', 'Телеком решения', 'E-commerce'],
+    uptime30days: 99.88,
+    reviews: []
+  },
+  {
+    id: 42,
+    name: 'DataRU',
+    logo: 'https://cdn.poehali.dev/files/dataru-logo.png',
+    rating: 8.1,
+    basePrice: 0,
+    cpuPrice: 195,
+    ramPrice: 95,
+    storagePrice: 10,
+    features: ['SSD диски', '152-ФЗ', 'ISPmanager', 'DDoS защита'],
+    locations: ['Москва', 'Санкт-Петербург'],
+    trialDays: 3,
+    url: 'https://dataru.ru/',
+    pros: ['Тест 3 дня', 'Доступные цены', 'ISPmanager', 'DDoS защита'],
+    cons: ['Нет NVMe', 'Только 2 локации', 'Короткий тестовый период'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'SSD',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: false,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server'],
+      controlPanel: 'ISPmanager',
+      apiAccess: true,
+      ddosProtection: 'До 60 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.5%',
+      supportResponseTime: '< 30 мин',
+      moneyBackGuarantee: 3
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 95,
+      monitoring: true,
+      snapshots: false,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 8 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'СБП'],
+      minPrice: 195
+    },
+    popularity: 3500,
+    promoText: '3 дня тест + DDoS защита в подарок',
+    caseStudies: ['Игровые серверы', 'Веб-проекты', 'Discord боты'],
+    uptime30days: 99.46,
+    reviews: []
+  },
+  {
+    id: 43,
+    name: 'mClouds',
+    logo: 'https://cdn.poehali.dev/files/mclouds-logo.png',
+    rating: 8.4,
+    basePrice: 0,
+    cpuPrice: 190,
+    ramPrice: 92,
+    storagePrice: 9,
+    features: ['NVMe диски', '152-ФЗ', 'Почасовая оплата', 'DDoS защита'],
+    locations: ['Москва', 'Санкт-Петербург', 'Казань'],
+    trialDays: 5,
+    url: 'https://mclouds.ru/',
+    pros: ['Почасовая оплата', 'NVMe диски', 'Тест 5 дней', 'Доступные цены'],
+    cons: ['Мало локаций', 'Молодая компания', 'Базовая поддержка'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: true,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Windows Server'],
+      controlPanel: 'Собственная панель',
+      apiAccess: true,
+      ddosProtection: 'До 70 Гбит/с'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.5%',
+      supportResponseTime: '< 25 мин',
+      moneyBackGuarantee: 5
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 85,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 12 },
+        { months: 6, percent: 6 }
+      ],
+      paymentMethods: ['Банковская карта', 'СБП', 'ЮMoney', 'Криптовалюта'],
+      minPrice: 190
+    },
+    popularity: 6500,
+    promoText: 'Почасовая оплата + NVMe диски от 190₽/мес',
+    caseStudies: ['Веб-разработка', 'Игровые серверы', 'Боты'],
+    uptime30days: 99.53,
+    reviews: []
+  },
+  {
+    id: 44,
+    name: 'Nubes',
+    logo: 'https://cdn.poehali.dev/files/nubes-logo.png',
+    rating: 8.6,
+    basePrice: 0,
+    cpuPrice: 200,
+    ramPrice: 98,
+    storagePrice: 10,
+    features: ['NVMe диски', '152-ФЗ', 'Managed услуги', 'ISPmanager'],
+    locations: ['Москва', 'Санкт-Петербург', 'Нижний Новгород'],
+    trialDays: 7,
+    url: 'https://nubes.ru/',
+    pros: ['Тест 7 дней', 'NVMe диски', 'Managed услуги', 'ISPmanager'],
+    cons: ['Мало локаций', 'Средняя известность', 'Нет IPv6'],
+    fz152Compliant: true,
+    fz152Level: 'УЗ-1',
+    technicalSpecs: {
+      diskType: 'NVMe',
+      networkSpeed: '1 Гбит/с',
+      virtualization: ['KVM'],
+      guaranteedResources: true,
+      ipv4: true,
+      ipv6: false,
+      availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Astra Linux'],
+      controlPanel: 'ISPmanager',
+      apiAccess: true,
+      ddosProtection: 'Базовая защита'
+    },
+    serviceGuarantees: {
+      uptimeSLA: '99.7%',
+      supportResponseTime: '< 20 мин',
+      moneyBackGuarantee: 7
+    },
+    additionalServices: {
+      autoBackups: true,
+      backupPrice: 105,
+      monitoring: true,
+      snapshots: true,
+      customOS: true
+    },
+    pricingDetails: {
+      discounts: [
+        { months: 12, percent: 15 },
+        { months: 6, percent: 8 }
+      ],
+      paymentMethods: ['Банковская карта', 'ЮMoney', 'Безналичный расчёт'],
+      minPrice: 200
+    },
+    popularity: 7500,
+    promoText: '7 дней тест + NVMe диски + managed услуги',
+    caseStudies: ['Корпоративные сайты', 'E-commerce', 'CMS-проекты', '1C на облаке'],
+    uptime30days: 99.68,
+    reviews: []
   }
 ];
