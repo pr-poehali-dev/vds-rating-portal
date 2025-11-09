@@ -21,8 +21,7 @@ export const ProviderCardHeader = ({
   const avgRating = provider.reviews.reduce((sum, r) => sum + r.rating, 0) / provider.reviews.length;
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-start gap-3 flex-1">
+    <div className="flex items-start gap-3 flex-1">
         <div className="relative flex-shrink-0">
           <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden bg-white border border-primary/10 shadow-soft flex items-center justify-center">
             <img src={provider.logo} alt={provider.name} className="w-10 h-10 sm:w-12 sm:h-12 object-contain" />
@@ -104,49 +103,24 @@ export const ProviderCardHeader = ({
               </div>
             </div>
 
-          </div>
-        </div>
-      </div>
-      
-      <div className="w-full flex-shrink-0">
-        <div className="bg-[#0a0a0a] border-0 rounded-2xl p-3 text-center flex flex-col">
-          {provider.promoText && (
-            <div className="bg-secondary/20 border border-secondary rounded-xl px-2 py-1 mb-2">
-              <p className="text-[10px] font-bold text-secondary truncate">{provider.promoText}</p>
+            <div className="flex items-center gap-1.5 text-xs mt-2">
+              <Icon name="DollarSign" size={12} className="text-primary flex-shrink-0" />
+              <span className="font-semibold text-foreground">{t('common.from')} </span>
+              <span className="text-lg font-black text-primary">{calculatedPrice}</span>
+              <span className="text-xs text-muted-foreground">{t('common.perMonth')}</span>
+              {provider.pricingDetails.discounts && provider.pricingDetails.discounts.length > 0 && (
+                <Badge variant="outline" className="text-[9px] bg-secondary/10 text-secondary border-secondary/30 px-1 py-0 ml-1">
+                  -{provider.pricingDetails.discounts[0].percent}%
+                </Badge>
+              )}
             </div>
-          )}
-          <div className="text-[10px] font-bold text-primary uppercase tracking-wider mb-1">{t('common.price')}</div>
-          <div className="flex items-baseline justify-center gap-1 mb-2">
-            <span className="text-xs text-muted-foreground font-semibold">{t('common.from')}</span>
-            <span className="text-2xl sm:text-3xl font-black text-primary">{calculatedPrice}</span>
-            <span className="text-sm text-muted-foreground">{t('common.perMonth')}</span>
-          </div>
-          {provider.pricingDetails.discounts && provider.pricingDetails.discounts.length > 0 && (
-            <div className="mb-2">
-              <div className="text-[10px] text-muted-foreground mb-1">{t('common.discounts')}:</div>
-              <div className="flex flex-wrap gap-0.5 justify-center">
-                {provider.pricingDetails.discounts.slice(0, 2).map((d, idx) => (
-                  <Badge key={idx} variant="outline" className="text-[9px] bg-secondary/10 text-secondary border-secondary/30 px-1 py-0">
-                    -{d.percent}%
-                  </Badge>
-                ))}
+            {provider.uptime30days && (
+              <div className="flex items-center gap-1.5 text-xs mt-1">
+                <Icon name="Activity" size={12} className="text-secondary flex-shrink-0" />
+                <span className="font-semibold text-foreground">{t('common.uptime')}: {provider.uptime30days}%</span>
               </div>
-            </div>
-          )}
-          <Button 
-            className="w-full h-9 text-xs font-bold bg-primary text-background shadow-lg shadow-primary/30 hover:shadow-neon transition-all group mb-2"
-            onClick={onProviderClick}
-            disabled={!provider.url}
-          >
-            {t('common.goTo')}
-            <Icon name="ExternalLink" size={14} className="ml-1" />
-          </Button>
-          {provider.uptime30days && (
-            <div className="flex items-center justify-center gap-1.5 text-[10px]">
-              <div className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></div>
-              <span className="text-muted-foreground">{provider.uptime30days}%</span>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>
