@@ -97,8 +97,8 @@ export const ProviderCard = ({
           isSelected ? 'shadow-lg shadow-primary/30 bg-[#1a1a1a]' : 'bg-[#1a1a1a] hover:shadow-xl'
         }`}
         style={{
-          borderRadius: '3rem',
-          clipPath: 'polygon(0% 3rem, 0% 0%, 3rem 0%, calc(100% - 10.45rem) 0%, calc(100% - 10.45rem) 1rem, calc(100% - 10.45rem) 5.6rem, 100% 5.6rem, 100% calc(100% - 3rem), calc(100% - 3rem) 100%, 3rem 100%, 0% calc(100% - 3rem))'
+          borderRadius: '2rem',
+          clipPath: 'polygon(0% 2rem, 0% 0%, 2rem 0%, calc(100% - 10.45rem) 0%, calc(100% - 10.45rem) 1rem, calc(100% - 10.45rem) 5.6rem, 100% 5.6rem, 100% calc(100% - 2rem), calc(100% - 2rem) 100%, 2rem 100%, 0% calc(100% - 2rem))'
         }}
       >
 
