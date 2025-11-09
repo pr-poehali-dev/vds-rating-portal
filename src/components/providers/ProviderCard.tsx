@@ -93,11 +93,12 @@ export const ProviderCard = ({
       </div>
       
       <Card 
-        className={`group border-0 transition-all duration-300 hover-lift overflow-visible relative rounded-[3rem] ${
+        className={`group border-0 transition-all duration-300 hover-lift overflow-visible relative ${
           isSelected ? 'shadow-lg shadow-primary/30 bg-[#1a1a1a]' : 'bg-[#1a1a1a] hover:shadow-xl'
         }`}
         style={{
-          clipPath: 'path("M 0,48 Q 0,0 48,0 L calc(100% - 170px),0 Q calc(100% - 165px),2 calc(100% - 160px),7 Q calc(100% - 150px),17 calc(100% - 135px),32 Q calc(100% - 115px),52 calc(100% - 90px),65 Q calc(100% - 65px),78 calc(100% - 35px),82 Q calc(100% - 15px),84 0,84 Q 5,84 15,82 Q 35,78 60,65 Q 85,52 105,32 Q 120,17 130,7 Q 135,2 140,0 L calc(100% - 48),0 Q 100%,0 100%,48 L 100%,calc(100% - 48) Q 100%,100% calc(100% - 48),100% L 48,100% Q 0,100% 0,calc(100% - 48) Z")'
+          borderRadius: '3rem',
+          clipPath: 'polygon(0 3rem, 0 0, 3rem 0, calc(100% - 11rem) 0, calc(100% - 11rem) 0.5rem, calc(100% - 10.5rem) 1rem, calc(100% - 10rem) 1.5rem, calc(100% - 9.5rem) 2rem, calc(100% - 9rem) 2.5rem, calc(100% - 8.5rem) 3rem, calc(100% - 8rem) 3.5rem, calc(100% - 7.5rem) 4rem, calc(100% - 7rem) 4.3rem, calc(100% - 6.5rem) 4.5rem, calc(100% - 6rem) 4.6rem, calc(100% - 5.5rem) 4.65rem, calc(100% - 5rem) 4.7rem, calc(100% - 4.5rem) 4.65rem, calc(100% - 4rem) 4.6rem, calc(100% - 3.5rem) 4.5rem, calc(100% - 3rem) 4.3rem, calc(100% - 2.5rem) 4rem, calc(100% - 2rem) 3.5rem, calc(100% - 1.5rem) 3rem, calc(100% - 1rem) 2.5rem, calc(100% - 0.5rem) 2rem, 100% 1.5rem, 100% 100%, calc(100% - 3rem) 100%, 3rem 100%, 0 calc(100% - 3rem))'
         }}
       >
 
