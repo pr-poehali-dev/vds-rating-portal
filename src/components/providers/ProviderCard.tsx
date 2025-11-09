@@ -72,7 +72,7 @@ export const ProviderCard = ({
   };
 
   return (
-    <div className="relative h-full flex flex-col group">
+    <div className="relative flex flex-col group">
       <div className="absolute top-0.5 right-0 z-50 flex gap-2 hover-lift">
         {onToggleCompare && (
           <button 
@@ -93,7 +93,7 @@ export const ProviderCard = ({
       </div>
       
       <Card 
-        className={`border-0 transition-all duration-300 hover-lift overflow-visible relative flex flex-col h-full ${
+        className={`border-0 transition-all duration-300 hover-lift overflow-visible relative flex flex-col ${
           isSelected ? 'shadow-lg shadow-primary/30 bg-[#1a1a1a]' : 'bg-[#1a1a1a] group-hover:shadow-xl'
         }`}
         style={{
