@@ -81,9 +81,9 @@ export const FilterPanel = ({
   };
 
   return (
-    <div className="bg-gradient-to-br from-card via-card to-accent/30 border-2 border-border rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 shadow-xl relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-48 h-48 bg-secondary/10 rounded-full blur-3xl"></div>
+    <div className="bg-gradient-to-br from-card via-card to-accent/30 border-2 border-border rounded-xl sm:rounded-2xl p-2 sm:p-3 md:p-4 mb-3 sm:mb-4 shadow-xl relative overflow-hidden max-w-xs sm:max-w-sm">
+      <div className="absolute top-0 right-0 w-16 h-16 bg-primary/10 rounded-full blur-xl"></div>
+      <div className="absolute bottom-0 left-0 w-12 h-12 bg-secondary/10 rounded-full blur-xl"></div>
       
       <div className="flex items-center justify-between mb-4 relative z-10">
         <button
