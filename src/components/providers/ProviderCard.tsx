@@ -133,7 +133,7 @@ export const ProviderCard = ({
             showDetails ? 'max-h-[10000px] opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="pt-5 px-5 border-t border-border grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+          <div className="pt-5 px-5 border-t border-border flex flex-col gap-3">
               <div className="bg-accent border border-secondary/30 rounded-2xl p-4">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-9 h-9 bg-secondary rounded-xl flex items-center justify-center shadow-lg">
@@ -173,7 +173,7 @@ export const ProviderCard = ({
               </div>
 
               {provider.fz152Compliant && (
-                <div className="md:col-span-2 bg-primary/5 border border-primary/20 rounded-2xl p-4">
+                <div className="bg-primary/5 border border-primary/20 rounded-2xl p-4">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-9 h-9 bg-primary/20 rounded-xl flex items-center justify-center">
                       <Icon name="ShieldCheck" size={18} className="text-primary" />
