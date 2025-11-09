@@ -33,18 +33,13 @@ export const ProvidersList = ({
   return (
     <div className="flex flex-wrap gap-6">
       <style>{`
-        @media (min-width: 1024px) {
-          .provider-card-wrapper {
-            width: calc(50% - 12px);
-          }
+        .provider-card-wrapper {
+          width: 100%;
         }
-        @media (min-width: 1280px) {
+        @media (min-width: 1024px) {
           .provider-card-wrapper {
             width: calc(33.333% - 16px);
           }
-        }
-        .provider-card-wrapper {
-          width: 100%;
         }
       `}</style>
       {filteredProviders.map((provider, index) => (
