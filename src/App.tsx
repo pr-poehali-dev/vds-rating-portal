@@ -13,6 +13,8 @@ import About from "./pages/About";
 import Privacy from "./pages/Privacy";
 import Uptime from "./pages/Uptime";
 import Promo from "./pages/Promo";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -54,6 +56,8 @@ const App = () => (
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/uptime" element={<Uptime />} />
             <Route path="/promo" element={<Promo />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -22,6 +22,10 @@ export const Header = () => {
             </div>
           </a>
           <div className="hidden md:flex items-center gap-8">
+            <a href="/blog" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-colors flex items-center gap-1">
+              <Icon name="BookOpen" size={14} />
+              Блог
+            </a>
             <a href="/uptime" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-colors flex items-center gap-1">
               <Icon name="Activity" size={14} />
               {t('header.uptime')}
