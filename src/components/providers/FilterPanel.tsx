@@ -92,14 +92,14 @@ export const FilterPanel = ({
         >
           <div className="relative group">
             <div className="absolute inset-0 bg-primary rounded-lg blur-sm opacity-50 group-hover:opacity-75 transition-opacity"></div>
-            <div className="relative w-6 h-6 bg-primary rounded-lg flex items-center justify-center shadow-lg">
-              <Icon name="Filter" size={12} className="text-background" />
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-lg flex items-center justify-center shadow-lg">
+              <Icon name="Filter" size={16} className="text-background sm:w-5 sm:h-5" />
             </div>
           </div>
-          <h3 className="text-sm font-bold text-foreground">Фильтры</h3>
+          <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground">Фильтры</h3>
           <Icon 
             name={isExpanded ? "ChevronUp" : "ChevronDown"} 
-            size={16} 
+            size={24} 
             className="text-muted-foreground transition-transform"
           />
         </button>
