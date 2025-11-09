@@ -1,0 +1,38 @@
+{
+  "tests": [
+    {
+      "name": "Test OPTIONS request for CORS",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": "",
+      "bodyMatcher": "exact"
+    },
+    {
+      "name": "Test VK OAuth URL generation",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "provider": "vk"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "authUrl": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test invalid provider",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "provider": "invalid"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "Invalid provider"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
