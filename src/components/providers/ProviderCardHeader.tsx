@@ -33,7 +33,7 @@ export const ProviderCardHeader = ({
         </div>
         
         <div className="flex-1 min-w-0">
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#2a2a2a] mb-2">{provider.name}</h3>
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-2">{provider.name}</h3>
           <div className="flex items-center gap-3 mb-3">
             <div className="flex items-center gap-1">
               {[...Array(5)].map((_, i) => (
@@ -45,14 +45,14 @@ export const ProviderCardHeader = ({
                 />
               ))}
             </div>
-            <span className="text-lg sm:text-xl font-bold text-[#2a2a2a]">
+            <span className="text-lg sm:text-xl font-bold text-foreground">
               {avgRating.toFixed(1)}
             </span>
-            <span className="text-[#2a2a2a]/60 text-sm">из 5</span>
+            <span className="text-muted-foreground text-sm">из 5</span>
           </div>
           <div className="flex flex-wrap gap-2 mb-2">
             {provider.features.slice(0, 3).map((feature, idx) => (
-              <Badge key={idx} className="bg-[#2a2a2a] border-0 text-primary font-semibold text-xs">
+              <Badge key={idx} className="bg-accent border border-primary/20 text-foreground font-semibold text-xs">
                 {feature}
               </Badge>
             ))}
@@ -68,23 +68,23 @@ export const ProviderCardHeader = ({
               </div>
             </div>
             <div className="flex items-center gap-2 text-sm">
-              <Icon name="Gift" size={14} className={provider.trialDays ? "text-[#2a2a2a]" : "text-[#2a2a2a]/60"} />
+              <Icon name="Gift" size={14} className={provider.trialDays ? "text-primary" : "text-muted-foreground"} />
               <span className="font-semibold text-foreground">
                 {t('common.trialPeriod')}: {provider.trialDays ? `${provider.trialDays} ${provider.trialDays === 1 ? t('common.day') : provider.trialDays < 5 ? t('common.daysGenitive') : t('common.days')} ${t('common.free')}` : t('common.absent')}
               </span>
             </div>
             {provider.fz152Compliant && (
               <div className="flex items-center gap-2 text-sm">
-                <Icon name="ShieldCheck" size={14} className="text-[#2a2a2a]" />
+                <Icon name="ShieldCheck" size={14} className="text-primary" />
                 <span className="font-semibold text-foreground">152-ФЗ: {provider.fz152Level || t('common.compliant')}</span>
               </div>
             )}
             <div className="flex items-center gap-2 text-sm">
-              <Icon name="HardDrive" size={14} className="text-[#2a2a2a]" />
+              <Icon name="HardDrive" size={14} className="text-primary" />
               <span className="font-semibold text-foreground">{t('common.disks')}: {provider.technicalSpecs.diskType}</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
-              <Icon name="Box" size={14} className="text-[#2a2a2a]" />
+              <Icon name="Box" size={14} className="text-primary" />
               <span className="font-semibold text-foreground">{t('common.virtualization')}:</span>
               <div className="flex flex-wrap gap-1.5">
                 {provider.technicalSpecs.virtualization.map((virt, idx) => {
@@ -109,8 +109,8 @@ export const ProviderCardHeader = ({
             </div>
             {provider.popularity && (
               <div className="flex items-center gap-2 text-sm">
-                <Icon name="Users" size={14} className="text-[#2a2a2a]" />
-                <span className="text-[#2a2a2a]/60">{provider.popularity.toLocaleString(language === 'ru' ? 'ru-RU' : 'en-US')}+ {t('common.users')}</span>
+                <Icon name="Users" size={14} className="text-primary" />
+                <span className="text-muted-foreground">{provider.popularity.toLocaleString(language === 'ru' ? 'ru-RU' : 'en-US')}+ {t('common.users')}</span>
               </div>
             )}
           </div>
@@ -118,7 +118,7 @@ export const ProviderCardHeader = ({
       </div>
       
       <div className="w-full lg:w-[280px] flex-shrink-0">
-        <div className="bg-[#2a2a2a] border-0 rounded-2xl p-4 sm:p-6 text-center flex flex-col h-full">
+        <div className="bg-accent border-2 border-primary/20 rounded-2xl p-4 sm:p-6 text-center flex flex-col h-full">
           <div className="min-h-[48px] sm:min-h-[60px] flex items-center justify-center mb-3">
             {provider.promoText && (
               <div className="bg-secondary/20 border border-secondary rounded-xl px-2 sm:px-3 py-1.5">
@@ -126,16 +126,16 @@ export const ProviderCardHeader = ({
               </div>
             )}
           </div>
-          <div className="text-xs font-bold text-primary/80 uppercase tracking-wider mb-2">{t('common.price')}</div>
+          <div className="text-xs font-bold text-primary uppercase tracking-wider mb-2">{t('common.price')}</div>
           <div className="flex items-baseline justify-center gap-1 sm:gap-2 mb-4">
-            <span className="text-sm sm:text-lg text-white/60 font-semibold">{t('common.from')}</span>
+            <span className="text-sm sm:text-lg text-muted-foreground font-semibold">{t('common.from')}</span>
             <span className="text-3xl sm:text-4xl md:text-5xl font-black text-primary">{calculatedPrice}</span>
-            <span className="text-base sm:text-xl text-white/60">{t('common.perMonth')}</span>
+            <span className="text-base sm:text-xl text-muted-foreground">{t('common.perMonth')}</span>
           </div>
           <div className="min-h-[72px] mb-4">
             {provider.pricingDetails.discounts && provider.pricingDetails.discounts.length > 0 && (
               <div>
-                <div className="text-xs text-white/60 mb-1.5">{t('common.discounts')}:</div>
+                <div className="text-xs text-muted-foreground mb-1.5">{t('common.discounts')}:</div>
                 <div className="flex flex-wrap gap-1 justify-center">
                   {provider.pricingDetails.discounts.map((d, idx) => (
                     <Badge key={idx} variant="outline" className="text-xs bg-secondary/10 text-secondary border-secondary/30">
@@ -157,7 +157,7 @@ export const ProviderCardHeader = ({
           {provider.uptime30days && (
             <div className="flex items-center justify-center gap-2 text-xs">
               <div className="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
-              <span className="text-white/60">{t('common.uptime')}: {provider.uptime30days}%</span>
+              <span className="text-muted-foreground">{t('common.uptime')}: {provider.uptime30days}%</span>
             </div>
           )}
         </div>

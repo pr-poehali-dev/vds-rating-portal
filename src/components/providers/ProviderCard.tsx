@@ -73,22 +73,10 @@ export const ProviderCard = ({
 
   return (
     <Card 
-      className={`group border-0 transition-all duration-300 hover-lift overflow-hidden relative rounded-[2.5rem] ${
-        isSelected ? 'shadow-lg shadow-primary/20 bg-primary' : 'bg-primary hover:shadow-xl'
+      className={`group border-2 transition-all duration-300 hover-lift overflow-hidden relative rounded-[2.5rem] ${
+        isSelected ? 'border-primary shadow-lg shadow-primary/20 bg-primary/5' : 'border-border hover:border-primary/50 bg-gradient-to-br from-primary/10 via-card to-card'
       }`}
     >
-      <div className="absolute top-16 right-24 w-40 h-40 rounded-full opacity-60" style={{background: 'repeating-linear-gradient(45deg, transparent, transparent 6px, rgba(0,0,0,0.1) 6px, rgba(0,0,0,0.1) 12px)'}}></div>
-      
-      <div className="absolute bottom-20 right-12 w-32 h-32 bg-[#2a2a2a] rounded-[2rem] flex items-center justify-center">
-        <span className="text-white text-3xl font-bold">40%</span>
-      </div>
-      
-      <div className="absolute top-1/2 right-20 w-28 h-28 bg-primary/60 rounded-[2rem] flex items-center justify-center">
-        <span className="text-[#2a2a2a] text-3xl font-bold">30%</span>
-      </div>
-      
-      <div className="absolute bottom-24 right-32 w-24 h-24 rounded-full" style={{background: 'radial-gradient(circle, transparent 40%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.2) 45%, transparent 45%, transparent 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2) 55%, transparent 55%), radial-gradient(circle, transparent 60%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.2) 65%, transparent 65%)', backgroundSize: '8px 8px, 12px 12px'}}></div>
-      
       {onToggleCompare && (
         <div className="absolute top-4 right-4 z-20">
           <Button
