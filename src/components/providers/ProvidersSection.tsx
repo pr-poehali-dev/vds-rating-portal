@@ -316,7 +316,8 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-4 mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-4 mb-6">
+        <GlobalResourceConfig onApplyConfig={applyGlobalConfig} />
         <FilterPanel
           filterFZ152={filterFZ152}
           setFilterFZ152={setFilterFZ152}
@@ -345,7 +346,6 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
           setSearchQuery={setSearchQuery}
           filteredCount={filteredProviders.length}
         />
-        <GlobalResourceConfig onApplyConfig={applyGlobalConfig} />
       </div>
 
       <ProvidersList
