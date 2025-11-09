@@ -83,16 +83,7 @@ export const FilterPanel = ({
       <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-48 h-48 bg-secondary/10 rounded-full blur-3xl"></div>
       
-      <div className="flex items-center justify-between mb-6 sm:mb-8 relative z-10 gap-2">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className="relative group">
-            <div className="absolute inset-0 bg-primary rounded-xl blur-md opacity-50 group-hover:opacity-75 transition-opacity"></div>
-            <div className="relative w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg">
-              <Icon name="Filter" size={16} className="text-background sm:w-5 sm:h-5" />
-            </div>
-          </div>
-          <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold text-foreground">{t('filters.title')}</h3>
-        </div>
+      <div className="flex items-center justify-end mb-6 sm:mb-8 relative z-10 gap-2">
         {hasActiveFilters && (
           <Button
             variant="outline"
