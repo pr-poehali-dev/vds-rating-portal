@@ -250,7 +250,9 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     );
     return (
       <ComparisonTable 
-        providers={selectedProviders} 
+        providers={selectedProviders}
+        configs={configs}
+        calculatePrice={calculatePrice}
         onClose={() => setShowComparison(false)} 
       />
     );
