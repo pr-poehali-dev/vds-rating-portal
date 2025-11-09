@@ -73,7 +73,7 @@ export const ProviderCard = ({
 
   return (
     <div className="relative">
-      <div className="absolute -top-2 -right-2 z-50 flex gap-3">
+      <div className="absolute top-0.5 -right-3.5 z-50 flex gap-3">
         {onToggleCompare && (
           <button 
             onClick={onToggleCompare}
