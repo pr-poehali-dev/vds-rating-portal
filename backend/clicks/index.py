@@ -57,7 +57,14 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'isBase64Encoded': False
             }
         
-        user_ip = event.get('requestContext', {}).get('identity', {}).get('sourceIp', 'unknown')
+        headers = event.get('headers', {})
+        user_ip = (
+            headers.get('X-Forwarded-For', '').split(',')[0].strip() or
+            headers.get('x-forwarded-for', '').split(',')[0].strip() or
+            headers.get('X-Real-IP', '') or
+            headers.get('x-real-ip', '') or
+            event.get('requestContext', {}).get('identity', {}).get('sourceIp', 'unknown')
+        )
         
         with conn.cursor() as cur:
             cur.execute(
