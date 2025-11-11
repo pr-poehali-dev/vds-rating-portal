@@ -66,8 +66,8 @@ export const ProviderCard = ({
 
   const handleProviderClick = async () => {
     if (provider.url) {
-      await trackClick();
-      window.open(provider.url, '_blank');
+      trackClick();
+      window.location.href = provider.url;
     }
   };
 
