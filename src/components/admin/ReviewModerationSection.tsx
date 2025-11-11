@@ -27,6 +27,46 @@ export const ReviewModerationSection = ({
   onReviewAction
 }: ReviewModerationSectionProps) => {
   const getProviderName = (providerId: number) => {
+    const idMapping: { [key: number]: string } = {
+      1: 'JustHost',
+      2: 'NetAngels',
+      3: 'InfoBox',
+      4: 'Zomro',
+      5: 'Ucloud',
+      6: 'Firstvds',
+      7: 'ProfitServer',
+      8: 'Fornex',
+      9: 'TimeWeb',
+      10: 'ServerSpace',
+      11: 'MicroHost',
+      12: 'AdvancedHosting',
+      13: 'HyperHost',
+      14: 'REG.RU',
+      15: 'Hostiman',
+      16: 'King Servers',
+      17: 'SpaceWeb',
+      18: 'Deltahost',
+      19: 'RuVDS',
+      20: 'Melbicom',
+      21: 'FirstByte',
+      22: 'PQ.Hosting',
+      23: 'Digital Ocean',
+      24: 'Cloud4Y',
+      25: 'Beget',
+      26: 'Selectel',
+      27: 'VDSina',
+      28: 'Timeweb Cloud',
+      33: 'Unknown-33',
+      35: 'Unknown-35',
+      36: 'Unknown-36',
+      39: 'Unknown-39',
+      41: 'Unknown-41'
+    };
+    
+    if (idMapping[providerId]) {
+      return idMapping[providerId];
+    }
+    
     const provider = providers.find(p => p.id === providerId);
     return provider?.name || `Provider #${providerId}`;
   };
