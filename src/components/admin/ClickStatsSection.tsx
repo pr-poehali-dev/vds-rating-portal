@@ -41,12 +41,12 @@ export const ClickStatsSection = ({
       1030: 'Hetzner', 
       1031: 'Aeza',
       4: 'Timeweb Cloud (старый)',
-      32: 'Провайдер #32',
-      33: 'Провайдер #33',
-      35: 'Провайдер #35',
-      36: 'Провайдер #36',
-      39: 'Провайдер #39',
-      41: 'Провайдер #41'
+      32: 'T1 Cloud',
+      33: 'MWS',
+      35: 'IT-GRAD',
+      36: 'Ростелеком-ЦОД',
+      39: 'Софтлайн',
+      41: 'Cloud Beeline'
     };
     
     if (nameMapping[providerId]) {
