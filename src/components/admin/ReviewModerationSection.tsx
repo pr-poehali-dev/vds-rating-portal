@@ -27,14 +27,24 @@ export const ReviewModerationSection = ({
   onReviewAction
 }: ReviewModerationSectionProps) => {
   const getProviderName = (providerId: number) => {
-    const tempIdMapping: { [key: number]: number } = {
-      1029: 29,
-      1030: 30,
-      1031: 31
+    const nameMapping: { [key: number]: string } = {
+      1029: 'HostKey',
+      1030: 'Hetzner',
+      1031: 'Aeza',
+      4: 'Timeweb Cloud (старый)',
+      32: 'Провайдер #32',
+      33: 'Провайдер #33',
+      35: 'Провайдер #35',
+      36: 'Провайдер #36',
+      39: 'Провайдер #39',
+      41: 'Провайдер #41'
     };
     
-    const actualId = tempIdMapping[providerId] || providerId;
-    const provider = providers.find(p => p.id === actualId);
+    if (nameMapping[providerId]) {
+      return nameMapping[providerId];
+    }
+    
+    const provider = providers.find(p => p.id === providerId);
     return provider?.name || `Provider #${providerId}`;
   };
 
