@@ -27,7 +27,14 @@ export const ReviewModerationSection = ({
   onReviewAction
 }: ReviewModerationSectionProps) => {
   const getProviderName = (providerId: number) => {
-    const provider = providers.find(p => p.id === providerId);
+    const tempIdMapping: { [key: number]: number } = {
+      1029: 29,
+      1030: 30,
+      1031: 31
+    };
+    
+    const actualId = tempIdMapping[providerId] || providerId;
+    const provider = providers.find(p => p.id === actualId);
     return provider?.name || `Provider #${providerId}`;
   };
 
