@@ -32,9 +32,9 @@ const Promo = () => {
     }
   };
 
-  const handleProviderClick = (provider: typeof providers[0]) => {
+  const handleProviderClick = async (provider: typeof providers[0]) => {
     if (provider.url) {
-      trackClick(provider.id);
+      await trackClick(provider.id);
       window.open(provider.url, '_blank');
     }
   };

@@ -47,9 +47,9 @@ export const UptimeChart = ({ providers }: UptimeChartProps) => {
     }
   };
 
-  const handleProviderClick = (provider: Provider) => {
+  const handleProviderClick = async (provider: Provider) => {
     if (provider.url) {
-      trackClick(provider.id);
+      await trackClick(provider.id);
       window.open(provider.url, '_blank');
     }
   };

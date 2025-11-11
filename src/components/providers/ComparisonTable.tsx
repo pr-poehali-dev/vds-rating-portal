@@ -29,9 +29,9 @@ export const ComparisonTable = ({ providers, configs, onClose, calculatePrice }:
     }
   };
 
-  const handleProviderClick = (provider: Provider) => {
+  const handleProviderClick = async (provider: Provider) => {
     if (provider.url) {
-      trackClick(provider.id);
+      await trackClick(provider.id);
       window.open(provider.url, '_blank');
     }
   };

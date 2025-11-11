@@ -64,9 +64,9 @@ export const ProviderCard = ({
     }
   };
 
-  const handleProviderClick = () => {
+  const handleProviderClick = async () => {
     if (provider.url) {
-      trackClick();
+      await trackClick();
       window.open(provider.url, '_blank');
     }
   };
