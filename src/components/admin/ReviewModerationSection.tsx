@@ -31,7 +31,7 @@ export const ReviewModerationSection = ({
       1029: 'HostKey',
       1030: 'Hetzner',
       1031: 'Aeza',
-      4: 'Timeweb Cloud (старый)',
+      4: 'Timeweb Cloud',
       32: 'T1 Cloud',
       33: 'MWS',
       35: 'IT-GRAD',
