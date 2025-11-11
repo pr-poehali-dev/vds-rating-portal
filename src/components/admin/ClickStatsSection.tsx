@@ -38,7 +38,7 @@ export const ClickStatsSection = ({
   const getProviderName = (providerId: number) => {
     const nameMapping: { [key: number]: string } = {
       1029: 'HostKey',
-      1030: 'Hetzner',
+      1030: 'Hetzner', 
       1031: 'Aeza',
       4: 'Timeweb Cloud (старый)',
       32: 'Провайдер #32',
