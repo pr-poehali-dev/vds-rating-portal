@@ -90,9 +90,9 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     SELECT 
                         provider_id,
                         DATE(clicked_at) as date,
-                        COUNT(*) as clicks
+                        COUNT(DISTINCT user_ip) as clicks
                     FROM provider_clicks
-                    WHERE clicked_at >= CURRENT_DATE - %s
+                    WHERE clicked_at >= CURRENT_DATE - %s AND user_ip IS NOT NULL
                     GROUP BY provider_id, DATE(clicked_at)
                     ORDER BY date DESC, provider_id
                 """, (days,))
@@ -123,10 +123,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 cur.execute("""
                     SELECT 
                         provider_id,
-                        COUNT(*) as clicks,
+                        COUNT(DISTINCT user_ip) as clicks,
                         MIN(clicked_at) as first_click,
                         MAX(clicked_at) as last_click
                     FROM provider_clicks
+                    WHERE user_ip IS NOT NULL
                     GROUP BY provider_id
                     ORDER BY clicks DESC
                 """)
