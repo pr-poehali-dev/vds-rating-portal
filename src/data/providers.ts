@@ -497,7 +497,11 @@ export const providers: Provider[] = [
       availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Astra Linux', 'Windows Server'],
       controlPanel: 'Selectel Cloud Panel',
       apiAccess: true,
-      ddosProtection: 'До 500 Гбит/с'
+      ddosProtection: 'До 500 Гбит/с',
+      kubernetes: {
+        available: true,
+        managed: true
+      }
     },
     serviceGuarantees: {
       uptimeSLA: '99.98%',
