@@ -15,24 +15,24 @@
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 84 100% 59%;
+    --primary: 27 100% 60%;
     --primary-foreground: 0 0% 7%;
 
-    --secondary: 166 77% 56%;
+    --secondary: 33 100% 50%;
     --secondary-foreground: 0 0% 7%;
 
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 60%;
 
     --accent: 0 0% 14%;
-    --accent-foreground: 84 100% 59%;
+    --accent-foreground: 27 100% 60%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 0 0% 20%;
     --input: 0 0% 18%;
-    --ring: 84 100% 59%;
+    --ring: 27 100% 60%;
 
     --radius: 1.25rem;
 
@@ -107,7 +107,7 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-[#D4FF00] via-[#B8E803] to-[#7FFF00] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#FF8C00] via-[#FF6B00] to-[#FF4500] bg-clip-text text-transparent;
   }
 
   .glass-effect {
@@ -115,13 +115,13 @@
   }
 
   .shadow-glow {
-    box-shadow: 0 20px 60px -15px rgba(212, 255, 0, 0.4);
+    box-shadow: 0 20px 60px -15px rgba(255, 140, 0, 0.4);
   }
 
   .shadow-neon {
     box-shadow:
-      0 0 20px rgba(212, 255, 0, 0.5),
-      0 0 40px rgba(212, 255, 0, 0.3);
+      0 0 20px rgba(255, 140, 0, 0.5),
+      0 0 40px rgba(255, 140, 0, 0.3);
   }
 
   .shadow-soft {
@@ -133,7 +133,7 @@
   }
 
   .hover-lift:hover {
-    box-shadow: 0 20px 40px rgba(212, 255, 0, 0.2);
+    box-shadow: 0 20px 40px rgba(255, 140, 0, 0.2);
   }
 
   .group:hover .hover-lift {
@@ -178,26 +178,26 @@
     0%,
     100% {
       text-shadow:
-        0 0 8px rgba(212, 255, 0, 0.6),
-        0 0 16px rgba(212, 255, 0, 0.4);
+        0 0 8px rgba(255, 140, 0, 0.6),
+        0 0 16px rgba(255, 140, 0, 0.4);
       opacity: 1;
     }
     25% {
       text-shadow:
-        0 0 12px rgba(212, 255, 0, 0.7),
-        0 0 24px rgba(212, 255, 0, 0.5);
+        0 0 12px rgba(255, 140, 0, 0.7),
+        0 0 24px rgba(255, 140, 0, 0.5);
       opacity: 0.95;
     }
     50% {
       text-shadow:
-        0 0 16px rgba(212, 255, 0, 0.8),
-        0 0 32px rgba(212, 255, 0, 0.6);
+        0 0 16px rgba(255, 140, 0, 0.8),
+        0 0 32px rgba(255, 140, 0, 0.6);
       opacity: 1;
     }
     75% {
       text-shadow:
-        0 0 12px rgba(212, 255, 0, 0.7),
-        0 0 24px rgba(212, 255, 0, 0.5);
+        0 0 12px rgba(255, 140, 0, 0.7),
+        0 0 24px rgba(255, 140, 0, 0.5);
       opacity: 0.95;
     }
   }
