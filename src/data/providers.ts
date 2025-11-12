@@ -31,7 +31,11 @@ export const providers: Provider[] = [
       availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Alma Linux', 'Rocky Linux', 'Windows Server', 'Arch Linux'],
       controlPanel: 'Собственная панель',
       apiAccess: true,
-      ddosProtection: 'До 100 Гбит/с'
+      ddosProtection: 'До 100 Гбит/с',
+      kubernetes: {
+        available: true,
+        managed: false
+      }
     },
     serviceGuarantees: {
       uptimeSLA: 'Нет официального SLA',
@@ -94,7 +98,11 @@ export const providers: Provider[] = [
       availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Rocky Linux', 'Alma Linux', 'Arch Linux', 'Windows Server'],
       controlPanel: 'Hetzner Cloud Console',
       apiAccess: true,
-      ddosProtection: 'Базовая защита'
+      ddosProtection: 'Базовая защита',
+      kubernetes: {
+        available: true,
+        managed: true
+      }
     },
     serviceGuarantees: {
       uptimeSLA: 'Нет официального SLA',
@@ -156,7 +164,11 @@ export const providers: Provider[] = [
       availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Rocky Linux', 'Alma Linux', 'Windows Server', 'FreeBSD'],
       controlPanel: 'Собственная панель',
       apiAccess: true,
-      ddosProtection: 'До 500 Гбит/с'
+      ddosProtection: 'До 500 Гбит/с',
+      kubernetes: {
+        available: true,
+        managed: false
+      }
     },
     serviceGuarantees: {
       uptimeSLA: '99.9%',
@@ -221,7 +233,11 @@ export const providers: Provider[] = [
       availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Windows Server', 'Astra Linux'],
       controlPanel: 'VK Cloud Console',
       apiAccess: true,
-      ddosProtection: 'До 500 Гбит/с'
+      ddosProtection: 'До 500 Гбит/с',
+      kubernetes: {
+        available: true,
+        managed: true
+      }
     },
     serviceGuarantees: {
       uptimeSLA: '99.95%',
@@ -284,7 +300,11 @@ export const providers: Provider[] = [
       availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Astra Linux', 'Windows Server'],
       controlPanel: 'Cloud.ru Panel',
       apiAccess: true,
-      ddosProtection: 'До 400 Гбит/с'
+      ddosProtection: 'До 400 Гбит/с',
+      kubernetes: {
+        available: true,
+        managed: true
+      }
     },
     serviceGuarantees: {
       uptimeSLA: '99.95%',
@@ -347,7 +367,11 @@ export const providers: Provider[] = [
       availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'CoreOS', 'FreeBSD', 'Windows Server'],
       controlPanel: 'Serverspace Panel',
       apiAccess: true,
-      ddosProtection: 'До 300 Гбит/с'
+      ddosProtection: 'До 300 Гбит/с',
+      kubernetes: {
+        available: true,
+        managed: false
+      }
     },
     serviceGuarantees: {
       uptimeSLA: '99.95%',
@@ -1032,7 +1056,11 @@ export const providers: Provider[] = [
       availableOS: ['Debian', 'Ubuntu', 'CentOS', 'Fedora', 'Arch Linux', 'Rocky Linux', 'Windows Server'],
       controlPanel: 'Собственная панель',
       apiAccess: true,
-      ddosProtection: 'Включена бесплатно'
+      ddosProtection: 'Включена бесплатно',
+      kubernetes: {
+        available: true,
+        managed: false
+      }
     },
     serviceGuarantees: {
       uptimeSLA: '99.9%',
@@ -1103,7 +1131,11 @@ export const providers: Provider[] = [
       availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Arch Linux', 'Windows Server'],
       controlPanel: 'ISPmanager 6 (бесплатно)',
       apiAccess: true,
-      ddosProtection: 'Базовая защита'
+      ddosProtection: 'Базовая защита',
+      kubernetes: {
+        available: true,
+        managed: false
+      }
     },
     serviceGuarantees: {
       uptimeSLA: '99.9%',
@@ -1612,7 +1644,11 @@ export const providers: Provider[] = [
       availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Alma Linux', 'Rocky Linux', 'Astra Linux', 'Windows Server'],
       controlPanel: 'Собственная панель',
       apiAccess: true,
-      ddosProtection: 'До 500 Гбит/с'
+      ddosProtection: 'До 500 Гбит/с',
+      kubernetes: {
+        available: true,
+        managed: false
+      }
     },
     serviceGuarantees: {
       uptimeSLA: '99.98%',
@@ -1997,7 +2033,11 @@ export const providers: Provider[] = [
       availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Arch Linux', 'Windows Server'],
       controlPanel: 'ISPmanager',
       apiAccess: true,
-      ddosProtection: 'До 150 Гбит/с'
+      ddosProtection: 'До 150 Гбит/с',
+      kubernetes: {
+        available: true,
+        managed: false
+      }
     },
     serviceGuarantees: {
       uptimeSLA: '99.9%',
@@ -2065,7 +2105,11 @@ export const providers: Provider[] = [
       availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Astra Linux'],
       controlPanel: 'Собственная панель',
       apiAccess: true,
-      ddosProtection: 'По запросу'
+      ddosProtection: 'По запросу',
+      kubernetes: {
+        available: true,
+        managed: false
+      }
     },
     serviceGuarantees: {
       uptimeSLA: '99.95%',
@@ -2664,7 +2708,11 @@ export const providers: Provider[] = [
       availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Fedora', 'Windows Server'],
       controlPanel: 'Собственная панель',
       apiAccess: true,
-      ddosProtection: 'До 70 Гбит/с'
+      ddosProtection: 'До 70 Гбит/с',
+      kubernetes: {
+        available: true,
+        managed: false
+      }
     },
     serviceGuarantees: {
       uptimeSLA: '99.5%',
@@ -2720,7 +2768,11 @@ export const providers: Provider[] = [
       availableOS: ['Ubuntu', 'Debian', 'CentOS', 'Windows Server', 'Astra Linux'],
       controlPanel: 'ISPmanager',
       apiAccess: true,
-      ddosProtection: 'Базовая защита'
+      ddosProtection: 'Базовая защита',
+      kubernetes: {
+        available: true,
+        managed: false
+      }
     },
     serviceGuarantees: {
       uptimeSLA: '99.7%',

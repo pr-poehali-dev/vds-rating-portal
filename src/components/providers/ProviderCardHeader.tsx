@@ -120,6 +120,17 @@ export const ProviderCardHeader = ({
                 })}
               </div>
             </div>
+            {provider.technicalSpecs.kubernetes?.available && (
+              <div className="flex items-center gap-1.5 text-sm">
+                <Icon name="Network" size={14} className="text-primary flex-shrink-0" />
+                <span className="font-semibold text-foreground">Kubernetes</span>
+                {provider.technicalSpecs.kubernetes.managed && (
+                  <Badge className="bg-primary/10 border-primary/30 text-primary border font-semibold text-[10px] px-1 py-0">
+                    managed
+                  </Badge>
+                )}
+              </div>
+            )}
 
             <div className="flex items-center gap-1.5 text-sm mt-2">
               <Icon name="Wallet" size={14} className="text-primary flex-shrink-0" />

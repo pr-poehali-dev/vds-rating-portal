@@ -18,6 +18,10 @@ export interface TechnicalSpecs {
   controlPanel?: string;
   apiAccess: boolean;
   ddosProtection?: string;
+  kubernetes?: {
+    available: boolean;
+    managed: boolean;
+  };
 }
 
 export interface ServiceGuarantees {
