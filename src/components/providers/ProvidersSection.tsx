@@ -261,10 +261,10 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   return (
     <section id="providers" className="container mx-auto px-4 py-8">
       <div className="mb-8 flex items-center justify-between flex-wrap gap-4">
-        <div className="flex items-center gap-3 bg-gradient-to-r from-green-500/10 to-primary/10 border border-green-500/30 rounded-full px-5 py-2.5 shadow-sm">
-          <Icon name="CalendarCheck" size={18} className="text-green-600" />
+        <div className="flex items-center gap-3 bg-gradient-to-r from-orange-500/10 to-primary/10 border border-orange-500/30 rounded-full px-5 py-2.5 shadow-sm">
+          <Icon name="CalendarCheck" size={18} className="text-orange-600" />
           <span className="text-sm font-semibold text-foreground">
-            Последнее обновление данных: <span className="text-green-600">{lastUpdateDate}</span>
+            Последнее обновление данных: <span className="text-orange-600">{lastUpdateDate}</span>
           </span>
         </div>
         <div className="text-sm text-muted-foreground">
