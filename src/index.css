@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
+    --background: 220 14% 96%;
     --foreground: 0 0% 10%;
 
     --card: 0 0% 100%;
@@ -15,35 +15,35 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 10%;
 
-    --primary: 27 100% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 86 65% 65%;
+    --primary-foreground: 0 0% 10%;
 
-    --secondary: 33 100% 45%;
+    --secondary: 150 40% 35%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 92%;
+    --muted: 220 14% 92%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 0 0% 95%;
-    --accent-foreground: 27 100% 50%;
+    --accent: 220 14% 95%;
+    --accent-foreground: 0 0% 10%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 88%;
-    --input: 0 0% 92%;
-    --ring: 27 100% 50%;
+    --border: 220 13% 88%;
+    --input: 0 0% 98%;
+    --ring: 86 65% 65%;
 
     --radius: 1.25rem;
 
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 221 83% 53%;
+    --sidebar-foreground: 0 0% 10%;
+    --sidebar-primary: 86 65% 65%;
+    --sidebar-primary-foreground: 0 0% 10%;
+    --sidebar-accent: 220 14% 95%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 220 13% 88%;
+    --sidebar-ring: 86 65% 65%;
   }
 
   .dark {
@@ -108,21 +108,21 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-[#FF8C00] via-[#FF6B00] to-[#FF4500] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#A8E890] via-[#8DD66E] to-[#6FB84E] bg-clip-text text-transparent;
   }
 
   .glass-effect {
-    @apply bg-black/40 backdrop-blur-2xl border border-white/10;
+    @apply bg-card/40 backdrop-blur-2xl border border-border/30;
   }
 
   .shadow-glow {
-    box-shadow: 0 20px 60px -15px rgba(255, 140, 0, 0.4);
+    box-shadow: 0 20px 60px -15px rgba(168, 232, 144, 0.4);
   }
 
   .shadow-neon {
     box-shadow:
-      0 0 20px rgba(255, 140, 0, 0.5),
-      0 0 40px rgba(255, 140, 0, 0.3);
+      0 0 20px rgba(168, 232, 144, 0.5),
+      0 0 40px rgba(168, 232, 144, 0.3);
   }
 
   .shadow-soft {
@@ -134,7 +134,7 @@
   }
 
   .hover-lift:hover {
-    box-shadow: 0 20px 40px rgba(255, 140, 0, 0.2);
+    box-shadow: 0 20px 40px rgba(168, 232, 144, 0.2);
   }
 
   .group:hover .hover-lift {
@@ -179,26 +179,26 @@
     0%,
     100% {
       text-shadow:
-        0 0 8px rgba(255, 140, 0, 0.6),
-        0 0 16px rgba(255, 140, 0, 0.4);
+        0 0 8px rgba(168, 232, 144, 0.6),
+        0 0 16px rgba(168, 232, 144, 0.4);
       opacity: 1;
     }
     25% {
       text-shadow:
-        0 0 12px rgba(255, 140, 0, 0.7),
-        0 0 24px rgba(255, 140, 0, 0.5);
+        0 0 12px rgba(168, 232, 144, 0.7),
+        0 0 24px rgba(168, 232, 144, 0.5);
       opacity: 0.95;
     }
     50% {
       text-shadow:
-        0 0 16px rgba(255, 140, 0, 0.8),
-        0 0 32px rgba(255, 140, 0, 0.6);
+        0 0 16px rgba(168, 232, 144, 0.8),
+        0 0 32px rgba(168, 232, 144, 0.6);
       opacity: 1;
     }
     75% {
       text-shadow:
-        0 0 12px rgba(255, 140, 0, 0.7),
-        0 0 24px rgba(255, 140, 0, 0.5);
+        0 0 12px rgba(168, 232, 144, 0.7),
+        0 0 24px rgba(168, 232, 144, 0.5);
       opacity: 0.95;
     }
   }
