@@ -78,23 +78,23 @@ export const ProviderCard = ({
           <button 
             onClick={onToggleCompare}
             className={`w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all ${
-              isSelected ? 'bg-[#3a3a3a] hover:bg-[#4a4a4a]' : 'bg-[#2a2a2a] hover:bg-[#3a3a3a]'
+              isSelected ? 'bg-card hover:bg-accent' : 'bg-card hover:bg-accent'
             }`}
           >
-            <Icon name={isSelected ? "Check" : "GitCompare"} size={17} className="text-white" />
+            <Icon name={isSelected ? "Check" : "GitCompare"} size={17} className="text-foreground" />
           </button>
         )}
         <button 
           onClick={handleProviderClick}
           className="w-14 h-14 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center shadow-2xl transition-all"
         >
-          <Icon name="ArrowUpRight" size={17} className="text-[#2a2a2a]" />
+          <Icon name="ArrowUpRight" size={17} className="text-primary-foreground" />
         </button>
       </div>
       
       <Card 
         className={`border-0 transition-all duration-300 hover-lift overflow-visible relative flex flex-col ${
-          isSelected ? 'shadow-lg shadow-primary/30 bg-[#1a1a1a]' : 'bg-[#1a1a1a] group-hover:shadow-xl'
+          isSelected ? 'shadow-lg shadow-primary/30 bg-card' : 'bg-card group-hover:shadow-xl'
         }`}
         style={{
           borderRadius: '2rem',
@@ -157,7 +157,7 @@ export const ProviderCard = ({
                 <div className="bg-accent border border-destructive/30 rounded-2xl p-4">
                   <div className="flex items-center gap-2 mb-4">
                     <div className="w-9 h-9 bg-destructive rounded-xl flex items-center justify-center shadow-lg">
-                      <Icon name="AlertCircle" size={18} className="text-white" />
+                      <Icon name="AlertCircle" size={18} className="text-destructive-foreground" />
                     </div>
                     <h4 className="text-base font-bold text-foreground">{t('card.cons')}</h4>
                   </div>
@@ -165,7 +165,7 @@ export const ProviderCard = ({
                     {provider.cons.map((con, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
                         <div className="w-5 h-5 bg-destructive rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <Icon name="Minus" size={12} className="text-white" />
+                          <Icon name="Minus" size={12} className="text-destructive-foreground" />
                         </div>
                         <span className="text-sm text-foreground font-medium">{con}</span>
                       </li>

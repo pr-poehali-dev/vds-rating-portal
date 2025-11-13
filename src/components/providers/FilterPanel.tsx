@@ -81,7 +81,7 @@ export const FilterPanel = ({
   };
 
   return (
-    <div className={`bg-[#1a1a1a] border border-primary/20 rounded-2xl shadow-lg mb-3 sm:mb-4 relative overflow-hidden transition-all duration-700 ease-in-out ${isExpanded ? 'max-w-full' : 'max-w-[190px] sm:max-w-[230px]'}`}>
+    <div className={`bg-card border border-primary/20 rounded-2xl shadow-lg mb-3 sm:mb-4 relative overflow-hidden transition-all duration-700 ease-in-out ${isExpanded ? 'max-w-full' : 'max-w-[190px] sm:max-w-[230px]'}`}>
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="w-full px-6 py-4 flex items-center justify-between hover:bg-primary/5 transition-colors rounded-2xl"
@@ -107,7 +107,7 @@ export const FilterPanel = ({
             variant="outline"
             size="sm"
             onClick={clearFilters}
-            className="text-[10px] sm:text-xs font-bold hover:bg-destructive hover:text-white hover:border-destructive transition-all shadow-lg hover:shadow-xl h-8 sm:h-9 px-2 sm:px-3"
+            className="text-[10px] sm:text-xs font-bold hover:bg-destructive hover:text-destructive-foreground hover:border-destructive transition-all shadow-lg hover:shadow-xl h-8 sm:h-9 px-2 sm:px-3"
           >
             <Icon name="X" size={12} className="sm:mr-1" />
             <span className="hidden sm:inline">{t('filters.resetAll')}</span>
