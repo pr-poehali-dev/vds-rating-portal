@@ -107,11 +107,15 @@ const Blog = () => {
                       </div>
                       
                       <div className="p-6 flex-1 flex flex-col">
-                        <div className="flex items-center gap-2 mb-3">
+                        <div className="flex items-center gap-2 mb-3 flex-wrap">
                           <Badge className="bg-primary/10 text-primary border-primary/30 text-xs">
                             {post.category}
                           </Badge>
                           <span className="text-xs text-muted-foreground">{post.readTime}</span>
+                          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                            <Icon name="Eye" size={12} />
+                            <span>{post.views.toLocaleString()}</span>
+                          </div>
                         </div>
                         
                         <h2 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
