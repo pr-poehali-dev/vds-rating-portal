@@ -34,8 +34,8 @@ const Promo = () => {
 
   const handleProviderClick = async (provider: typeof providers[0]) => {
     if (provider.url) {
-      trackClick(provider.id);
-      window.location.href = provider.url;
+      await trackClick(provider.id);
+      window.open(provider.url, '_blank', 'noopener,noreferrer');
     }
   };
 
