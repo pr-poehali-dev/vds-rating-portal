@@ -622,7 +622,286 @@ Kubernetes на VPS — отличное решение для тех, кто:
 - K3s документация (k3s.io)
 - Awesome Kubernetes (список инструментов и гайдов)
 - r/kubernetes — сообщество на Reddit`
-  }
+  },
+  {
+    id: 6,
+    slug: 'kubernetes-na-vps-polnoe-rukovodstvo',
+    title: 'Kubernetes на VPS: Полное руководство по развёртыванию',
+    excerpt: 'Пошаговое руководство по установке и настройке Kubernetes кластера на VPS. Узнайте, как развернуть K8s с минимальными ресурсами и какие провайдеры лучше подходят для контейнеризации.',
+    author: 'Команда VPS Rating',
+    date: '14.11.2025',
+    readTime: '12 мин',
+    category: 'Технологии',
+    tags: ['Kubernetes', 'Docker', 'Контейнеры', 'DevOps'],
+    image: 'https://cdn.poehali.dev/files/blog-kubernetes.jpg',
+    content: `# Kubernetes на VPS: Полное руководство по развёртыванию
+
+Kubernetes (K8s) — стандарт оркестрации контейнеров для современных приложений. В этом руководстве разберём, как развернуть полноценный кластер на VPS серверах.
+
+## Что такое Kubernetes и зачем он нужен?
+
+Kubernetes — это платформа для автоматизации развёртывания, масштабирования и управления контейнеризированными приложениями.
+
+### Преимущества Kubernetes:
+
+- **Автоматическое масштабирование**: K8s автоматически увеличивает или уменьшает количество подов в зависимости от нагрузки
+- **Self-healing**: Автоматический перезапуск упавших контейнеров
+- **Service Discovery**: Встроенная балансировка нагрузки между подами
+- **Rolling Updates**: Обновление приложений без простоя
+- **Секреты и конфигурация**: Централизованное управление настройками
+
+## Когда нужен Kubernetes на VPS?
+
+### Kubernetes оправдан для:
+
+1. **Микросервисная архитектура**: 5+ независимых сервисов, требующих автоматической оркестрации
+2. **CI/CD пайплайны**: Автоматизация развёртывания с Jenkins/GitLab CI
+3. **Highload проекты**: Необходимость быстрого горизонтального масштабирования
+4. **Multi-tenant приложения**: SaaS платформы с изоляцией клиентов
+
+### Когда Kubernetes избыточен:
+
+- Монолитные приложения
+- Проекты с 1-2 контейнерами
+- Статичные сайты без динамического масштабирования
+- Команда без опыта работы с K8s
+
+Важно: Для простых проектов используйте Docker Compose — это проще и дешевле.
+
+## Требования к VPS для Kubernetes
+
+### Минимальные требования для тестового кластера:
+
+**Master Node (Control Plane):**
+- 2 vCPU
+- 4 GB RAM
+- 40 GB NVMe
+- Ubuntu 22.04 LTS
+
+**Worker Nodes (минимум 2 ноды):**
+- 2 vCPU каждая
+- 4 GB RAM каждая
+- 40 GB NVMe каждая
+
+**Итого минимум:** 6 vCPU, 12 GB RAM, 120 GB NVMe
+
+### Production требования:
+
+**Master Node:**
+- 4 vCPU
+- 8 GB RAM
+- 80 GB NVMe
+
+**Worker Nodes (3-5 нод):**
+- 4 vCPU каждая
+- 8 GB RAM каждая
+- 100 GB NVMe каждая
+
+**Итого для production:** 16-24 vCPU, 32-48 GB RAM, 380-580 GB NVMe
+
+## Выбор провайдера VPS для Kubernetes
+
+### Критерии выбора:
+
+1. **NVMe диски обязательны** — K8s активно работает с etcd, требующей низкой латентности
+2. **Высокая пропускная способность сети** — минимум 1 Гбит/с между нодами
+3. **Поддержка частных сетей** — для безопасной коммуникации между нодами
+4. **Резервное копирование** — критично для etcd
+5. **Географическая близость нод** — все ноды в одном ДЦ
+
+### Топ провайдеров для Kubernetes:
+
+**Timeweb Cloud**
+- Цена: от 950₽/мес за ноду (4 vCPU, 8 GB RAM)
+- Плюсы: NVMe, частные сети, snapshots
+- Минусы: Нет managed K8s
+
+**REG.RU**
+- Цена: от 1200₽/мес за ноду
+- Плюсы: Managed Kubernetes включён
+- Минусы: Дороже конкурентов
+
+**Selectel**
+- Цена: от 850₽/мес за ноду
+- Плюсы: Managed K8s, S3 storage
+- Минусы: Интерфейс сложнее для новичков
+
+## Установка Kubernetes: пошаговая инструкция
+
+### Шаг 1: Подготовка серверов
+
+Обновите все ноды и установите необходимые зависимости:
+
+\`\`\`bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y apt-transport-https ca-certificates curl
+\`\`\`
+
+Отключите swap (обязательно для K8s):
+
+\`\`\`bash
+sudo swapoff -a
+sudo sed -i '/ swap / s/^/#/' /etc/fstab
+\`\`\`
+
+### Шаг 2: Установка Container Runtime (containerd)
+
+\`\`\`bash
+sudo apt install -y containerd
+sudo mkdir -p /etc/containerd
+sudo containerd config default | sudo tee /etc/containerd/config.toml
+sudo systemctl restart containerd
+sudo systemctl enable containerd
+\`\`\`
+
+### Шаг 3: Установка kubeadm, kubelet, kubectl
+
+Добавьте репозиторий Kubernetes:
+
+\`\`\`bash
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+\`\`\`
+
+Установите компоненты:
+
+\`\`\`bash
+sudo apt update
+sudo apt install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+\`\`\`
+
+### Шаг 4: Инициализация Master Node
+
+На master ноде выполните:
+
+\`\`\`bash
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+\`\`\`
+
+После успешной инициализации настройте kubectl:
+
+\`\`\`bash
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+\`\`\`
+
+### Шаг 5: Установка сетевого плагина (Flannel)
+
+\`\`\`bash
+kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+\`\`\`
+
+### Шаг 6: Подключение Worker Nodes
+
+На каждой worker ноде выполните команду join, которую вывел kubeadm init:
+
+\`\`\`bash
+sudo kubeadm join <master-ip>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
+\`\`\`
+
+Проверьте статус нод на master:
+
+\`\`\`bash
+kubectl get nodes
+\`\`\`
+
+Все ноды должны быть в статусе **Ready**.
+
+## Первое приложение в Kubernetes
+
+### Развёртывание Nginx:
+
+\`\`\`bash
+kubectl create deployment nginx --image=nginx
+kubectl expose deployment nginx --port=80 --type=NodePort
+kubectl get services
+\`\`\`
+
+Проверьте доступность по NodePort.
+
+## Мониторинг и управление
+
+### Установка Kubernetes Dashboard:
+
+\`\`\`bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+\`\`\`
+
+### Установка Prometheus + Grafana для мониторинга:
+
+\`\`\`bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm install prometheus prometheus-community/kube-prometheus-stack
+\`\`\`
+
+## Стоимость содержания K8s кластера
+
+### Минимальный кластер (dev/test):
+
+- 3 ноды × 600₽/мес = **1800₽/мес**
+
+### Production кластер (5 нод):
+
+- 5 нод × 1200₽/мес = **6000₽/мес**
+
+### Managed Kubernetes (альтернатива):
+
+- Control Plane: бесплатно у большинства провайдеров
+- Worker ноды: от 1000₽/мес за ноду
+- Итого для 3 нод: **3000₽/мес**
+
+Вывод: Managed K8s выгоднее для production.
+
+## Типичные ошибки при развёртывании
+
+### 1. Swap не отключен
+
+Ошибка: \`[ERROR Swap]: running with swap on is not supported\`
+
+Решение: \`sudo swapoff -a\` и закомментируйте swap в /etc/fstab
+
+### 2. Недостаточно ресурсов на master
+
+Симптомы: etcd падает, API server не отвечает
+
+Решение: Минимум 4 GB RAM для master в production
+
+### 3. Ноды в NotReady
+
+Причина: Сетевой плагин не установлен или настроен неверно
+
+Решение: Проверьте \`kubectl get pods -n kube-system\`
+
+### 4. ImagePullBackOff
+
+Причина: Не хватает ресурсов для скачивания образов
+
+Решение: Увеличьте лимиты памяти на нодах
+
+## Best practices для K8s на VPS
+
+1. **Используйте частные сети** — весь трафик между нодами через private network
+2. **Настройте backups etcd** — это критически важные данные кластера
+3. **Включите RBAC** — ограничьте доступ к API server
+4. **Мониторинг обязателен** — Prometheus + Grafana или аналоги
+5. **Используйте Helm** — пакетный менеджер для K8s упрощает деплой
+6. **Настройте Ingress Controller** — nginx-ingress для управления внешним трафиком
+7. **Лимиты ресурсов** — всегда указывайте requests/limits для подов
+
+## Заключение
+
+Kubernetes на VPS — реальный и экономичный вариант для production проектов. Главное:
+
+✅ Выбирайте провайдера с NVMe и частными сетями
+✅ Минимум 3 ноды для production (1 master + 2 worker)
+✅ Managed K8s выгоднее self-hosted для малого бизнеса
+✅ Мониторинг и бэкапы etcd — обязательны
+
+Для начала рекомендуем попробовать managed решения (Selectel, REG.RU) — это проще и надёжнее. Self-hosted K8s оправдан для крупных проектов с DevOps командой.`
+  },
 ];
 
 export const blogCategories = ['Все', 'Руководства', 'Технологии', 'Безопасность', 'Право'];
