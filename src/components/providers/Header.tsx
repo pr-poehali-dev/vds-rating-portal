@@ -1,10 +1,12 @@
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { useState } from 'react';
 
 export const Header = () => {
   const { language, setLanguage, t } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   return (
@@ -51,15 +53,31 @@ export const Header = () => {
             >
               {t('header.compare')}
             </a>
+            <button
+              onClick={toggleTheme}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border hover:border-primary/50 hover:bg-accent transition-all"
+              aria-label="Toggle theme"
+            >
+              <Icon name={theme === 'light' ? 'Moon' : 'Sun'} size={18} className="text-foreground/70" />
+            </button>
           </div>
 
-          <button 
-            className="md:hidden p-2 hover:bg-accent rounded-lg transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} className="text-foreground" />
-          </button>
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 hover:bg-accent rounded-lg transition-colors"
+              aria-label="Toggle theme"
+            >
+              <Icon name={theme === 'light' ? 'Moon' : 'Sun'} size={20} className="text-foreground/70" />
+            </button>
+            <button 
+              className="p-2 hover:bg-accent rounded-lg transition-colors"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} className="text-foreground" />
+            </button>
+          </div>
         </div>
 
         {mobileMenuOpen && (
@@ -99,12 +117,11 @@ export const Header = () => {
               <button 
                 className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-foreground/80 hover:text-primary hover:bg-accent rounded-lg transition-all text-left"
                 onClick={() => {
-                  setLanguage(language === 'ru' ? 'en' : 'ru');
-                  setMobileMenuOpen(false);
+                  toggleTheme();
                 }}
               >
-                <Icon name="Globe" size={16} />
-                {language === 'ru' ? 'English' : 'Русский'}
+                <Icon name={theme === 'light' ? 'Moon' : 'Sun'} size={16} />
+                {theme === 'light' ? 'Тёмная тема' : 'Светлая тема'}
               </button>
               <Button 
                 onClick={() => {
