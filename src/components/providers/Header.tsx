@@ -51,15 +51,6 @@ export const Header = () => {
             >
               {t('header.compare')}
             </a>
-            <button 
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border hover:border-primary/50 hover:bg-accent transition-all"
-              onClick={() => setLanguage(language === 'ru' ? 'en' : 'ru')}
-            >
-              <Icon name="Globe" size={16} className="text-foreground/70" />
-              <span className="text-sm font-semibold text-foreground/80">
-                {language === 'ru' ? 'EN' : 'RU'}
-              </span>
-            </button>
             <Button 
               onClick={() => window.location.href = '/'}
               className="bg-primary text-background font-bold shadow-lg shadow-primary/30 hover:shadow-neon transition-all"
