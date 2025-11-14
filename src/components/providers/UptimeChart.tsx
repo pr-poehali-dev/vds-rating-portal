@@ -4,9 +4,10 @@ import Icon from '@/components/ui/icon';
 
 interface UptimeChartProps {
   providers: Provider[];
+  lastCheckTime?: string;
 }
 
-export const UptimeChart = ({ providers }: UptimeChartProps) => {
+export const UptimeChart = ({ providers, lastCheckTime }: UptimeChartProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   
   const providersWithUptime = providers
@@ -77,7 +78,14 @@ export const UptimeChart = ({ providers }: UptimeChartProps) => {
           {/* Компактный список провайдеров */}
           <div className="bg-gradient-to-br from-card via-card to-accent/20 border-2 border-border rounded-3xl p-8 shadow-xl">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
-              <h3 className="text-2xl font-bold text-foreground">Топ провайдеров по Uptime</h3>
+              <div>
+                <h3 className="text-2xl font-bold text-foreground">Топ провайдеров по Uptime</h3>
+                {lastCheckTime && (
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Последняя проверка: {lastCheckTime}
+                  </p>
+                )}
+              </div>
               
               <div className="relative w-full sm:w-80">
                 <Icon name="Search" size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
