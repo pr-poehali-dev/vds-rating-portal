@@ -3,43 +3,65 @@ import { Header } from '@/components/providers/Header';
 import { UptimeChart } from '@/components/providers/UptimeChart';
 import { MethodologySection } from '@/components/providers/MethodologySection';
 import { Footer } from '@/components/providers/Footer';
-import { providers } from '@/data/providers';
+import { providers as providersData } from '@/data/providers';
+
+interface UptimeStats {
+  provider_id: number;
+  uptime_percent: number;
+  total_checks: number;
+  successful_checks: number;
+  avg_response_time_ms: number | null;
+}
 
 const Uptime = () => {
+  const [uptimeStats, setUptimeStats] = useState<UptimeStats[]>([]);
   const [lastCheckTime, setLastCheckTime] = useState<string>('');
-  const [isChecking, setIsChecking] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const checkUptime = async () => {
-      setIsChecking(true);
+    const fetchUptimeStats = async () => {
       try {
-        const providersToCheck = providers
-          .filter(p => p.url)
-          .map(p => ({ id: p.id, url: p.url! }));
-
-        await fetch('https://functions.poehali.dev/cb148476-2d49-4e4f-8a7e-f1e399493259', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ providers: providersToCheck }),
-        });
-
-        setLastCheckTime(new Date().toLocaleTimeString('ru-RU'));
+        const response = await fetch('https://functions.poehali.dev/da289550-8e78-4eca-93fe-815932441ab2?days=30');
+        const data = await response.json();
+        
+        if (data.providers) {
+          setUptimeStats(data.providers);
+          setLastCheckTime(new Date().toLocaleTimeString('ru-RU', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          }));
+        }
       } catch (error) {
-        console.error('Ошибка проверки аптайма:', error);
+        console.error('Ошибка загрузки статистики аптайма:', error);
       } finally {
-        setIsChecking(false);
+        setIsLoading(false);
       }
     };
 
-    const interval = setInterval(checkUptime, 5 * 60 * 1000);
+    fetchUptimeStats();
+    
+    // Обновляем данные каждые 30 секунд
+    const interval = setInterval(fetchUptimeStats, 30000);
 
     return () => clearInterval(interval);
   }, []);
 
+  // Объединяем данные провайдеров с актуальной статистикой
+  const providers = providersData.map(provider => {
+    const stats = uptimeStats.find(s => s.provider_id === provider.id);
+    return {
+      ...provider,
+      uptime30days: stats?.uptime_percent || provider.uptime30days
+    };
+  });
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <UptimeChart providers={providers} lastCheckTime={lastCheckTime} isChecking={isChecking} />
+      <UptimeChart providers={providers} lastCheckTime={lastCheckTime} isChecking={isLoading} />
       <MethodologySection />
       <Footer />
     </div>

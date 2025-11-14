@@ -65,9 +65,9 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking }: UptimeChar
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 bg-accent border border-orange-500/30 rounded-full px-5 py-2.5">
-              <div className={`w-2 h-2 bg-orange-500 rounded-full ${isChecking ? 'animate-pulse' : ''}`}></div>
+              <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
               <span className="text-sm font-bold text-orange-600">
-                {isChecking ? 'Проверяем провайдеров...' : 'Мониторинг доступности'}
+                Мониторинг доступности
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-extrabold text-foreground">
@@ -84,17 +84,10 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking }: UptimeChar
               <div>
                 <h3 className="text-2xl font-bold text-foreground flex items-center gap-2">
                   Топ провайдеров по Uptime
-                  {isChecking && (
-                    <div className="flex items-center gap-1">
-                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                      <div className="w-1.5 h-1.5 bg-orange-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-                    </div>
-                  )}
                 </h3>
                 {lastCheckTime && (
                   <p className="text-sm text-muted-foreground mt-1">
-                    Последняя проверка: {lastCheckTime}
+                    Данные обновлены: {lastCheckTime}
                   </p>
                 )}
               </div>
