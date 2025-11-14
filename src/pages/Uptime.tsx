@@ -22,9 +22,14 @@ const Uptime = () => {
     const fetchUptimeStats = async () => {
       try {
         const response = await fetch('https://functions.poehali.dev/da289550-8e78-4eca-93fe-815932441ab2?days=30');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        
         const data = await response.json();
         
-        if (data.providers) {
+        if (data.providers && data.providers.length > 0) {
           setUptimeStats(data.providers);
           setLastCheckTime(new Date().toLocaleTimeString('ru-RU', {
             day: '2-digit',
@@ -36,6 +41,7 @@ const Uptime = () => {
         }
       } catch (error) {
         console.error('Ошибка загрузки статистики аптайма:', error);
+        // Если ошибка - используем базовые значения из providers.ts
       } finally {
         setIsLoading(false);
       }
