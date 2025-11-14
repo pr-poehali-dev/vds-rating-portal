@@ -24,6 +24,16 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
     // Загружаем состояние автопроверки из localStorage
     const savedState = localStorage.getItem('uptime_auto_check_enabled');
     const savedNextCheckTime = localStorage.getItem('uptime_next_check_time');
+    const savedLastResult = localStorage.getItem('uptime_last_check_result');
+    
+    // Восстанавливаем последний результат проверки
+    if (savedLastResult) {
+      try {
+        setLastCheckResult(JSON.parse(savedLastResult));
+      } catch (e) {
+        console.error('Error parsing saved result:', e);
+      }
+    }
     
     if (savedState === 'true') {
       setIsAutoCheckEnabled(true);
@@ -189,12 +199,17 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
 
       const data = await response.json();
       
-      setLastCheckResult({
+      const result = {
         total: data.total || 0,
         successful: data.successful || 0,
         failed: data.failed || 0,
         timestamp: new Date().toLocaleString('ru-RU'),
-      });
+      };
+      
+      setLastCheckResult(result);
+      
+      // Сохраняем результат в localStorage
+      localStorage.setItem('uptime_last_check_result', JSON.stringify(result));
 
       if (onStatusChange) {
         onStatusChange();
