@@ -315,7 +315,7 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
         </div>
 
         <div className="text-sm text-muted-foreground">
-          Проверка доступности всех провайдеров (31 шт.)
+          Проверка доступности всех провайдеров (29 шт.)
         </div>
 
         {error && (
