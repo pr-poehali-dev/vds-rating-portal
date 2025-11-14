@@ -162,12 +162,20 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     if (!config) {
       config = { cpu: 1, ram: 1, storage: 10 };
     }
-    return Math.round(
+    
+    const calculatedPrice = Math.round(
       provider.basePrice +
       config.cpu * provider.cpuPrice +
       config.ram * provider.ramPrice +
       config.storage * provider.storagePrice
     );
+    
+    // Если конфигурация минимальная и есть minPrice, используем его
+    if (config.cpu === 1 && config.ram === 1 && config.storage === 10 && provider.pricingDetails.minPrice) {
+      return Math.min(calculatedPrice, provider.pricingDetails.minPrice);
+    }
+    
+    return calculatedPrice;
   };
 
   const toggleComparison = (providerId: number) => {
