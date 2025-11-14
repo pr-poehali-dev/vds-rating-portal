@@ -23,14 +23,40 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
   useEffect(() => {
     // Загружаем состояние автопроверки из localStorage
     const savedState = localStorage.getItem('uptime_auto_check_enabled');
+    const savedNextCheckTime = localStorage.getItem('uptime_next_check_time');
+    
     if (savedState === 'true') {
       setIsAutoCheckEnabled(true);
-      startAutoCheck();
+      
+      // Восстанавливаем таймер
+      if (savedNextCheckTime) {
+        const nextCheckTime = parseInt(savedNextCheckTime, 10);
+        const now = Date.now();
+        const remainingSeconds = Math.max(0, Math.floor((nextCheckTime - now) / 1000));
+        
+        if (remainingSeconds > 0) {
+          setNextCheckIn(remainingSeconds);
+          // Если время ещё не пришло, планируем следующую проверку
+          const timeoutId = setTimeout(() => {
+            handleStartCheck();
+          }, remainingSeconds * 1000);
+          
+          // Сохраняем timeout ID для очистки
+          intervalRef.current = timeoutId as any;
+        } else {
+          // Время уже прошло, запускаем проверку сразу
+          handleStartCheck();
+        }
+      } else {
+        // Нет сохранённого времени, запускаем первую проверку
+        handleStartCheck();
+      }
     }
 
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
+        clearTimeout(intervalRef.current as any);
       }
       if (countdownRef.current) {
         clearInterval(countdownRef.current);
@@ -42,12 +68,18 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
     if (isAutoCheckEnabled) {
       // Обновляем обратный отсчёт каждую секунду
       countdownRef.current = setInterval(() => {
-        setNextCheckIn(prev => {
-          if (prev <= 1) {
-            return 300; // Сбрасываем на 5 минут
+        const savedNextCheckTime = localStorage.getItem('uptime_next_check_time');
+        if (savedNextCheckTime) {
+          const nextCheckTime = parseInt(savedNextCheckTime, 10);
+          const now = Date.now();
+          const remainingSeconds = Math.max(0, Math.floor((nextCheckTime - now) / 1000));
+          setNextCheckIn(remainingSeconds);
+          
+          // Если время вышло, запускаем проверку
+          if (remainingSeconds === 0) {
+            handleStartCheck();
           }
-          return prev - 1;
-        });
+        }
       }, 1000);
     } else {
       if (countdownRef.current) {
@@ -64,11 +96,20 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
     };
   }, [isAutoCheckEnabled]);
 
-  const startAutoCheck = () => {
-    // Запускаем проверку каждые 5 минут
-    intervalRef.current = setInterval(() => {
+  const scheduleNextCheck = () => {
+    // Планируем следующую проверку через 5 минут
+    const nextCheckTime = Date.now() + (5 * 60 * 1000);
+    localStorage.setItem('uptime_next_check_time', nextCheckTime.toString());
+    setNextCheckIn(300);
+    
+    // Устанавливаем таймер на следующую проверку
+    if (intervalRef.current) {
+      clearTimeout(intervalRef.current as any);
+    }
+    
+    intervalRef.current = setTimeout(() => {
       handleStartCheck();
-    }, 5 * 60 * 1000);
+    }, 5 * 60 * 1000) as any;
   };
 
   const handleToggleAutoCheck = () => {
@@ -76,6 +117,7 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
       // Выключаем автопроверку
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
+        clearTimeout(intervalRef.current as any);
         intervalRef.current = null;
       }
       if (countdownRef.current) {
@@ -84,13 +126,12 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
       }
       setIsAutoCheckEnabled(false);
       localStorage.setItem('uptime_auto_check_enabled', 'false');
+      localStorage.removeItem('uptime_next_check_time');
       setNextCheckIn(300);
     } else {
       // Включаем автопроверку
       setIsAutoCheckEnabled(true);
       localStorage.setItem('uptime_auto_check_enabled', 'true');
-      setNextCheckIn(300);
-      startAutoCheck();
       // Запускаем первую проверку сразу
       handleStartCheck();
     }
@@ -99,7 +140,6 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
   const handleStartCheck = async () => {
     setIsChecking(true);
     setError('');
-    setNextCheckIn(300); // Сбрасываем таймер
     
     try {
       // Вызываем uptime-checker для всех провайдеров
@@ -159,9 +199,19 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
       if (onStatusChange) {
         onStatusChange();
       }
+      
+      // Планируем следующую проверку если автопроверка включена
+      if (isAutoCheckEnabled || localStorage.getItem('uptime_auto_check_enabled') === 'true') {
+        scheduleNextCheck();
+      }
     } catch (err) {
       console.error('Error starting uptime check:', err);
       setError(err instanceof Error ? err.message : 'Ошибка при запуске проверки');
+      
+      // Даже при ошибке планируем следующую проверку
+      if (isAutoCheckEnabled || localStorage.getItem('uptime_auto_check_enabled') === 'true') {
+        scheduleNextCheck();
+      }
     } finally {
       setIsChecking(false);
     }
@@ -294,8 +344,9 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
                 <li>Проверка отправляет HTTP-запросы ко всем провайдерам</li>
                 <li>Результаты сохраняются в базу данных</li>
                 <li>Статистика обновляется на странице /uptime каждые 30 секунд</li>
-                <li><strong>Автопроверка:</strong> при включении проверка запускается каждые 5 минут автоматически</li>
-                <li>Состояние автопроверки сохраняется и восстанавливается при перезагрузке страницы</li>
+                <li><strong>Автопроверка:</strong> проверка запускается каждые 5 минут автоматически</li>
+                <li>Таймер сохраняется — после перезагрузки страницы проверка продолжится по расписанию</li>
+                <li>Автопроверка работает пока вкладка браузера открыта</li>
               </ul>
             </div>
           </div>
