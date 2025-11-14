@@ -31,7 +31,6 @@ const Uptime = () => {
       }
     };
 
-    checkUptime();
     const interval = setInterval(checkUptime, 5 * 60 * 1000);
 
     return () => clearInterval(interval);
