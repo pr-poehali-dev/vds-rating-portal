@@ -1812,7 +1812,7 @@ export const providers: Provider[] = [
       "Панель управления",
       "DDoS защита",
     ],
-    locations: ["Москва", "Санкт-Петербург"],
+    locations: ["Франкфурт", "Амстердам", "Хельсинки"],
     trialDays: 1,
     url: "https://u1host.com/?from=17448",
     pros: [
