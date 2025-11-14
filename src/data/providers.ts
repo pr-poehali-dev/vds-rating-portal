@@ -1822,7 +1822,7 @@ export const providers: Provider[] = [
       "Простая панель управления",
     ],
     cons: ["Нет тестового периода", "Только 2 локации", "Нет NVMe дисков"],
-    fz152Compliant: true,
+    fz152Compliant: false,
     fz152Level: "УЗ-1",
     fstekCompliant: false,
     technicalSpecs: {
