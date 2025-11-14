@@ -16,6 +16,12 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
     failed: number;
     timestamp: string;
   } | null>(null);
+  const [checkHistory, setCheckHistory] = useState<{
+    total: number;
+    successful: number;
+    failed: number;
+    timestamp: string;
+  }[]>([]);
   const [error, setError] = useState<string>('');
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const countdownRef = useRef<NodeJS.Timeout | null>(null);
@@ -25,6 +31,7 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
     const savedState = localStorage.getItem('uptime_auto_check_enabled');
     const savedNextCheckTime = localStorage.getItem('uptime_next_check_time');
     const savedLastResult = localStorage.getItem('uptime_last_check_result');
+    const savedHistory = localStorage.getItem('uptime_check_history');
     
     // Восстанавливаем последний результат проверки
     if (savedLastResult) {
@@ -32,6 +39,15 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
         setLastCheckResult(JSON.parse(savedLastResult));
       } catch (e) {
         console.error('Error parsing saved result:', e);
+      }
+    }
+    
+    // Восстанавливаем историю проверок
+    if (savedHistory) {
+      try {
+        setCheckHistory(JSON.parse(savedHistory));
+      } catch (e) {
+        console.error('Error parsing saved history:', e);
       }
     }
     
@@ -208,6 +224,13 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
       
       setLastCheckResult(result);
       
+      // Обновляем историю (максимум 5 записей)
+      setCheckHistory(prev => {
+        const newHistory = [result, ...prev].slice(0, 5);
+        localStorage.setItem('uptime_check_history', JSON.stringify(newHistory));
+        return newHistory;
+      });
+      
       // Сохраняем результат в localStorage
       localStorage.setItem('uptime_last_check_result', JSON.stringify(result));
 
@@ -323,30 +346,60 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
         )}
 
         {lastCheckResult && (
-          <div className="bg-accent/50 border border-border rounded-lg p-4">
-            <div className="flex items-start gap-3">
-              <Icon name="CheckCircle2" size={20} className="text-green-600 flex-shrink-0 mt-0.5" />
-              <div className="flex-1">
-                <p className="font-semibold text-foreground mb-2">Результаты проверки</p>
-                <div className="grid grid-cols-3 gap-4 text-sm">
-                  <div>
-                    <p className="text-muted-foreground">Всего проверено</p>
-                    <p className="text-xl font-bold text-foreground">{lastCheckResult.total}</p>
+          <div className="space-y-4">
+            <div className="bg-accent/50 border border-border rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <Icon name="CheckCircle2" size={20} className="text-green-600 flex-shrink-0 mt-0.5" />
+                <div className="flex-1">
+                  <p className="font-semibold text-foreground mb-2">Последняя проверка</p>
+                  <div className="grid grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <p className="text-muted-foreground">Всего проверено</p>
+                      <p className="text-xl font-bold text-foreground">{lastCheckResult.total}</p>
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground">Успешно</p>
+                      <p className="text-xl font-bold text-green-600">{lastCheckResult.successful}</p>
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground">Недоступно</p>
+                      <p className="text-xl font-bold text-red-600">{lastCheckResult.failed}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-muted-foreground">Успешно</p>
-                    <p className="text-xl font-bold text-green-600">{lastCheckResult.successful}</p>
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground">Недоступно</p>
-                    <p className="text-xl font-bold text-red-600">{lastCheckResult.failed}</p>
-                  </div>
+                  <p className="text-xs text-muted-foreground mt-3">
+                    Время проверки: {lastCheckResult.timestamp}
+                  </p>
                 </div>
-                <p className="text-xs text-muted-foreground mt-3">
-                  Время проверки: {lastCheckResult.timestamp}
-                </p>
               </div>
             </div>
+
+            {checkHistory.length > 1 && (
+              <div className="bg-background border border-border rounded-lg p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <Icon name="History" size={18} className="text-muted-foreground" />
+                  <h3 className="font-semibold text-foreground">История проверок</h3>
+                </div>
+                <div className="space-y-2">
+                  {checkHistory.slice(1).map((check, index) => (
+                    <div key={index} className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                      <div className="flex items-center gap-4">
+                        <div className="text-xs text-muted-foreground">
+                          {check.timestamp}
+                        </div>
+                        <div className="flex items-center gap-3 text-sm">
+                          <span className="text-muted-foreground">Всего: <span className="font-bold text-foreground">{check.total}</span></span>
+                          <span className="text-green-600">✓ {check.successful}</span>
+                          <span className="text-red-600">✗ {check.failed}</span>
+                        </div>
+                      </div>
+                      <div className="text-sm font-bold text-foreground">
+                        {((check.successful / check.total) * 100).toFixed(1)}%
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
