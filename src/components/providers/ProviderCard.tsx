@@ -121,8 +121,8 @@ export const ProviderCard = ({
             onClick={onToggleDetails}
           >
             <div className="flex items-center gap-2">
-              <Icon name={showDetails ? "ThumbsDown" : "ThumbsUp"} size={18} />
-              <span>{showDetails ? t('card.hideProsCons') : t('card.showProsCons')}</span>
+              <Icon name={showDetails ? "EyeOff" : "Eye"} size={18} />
+              <span>{showDetails ? 'Скрыть детали' : 'Показать детали'}</span>
             </div>
             <Icon name={showDetails ? "ChevronUp" : "ChevronDown"} size={18} />
           </Button>
@@ -134,6 +134,29 @@ export const ProviderCard = ({
           }`}
         >
           <div className="pt-5 px-5 border-t border-border flex flex-col gap-3">
+              {provider.fz152Compliant && (
+                <div className="bg-primary/5 border border-primary/20 rounded-2xl p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-9 h-9 bg-primary/20 rounded-xl flex items-center justify-center">
+                      <Icon name="ShieldCheck" size={18} className="text-primary" />
+                    </div>
+                    <h4 className="text-base font-bold text-foreground">{t('card.fz152')}</h4>
+                    {provider.fz152Level && (
+                      <Badge className="bg-primary/20 text-primary border-0 ml-auto">{provider.fz152Level}</Badge>
+                    )}
+                  </div>
+                  <p className="text-sm text-foreground leading-relaxed">
+                    {t('card.fz152Description')}
+                  </p>
+                </div>
+              )}
+
+              <TechnicalSpecsSection provider={provider} />
+              <ServiceGuaranteesSection provider={provider} />
+              <AdditionalServicesSection provider={provider} />
+              <PaymentMethodsSection provider={provider} />
+              <CaseStudiesSection provider={provider} />
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="bg-accent border border-secondary/30 rounded-2xl p-4">
                   <div className="flex items-center gap-2 mb-4">
@@ -173,29 +196,6 @@ export const ProviderCard = ({
                   </ul>
                 </div>
               </div>
-
-              {provider.fz152Compliant && (
-                <div className="bg-primary/5 border border-primary/20 rounded-2xl p-4">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-9 h-9 bg-primary/20 rounded-xl flex items-center justify-center">
-                      <Icon name="ShieldCheck" size={18} className="text-primary" />
-                    </div>
-                    <h4 className="text-base font-bold text-foreground">{t('card.fz152')}</h4>
-                    {provider.fz152Level && (
-                      <Badge className="bg-primary/20 text-primary border-0 ml-auto">{provider.fz152Level}</Badge>
-                    )}
-                  </div>
-                  <p className="text-sm text-foreground leading-relaxed">
-                    {t('card.fz152Description')}
-                  </p>
-                </div>
-              )}
-
-              <TechnicalSpecsSection provider={provider} />
-              <ServiceGuaranteesSection provider={provider} />
-              <AdditionalServicesSection provider={provider} />
-              <PaymentMethodsSection provider={provider} />
-              <CaseStudiesSection provider={provider} />
 
             <ProviderReviews
               provider={provider}
