@@ -56,11 +56,14 @@ const Uptime = () => {
   }, []);
 
   // Объединяем данные провайдеров с актуальной статистикой
+  // Используем базовые значения если мониторинг только начался (< 100 проверок)
   const providers = providersData.map(provider => {
     const stats = uptimeStats.find(s => s.provider_id === provider.id);
+    // Если мало данных (< 100 проверок) - используем базовые значения
+    const useBaselineValue = !stats || stats.total_checks < 100;
     return {
       ...provider,
-      uptime30days: stats?.uptime_percent || provider.uptime30days
+      uptime30days: useBaselineValue ? provider.uptime30days : stats.uptime_percent
     };
   });
 
