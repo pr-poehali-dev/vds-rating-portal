@@ -1867,7 +1867,7 @@ export const providers: Provider[] = [
         { months: 6, percent: 10 },
       ],
       paymentMethods: ["Банковская карта", "СБП", "Криптовалюта (Heleket)"],
-      minPrice: 180,
+      minPrice: 149,
     },
     popularity: 15000,
     promoText: "Скидка 15% при оплате на год",
