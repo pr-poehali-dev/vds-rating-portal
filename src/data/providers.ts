@@ -1830,7 +1830,7 @@ export const providers: Provider[] = [
     fz152Level: "УЗ-1",
     fstekCompliant: false,
     technicalSpecs: {
-      diskType: "NvME",
+      diskType: "NVME",
       networkSpeed: "1 Гбит/с",
       virtualization: ["KVM"],
       guaranteedResources: true,
