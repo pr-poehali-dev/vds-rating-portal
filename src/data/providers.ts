@@ -1813,7 +1813,7 @@ export const providers: Provider[] = [
       "DDoS защита",
     ],
     locations: ["Москва", "Санкт-Петербург"],
-    trialDays: 24,
+    trialDays: 1,
     url: "https://u1host.com/?from=17448",
     pros: [
       "Доступные цены",
