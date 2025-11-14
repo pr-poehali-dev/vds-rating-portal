@@ -345,6 +345,20 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
           </div>
         )}
 
+        {!lastCheckResult && !isChecking && (
+          <div className="bg-muted/30 border-2 border-dashed border-border rounded-lg p-8 text-center">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                <Icon name="PlayCircle" size={32} className="text-primary" />
+              </div>
+              <div>
+                <p className="text-lg font-semibold text-foreground mb-2">Статистика пока отсутствует</p>
+                <p className="text-sm text-muted-foreground">Запустите первую проверку, чтобы увидеть результаты</p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {lastCheckResult && (
           <div className="space-y-4">
             <div className="bg-accent/50 border border-border rounded-lg p-4">
