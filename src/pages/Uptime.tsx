@@ -7,9 +7,11 @@ import { providers } from '@/data/providers';
 
 const Uptime = () => {
   const [lastCheckTime, setLastCheckTime] = useState<string>('');
+  const [isChecking, setIsChecking] = useState<boolean>(false);
 
   useEffect(() => {
     const checkUptime = async () => {
+      setIsChecking(true);
       try {
         const providersToCheck = providers
           .filter(p => p.url)
@@ -24,6 +26,8 @@ const Uptime = () => {
         setLastCheckTime(new Date().toLocaleTimeString('ru-RU'));
       } catch (error) {
         console.error('Ошибка проверки аптайма:', error);
+      } finally {
+        setIsChecking(false);
       }
     };
 
@@ -36,7 +40,7 @@ const Uptime = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <UptimeChart providers={providers} lastCheckTime={lastCheckTime} />
+      <UptimeChart providers={providers} lastCheckTime={lastCheckTime} isChecking={isChecking} />
       <MethodologySection />
       <Footer />
     </div>
