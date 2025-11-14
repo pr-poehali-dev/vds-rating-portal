@@ -1802,7 +1802,7 @@ export const providers: Provider[] = [
     name: "U1Host",
     logo: "https://cdn.poehali.dev/files/aa6a19cb-f969-4b2b-a20b-e5a5fdfb313c.png",
     rating: 9.0,
-    basePrice: 180,
+    basePrice: 149,
     cpuPrice: 145,
     ramPrice: 85,
     storagePrice: 7,
