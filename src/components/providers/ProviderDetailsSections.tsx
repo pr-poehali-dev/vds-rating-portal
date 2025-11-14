@@ -99,6 +99,18 @@ export const TechnicalSpecsSection = ({ provider }: TechnicalSpecsSectionProps) 
         </div>
       </div>
       <div className="mt-4 pt-4 border-t border-border">
+        {technicalSpecs.cpuModels && technicalSpecs.cpuModels.length > 0 && (
+          <div className="mb-4">
+            <div className="text-xs text-muted-foreground mb-2">Процессоры:</div>
+            <div className="flex flex-wrap gap-1.5">
+              {technicalSpecs.cpuModels.map((cpu, idx) => (
+                <Badge key={idx} variant="outline" className="text-xs bg-background">
+                  {cpu}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="text-xs text-muted-foreground mb-2">{t('card.availableOS')}:</div>
         <div className="flex flex-wrap gap-1.5">
           {technicalSpecs.availableOS.map((os, idx) => (

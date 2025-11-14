@@ -1848,6 +1848,11 @@ export const providers: Provider[] = [
       controlPanel: "Собственная панель",
       apiAccess: false,
       ddosProtection: "Базовая защита",
+      cpuModels: [
+        "AMD Ryzen 9 3900",
+        "AMD Ryzen 9 5950X",
+        "AMD Ryzen 9 7950X3D"
+      ],
     },
     serviceGuarantees: {
       uptimeSLA: "99.9%",

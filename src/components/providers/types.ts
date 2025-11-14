@@ -18,6 +18,7 @@ export interface TechnicalSpecs {
   controlPanel?: string;
   apiAccess: boolean;
   ddosProtection?: string;
+  cpuModels?: string[];
   kubernetes?: {
     available: boolean;
     managed: boolean;
