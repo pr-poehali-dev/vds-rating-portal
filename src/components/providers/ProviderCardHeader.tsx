@@ -117,9 +117,9 @@ export const ProviderCardHeader = ({
 
             <div className="flex items-center gap-1.5 text-sm mt-2">
               <Icon name="Wallet" size={14} className="text-primary flex-shrink-0" />
-              <span className={provider.id === 16 ? "text-foreground" : "font-semibold text-foreground"}>{t('common.from')} </span>
+              <span className={provider.id === 16 ? "text-sm text-foreground" : "font-semibold text-foreground"}>{t('common.from')} </span>
               <span className="text-base font-black text-primary">{calculatedPrice}</span>
-              <span className="text-xs text-muted-foreground">{t('common.perMonth')}</span>
+              <span className={provider.id === 16 ? "text-sm text-foreground" : "text-xs text-muted-foreground"}>{t('common.perMonth')}</span>
             </div>
           {provider.uptime30days && (
             <div className="flex items-center gap-1.5 text-sm mt-1">
