@@ -43,6 +43,9 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   const [filterOS, setFilterOS] = useState<string | null>(() => {
     return localStorage.getItem('filterOS') || null;
   });
+  const [filterCPU, setFilterCPU] = useState<string | null>(() => {
+    return localStorage.getItem('filterCPU') || null;
+  });
   const [sortBy, setSortBy] = useState<'rating' | 'price'>(() => {
     const saved = localStorage.getItem('sortBy');
     return (saved as 'rating' | 'price') || 'rating';
@@ -155,6 +158,14 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
   }, [filterOS]);
 
   useEffect(() => {
+    if (filterCPU) {
+      localStorage.setItem('filterCPU', filterCPU);
+    } else {
+      localStorage.removeItem('filterCPU');
+    }
+  }, [filterCPU]);
+
+  useEffect(() => {
     localStorage.setItem('sortBy', sortBy);
   }, [sortBy]);
 
@@ -227,6 +238,10 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
     new Set(providersWithReviews.flatMap(p => p.technicalSpecs.availableOS))
   ).sort();
 
+  const allCPUs = Array.from(
+    new Set(providersWithReviews.flatMap(p => p.technicalSpecs.cpuModels || []))
+  ).sort();
+
   const filteredProviders = providersWithReviews
     .filter(p => {
       if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
@@ -238,6 +253,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
       if (filterDiskType && p.technicalSpecs.diskType !== filterDiskType) return false;
       if (filterPaymentMethod && !p.pricingDetails.paymentMethods.includes(filterPaymentMethod)) return false;
       if (filterOS && !p.technicalSpecs.availableOS.includes(filterOS)) return false;
+      if (filterCPU && (!p.technicalSpecs.cpuModels || !p.technicalSpecs.cpuModels.includes(filterCPU))) return false;
       return true;
     })
     .sort((a, b) => {
@@ -287,6 +303,8 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
           setFilterPaymentMethod={setFilterPaymentMethod}
           filterOS={filterOS}
           setFilterOS={setFilterOS}
+          filterCPU={filterCPU}
+          setFilterCPU={setFilterCPU}
           sortBy={sortBy}
           setSortBy={setSortBy}
           allLocations={allLocations}
@@ -294,6 +312,7 @@ export const ProvidersSection = ({ providers }: ProvidersSectionProps) => {
           allDiskTypes={allDiskTypes}
           allPaymentMethods={allPaymentMethods}
           allOS={allOS}
+          allCPUs={allCPUs}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           filteredCount={filteredProviders.length}

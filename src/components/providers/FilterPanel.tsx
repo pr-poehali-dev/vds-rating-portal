@@ -20,6 +20,8 @@ interface FilterPanelProps {
   setFilterPaymentMethod: (value: string | null) => void;
   filterOS: string | null;
   setFilterOS: (value: string | null) => void;
+  filterCPU: string | null;
+  setFilterCPU: (value: string | null) => void;
   sortBy: 'rating' | 'price';
   setSortBy: (value: 'rating' | 'price') => void;
   allLocations: string[];
@@ -27,6 +29,7 @@ interface FilterPanelProps {
   allDiskTypes: string[];
   allPaymentMethods: string[];
   allOS: string[];
+  allCPUs: string[];
   searchQuery: string;
   setSearchQuery: (value: string) => void;
   filteredCount: number;
@@ -49,6 +52,8 @@ export const FilterPanel = ({
   setFilterPaymentMethod,
   filterOS,
   setFilterOS,
+  filterCPU,
+  setFilterCPU,
   sortBy,
   setSortBy,
   allLocations,
@@ -56,6 +61,7 @@ export const FilterPanel = ({
   allDiskTypes,
   allPaymentMethods,
   allOS,
+  allCPUs,
   searchQuery,
   setSearchQuery,
   filteredCount
@@ -65,7 +71,7 @@ export const FilterPanel = ({
   
   const hasActiveFilters = filterFZ152 || filterTrialPeriod || filterLocation || 
                           filterVirtualization || filterMinDatacenters !== null || 
-                          filterDiskType || filterPaymentMethod || filterOS || searchQuery;
+                          filterDiskType || filterPaymentMethod || filterOS || filterCPU || searchQuery;
 
   const clearFilters = () => {
     setFilterFZ152(false);
@@ -76,6 +82,7 @@ export const FilterPanel = ({
     setFilterDiskType(null);
     setFilterPaymentMethod(null);
     setFilterOS(null);
+    setFilterCPU(null);
     setSortBy('rating');
     setSearchQuery('');
   };
@@ -273,6 +280,29 @@ export const FilterPanel = ({
               <option value="">{t('filters.anyOS')}</option>
               {allOS.map(os => (
                 <option key={os} value={os}>{os}</option>
+              ))}
+            </select>
+            <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-muted-foreground" />
+          </div>
+        </div>
+
+        <div className="group">
+          <label className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
+            <Icon name="Cpu" size={16} className="text-primary" />
+            Процессор
+          </label>
+          <div className="relative">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+              <Icon name="Cpu" size={18} className="text-primary" />
+            </div>
+            <select
+              className="w-full h-12 pl-11 pr-4 rounded-xl border-2 border-input bg-background text-foreground text-sm font-semibold appearance-none cursor-pointer hover:border-primary/50 hover:shadow-md focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+              value={filterCPU || ''}
+              onChange={(e) => setFilterCPU(e.target.value || null)}
+            >
+              <option value="">Любой процессор</option>
+              {allCPUs.map(cpu => (
+                <option key={cpu} value={cpu}>{cpu}</option>
               ))}
             </select>
             <Icon name="ChevronDown" size={16} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-muted-foreground" />
