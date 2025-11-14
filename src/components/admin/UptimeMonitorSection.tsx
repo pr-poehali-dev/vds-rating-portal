@@ -277,44 +277,29 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
 
       <div className="space-y-4">
         <div className="flex items-center justify-between gap-4 flex-wrap">
-          <div className="flex items-center gap-3">
-            <Button
-              onClick={handleStartCheck}
-              disabled={isChecking}
-              className="flex items-center gap-2"
-            >
-              {isChecking ? (
-                <>
-                  <Icon name="Loader2" size={18} className="animate-spin" />
-                  Проверка...
-                </>
-              ) : (
-                <>
-                  <Icon name="Play" size={18} />
-                  Запустить проверку
-                </>
-              )}
-            </Button>
-
-            <Button
-              onClick={handleToggleAutoCheck}
-              disabled={isChecking}
-              variant={isAutoCheckEnabled ? "default" : "outline"}
-              className="flex items-center gap-2"
-            >
-              {isAutoCheckEnabled ? (
-                <>
-                  <Icon name="PauseCircle" size={18} />
-                  Остановить автопроверку
-                </>
-              ) : (
-                <>
-                  <Icon name="PlayCircle" size={18} />
-                  Включить автопроверку
-                </>
-              )}
-            </Button>
-          </div>
+          <Button
+            onClick={handleToggleAutoCheck}
+            disabled={isChecking}
+            variant={isAutoCheckEnabled ? "default" : "outline"}
+            className="flex items-center gap-2"
+          >
+            {isChecking ? (
+              <>
+                <Icon name="Loader2" size={18} className="animate-spin" />
+                Проверка...
+              </>
+            ) : isAutoCheckEnabled ? (
+              <>
+                <Icon name="PauseCircle" size={18} />
+                Остановить автопроверку
+              </>
+            ) : (
+              <>
+                <Icon name="PlayCircle" size={18} />
+                Включить автопроверку
+              </>
+            )}
+          </Button>
 
           {isAutoCheckEnabled && (
             <div className="flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-lg">
@@ -353,7 +338,7 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
               </div>
               <div>
                 <p className="text-lg font-semibold text-foreground mb-2">Статистика пока отсутствует</p>
-                <p className="text-sm text-muted-foreground">Запустите первую проверку, чтобы увидеть результаты</p>
+                <p className="text-sm text-muted-foreground">Включите автопроверку, чтобы начать мониторинг</p>
               </div>
             </div>
           </div>
