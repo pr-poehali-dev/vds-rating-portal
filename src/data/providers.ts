@@ -1826,7 +1826,7 @@ export const providers: Provider[] = [
     fz152Level: "УЗ-1",
     fstekCompliant: false,
     technicalSpecs: {
-      diskType: "SSD",
+      diskType: "NvME",
       networkSpeed: "1 Гбит/с",
       virtualization: ["KVM"],
       guaranteedResources: true,
@@ -1842,7 +1842,7 @@ export const providers: Provider[] = [
         "Rocky Linux",
       ],
       controlPanel: "Собственная панель",
-      apiAccess: true,
+      apiAccess: false,
       ddosProtection: "Базовая защита",
     },
     serviceGuarantees: {
@@ -1851,7 +1851,7 @@ export const providers: Provider[] = [
       moneyBackGuarantee: 14,
     },
     additionalServices: {
-      autoBackups: true,
+      autoBackups: false,
       backupPrice: 60,
       monitoring: true,
       snapshots: true,
