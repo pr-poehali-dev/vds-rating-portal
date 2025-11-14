@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
@@ -8,6 +8,8 @@ interface UptimeMonitorSectionProps {
 
 export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionProps) => {
   const [isChecking, setIsChecking] = useState(false);
+  const [isAutoCheckEnabled, setIsAutoCheckEnabled] = useState(false);
+  const [nextCheckIn, setNextCheckIn] = useState<number>(300);
   const [lastCheckResult, setLastCheckResult] = useState<{
     total: number;
     successful: number;
@@ -15,15 +17,91 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
     timestamp: string;
   } | null>(null);
   const [error, setError] = useState<string>('');
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const countdownRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    // Загружаем состояние автопроверки из localStorage
+    const savedState = localStorage.getItem('uptime_auto_check_enabled');
+    if (savedState === 'true') {
+      setIsAutoCheckEnabled(true);
+      startAutoCheck();
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+      if (countdownRef.current) {
+        clearInterval(countdownRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isAutoCheckEnabled) {
+      // Обновляем обратный отсчёт каждую секунду
+      countdownRef.current = setInterval(() => {
+        setNextCheckIn(prev => {
+          if (prev <= 1) {
+            return 300; // Сбрасываем на 5 минут
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    } else {
+      if (countdownRef.current) {
+        clearInterval(countdownRef.current);
+        countdownRef.current = null;
+      }
+      setNextCheckIn(300);
+    }
+
+    return () => {
+      if (countdownRef.current) {
+        clearInterval(countdownRef.current);
+      }
+    };
+  }, [isAutoCheckEnabled]);
+
+  const startAutoCheck = () => {
+    // Запускаем проверку каждые 5 минут
+    intervalRef.current = setInterval(() => {
+      handleStartCheck();
+    }, 5 * 60 * 1000);
+  };
+
+  const handleToggleAutoCheck = () => {
+    if (isAutoCheckEnabled) {
+      // Выключаем автопроверку
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+      if (countdownRef.current) {
+        clearInterval(countdownRef.current);
+        countdownRef.current = null;
+      }
+      setIsAutoCheckEnabled(false);
+      localStorage.setItem('uptime_auto_check_enabled', 'false');
+      setNextCheckIn(300);
+    } else {
+      // Включаем автопроверку
+      setIsAutoCheckEnabled(true);
+      localStorage.setItem('uptime_auto_check_enabled', 'true');
+      setNextCheckIn(300);
+      startAutoCheck();
+      // Запускаем первую проверку сразу
+      handleStartCheck();
+    }
+  };
 
   const handleStartCheck = async () => {
     setIsChecking(true);
     setError('');
+    setNextCheckIn(300); // Сбрасываем таймер
     
     try {
-      // Получаем список всех провайдеров с URL
-      const providersResponse = await fetch('/src/data/providers.ts');
-      
       // Вызываем uptime-checker для всех провайдеров
       const response = await fetch('https://functions.poehali.dev/cb148476-2d49-4e4f-8a7e-f1e399493259', {
         method: 'POST',
@@ -89,8 +167,14 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
     }
   };
 
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${String(secs).padStart(2, '0')}`;
+  };
+
   return (
-    <div className="bg-card border border-border rounded-xl p-6">
+    <div className="bg-card border border-border rounded-xl p-6 mb-8">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
@@ -104,28 +188,61 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
       </div>
 
       <div className="space-y-4">
-        <div className="flex items-center gap-3">
-          <Button
-            onClick={handleStartCheck}
-            disabled={isChecking}
-            className="flex items-center gap-2"
-          >
-            {isChecking ? (
-              <>
-                <Icon name="Loader2" size={18} className="animate-spin" />
-                Проверка...
-              </>
-            ) : (
-              <>
-                <Icon name="Play" size={18} />
-                Запустить проверку
-              </>
-            )}
-          </Button>
+        <div className="flex items-center justify-between gap-4 flex-wrap">
+          <div className="flex items-center gap-3">
+            <Button
+              onClick={handleStartCheck}
+              disabled={isChecking}
+              className="flex items-center gap-2"
+            >
+              {isChecking ? (
+                <>
+                  <Icon name="Loader2" size={18} className="animate-spin" />
+                  Проверка...
+                </>
+              ) : (
+                <>
+                  <Icon name="Play" size={18} />
+                  Запустить проверку
+                </>
+              )}
+            </Button>
 
-          <div className="text-sm text-muted-foreground">
-            Проверка доступности всех провайдеров (43 шт.)
+            <Button
+              onClick={handleToggleAutoCheck}
+              disabled={isChecking}
+              variant={isAutoCheckEnabled ? "default" : "outline"}
+              className="flex items-center gap-2"
+            >
+              {isAutoCheckEnabled ? (
+                <>
+                  <Icon name="PauseCircle" size={18} />
+                  Остановить автопроверку
+                </>
+              ) : (
+                <>
+                  <Icon name="PlayCircle" size={18} />
+                  Включить автопроверку
+                </>
+              )}
+            </Button>
           </div>
+
+          {isAutoCheckEnabled && (
+            <div className="flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-lg">
+              <Icon name="Clock" size={18} className="text-primary" />
+              <div className="text-sm">
+                <span className="text-muted-foreground">Следующая проверка через:</span>
+                <span className="ml-2 font-bold text-foreground">
+                  {formatTime(nextCheckIn)}
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="text-sm text-muted-foreground">
+          Проверка доступности всех провайдеров (31 шт.)
         </div>
 
         {error && (
@@ -174,10 +291,11 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
             <div className="text-sm text-muted-foreground space-y-2">
               <p><strong>Как работает:</strong></p>
               <ul className="list-disc list-inside space-y-1 ml-2">
-                <li>Проверка отправляет HTTP-запросы ко всем 43 провайдерам</li>
+                <li>Проверка отправляет HTTP-запросы ко всем провайдерам</li>
                 <li>Результаты сохраняются в базу данных</li>
                 <li>Статистика обновляется на странице /uptime каждые 30 секунд</li>
-                <li>Рекомендуется запускать проверку каждые 5 минут для точной статистики</li>
+                <li><strong>Автопроверка:</strong> при включении проверка запускается каждые 5 минут автоматически</li>
+                <li>Состояние автопроверки сохраняется и восстанавливается при перезагрузке страницы</li>
               </ul>
             </div>
           </div>
