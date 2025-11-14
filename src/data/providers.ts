@@ -8,7 +8,7 @@ export const providers: Provider[] = [
     name: "Aeza",
     logo: "https://cdn.poehali.dev/files/0e5cc686-2af5-4b58-aeaa-a86722ba8cd8.png",
     rating: 9.6,
-    basePrice: 149,
+    basePrice: 0,
     cpuPrice: 180,
     ramPrice: 95,
     storagePrice: 8,
