@@ -375,28 +375,77 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
 
             {checkHistory.length > 1 && (
               <div className="bg-background border border-border rounded-lg p-4">
-                <div className="flex items-center gap-2 mb-3">
-                  <Icon name="History" size={18} className="text-muted-foreground" />
-                  <h3 className="font-semibold text-foreground">История проверок</h3>
+                <div className="flex items-center gap-2 mb-4">
+                  <Icon name="TrendingUp" size={18} className="text-muted-foreground" />
+                  <h3 className="font-semibold text-foreground">График доступности</h3>
                 </div>
-                <div className="space-y-2">
-                  {checkHistory.slice(1).map((check, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
-                      <div className="flex items-center gap-4">
-                        <div className="text-xs text-muted-foreground">
-                          {check.timestamp}
+                
+                {/* График */}
+                <div className="mb-6">
+                  <div className="h-48 flex items-end gap-2 px-2">
+                    {[...checkHistory].reverse().map((check, index) => {
+                      const successRate = (check.successful / check.total) * 100;
+                      const height = (successRate / 100) * 100;
+                      const barColor = successRate >= 95 ? 'bg-green-500' : successRate >= 85 ? 'bg-yellow-500' : 'bg-red-500';
+                      
+                      return (
+                        <div key={index} className="flex-1 flex flex-col items-center gap-2">
+                          <div className="w-full relative group">
+                            <div 
+                              className={`w-full ${barColor} rounded-t transition-all hover:opacity-80 cursor-pointer`}
+                              style={{ height: `${height}%`, minHeight: '8px' }}
+                            >
+                            </div>
+                            {/* Tooltip */}
+                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                              <div className="bg-foreground text-background text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg">
+                                <div className="font-bold">{successRate.toFixed(1)}%</div>
+                                <div className="text-[10px] opacity-80">{check.successful}/{check.total}</div>
+                                <div className="text-[10px] opacity-60">{check.timestamp.split(',')[1]}</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="text-[10px] text-muted-foreground text-center">
+                            {index === 0 ? 'Старая' : index === checkHistory.length - 1 ? 'Новая' : ''}
+                          </div>
                         </div>
-                        <div className="flex items-center gap-3 text-sm">
-                          <span className="text-muted-foreground">Всего: <span className="font-bold text-foreground">{check.total}</span></span>
-                          <span className="text-green-600">✓ {check.successful}</span>
-                          <span className="text-red-600">✗ {check.failed}</span>
+                      );
+                    })}
+                  </div>
+                  
+                  {/* Шкала */}
+                  <div className="flex justify-between text-xs text-muted-foreground mt-2 px-2">
+                    <span>0%</span>
+                    <span>50%</span>
+                    <span>100%</span>
+                  </div>
+                </div>
+
+                {/* История в виде списка */}
+                <div className="border-t border-border pt-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Icon name="History" size={16} className="text-muted-foreground" />
+                    <h4 className="text-sm font-semibold text-foreground">История проверок</h4>
+                  </div>
+                  <div className="space-y-2">
+                    {checkHistory.slice(1).map((check, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                        <div className="flex items-center gap-4">
+                          <div className="text-xs text-muted-foreground">
+                            {check.timestamp}
+                          </div>
+                          <div className="flex items-center gap-3 text-sm">
+                            <span className="text-muted-foreground">Всего: <span className="font-bold text-foreground">{check.total}</span></span>
+                            <span className="text-green-600">✓ {check.successful}</span>
+                            <span className="text-red-600">✗ {check.failed}</span>
+                          </div>
+                        </div>
+                        <div className="text-sm font-bold text-foreground">
+                          {((check.successful / check.total) * 100).toFixed(1)}%
                         </div>
                       </div>
-                      <div className="text-sm font-bold text-foreground">
-                        {((check.successful / check.total) * 100).toFixed(1)}%
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
