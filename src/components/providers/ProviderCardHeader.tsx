@@ -83,30 +83,30 @@ export const ProviderCardHeader = ({
             </div>
             <div className="flex items-center gap-1.5 text-sm">
               <Icon name="Gift" size={14} className={provider.trialDays ? "text-primary" : "text-muted-foreground"} />
-              <span className="font-semibold text-foreground truncate">
+              <span className={provider.id === 16 ? "text-foreground truncate" : "font-semibold text-foreground truncate"}>
                 {provider.trialDays ? `${provider.trialDays} ${provider.trialDays === 1 ? t('common.day') : provider.trialDays < 5 ? t('common.daysGenitive') : t('common.days')} ${t('common.free')}` : 'Тест по запросу'}
               </span>
             </div>
             {provider.fz152Compliant && (
               <div className="flex items-center gap-1.5 text-sm">
                 <Icon name="ShieldCheck" size={14} className="text-primary flex-shrink-0" />
-                <span className="font-semibold text-foreground truncate">152-ФЗ</span>
+                <span className={provider.id === 16 ? "text-foreground truncate" : "font-semibold text-foreground truncate"}>152-ФЗ</span>
               </div>
             )}
             <div className="flex items-center gap-1.5 text-sm">
               <Icon name="HardDrive" size={14} className="text-primary flex-shrink-0" />
-              <span className="font-semibold text-foreground truncate">{provider.technicalSpecs.diskType}</span>
+              <span className={provider.id === 16 ? "text-foreground truncate" : "font-semibold text-foreground truncate"}>{provider.technicalSpecs.diskType}</span>
             </div>
             <div className="flex items-center gap-1.5 text-sm">
               <Icon name="Box" size={14} className="text-primary flex-shrink-0" />
-              <span className="font-semibold text-foreground truncate">
+              <span className={provider.id === 16 ? "text-foreground truncate" : "font-semibold text-foreground truncate"}>
                 {provider.technicalSpecs.virtualization.slice(0, 2).join(', ')}
               </span>
             </div>
             {provider.technicalSpecs.kubernetes?.available && (
               <div className="flex items-center gap-1.5 text-sm">
                 <Icon name="Network" size={14} className="text-primary flex-shrink-0" />
-                <span className="font-semibold text-foreground">Kubernetes</span>
+                <span className={provider.id === 16 ? "text-foreground" : "font-semibold text-foreground"}>Kubernetes</span>
                 {provider.technicalSpecs.kubernetes.managed && (
                   <Badge className="bg-primary/10 border-primary/30 text-primary border font-semibold text-[10px] px-1 py-0">
                     managed
@@ -117,14 +117,14 @@ export const ProviderCardHeader = ({
 
             <div className="flex items-center gap-1.5 text-sm mt-2">
               <Icon name="Wallet" size={14} className="text-primary flex-shrink-0" />
-              <span className="font-semibold text-foreground">{t('common.from')} </span>
+              <span className={provider.id === 16 ? "text-foreground" : "font-semibold text-foreground"}>{t('common.from')} </span>
               <span className="text-base font-black text-primary">{calculatedPrice}</span>
               <span className="text-xs text-muted-foreground">{t('common.perMonth')}</span>
             </div>
           {provider.uptime30days && (
             <div className="flex items-center gap-1.5 text-sm mt-1">
               <Icon name="Activity" size={14} className="text-secondary flex-shrink-0" />
-              <span className="font-semibold text-foreground">{t('common.uptime')}: {provider.uptime30days}%</span>
+              <span className={provider.id === 16 ? "text-foreground" : "font-semibold text-foreground"}>{t('common.uptime')}: {provider.uptime30days}%</span>
             </div>
           )}
         </div>
