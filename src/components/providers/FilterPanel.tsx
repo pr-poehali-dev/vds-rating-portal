@@ -288,12 +288,12 @@ export const FilterPanel = ({
 
         <div className="group">
           <label className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
-            <Icon name="RussianRuble" size={16} className="text-primary" />
+            <Icon name="Cpu" size={16} className="text-primary" />
             Процессор
           </label>
           <div className="relative">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-              <Icon name="RussianRuble" size={18} className="text-primary" />
+              <Icon name="Cpu" size={18} className="text-primary" />
             </div>
             <select
               className="w-full h-12 pl-11 pr-4 rounded-xl border-2 border-input bg-background text-foreground text-sm font-semibold appearance-none cursor-pointer hover:border-primary/50 hover:shadow-md focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
