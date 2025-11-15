@@ -173,6 +173,8 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
             localStorage.removeItem('uptime_next_check_time');
             performCheck();
           }
+        } else if (!isChecking) {
+          performCheck();
         }
       };
       
