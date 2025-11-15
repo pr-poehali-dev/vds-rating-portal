@@ -158,7 +158,7 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
 
   useEffect(() => {
     if (isAutoCheckEnabled) {
-      countdownRef.current = setInterval(() => {
+      const checkAndUpdate = () => {
         const savedNextCheckTime = localStorage.getItem('uptime_next_check_time');
         if (savedNextCheckTime) {
           const nextCheckTime = parseInt(savedNextCheckTime, 10);
@@ -166,11 +166,16 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
           const remainingSeconds = Math.max(0, Math.floor((nextCheckTime - now) / 1000));
           setNextCheckIn(remainingSeconds);
           
-          if (remainingSeconds === 0) {
+          if (remainingSeconds === 0 && !isChecking) {
             performCheck();
           }
+        } else {
+          setNextCheckIn(0);
         }
-      }, 1000);
+      };
+      
+      checkAndUpdate();
+      countdownRef.current = setInterval(checkAndUpdate, 1000);
     } else {
       if (countdownRef.current) {
         clearInterval(countdownRef.current);
@@ -184,7 +189,7 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
         clearInterval(countdownRef.current);
       }
     };
-  }, [isAutoCheckEnabled]);
+  }, [isAutoCheckEnabled, isChecking]);
 
   const scheduleNextCheck = () => {
     // Планируем следующую проверку через 5 минут
@@ -193,7 +198,7 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
     setNextCheckIn(300);
   };
 
-  const handleToggleAutoCheck = () => {
+  const handleToggleAutoCheck = async () => {
     if (isAutoCheckEnabled) {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
@@ -211,7 +216,7 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
     } else {
       setIsAutoCheckEnabled(true);
       localStorage.setItem('uptime_auto_check_enabled', 'true');
-      performCheck();
+      await performCheck();
     }
   };
 
