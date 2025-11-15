@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
@@ -23,10 +23,15 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
     timestamp: string;
   }[]>([]);
   const [error, setError] = useState<string>('');
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const countdownRef = useRef<NodeJS.Timeout | null>(null);
 
-  const performCheck = async () => {
+  const scheduleNextCheck = useCallback(() => {
+    const nextCheckTime = Date.now() + (5 * 60 * 1000);
+    localStorage.setItem('uptime_next_check_time', nextCheckTime.toString());
+    setNextCheckIn(300);
+  }, []);
+
+  const performCheck = useCallback(async () => {
     setIsChecking(true);
     setError('');
     
@@ -101,11 +106,13 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
       setLastCheckResult(result);
       localStorage.setItem('uptime_last_check_result', JSON.stringify(result));
       
-      const newHistory = [result, ...checkHistory].slice(0, 10);
-      setCheckHistory(newHistory);
-      localStorage.setItem('uptime_check_history', JSON.stringify(newHistory));
+      setCheckHistory(prev => {
+        const newHistory = [result, ...prev].slice(0, 10);
+        localStorage.setItem('uptime_check_history', JSON.stringify(newHistory));
+        return newHistory;
+      });
       
-      if (isAutoCheckEnabled) {
+      if (localStorage.getItem('uptime_auto_check_enabled') === 'true') {
         scheduleNextCheck();
       }
       
@@ -118,7 +125,7 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
     } finally {
       setIsChecking(false);
     }
-  };
+  }, [onStatusChange, scheduleNextCheck]);
 
   useEffect(() => {
     const savedState = localStorage.getItem('uptime_auto_check_enabled');
@@ -146,10 +153,6 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
     }
 
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        clearTimeout(intervalRef.current as any);
-      }
       if (countdownRef.current) {
         clearInterval(countdownRef.current);
       }
@@ -167,10 +170,9 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
           setNextCheckIn(remainingSeconds);
           
           if (remainingSeconds === 0 && !isChecking) {
+            localStorage.removeItem('uptime_next_check_time');
             performCheck();
           }
-        } else {
-          setNextCheckIn(0);
         }
       };
       
@@ -189,22 +191,10 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
         clearInterval(countdownRef.current);
       }
     };
-  }, [isAutoCheckEnabled, isChecking]);
+  }, [isAutoCheckEnabled, isChecking, performCheck]);
 
-  const scheduleNextCheck = () => {
-    // Планируем следующую проверку через 5 минут
-    const nextCheckTime = Date.now() + (5 * 60 * 1000);
-    localStorage.setItem('uptime_next_check_time', nextCheckTime.toString());
-    setNextCheckIn(300);
-  };
-
-  const handleToggleAutoCheck = async () => {
+  const handleToggleAutoCheck = () => {
     if (isAutoCheckEnabled) {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        clearTimeout(intervalRef.current as any);
-        intervalRef.current = null;
-      }
       if (countdownRef.current) {
         clearInterval(countdownRef.current);
         countdownRef.current = null;
@@ -216,7 +206,7 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
     } else {
       setIsAutoCheckEnabled(true);
       localStorage.setItem('uptime_auto_check_enabled', 'true');
-      await performCheck();
+      performCheck();
     }
   };
 
@@ -265,177 +255,101 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
             ) : (
               <>
                 <Icon name="PlayCircle" size={18} />
-                Включить автопроверку
+                Запустить автопроверку
               </>
             )}
           </Button>
 
+          {!isAutoCheckEnabled && (
+            <Button
+              onClick={handleStartCheck}
+              disabled={isChecking}
+              variant="outline"
+              className="flex items-center gap-2"
+            >
+              {isChecking ? (
+                <>
+                  <Icon name="Loader2" size={18} className="animate-spin" />
+                  Проверка...
+                </>
+              ) : (
+                <>
+                  <Icon name="RefreshCw" size={18} />
+                  Запустить проверку
+                </>
+              )}
+            </Button>
+          )}
+
           {isAutoCheckEnabled && (
-            <div className="flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-lg">
-              <Icon name="Clock" size={18} className="text-primary" />
-              <div className="text-sm">
-                <span className="text-muted-foreground">Следующая проверка через:</span>
-                <span className="ml-2 font-bold text-foreground">
-                  {formatTime(nextCheckIn)}
-                </span>
-              </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Icon name="Clock" size={18} />
+              <span className="text-sm font-medium">
+                Следующая проверка через: {formatTime(nextCheckIn)}
+              </span>
             </div>
           )}
         </div>
 
-        <div className="text-sm text-muted-foreground">
-          Проверка доступности всех провайдеров (43 шт.)
-        </div>
-
         {error && (
           <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
-            <div className="flex items-start gap-3">
-              <Icon name="AlertCircle" size={20} className="text-destructive flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="font-semibold text-destructive mb-1">Ошибка</p>
-                <p className="text-sm text-destructive/80">{error}</p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {!lastCheckResult && !isChecking && (
-          <div className="bg-muted/30 border-2 border-dashed border-border rounded-lg p-8 text-center">
-            <div className="flex flex-col items-center gap-4">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-                <Icon name="PlayCircle" size={32} className="text-primary" />
-              </div>
-              <div>
-                <p className="text-lg font-semibold text-foreground mb-2">Статистика пока отсутствует</p>
-                <p className="text-sm text-muted-foreground">Включите автопроверку, чтобы начать мониторинг</p>
-              </div>
+            <div className="flex items-center gap-2 text-destructive">
+              <Icon name="AlertCircle" size={18} />
+              <span className="text-sm font-medium">{error}</span>
             </div>
           </div>
         )}
 
         {lastCheckResult && (
-          <div className="space-y-4">
-            <div className="bg-accent/50 border border-border rounded-lg p-4">
-              <div className="flex items-start gap-3">
-                <Icon name="CheckCircle2" size={20} className="text-green-600 flex-shrink-0 mt-0.5" />
-                <div className="flex-1">
-                  <p className="font-semibold text-foreground mb-2">Последняя проверка</p>
-                  <div className="grid grid-cols-3 gap-4 text-sm">
-                    <div>
-                      <p className="text-muted-foreground">Всего проверено</p>
-                      <p className="text-xl font-bold text-foreground">{lastCheckResult.total}</p>
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground">Успешно</p>
-                      <p className="text-xl font-bold text-green-600">{lastCheckResult.successful}</p>
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground">Недоступно</p>
-                      <p className="text-xl font-bold text-red-600">{lastCheckResult.failed}</p>
-                    </div>
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-3">
-                    Время проверки: {lastCheckResult.timestamp}
-                  </p>
-                </div>
+          <div className="bg-muted/50 border border-border rounded-xl p-4">
+            <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
+              <Icon name="BarChart3" size={16} className="text-primary" />
+              Последняя проверка
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="bg-background rounded-lg p-3">
+                <div className="text-xs text-muted-foreground mb-1">Всего провайдеров</div>
+                <div className="text-2xl font-bold text-foreground">{lastCheckResult.total}</div>
+              </div>
+              <div className="bg-background rounded-lg p-3">
+                <div className="text-xs text-muted-foreground mb-1">Доступны</div>
+                <div className="text-2xl font-bold text-green-600">{lastCheckResult.successful}</div>
+              </div>
+              <div className="bg-background rounded-lg p-3">
+                <div className="text-xs text-muted-foreground mb-1">Недоступны</div>
+                <div className="text-2xl font-bold text-destructive">{lastCheckResult.failed}</div>
               </div>
             </div>
-
-            {checkHistory.length > 1 && (
-              <div className="bg-background border border-border rounded-lg p-4">
-                <div className="flex items-center gap-2 mb-4">
-                  <Icon name="TrendingUp" size={18} className="text-muted-foreground" />
-                  <h3 className="font-semibold text-foreground">График доступности</h3>
-                </div>
-                
-                {/* График */}
-                <div className="mb-6">
-                  <div className="h-48 flex items-end gap-2 px-2">
-                    {[...checkHistory].reverse().map((check, index) => {
-                      const successRate = (check.successful / check.total) * 100;
-                      const height = (successRate / 100) * 100;
-                      const barColor = successRate >= 95 ? 'bg-green-500' : successRate >= 85 ? 'bg-yellow-500' : 'bg-red-500';
-                      
-                      return (
-                        <div key={index} className="flex-1 flex flex-col items-center gap-2">
-                          <div className="w-full relative group">
-                            <div 
-                              className={`w-full ${barColor} rounded-t transition-all hover:opacity-80 cursor-pointer`}
-                              style={{ height: `${height}%`, minHeight: '8px' }}
-                            >
-                            </div>
-                            {/* Tooltip */}
-                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
-                              <div className="bg-foreground text-background text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg">
-                                <div className="font-bold">{successRate.toFixed(1)}%</div>
-                                <div className="text-[10px] opacity-80">{check.successful}/{check.total}</div>
-                                <div className="text-[10px] opacity-60">{check.timestamp.split(',')[1]}</div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="text-[10px] text-muted-foreground text-center">
-                            {index === 0 ? 'Старая' : index === checkHistory.length - 1 ? 'Новая' : ''}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  
-                  {/* Шкала */}
-                  <div className="flex justify-between text-xs text-muted-foreground mt-2 px-2">
-                    <span>0%</span>
-                    <span>50%</span>
-                    <span>100%</span>
-                  </div>
-                </div>
-
-                {/* История в виде списка */}
-                <div className="border-t border-border pt-4">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Icon name="History" size={16} className="text-muted-foreground" />
-                    <h4 className="text-sm font-semibold text-foreground">История проверок</h4>
-                  </div>
-                  <div className="space-y-2">
-                    {checkHistory.slice(1).map((check, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
-                        <div className="flex items-center gap-4">
-                          <div className="text-xs text-muted-foreground">
-                            {check.timestamp}
-                          </div>
-                          <div className="flex items-center gap-3 text-sm">
-                            <span className="text-muted-foreground">Всего: <span className="font-bold text-foreground">{check.total}</span></span>
-                            <span className="text-green-600">✓ {check.successful}</span>
-                            <span className="text-red-600">✗ {check.failed}</span>
-                          </div>
-                        </div>
-                        <div className="text-sm font-bold text-foreground">
-                          {((check.successful / check.total) * 100).toFixed(1)}%
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
+            <div className="mt-3 text-xs text-muted-foreground">
+              Время проверки: {new Date(lastCheckResult.timestamp).toLocaleString('ru-RU')}
+            </div>
           </div>
         )}
 
-        <div className="bg-muted/50 border border-border rounded-lg p-4">
-          <div className="flex items-start gap-3">
-            <Icon name="Info" size={20} className="text-muted-foreground flex-shrink-0 mt-0.5" />
-            <div className="text-sm text-muted-foreground space-y-2">
-              <p><strong>Как работает:</strong></p>
-              <ul className="list-disc list-inside space-y-1 ml-2">
-                <li>Проверка отправляет HTTP-запросы ко всем провайдерам</li>
-                <li>Результаты сохраняются в базу данных</li>
-                <li>Статистика обновляется на странице /uptime каждые 30 секунд</li>
-                <li><strong>Автопроверка:</strong> проверка запускается каждые 5 минут автоматически</li>
-                <li>Таймер сохраняется — после перезагрузки страницы проверка продолжится по расписанию</li>
-                <li>Автопроверка работает пока вкладка браузера открыта</li>
-              </ul>
+        {checkHistory.length > 0 && (
+          <div className="bg-muted/50 border border-border rounded-xl p-4">
+            <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
+              <Icon name="History" size={16} className="text-primary" />
+              История проверок
+            </h3>
+            <div className="space-y-2 max-h-60 overflow-y-auto">
+              {checkHistory.map((check, index) => (
+                <div key={index} className="bg-background rounded-lg p-3 flex items-center justify-between">
+                  <div className="text-xs text-muted-foreground">
+                    {new Date(check.timestamp).toLocaleString('ru-RU')}
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs">
+                      <span className="text-green-600 font-medium">{check.successful}</span>
+                      {' / '}
+                      <span className="text-destructive font-medium">{check.failed}</span>
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
