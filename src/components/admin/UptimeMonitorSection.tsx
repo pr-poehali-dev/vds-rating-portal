@@ -26,14 +26,105 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const countdownRef = useRef<NodeJS.Timeout | null>(null);
 
+  const performCheck = async () => {
+    setIsChecking(true);
+    setError('');
+    
+    try {
+      const response = await fetch('https://functions.poehali.dev/cb148476-2d49-4e4f-8a7e-f1e399493259', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          providers: [
+            { id: 1, url: 'https://cloud.vk.com' },
+            { id: 2, url: 'https://mcs.mail.ru' },
+            { id: 3, url: 'https://sbercloud.ru' },
+            { id: 4, url: 'https://netangels.ru' },
+            { id: 5, url: 'https://oblakoteka.ru' },
+            { id: 6, url: 'https://vscale.io' },
+            { id: 7, url: 'https://beget.com' },
+            { id: 8, url: 'https://reg.ru' },
+            { id: 9, url: 'https://1cloud.ru' },
+            { id: 10, url: 'https://cloud4y.ru' },
+            { id: 11, url: 'https://fastvps.ru' },
+            { id: 12, url: 'https://gcorelabs.com' },
+            { id: 13, url: 'https://deltahost.ua' },
+            { id: 14, url: 'https://serverspace.ru' },
+            { id: 15, url: 'https://adminvps.ru' },
+            { id: 16, url: 'https://zomro.com' },
+            { id: 17, url: 'https://justhost.ru' },
+            { id: 18, url: 'https://sweb.ru' },
+            { id: 19, url: 'https://ruvds.com' },
+            { id: 20, url: 'https://fornex.com' },
+            { id: 21, url: 'https://cloud.yandex.ru' },
+            { id: 22, url: 'https://timeweb.cloud' },
+            { id: 23, url: 'https://selectel.ru' },
+            { id: 24, url: 'https://www.vdsina.ru' },
+            { id: 25, url: 'https://www.ixbt.com/live/hosting/vps-hosting-nedorogo-nadezhno-kachestvenno.html' },
+            { id: 26, url: 'https://3data.ru' },
+            { id: 27, url: 'https://firstvds.ru' },
+            { id: 28, url: 'https://xelent.ru' },
+            { id: 29, url: 'https://www.hostkey.com' },
+            { id: 30, url: 'https://www.hetzner.com' },
+            { id: 31, url: 'https://aeza.net' },
+            { id: 32, url: 'https://kamatera.com' },
+            { id: 33, url: 'https://digitalocean.com' },
+            { id: 34, url: 'https://vultr.com' },
+            { id: 35, url: 'https://linode.com' },
+            { id: 36, url: 'https://aws.amazon.com' },
+            { id: 37, url: 'https://azure.microsoft.com' },
+            { id: 38, url: 'https://cloud.google.com' },
+            { id: 39, url: 'https://upcloud.com' },
+            { id: 40, url: 'https://contabo.com' },
+            { id: 41, url: 'https://ovhcloud.com' },
+            { id: 42, url: 'https://scaleway.com' },
+            { id: 43, url: 'https://ionos.com' },
+          ]
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      
+      const result = {
+        total: data.total || 0,
+        successful: data.successful || 0,
+        failed: data.failed || 0,
+        timestamp: new Date().toISOString(),
+      };
+      
+      setLastCheckResult(result);
+      localStorage.setItem('uptime_last_check_result', JSON.stringify(result));
+      
+      const newHistory = [result, ...checkHistory].slice(0, 10);
+      setCheckHistory(newHistory);
+      localStorage.setItem('uptime_check_history', JSON.stringify(newHistory));
+      
+      if (isAutoCheckEnabled) {
+        scheduleNextCheck();
+      }
+      
+      if (onStatusChange) {
+        onStatusChange();
+      }
+    } catch (err) {
+      console.error('Uptime check error:', err);
+      setError(err instanceof Error ? err.message : 'Неизвестная ошибка при проверке');
+    } finally {
+      setIsChecking(false);
+    }
+  };
+
   useEffect(() => {
-    // Загружаем состояние автопроверки из localStorage
     const savedState = localStorage.getItem('uptime_auto_check_enabled');
-    const savedNextCheckTime = localStorage.getItem('uptime_next_check_time');
     const savedLastResult = localStorage.getItem('uptime_last_check_result');
     const savedHistory = localStorage.getItem('uptime_check_history');
     
-    // Восстанавливаем последний результат проверки
     if (savedLastResult) {
       try {
         setLastCheckResult(JSON.parse(savedLastResult));
@@ -42,7 +133,6 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
       }
     }
     
-    // Восстанавливаем историю проверок
     if (savedHistory) {
       try {
         setCheckHistory(JSON.parse(savedHistory));
@@ -53,30 +143,6 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
     
     if (savedState === 'true') {
       setIsAutoCheckEnabled(true);
-      
-      // Восстанавливаем таймер
-      if (savedNextCheckTime) {
-        const nextCheckTime = parseInt(savedNextCheckTime, 10);
-        const now = Date.now();
-        const remainingSeconds = Math.max(0, Math.floor((nextCheckTime - now) / 1000));
-        
-        if (remainingSeconds > 0) {
-          setNextCheckIn(remainingSeconds);
-          // Если время ещё не пришло, планируем следующую проверку
-          const timeoutId = setTimeout(() => {
-            handleStartCheck();
-          }, remainingSeconds * 1000);
-          
-          // Сохраняем timeout ID для очистки
-          intervalRef.current = timeoutId as any;
-        } else {
-          // Время уже прошло, запускаем проверку сразу
-          handleStartCheck();
-        }
-      } else {
-        // Нет сохранённого времени, запускаем первую проверку
-        handleStartCheck();
-      }
     }
 
     return () => {
@@ -92,7 +158,6 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
 
   useEffect(() => {
     if (isAutoCheckEnabled) {
-      // Обновляем обратный отсчёт каждую секунду
       countdownRef.current = setInterval(() => {
         const savedNextCheckTime = localStorage.getItem('uptime_next_check_time');
         if (savedNextCheckTime) {
@@ -101,9 +166,8 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
           const remainingSeconds = Math.max(0, Math.floor((nextCheckTime - now) / 1000));
           setNextCheckIn(remainingSeconds);
           
-          // Если время вышло, запускаем проверку
           if (remainingSeconds === 0) {
-            handleStartCheck();
+            performCheck();
           }
         }
       }, 1000);
@@ -127,20 +191,10 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
     const nextCheckTime = Date.now() + (5 * 60 * 1000);
     localStorage.setItem('uptime_next_check_time', nextCheckTime.toString());
     setNextCheckIn(300);
-    
-    // Устанавливаем таймер на следующую проверку
-    if (intervalRef.current) {
-      clearTimeout(intervalRef.current as any);
-    }
-    
-    intervalRef.current = setTimeout(() => {
-      handleStartCheck();
-    }, 5 * 60 * 1000) as any;
   };
 
   const handleToggleAutoCheck = () => {
     if (isAutoCheckEnabled) {
-      // Выключаем автопроверку
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
         clearTimeout(intervalRef.current as any);
@@ -155,11 +209,9 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
       localStorage.removeItem('uptime_next_check_time');
       setNextCheckIn(300);
     } else {
-      // Включаем автопроверку
       setIsAutoCheckEnabled(true);
       localStorage.setItem('uptime_auto_check_enabled', 'true');
-      // Запускаем первую проверку сразу
-      handleStartCheck();
+      performCheck();
     }
   };
 
@@ -252,7 +304,6 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
         onStatusChange();
       }
       
-      // Планируем следующую проверку если автопроверка включена
       if (isAutoCheckEnabled || localStorage.getItem('uptime_auto_check_enabled') === 'true') {
         scheduleNextCheck();
       }
@@ -260,13 +311,16 @@ export const UptimeMonitorSection = ({ onStatusChange }: UptimeMonitorSectionPro
       console.error('Error starting uptime check:', err);
       setError(err instanceof Error ? err.message : 'Ошибка при запуске проверки');
       
-      // Даже при ошибке планируем следующую проверку
       if (isAutoCheckEnabled || localStorage.getItem('uptime_auto_check_enabled') === 'true') {
         scheduleNextCheck();
       }
     } finally {
       setIsChecking(false);
     }
+  };
+
+  const handleStartCheck = () => {
+    performCheck();
   };
 
   const formatTime = (seconds: number) => {
