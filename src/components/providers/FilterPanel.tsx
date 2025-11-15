@@ -368,7 +368,7 @@ export const FilterPanel = ({
                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-2 ${
                   sortBy === 'price' ? 'bg-background/20' : 'bg-primary/10'
                 }`}>
-                  <Icon name="DollarSign" size={18} className={sortBy === 'price' ? 'text-background' : 'text-primary'} />
+                  ₽
                 </div>
                 {t('filters.byPrice')}
               </Button>
