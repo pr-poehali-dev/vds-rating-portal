@@ -5,7 +5,6 @@ import { AdminLogin } from '@/components/admin/AdminLogin';
 import { VisitorStatsSection } from '@/components/admin/VisitorStatsSection';
 import { ClickStatsSection } from '@/components/admin/ClickStatsSection';
 import { ReviewModerationSection } from '@/components/admin/ReviewModerationSection';
-import { UptimeMonitorSection } from '@/components/admin/UptimeMonitorSection';
 
 interface Review {
   id: number;
@@ -269,8 +268,6 @@ const Admin = () => {
             </Button>
           </div>
         </div>
-
-        <UptimeMonitorSection />
 
         <VisitorStatsSection
           visitorStats={visitorStats}
