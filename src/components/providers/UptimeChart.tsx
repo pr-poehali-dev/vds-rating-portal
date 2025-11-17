@@ -220,20 +220,26 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                 График Uptime по месяцам 2025
                               </h4>
                               
-                              <div className="relative h-64 mb-2">
+                              <div className="relative h-[600px] mb-2 overflow-y-auto">
                                 {/* Ось Y */}
-                                <div className="absolute left-0 top-0 bottom-8 w-16 flex flex-col justify-between text-[10px] text-muted-foreground">
-                                  <span>100%</span>
-                                  <span>95%</span>
-                                  <span>90%</span>
+                                <div className="absolute left-0 top-0 bottom-8 w-20 flex flex-col justify-between text-[9px] text-muted-foreground">
+                                  {Array.from({ length: 1001 }, (_, i) => 100 - i * 0.01).map((value, idx) => (
+                                    <span key={idx} className={idx % 100 === 0 ? 'font-bold' : ''}>
+                                      {value.toFixed(2)}%
+                                    </span>
+                                  ))}
                                 </div>
                                 
                                 {/* График */}
-                                <div className="absolute left-[72px] right-0 top-0 bottom-8 border-l-2 border-b-2 border-border">
-                                  {/* Горизонтальные линии сетки */}
-                                  <div className="absolute top-0 left-0 right-0 border-t border-border/30"></div>
-                                  <div className="absolute top-1/2 left-0 right-0 border-t border-border/30"></div>
-                                  <div className="absolute bottom-0 left-0 right-0 border-t border-border/30"></div>
+                                <div className="absolute left-[84px] right-0 top-0 bottom-8 border-l-2 border-b-2 border-border">
+                                  {/* Горизонтальные линии сетки - каждые 1% */}
+                                  {Array.from({ length: 11 }, (_, i) => i * 10).map((percent) => (
+                                    <div 
+                                      key={percent} 
+                                      className="absolute left-0 right-0 border-t border-border/30"
+                                      style={{ top: `${percent}%` }}
+                                    ></div>
+                                  ))}
                                   
                                   {/* Столбцы */}
                                   <div className="relative h-full flex items-end justify-around px-2">
@@ -274,7 +280,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                 </div>
                                 
                                 {/* Ось X - месяцы */}
-                                <div className="absolute left-[72px] right-0 bottom-0 flex justify-around text-xs text-muted-foreground">
+                                <div className="absolute left-[84px] right-0 bottom-0 flex justify-around text-xs text-muted-foreground">
                                   {staticMonthlyData.map((data, idx) => (
                                     <div key={idx} className="flex flex-col items-center flex-1">
                                       <span className="font-semibold">{data.month.slice(0, 3)}</span>
