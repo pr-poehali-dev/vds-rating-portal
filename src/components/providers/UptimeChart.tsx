@@ -204,14 +204,14 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                         {(provider.id === 44 || provider.id === 1) && isExpanded && (() => {
                           const staticMonthlyData = [
                             { month: 'Январь', uptime: 99.99, downtime: 3 },
-                            { month: 'Февраль', uptime: 95.5, downtime: 6 },
+                            { month: 'Февраль', uptime: 99.98, downtime: 6 },
                             { month: 'Март', uptime: 100, downtime: 0 },
-                            { month: 'Апрель', uptime: 92.3, downtime: 0 },
+                            { month: 'Апрель', uptime: 100, downtime: 0 },
                             { month: 'Май', uptime: 99.99, downtime: 3 },
-                            { month: 'Июнь', uptime: 90.1, downtime: 9 },
+                            { month: 'Июнь', uptime: 99.98, downtime: 9 },
                             { month: 'Июль', uptime: 100, downtime: 0 },
-                            { month: 'Август', uptime: 97.8, downtime: 3 },
-                            { month: 'Сентябрь', uptime: 94.2, downtime: 6 },
+                            { month: 'Август', uptime: 99, downtime: 3 },
+                            { month: 'Сентябрь', uptime: 99, downtime: 6 },
                           ];
                           
                           return (
@@ -222,25 +222,29 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                               
                               <div className="relative h-64 mb-2">
                                 {/* Ось Y */}
-                                <div className="absolute left-0 top-0 bottom-8 w-16 flex flex-col justify-between text-[10px] text-muted-foreground">
-                                  <span>100%</span>
-                                  <span>95%</span>
-                                  <span>90%</span>
+                                <div className="absolute left-0 top-0 bottom-8 w-14 flex flex-col justify-between text-[10px] text-muted-foreground">
+                                  <span>100.00%</span>
+                                  <span>99.75%</span>
+                                  <span>99.50%</span>
+                                  <span>99.25%</span>
+                                  <span>99.00%</span>
                                 </div>
                                 
                                 {/* График */}
-                                <div className="absolute left-[72px] right-0 top-0 bottom-8 border-l-2 border-b-2 border-border">
+                                <div className="absolute left-16 right-0 top-0 bottom-8 border-l-2 border-b-2 border-border">
                                   {/* Горизонтальные линии сетки */}
                                   <div className="absolute top-0 left-0 right-0 border-t border-border/30"></div>
+                                  <div className="absolute" style={{ top: '25%', left: 0, right: 0, borderTop: '1px solid rgb(var(--border) / 0.3)' }}></div>
                                   <div className="absolute top-1/2 left-0 right-0 border-t border-border/30"></div>
+                                  <div className="absolute" style={{ top: '75%', left: 0, right: 0, borderTop: '1px solid rgb(var(--border) / 0.3)' }}></div>
                                   <div className="absolute bottom-0 left-0 right-0 border-t border-border/30"></div>
                                   
                                   {/* Столбцы */}
                                   <div className="relative h-full flex items-end justify-around px-2">
                                     {staticMonthlyData.map((data, idx) => {
-                                      // Ось Y: 90% (низ) -> 100% (верх)
-                                      // Вычисляем высоту относительно 90% как 0% и 100% как 100%
-                                      const minUptime = 90;
+                                      // Ось Y: 99% (низ) -> 100% (верх) с шагом 0.25%
+                                      // Вычисляем высоту относительно 99% как 0% и 100% как 100%
+                                      const minUptime = 99;
                                       const maxUptime = 100;
                                       const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
                                       const height = normalizedHeight; // отображаем реальные пропорции
@@ -274,7 +278,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                 </div>
                                 
                                 {/* Ось X - месяцы */}
-                                <div className="absolute left-[72px] right-0 bottom-0 flex justify-around text-xs text-muted-foreground">
+                                <div className="absolute left-16 right-0 bottom-0 flex justify-around text-xs text-muted-foreground">
                                   {staticMonthlyData.map((data, idx) => (
                                     <div key={idx} className="flex flex-col items-center flex-1">
                                       <span className="font-semibold">{data.month.slice(0, 3)}</span>
