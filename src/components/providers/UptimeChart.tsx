@@ -263,6 +263,9 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                             strokeWidth="1"
                                             strokeDasharray="4 4"
                                             opacity="0.3"
+                                            style={{
+                                              animation: `lineGrow 0.6s ease-out ${idx * 0.05}s both`
+                                            }}
                                           />
                                         );
                                       })}
@@ -296,6 +299,9 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                               stroke="white"
                                               strokeWidth="2"
                                               className="hover:r-8 transition-all cursor-pointer"
+                                              style={{
+                                                animation: `pointAppear 0.4s ease-out ${idx * 0.05 + 0.3}s both`
+                                              }}
                                             />
                                             {/* Tooltip при наведении */}
                                             <title>{data.month}: {data.uptime}%</title>
