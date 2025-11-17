@@ -118,8 +118,42 @@ def get_uptime_stats(event: Dict[str, Any], conn) -> Dict[str, Any]:
     params = event.get('queryStringParameters') or {}
     provider_id = params.get('provider_id')
     days = int(params.get('days', 30))
+    view = params.get('view', 'default')
     
     cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    # Monthly view - downtime by month for 2025
+    if view == 'monthly':
+        cursor.execute(
+            "SELECT provider_id, "
+            "TO_CHAR(check_time, 'YYYY-MM') as month, "
+            "COUNT(*) as total_checks, "
+            "SUM(CASE WHEN NOT is_available THEN 1 ELSE 0 END) as failed_checks "
+            "FROM provider_uptime "
+            "WHERE check_time >= '2025-01-01' "
+            "GROUP BY provider_id, TO_CHAR(check_time, 'YYYY-MM') "
+            "ORDER BY provider_id, month"
+        )
+        rows = cursor.fetchall()
+        
+        monthly_data = []
+        for row in rows:
+            # Calculate downtime in minutes (assuming checks every 5 minutes)
+            downtime_minutes = int(row['failed_checks']) * 5
+            monthly_data.append({
+                'provider_id': int(row['provider_id']),
+                'month': row['month'],
+                'downtime_minutes': downtime_minutes
+            })
+        
+        cursor.close()
+        return {
+            'statusCode': 200,
+            'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            'body': json.dumps({
+                'monthly_downtime': monthly_data
+            })
+        }
     
     if provider_id:
         # Get stats for specific provider
