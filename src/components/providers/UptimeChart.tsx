@@ -117,11 +117,14 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking }: UptimeChar
               {providersWithUptime.map((provider, index) => {
                 const uptime = provider.uptime30days || 0;
                 const downtimeText = getDowntimeMinutes(uptime);
+                const isExpanded = expandedProviders.has(provider.id);
                 
                 return (
                   <div 
                     key={provider.id} 
-                    className="group bg-background border border-border rounded-xl p-4 hover:border-primary/50 transition-all"
+                    className={`group bg-background border border-border rounded-xl p-4 hover:border-primary/50 transition-all ${
+                      isExpanded ? 'md:col-span-2' : ''
+                    }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -170,7 +173,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking }: UptimeChar
                           className="p-1.5 hover:bg-accent rounded-lg transition-colors"
                         >
                           <Icon 
-                            name={expandedProviders.has(provider.id) ? "ChevronUp" : "ChevronDown"} 
+                            name={isExpanded ? "ChevronUp" : "ChevronDown"} 
                             size={18} 
                             className="text-muted-foreground" 
                           />
@@ -178,7 +181,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking }: UptimeChar
                       </div>
                     </div>
                     
-                    {expandedProviders.has(provider.id) && (
+                    {isExpanded && (
                       <div className="mt-4 pt-4 border-t border-border space-y-2">
                         <div className="text-xs text-muted-foreground">
                           <div className="flex justify-between py-1">
