@@ -243,23 +243,12 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                   {/* Столбцы */}
                                   <div className="relative h-full flex items-end justify-around px-2">
                                     {staticMonthlyData.map((data, idx) => {
-                                      // Минимальное значение в данных: 99.98%, максимальное: 100%
-                                      // Используем динамический диапазон для лучшей визуализации
-                                      const dataMin = Math.min(...staticMonthlyData.map(d => d.uptime));
-                                      const dataMax = Math.max(...staticMonthlyData.map(d => d.uptime));
-                                      
-                                      // Добавляем отступ снизу (20%) и сверху (10%) для наглядности
-                                      const minHeight = 20; // минимальная высота столбца
-                                      const maxHeight = 100; // максимальная высота
-                                      
-                                      let height;
-                                      if (dataMax === dataMin) {
-                                        // Если все значения одинаковые
-                                        height = 90;
-                                      } else {
-                                        // Нормализуем высоту с учётом реального диапазона данных
-                                        height = minHeight + ((data.uptime - dataMin) / (dataMax - dataMin)) * (maxHeight - minHeight);
-                                      }
+                                      // Ось Y: 99.90% (низ) -> 100% (верх) с шагом 0.01%
+                                      // Вычисляем высоту относительно 99.90% как 0% и 100% как 100%
+                                      const minUptime = 99.90;
+                                      const maxUptime = 100;
+                                      const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
+                                      const height = normalizedHeight; // отображаем реальные пропорции
                                       
                                       // Определяем цвет столбца по уровню uptime
                                       let backgroundColor = '';
