@@ -224,7 +224,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                               <div className="relative h-64 mb-2">
                                 {/* Ось Y */}
                                 <div className="absolute left-0 top-0 bottom-8 w-16 flex flex-col justify-between text-[9px] text-muted-foreground">
-                                  {Array.from({ length: 11 }, (_, i) => (100 - i * 0.01).toFixed(2)).map((value, idx) => (
+                                  {Array.from({ length: 11 }, (_, i) => (100.05 - i * 0.015).toFixed(2)).map((value, idx) => (
                                     <span key={idx}>{value}%</span>
                                   ))}
                                 </div>
@@ -247,7 +247,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                       <polyline
                                         points={staticMonthlyData.map((data, idx) => {
                                           const minUptime = 99.90;
-                                          const maxUptime = 100;
+                                          const maxUptime = 100.05;
                                           const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
                                           const x = (idx / (staticMonthlyData.length - 1)) * 1000;
                                           const y = 200 - (normalizedHeight / 100) * 200;
@@ -263,7 +263,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                       {/* Точки на графике */}
                                       {staticMonthlyData.map((data, idx) => {
                                         const minUptime = 99.90;
-                                        const maxUptime = 100;
+                                        const maxUptime = 100.05;
                                         const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
                                         const x = (idx / (staticMonthlyData.length - 1)) * 1000;
                                         const y = 200 - (normalizedHeight / 100) * 200;
