@@ -248,7 +248,8 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                         const minUptime = 99.90;
                                         const maxUptime = 100.05;
                                         const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
-                                        const x = (idx / (staticMonthlyData.length - 1)) * 1000;
+                                        const segmentWidth = 1000 / staticMonthlyData.length;
+                                        const x = segmentWidth * idx + segmentWidth / 2;
                                         const y = 200 - (normalizedHeight / 100) * 200;
                                         
                                         return (
@@ -271,7 +272,8 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                         const minUptime = 99.90;
                                         const maxUptime = 100.05;
                                         const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
-                                        const x = (idx / (staticMonthlyData.length - 1)) * 1000;
+                                        const segmentWidth = 1000 / staticMonthlyData.length;
+                                        const x = segmentWidth * idx + segmentWidth / 2;
                                         const y = 200 - (normalizedHeight / 100) * 200;
                                         
                                         // Определяем цвет точки по уровню uptime
