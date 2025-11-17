@@ -238,11 +238,12 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                   {/* Столбцы */}
                                   <div className="relative h-full flex items-end justify-around px-2">
                                     {staticMonthlyData.map((data, idx) => {
-                                      // Вычисляем высоту пропорционально uptime (диапазон 99-100%)
+                                      // Ось Y: 99% (низ) -> 99.5% (середина) -> 100% (верх)
+                                      // Вычисляем высоту относительно 99% как 0% и 100% как 100%
                                       const minUptime = 99;
                                       const maxUptime = 100;
                                       const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
-                                      const height = Math.max(normalizedHeight, 3); // минимум 3% для видимости
+                                      const height = normalizedHeight; // без минимума - отображаем реальные пропорции
                                       
                                       // Определяем цвет столбца по уровню uptime
                                       let backgroundColor = '';
