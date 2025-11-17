@@ -259,10 +259,9 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                             y1={y}
                                             x2={x}
                                             y2={200}
-                                            stroke="rgb(249, 115, 22)"
-                                            strokeWidth="1"
-                                            strokeDasharray="4 4"
-                                            opacity="0.3"
+                                            stroke="white"
+                                            strokeWidth="2"
+                                            opacity="0.2"
                                             style={{
                                               animation: `lineGrow 0.6s ease-out ${idx * 0.05}s both`
                                             }}
