@@ -151,8 +151,6 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                             <Icon name="ExternalLink" size={14} className="opacity-0 group-hover/name:opacity-100 transition-opacity" />
                           </button>
                           <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                            <span>Простой: {downtimeText}</span>
-                            <span>•</span>
                             <span>SLA: {provider.serviceGuarantees.uptimeSLA}</span>
                           </div>
                         </div>
