@@ -2,13 +2,20 @@ import { useState } from 'react';
 import { Provider } from './types';
 import Icon from '@/components/ui/icon';
 
+interface MonthlyDowntime {
+  provider_id: number;
+  month: string;
+  downtime_minutes: number;
+}
+
 interface UptimeChartProps {
   providers: Provider[];
   lastCheckTime?: string;
   isChecking?: boolean;
+  monthlyDowntime?: MonthlyDowntime[];
 }
 
-export const UptimeChart = ({ providers, lastCheckTime, isChecking }: UptimeChartProps) => {
+export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDowntime = [] }: UptimeChartProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedProviders, setExpandedProviders] = useState<Set<number>>(new Set());
   
@@ -182,7 +189,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking }: UptimeChar
                     </div>
                     
                     {isExpanded && (
-                      <div className="mt-4 pt-4 border-t border-border space-y-2">
+                      <div className="mt-4 pt-4 border-t border-border space-y-4">
                         <div className="text-xs text-muted-foreground">
                           <div className="flex justify-between py-1">
                             <span>Время простоя за 30 дней:</span>
@@ -197,6 +204,51 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking }: UptimeChar
                             <span className="font-semibold text-foreground">{provider.serviceGuarantees.supportResponseTime}</span>
                           </div>
                         </div>
+                        
+                        {monthlyDowntime.length > 0 && (() => {
+                          const providerMonthlyData = monthlyDowntime
+                            .filter(m => m.provider_id === provider.id)
+                            .sort((a, b) => a.month.localeCompare(b.month));
+                          
+                          if (providerMonthlyData.length === 0) return null;
+                          
+                          const maxDowntime = Math.max(...providerMonthlyData.map(m => m.downtime_minutes));
+                          
+                          return (
+                            <div className="border-t border-border pt-4">
+                              <h4 className="text-xs font-bold text-foreground mb-3 flex items-center gap-2">
+                                <Icon name="Calendar" size={14} className="text-primary" />
+                                Простой по месяцам 2025
+                              </h4>
+                              <div className="space-y-2">
+                                {providerMonthlyData.map((monthData) => {
+                                  const percentage = maxDowntime > 0 ? (monthData.downtime_minutes / maxDowntime) * 100 : 0;
+                                  const monthName = new Date(monthData.month + '-01').toLocaleDateString('ru-RU', { month: 'long' });
+                                  const downtimeDisplay = monthData.downtime_minutes < 1 
+                                    ? '< 1 мин' 
+                                    : monthData.downtime_minutes < 60 
+                                    ? `${Math.round(monthData.downtime_minutes)} мин` 
+                                    : `${Math.round(monthData.downtime_minutes / 60)} ч`;
+                                  
+                                  return (
+                                    <div key={monthData.month} className="space-y-1">
+                                      <div className="flex justify-between items-center text-xs">
+                                        <span className="text-muted-foreground capitalize">{monthName}</span>
+                                        <span className="font-semibold text-foreground">{downtimeDisplay}</span>
+                                      </div>
+                                      <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
+                                        <div 
+                                          className="h-full bg-gradient-to-r from-orange-500 to-orange-600 rounded-full transition-all duration-300"
+                                          style={{ width: `${Math.max(percentage, 2)}%` }}
+                                        />
+                                      </div>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          );
+                        })()}
                       </div>
                     )}
                   </div>

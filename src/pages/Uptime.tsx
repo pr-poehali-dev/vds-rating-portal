@@ -13,8 +13,15 @@ interface UptimeStats {
   avg_response_time_ms: number | null;
 }
 
+interface MonthlyDowntime {
+  provider_id: number;
+  month: string;
+  downtime_minutes: number;
+}
+
 const Uptime = () => {
   const [uptimeStats, setUptimeStats] = useState<UptimeStats[]>([]);
+  const [monthlyDowntime, setMonthlyDowntime] = useState<MonthlyDowntime[]>([]);
   const [lastCheckTime, setLastCheckTime] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -47,7 +54,26 @@ const Uptime = () => {
       }
     };
 
+    const fetchMonthlyDowntime = async () => {
+      try {
+        const response = await fetch('https://functions.poehali.dev/da289550-8e78-4eca-93fe-815932441ab2?view=monthly');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (data.monthly_downtime && data.monthly_downtime.length > 0) {
+          setMonthlyDowntime(data.monthly_downtime);
+        }
+      } catch (error) {
+        console.error('Ошибка загрузки месячной статистики:', error);
+      }
+    };
+
     fetchUptimeStats();
+    fetchMonthlyDowntime();
     
     // Обновляем данные каждые 30 секунд
     const interval = setInterval(fetchUptimeStats, 30000);
@@ -70,7 +96,7 @@ const Uptime = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <UptimeChart providers={providers} lastCheckTime={lastCheckTime} isChecking={isLoading} />
+      <UptimeChart providers={providers} lastCheckTime={lastCheckTime} isChecking={isLoading} monthlyDowntime={monthlyDowntime} />
       <MethodologySection />
       <Footer />
     </div>
