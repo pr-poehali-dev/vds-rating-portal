@@ -193,10 +193,6 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking }: UptimeChar
                             <span>Время ответа поддержки:</span>
                             <span className="font-semibold text-foreground">{provider.serviceGuarantees.supportResponseTime}</span>
                           </div>
-                          <div className="flex justify-between py-1">
-                            <span>Локации:</span>
-                            <span className="font-semibold text-foreground text-right">{provider.locations.join(', ')}</span>
-                          </div>
                         </div>
                       </div>
                     )}
