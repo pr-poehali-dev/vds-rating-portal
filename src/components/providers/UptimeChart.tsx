@@ -243,6 +243,29 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                   {/* Линейный график */}
                                   <div className="relative h-full px-2">
                                     <svg className="w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="none">
+                                      {/* Вертикальные линии от точек до оси X */}
+                                      {staticMonthlyData.map((data, idx) => {
+                                        const minUptime = 99.90;
+                                        const maxUptime = 100.05;
+                                        const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
+                                        const x = (idx / (staticMonthlyData.length - 1)) * 1000;
+                                        const y = 200 - (normalizedHeight / 100) * 200;
+                                        
+                                        return (
+                                          <line
+                                            key={`line-${idx}`}
+                                            x1={x}
+                                            y1={y}
+                                            x2={x}
+                                            y2={200}
+                                            stroke="rgb(249, 115, 22)"
+                                            strokeWidth="1"
+                                            strokeDasharray="4 4"
+                                            opacity="0.3"
+                                          />
+                                        );
+                                      })}
+                                      
                                       {/* Линия графика */}
                                       <polyline
                                         points={staticMonthlyData.map((data, idx) => {
