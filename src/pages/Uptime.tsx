@@ -65,7 +65,6 @@ const Uptime = () => {
         const data = await response.json();
         
         if (data.monthly_downtime && data.monthly_downtime.length > 0) {
-          console.log('Monthly downtime data:', data.monthly_downtime);
           setMonthlyDowntime(data.monthly_downtime);
         }
       } catch (error) {

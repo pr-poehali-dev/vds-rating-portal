@@ -210,8 +210,6 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                             .filter(m => m.provider_id === provider.id)
                             .sort((a, b) => a.month.localeCompare(b.month));
                           
-                          console.log(`Provider ${provider.name} (ID: ${provider.id}) monthly data:`, providerMonthlyData);
-                          
                           if (providerMonthlyData.length === 0) return null;
                           
                           const maxDowntime = Math.max(...providerMonthlyData.map(m => m.downtime_minutes));
