@@ -245,21 +245,21 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                       const height = Math.max(normalizedHeight, 3); // минимум 3% для видимости
                                       
                                       // Определяем цвет столбца по уровню uptime
-                                      let barColor = '';
+                                      let backgroundColor = '';
                                       if (data.uptime === 100) {
-                                        barColor = 'bg-green-500';
+                                        backgroundColor = 'rgb(34, 197, 94)'; // green-500
                                       } else if (data.uptime >= 99.5) {
-                                        barColor = 'bg-orange-500';
+                                        backgroundColor = 'rgb(249, 115, 22)'; // orange-500
                                       } else {
-                                        barColor = 'bg-red-500';
+                                        backgroundColor = 'rgb(239, 68, 68)'; // red-500
                                       }
                                       
                                       return (
                                         <div key={idx} className="flex flex-col items-center gap-1 flex-1">
                                           {/* Столбец */}
                                           <div 
-                                            className={`w-full max-w-[40px] rounded-t transition-all duration-300 hover:opacity-80 relative group ${barColor}`}
-                                            style={{ height: `${height}%` }}
+                                            className="w-full max-w-[40px] rounded-t transition-all duration-300 hover:opacity-80 relative group"
+                                            style={{ height: `${height}%`, backgroundColor }}
                                           >
                                             {/* Tooltip */}
                                             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-foreground text-background text-xs px-2 py-1 rounded whitespace-nowrap z-10">
