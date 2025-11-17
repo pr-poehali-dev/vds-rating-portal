@@ -241,7 +241,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                   ))}
                                   
                                   {/* Линейный график */}
-                                  <div className="relative h-full px-2">
+                                  <div className="relative h-full">
                                     <svg className="w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="none">
                                       {/* Вертикальные линии от точек до оси X */}
                                       {staticMonthlyData.map((data, idx) => {
