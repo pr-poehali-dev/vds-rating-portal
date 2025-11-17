@@ -205,7 +205,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                           </div>
                         </div>
                         
-                        {provider.id === 44 && isExpanded && (() => {
+                        {(provider.id === 44 || provider.id === 1) && isExpanded && (() => {
                           const staticMonthlyData = [
                             { month: 'Январь', uptime: 99.99, downtime: 3 },
                             { month: 'Февраль', uptime: 99.98, downtime: 6 },
