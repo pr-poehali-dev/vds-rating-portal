@@ -238,23 +238,27 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                   {/* Столбцы */}
                                   <div className="relative h-full flex items-end justify-around px-2">
                                     {staticMonthlyData.map((data, idx) => {
-                                      // Вычисляем высоту: диапазон 99-100%, масштабируем на всю высоту графика
+                                      // Вычисляем высоту пропорционально uptime (диапазон 99-100%)
                                       const minUptime = 99;
                                       const maxUptime = 100;
                                       const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
-                                      const height = Math.max(normalizedHeight, 5); // минимум 5% для видимости
+                                      const height = Math.max(normalizedHeight, 3); // минимум 3% для видимости
                                       
-                                      const barColor = data.uptime === 100 
-                                        ? 'bg-green-500' 
-                                        : data.uptime >= 99.5 
-                                        ? 'bg-orange-500' 
-                                        : 'bg-red-500';
+                                      // Определяем цвет столбца по уровню uptime
+                                      let barColor = '';
+                                      if (data.uptime === 100) {
+                                        barColor = 'bg-green-500';
+                                      } else if (data.uptime >= 99.5) {
+                                        barColor = 'bg-orange-500';
+                                      } else {
+                                        barColor = 'bg-red-500';
+                                      }
                                       
                                       return (
                                         <div key={idx} className="flex flex-col items-center gap-1 flex-1">
                                           {/* Столбец */}
                                           <div 
-                                            className={`w-full max-w-[40px] ${barColor} rounded-t transition-all duration-300 hover:opacity-80 relative group`}
+                                            className={`w-full max-w-[40px] rounded-t transition-all duration-300 hover:opacity-80 relative group ${barColor}`}
                                             style={{ height: `${height}%` }}
                                           >
                                             {/* Tooltip */}
