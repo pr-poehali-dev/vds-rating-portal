@@ -240,61 +240,43 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                     ></div>
                                   ))}
                                   
-                                  {/* Линейный график */}
-                                  <div className="relative h-full px-2">
-                                    <svg className="w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="none">
-                                      {/* Линия графика */}
-                                      <polyline
-                                        points={staticMonthlyData.map((data, idx) => {
-                                          const minUptime = 99.90;
-                                          const maxUptime = 100.05;
-                                          const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
-                                          const x = (idx / (staticMonthlyData.length - 1)) * 1000;
-                                          const y = 200 - (normalizedHeight / 100) * 200;
-                                          return `${x},${y}`;
-                                        }).join(' ')}
-                                        fill="none"
-                                        stroke="rgb(249, 115, 22)"
-                                        strokeWidth="3"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      />
+                                  {/* Столбцы */}
+                                  <div className="relative h-full flex items-end justify-around px-2">
+                                    {staticMonthlyData.map((data, idx) => {
+                                      const minUptime = 99.90;
+                                      const maxUptime = 100.05;
+                                      const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
+                                      const height = normalizedHeight;
                                       
-                                      {/* Точки на графике */}
-                                      {staticMonthlyData.map((data, idx) => {
-                                        const minUptime = 99.90;
-                                        const maxUptime = 100.05;
-                                        const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
-                                        const x = (idx / (staticMonthlyData.length - 1)) * 1000;
-                                        const y = 200 - (normalizedHeight / 100) * 200;
-                                        
-                                        // Определяем цвет точки по уровню uptime
-                                        let fillColor = '';
-                                        if (data.uptime === 100) {
-                                          fillColor = 'rgb(34, 197, 94)'; // green-500
-                                        } else if (data.uptime >= 99.5) {
-                                          fillColor = 'rgb(249, 115, 22)'; // orange-500
-                                        } else {
-                                          fillColor = 'rgb(239, 68, 68)'; // red-500
-                                        }
-                                        
-                                        return (
-                                          <g key={idx}>
-                                            <circle
-                                              cx={x}
-                                              cy={y}
-                                              r="6"
-                                              fill={fillColor}
-                                              stroke="white"
-                                              strokeWidth="2"
-                                              className="hover:r-8 transition-all cursor-pointer"
-                                            />
+                                      // Определяем цвет столбца по уровню uptime
+                                      let backgroundColor = '';
+                                      if (data.uptime === 100) {
+                                        backgroundColor = 'rgb(34, 197, 94)'; // green-500
+                                      } else if (data.uptime >= 99.5) {
+                                        backgroundColor = 'rgb(249, 115, 22)'; // orange-500
+                                      } else {
+                                        backgroundColor = 'rgb(239, 68, 68)'; // red-500
+                                      }
+                                      
+                                      return (
+                                        <div key={idx} className="flex flex-col items-center gap-1 flex-1">
+                                          {/* Процент над столбцом */}
+                                          <div className="text-[10px] font-bold text-foreground mb-1">
+                                            {data.uptime}%
+                                          </div>
+                                          {/* Столбец */}
+                                          <div 
+                                            className="w-full max-w-[40px] rounded-t transition-all duration-300 hover:opacity-80 relative group"
+                                            style={{ height: `${height}%`, backgroundColor }}
+                                          >
                                             {/* Tooltip при наведении */}
-                                            <title>{data.month}: {data.uptime}%</title>
-                                          </g>
-                                        );
-                                      })}
-                                    </svg>
+                                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-foreground text-background text-xs px-2 py-1 rounded whitespace-nowrap z-10">
+                                              Uptime: {data.uptime}%
+                                            </div>
+                                          </div>
+                                        </div>
+                                      );
+                                    })}
                                   </div>
                                 </div>
                                 
