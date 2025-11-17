@@ -10,6 +10,7 @@ interface UptimeChartProps {
 
 export const UptimeChart = ({ providers, lastCheckTime, isChecking }: UptimeChartProps) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [expandedProviders, setExpandedProviders] = useState<Set<number>>(new Set());
   
   const providersWithUptime = providers
     .filter(p => p.uptime30days !== undefined)
@@ -156,8 +157,49 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking }: UptimeChar
                             <span className="text-xs font-bold text-primary">#{index + 1}</span>
                           </div>
                         )}
+                        <button
+                          onClick={() => {
+                            const newExpanded = new Set(expandedProviders);
+                            if (newExpanded.has(provider.id)) {
+                              newExpanded.delete(provider.id);
+                            } else {
+                              newExpanded.add(provider.id);
+                            }
+                            setExpandedProviders(newExpanded);
+                          }}
+                          className="p-1.5 hover:bg-accent rounded-lg transition-colors"
+                        >
+                          <Icon 
+                            name={expandedProviders.has(provider.id) ? "ChevronUp" : "ChevronDown"} 
+                            size={18} 
+                            className="text-muted-foreground" 
+                          />
+                        </button>
                       </div>
                     </div>
+                    
+                    {expandedProviders.has(provider.id) && (
+                      <div className="mt-4 pt-4 border-t border-border space-y-2">
+                        <div className="text-xs text-muted-foreground">
+                          <div className="flex justify-between py-1">
+                            <span>Время простоя за 30 дней:</span>
+                            <span className="font-semibold text-foreground">{downtimeText}</span>
+                          </div>
+                          <div className="flex justify-between py-1">
+                            <span>SLA гарантия:</span>
+                            <span className="font-semibold text-foreground">{provider.serviceGuarantees.uptimeSLA}</span>
+                          </div>
+                          <div className="flex justify-between py-1">
+                            <span>Время ответа поддержки:</span>
+                            <span className="font-semibold text-foreground">{provider.serviceGuarantees.supportResponseTime}</span>
+                          </div>
+                          <div className="flex justify-between py-1">
+                            <span>Локации:</span>
+                            <span className="font-semibold text-foreground text-right">{provider.locations.join(', ')}</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 );
               })}
