@@ -210,8 +210,8 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                             { month: 'Май', uptime: 99.99, downtime: 3 },
                             { month: 'Июнь', uptime: 99.98, downtime: 9 },
                             { month: 'Июль', uptime: 100, downtime: 0 },
-                            { month: 'Август', uptime: 99, downtime: 3 },
-                            { month: 'Сентябрь', uptime: 99, downtime: 6 },
+                            { month: 'Август', uptime: 99.00, downtime: 3 },
+                            { month: 'Сентябрь', uptime: 99.00, downtime: 6 },
                           ];
                           
                           return (
