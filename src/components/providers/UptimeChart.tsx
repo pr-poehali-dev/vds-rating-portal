@@ -302,6 +302,17 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                                 animation: `pointAppear 0.4s ease-out ${idx * 0.05 + 0.3}s both`
                                               }}
                                             />
+                                            <text
+                                              x={x}
+                                              y={y - 12}
+                                              textAnchor="middle"
+                                              className="fill-foreground text-[10px] font-bold"
+                                              style={{
+                                                animation: `pointAppear 0.4s ease-out ${idx * 0.05 + 0.3}s both`
+                                              }}
+                                            >
+                                              {data.uptime}
+                                            </text>
                                             {/* Tooltip при наведении */}
                                             <title>{data.month}: {data.uptime}%</title>
                                           </g>
