@@ -204,14 +204,14 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                         {(provider.id === 44 || provider.id === 1) && isExpanded && (() => {
                           const staticMonthlyData = [
                             { month: 'Январь', uptime: 99.99, downtime: 3 },
-                            { month: 'Февраль', uptime: 99.98, downtime: 6 },
+                            { month: 'Февраль', uptime: 95.5, downtime: 6 },
                             { month: 'Март', uptime: 100, downtime: 0 },
-                            { month: 'Апрель', uptime: 100, downtime: 0 },
+                            { month: 'Апрель', uptime: 92.3, downtime: 0 },
                             { month: 'Май', uptime: 99.99, downtime: 3 },
-                            { month: 'Июнь', uptime: 99.98, downtime: 9 },
+                            { month: 'Июнь', uptime: 90.1, downtime: 9 },
                             { month: 'Июль', uptime: 100, downtime: 0 },
-                            { month: 'Август', uptime: 99, downtime: 3 },
-                            { month: 'Сентябрь', uptime: 99, downtime: 6 },
+                            { month: 'Август', uptime: 97.8, downtime: 3 },
+                            { month: 'Сентябрь', uptime: 94.2, downtime: 6 },
                           ];
                           
                           return (
