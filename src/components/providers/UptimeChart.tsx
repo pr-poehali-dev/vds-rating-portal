@@ -192,10 +192,6 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                       <div className="mt-4 pt-4 border-t border-border space-y-4">
                         <div className="text-xs text-muted-foreground">
                           <div className="flex justify-between py-1">
-                            <span>Время простоя за 30 дней:</span>
-                            <span className="font-semibold text-foreground">{downtimeText}</span>
-                          </div>
-                          <div className="flex justify-between py-1">
                             <span>SLA гарантия:</span>
                             <span className="font-semibold text-foreground">{provider.serviceGuarantees.uptimeSLA}</span>
                           </div>
@@ -242,7 +238,12 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                   {/* Столбцы */}
                                   <div className="relative h-full flex items-end justify-around px-2">
                                     {staticMonthlyData.map((data, idx) => {
-                                      const height = data.uptime;
+                                      // Вычисляем высоту: диапазон 99-100%, масштабируем на всю высоту графика
+                                      const minUptime = 99;
+                                      const maxUptime = 100;
+                                      const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
+                                      const height = Math.max(normalizedHeight, 5); // минимум 5% для видимости
+                                      
                                       const barColor = data.uptime === 100 
                                         ? 'bg-green-500' 
                                         : data.uptime >= 99.5 
