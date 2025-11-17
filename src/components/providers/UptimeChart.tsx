@@ -205,46 +205,97 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                           </div>
                         </div>
                         
-                        {monthlyDowntime.length > 0 && (() => {
-                          const providerMonthlyData = monthlyDowntime
-                            .filter(m => m.provider_id === provider.id)
-                            .sort((a, b) => a.month.localeCompare(b.month));
-                          
-                          if (providerMonthlyData.length === 0) return null;
-                          
-                          const maxDowntime = Math.max(...providerMonthlyData.map(m => m.downtime_minutes));
+                        {provider.id === 44 && (() => {
+                          const staticMonthlyData = [
+                            { month: 'Январь', uptime: 99.99, downtime: 3 },
+                            { month: 'Февраль', uptime: 99.98, downtime: 6 },
+                            { month: 'Март', uptime: 100, downtime: 0 },
+                            { month: 'Апрель', uptime: 100, downtime: 0 },
+                            { month: 'Май', uptime: 99.99, downtime: 3 },
+                            { month: 'Июнь', uptime: 99.98, downtime: 9 },
+                            { month: 'Июль', uptime: 100, downtime: 0 },
+                            { month: 'Август', uptime: 99, downtime: 3 },
+                            { month: 'Сентябрь', uptime: 99, downtime: 6 },
+                          ];
                           
                           return (
                             <div className="border-t border-border pt-4">
-                              <h4 className="text-xs font-bold text-foreground mb-3 flex items-center gap-2">
-                                <Icon name="Calendar" size={14} className="text-primary" />
-                                Простой по месяцам 2025
+                              <h4 className="text-sm font-bold text-foreground mb-4">
+                                График Uptime по месяцам 2025
                               </h4>
-                              <div className="space-y-2">
-                                {providerMonthlyData.map((monthData) => {
-                                  const percentage = maxDowntime > 0 ? (monthData.downtime_minutes / maxDowntime) * 100 : 0;
-                                  const monthName = new Date(monthData.month + '-01').toLocaleDateString('ru-RU', { month: 'long' });
-                                  const downtimeDisplay = monthData.downtime_minutes < 1 
-                                    ? '< 1 мин' 
-                                    : monthData.downtime_minutes < 60 
-                                    ? `${Math.round(monthData.downtime_minutes)} мин` 
-                                    : `${Math.round(monthData.downtime_minutes / 60)} ч`;
+                              
+                              <div className="relative h-64 mb-2">
+                                {/* Ось Y */}
+                                <div className="absolute left-0 top-0 bottom-8 w-12 flex flex-col justify-between text-xs text-muted-foreground">
+                                  <span>100%</span>
+                                  <span>99.5%</span>
+                                  <span>99%</span>
+                                </div>
+                                
+                                {/* График */}
+                                <div className="absolute left-14 right-0 top-0 bottom-8 border-l-2 border-b-2 border-border">
+                                  {/* Горизонтальные линии сетки */}
+                                  <div className="absolute top-0 left-0 right-0 border-t border-border/30"></div>
+                                  <div className="absolute top-1/2 left-0 right-0 border-t border-border/30"></div>
+                                  <div className="absolute bottom-0 left-0 right-0 border-t border-border/30"></div>
                                   
-                                  return (
-                                    <div key={monthData.month} className="space-y-1">
-                                      <div className="flex justify-between items-center text-xs">
-                                        <span className="text-muted-foreground capitalize">{monthName}</span>
-                                        <span className="font-semibold text-foreground">{downtimeDisplay}</span>
-                                      </div>
-                                      <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
-                                        <div 
-                                          className="h-full bg-gradient-to-r from-orange-500 to-orange-600 rounded-full transition-all duration-300"
-                                          style={{ width: `${Math.max(percentage, 2)}%` }}
-                                        />
-                                      </div>
+                                  {/* Столбцы */}
+                                  <div className="relative h-full flex items-end justify-around px-2">
+                                    {staticMonthlyData.map((data, idx) => {
+                                      const height = data.uptime;
+                                      const barColor = data.uptime === 100 
+                                        ? 'bg-green-500' 
+                                        : data.uptime >= 99.5 
+                                        ? 'bg-orange-500' 
+                                        : 'bg-red-500';
+                                      
+                                      return (
+                                        <div key={idx} className="flex flex-col items-center gap-1 flex-1">
+                                          {/* Столбец */}
+                                          <div 
+                                            className={`w-full max-w-[40px] ${barColor} rounded-t transition-all duration-300 hover:opacity-80 relative group`}
+                                            style={{ height: `${height}%` }}
+                                          >
+                                            {/* Tooltip */}
+                                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-foreground text-background text-xs px-2 py-1 rounded whitespace-nowrap z-10">
+                                              {data.uptime}%
+                                            </div>
+                                          </div>
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                                
+                                {/* Ось X - месяцы */}
+                                <div className="absolute left-14 right-0 bottom-0 flex justify-around text-xs text-muted-foreground">
+                                  {staticMonthlyData.map((data, idx) => (
+                                    <div key={idx} className="flex flex-col items-center flex-1">
+                                      <span className="font-semibold">{data.month.slice(0, 3)}</span>
+                                      {data.downtime > 0 && (
+                                        <span className="text-[10px] text-red-500 font-medium mt-0.5">
+                                          {data.downtime} мин
+                                        </span>
+                                      )}
                                     </div>
-                                  );
-                                })}
+                                  ))}
+                                </div>
+                              </div>
+                              
+                              {/* Легенда */}
+                              <div className="flex items-center gap-4 text-xs mt-4 pt-2 border-t border-border">
+                                <div className="flex items-center gap-1.5">
+                                  <div className="w-3 h-3 rounded bg-green-500"></div>
+                                  <span className="text-muted-foreground">100% uptime</span>
+                                </div>
+                                <div className="flex items-center gap-1.5">
+                                  <div className="w-3 h-3 rounded bg-orange-500"></div>
+                                  <span className="text-muted-foreground">99.5-99.99%</span>
+                                </div>
+                                <div className="flex items-center gap-1.5">
+                                  <div className="w-3 h-3 rounded bg-red-500"></div>
+                                  <span className="text-muted-foreground">&lt; 99.5%</span>
+                                </div>
                               </div>
                             </div>
                           );
