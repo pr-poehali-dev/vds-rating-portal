@@ -223,23 +223,21 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                               <div className="relative h-64 mb-2">
                                 {/* Ось Y */}
                                 <div className="absolute left-0 top-0 bottom-8 w-16 flex flex-col justify-between text-[9px] text-muted-foreground">
-                                  <span>100.00%</span>
-                                  <span>99.98%</span>
-                                  <span>99.96%</span>
-                                  <span>99.94%</span>
-                                  <span>99.92%</span>
-                                  <span>99.90%</span>
+                                  {Array.from({ length: 11 }, (_, i) => (100 - i * 0.01).toFixed(2)).map((value, idx) => (
+                                    <span key={idx}>{value}%</span>
+                                  ))}
                                 </div>
                                 
                                 {/* График */}
                                 <div className="absolute left-[68px] right-0 top-0 bottom-8 border-l-2 border-b-2 border-border">
                                   {/* Горизонтальные линии сетки */}
-                                  <div className="absolute top-0 left-0 right-0 border-t border-border/30"></div>
-                                  <div className="absolute" style={{ top: '20%', left: 0, right: 0, borderTop: '1px solid rgb(var(--border) / 0.3)' }}></div>
-                                  <div className="absolute" style={{ top: '40%', left: 0, right: 0, borderTop: '1px solid rgb(var(--border) / 0.3)' }}></div>
-                                  <div className="absolute" style={{ top: '60%', left: 0, right: 0, borderTop: '1px solid rgb(var(--border) / 0.3)' }}></div>
-                                  <div className="absolute" style={{ top: '80%', left: 0, right: 0, borderTop: '1px solid rgb(var(--border) / 0.3)' }}></div>
-                                  <div className="absolute bottom-0 left-0 right-0 border-t border-border/30"></div>
+                                  {Array.from({ length: 11 }, (_, i) => i * 10).map((percent) => (
+                                    <div 
+                                      key={percent} 
+                                      className="absolute left-0 right-0 border-t border-border/30"
+                                      style={{ top: `${percent}%` }}
+                                    ></div>
+                                  ))}
                                   
                                   {/* Столбцы */}
                                   <div className="relative h-full flex items-end justify-around px-2">
