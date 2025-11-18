@@ -600,7 +600,7 @@ export const UptimeChart = ({
             <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="bg-background border border-border rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-3 h-3 rounded-full bg-orange-600"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-600"></div>
                   <span className="text-xs font-bold text-muted-foreground">
                     ≥ 99.95%
                   </span>
@@ -609,7 +609,7 @@ export const UptimeChart = ({
               </div>
               <div className="bg-background border border-border rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-3 h-3 rounded-full bg-orange-400"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
                   <span className="text-xs font-bold text-muted-foreground">
                     ≥ 99.9%
                   </span>
@@ -618,7 +618,7 @@ export const UptimeChart = ({
               </div>
               <div className="bg-background border border-border rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-orange-500"></div>
                   <span className="text-xs font-bold text-muted-foreground">
                     ≥ 99.5%
                   </span>
