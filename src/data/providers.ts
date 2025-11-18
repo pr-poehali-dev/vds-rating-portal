@@ -2003,7 +2003,7 @@ export const providers: Provider[] = [
       "Dev окружения",
       "Игровые серверы",
     ],
-    uptime30days: 99.92,
+    uptime30days: 98.22,
     reviews: [
       {
         author: "Алексей Д.",
