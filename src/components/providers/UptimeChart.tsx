@@ -199,19 +199,36 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                           </div>
                         </div>
                         
-                        {(provider.id === 44 || provider.id === 1) && isExpanded && (() => {
-                          const staticMonthlyData = [
-                            { month: 'Январь', uptime: 99.99, downtime: 3 },
-                            { month: 'Февраль', uptime: 99.98, downtime: 6 },
-                            { month: 'Март', uptime: 100, downtime: 0 },
-                            { month: 'Апрель', uptime: 100, downtime: 0 },
-                            { month: 'Май', uptime: 99.99, downtime: 3 },
-                            { month: 'Июнь', uptime: 99.98, downtime: 9 },
-                            { month: 'Июль', uptime: 100, downtime: 0 },
-                            { month: 'Август', uptime: 99.99, downtime: 3 },
-                            { month: 'Сентябрь', uptime: 99.99, downtime: 6 },
-                            { month: 'Октябрь', uptime: 99.99, downtime: 6 },
-                          ];
+                        {(provider.id === 44 || provider.id === 1 || provider.id === 10) && isExpanded && (() => {
+                          let staticMonthlyData;
+                          
+                          if (provider.id === 10) {
+                            staticMonthlyData = [
+                              { month: 'Январь', uptime: 99.98, downtime: 9 },
+                              { month: 'Февраль', uptime: 99.99, downtime: 6 },
+                              { month: 'Март', uptime: 99.97, downtime: 15 },
+                              { month: 'Апрель', uptime: 100, downtime: 0 },
+                              { month: 'Май', uptime: 100, downtime: 0 },
+                              { month: 'Июнь', uptime: 99.99, downtime: 3 },
+                              { month: 'Июль', uptime: 99.97, downtime: 12 },
+                              { month: 'Август', uptime: 100, downtime: 0 },
+                              { month: 'Сентябрь', uptime: 99.97, downtime: 12 },
+                              { month: 'Октябрь', uptime: 99.97, downtime: 12 },
+                            ];
+                          } else {
+                            staticMonthlyData = [
+                              { month: 'Январь', uptime: 99.99, downtime: 3 },
+                              { month: 'Февраль', uptime: 99.98, downtime: 6 },
+                              { month: 'Март', uptime: 100, downtime: 0 },
+                              { month: 'Апрель', uptime: 100, downtime: 0 },
+                              { month: 'Май', uptime: 99.99, downtime: 3 },
+                              { month: 'Июнь', uptime: 99.98, downtime: 9 },
+                              { month: 'Июль', uptime: 100, downtime: 0 },
+                              { month: 'Август', uptime: 99.99, downtime: 3 },
+                              { month: 'Сентябрь', uptime: 99.99, downtime: 6 },
+                              { month: 'Октябрь', uptime: 99.99, downtime: 6 },
+                            ];
+                          }
                           
                           return (
                             <div className="border-t border-border pt-4">
