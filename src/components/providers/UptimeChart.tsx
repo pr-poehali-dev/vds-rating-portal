@@ -320,8 +320,10 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                         let y = 200 - (normalizedHeight / 100) * 200;
                                         
                                         // Для июня (idx 5) и сентября (idx 8) провайдера id 14 ставим точку на оси X
-                                        const isJuneOrSeptember = (provider.id === 14 && (idx === 5 || idx === 8));
-                                        if (isJuneOrSeptember) {
+                                        const isProvider14JuneOrSeptember = (provider.id === 14 && (idx === 5 || idx === 8));
+                                        // Для июня (idx 5) и августа (idx 7) провайдера id 20 ставим точку на оси X
+                                        const isProvider20JuneOrAugust = (provider.id === 20 && (idx === 5 || idx === 7));
+                                        if (isProvider14JuneOrSeptember || isProvider20JuneOrAugust) {
                                           y = 200;
                                         }
                                         
@@ -351,7 +353,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                             />
                                             <text
                                               x={x}
-                                              y={isJuneOrSeptember ? y - 12 : y - 12}
+                                              y={(isProvider14JuneOrSeptember || isProvider20JuneOrAugust) ? y - 12 : y - 12}
                                               textAnchor="middle"
                                               className="fill-foreground text-[10px] font-bold"
                                               style={{
