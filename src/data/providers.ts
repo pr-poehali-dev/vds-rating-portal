@@ -4423,7 +4423,7 @@ export const providers: Provider[] = [
       "API сервисы",
       "Базы данных",
     ],
-    uptime30days: 99.91,
+    uptime30days: 99.98,
     reviews: [
       {
         author: "Игорь М.",
