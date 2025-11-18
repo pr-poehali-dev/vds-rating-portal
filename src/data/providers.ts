@@ -1436,7 +1436,7 @@ export const providers: Provider[] = [
       "Веб-приложения",
       "CMS проекты",
     ],
-    uptime30days: 99.93,
+    uptime30days: 99.98,
     reviews: [
       {
         author: "Игорь С.",
@@ -1851,7 +1851,7 @@ export const providers: Provider[] = [
       cpuModels: [
         "AMD Ryzen 9 3900",
         "AMD Ryzen 9 5950X",
-        "AMD Ryzen 9 7950X3D"
+        "AMD Ryzen 9 7950X3D",
       ],
     },
     serviceGuarantees: {
