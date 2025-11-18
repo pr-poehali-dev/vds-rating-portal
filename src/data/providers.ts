@@ -2664,7 +2664,7 @@ export const providers: Provider[] = [
       "ML/AI проекты с GPU",
       "Highload системы",
     ],
-    uptime30days: 99.97,
+    uptime30days: 99.98,
     reviews: [
       {
         author: "Алексей М.",
