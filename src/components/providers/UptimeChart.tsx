@@ -199,7 +199,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                           </div>
                         </div>
                         
-                        {(provider.id === 44 || provider.id === 1 || provider.id === 10 || provider.id === 14 || provider.id === 20) && isExpanded && (() => {
+                        {(provider.id === 44 || provider.id === 1 || provider.id === 10 || provider.id === 14 || provider.id === 20 || provider.id === 15) && isExpanded && (() => {
                           let staticMonthlyData;
                           
                           if (provider.id === 10) {
@@ -240,6 +240,19 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                               { month: 'Август', uptime: 99.84, downtime: 72 },
                               { month: 'Сентябрь', uptime: 99.99, downtime: 6 },
                               { month: 'Октябрь', uptime: 99.98, downtime: 9 },
+                            ];
+                          } else if (provider.id === 15) {
+                            staticMonthlyData = [
+                              { month: 'Январь', uptime: 100, downtime: 0 },
+                              { month: 'Февраль', uptime: 99.99, downtime: 6 },
+                              { month: 'Март', uptime: 99.87, downtime: 57 },
+                              { month: 'Апрель', uptime: 99.99, downtime: 3 },
+                              { month: 'Май', uptime: 99.98, downtime: 9 },
+                              { month: 'Июнь', uptime: 99.68, downtime: 136 },
+                              { month: 'Июль', uptime: 99.97, downtime: 12 },
+                              { month: 'Август', uptime: 97.96, downtime: 903 },
+                              { month: 'Сентябрь', uptime: 99.03, downtime: 417 },
+                              { month: 'Октябрь', uptime: 98.22, downtime: 789 },
                             ];
                           } else {
                             staticMonthlyData = [
