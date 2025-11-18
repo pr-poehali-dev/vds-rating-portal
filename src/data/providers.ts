@@ -1436,7 +1436,7 @@ export const providers: Provider[] = [
       "Веб-приложения",
       "CMS проекты",
     ],
-    uptime30days: 99.98,
+    uptime30days: 99.95,
     reviews: [
       {
         author: "Игорь С.",
