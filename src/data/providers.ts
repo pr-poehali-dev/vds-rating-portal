@@ -4274,7 +4274,7 @@ export const providers: Provider[] = [
       "Telegram боты",
       "Базы данных",
     ],
-    uptime30days: 99.9,
+    uptime30days: 99.8,
     reviews: [
       {
         author: "Александр В.",
