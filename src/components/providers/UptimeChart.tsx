@@ -199,7 +199,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                           </div>
                         </div>
                         
-                        {(provider.id === 44 || provider.id === 1 || provider.id === 10 || provider.id === 14) && isExpanded && (() => {
+                        {(provider.id === 44 || provider.id === 1 || provider.id === 10 || provider.id === 14 || provider.id === 20) && isExpanded && (() => {
                           let staticMonthlyData;
                           
                           if (provider.id === 10) {
@@ -227,6 +227,19 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                               { month: 'Август', uptime: 99.93, downtime: 30 },
                               { month: 'Сентябрь', uptime: 99.80, downtime: 87 },
                               { month: 'Октябрь', uptime: 99.93, downtime: 33 },
+                            ];
+                          } else if (provider.id === 20) {
+                            staticMonthlyData = [
+                              { month: 'Январь', uptime: 100, downtime: 0 },
+                              { month: 'Февраль', uptime: 100, downtime: 0 },
+                              { month: 'Март', uptime: 99.98, downtime: 9 },
+                              { month: 'Апрель', uptime: 99.98, downtime: 9 },
+                              { month: 'Май', uptime: 99.99, downtime: 3 },
+                              { month: 'Июнь', uptime: 99.78, downtime: 93 },
+                              { month: 'Июль', uptime: 100, downtime: 0 },
+                              { month: 'Август', uptime: 99.84, downtime: 72 },
+                              { month: 'Сентябрь', uptime: 99.99, downtime: 6 },
+                              { month: 'Октябрь', uptime: 99.98, downtime: 9 },
                             ];
                           } else {
                             staticMonthlyData = [
