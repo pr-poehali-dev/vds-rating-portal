@@ -304,7 +304,13 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                         const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
                                         const segmentWidth = 1000 / staticMonthlyData.length;
                                         const x = segmentWidth * idx + segmentWidth / 2;
-                                        const y = 200 - (normalizedHeight / 100) * 200;
+                                        let y = 200 - (normalizedHeight / 100) * 200;
+                                        
+                                        // Для июня (idx 5) и сентября (idx 8) провайдера id 14 ставим точку на оси X
+                                        const isJuneOrSeptember = (provider.id === 14 && (idx === 5 || idx === 8));
+                                        if (isJuneOrSeptember) {
+                                          y = 200;
+                                        }
                                         
                                         // Определяем цвет точки по уровню uptime
                                         let fillColor = '';
@@ -332,7 +338,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                             />
                                             <text
                                               x={x}
-                                              y={y - 12}
+                                              y={isJuneOrSeptember ? y - 12 : y - 12}
                                               textAnchor="middle"
                                               className="fill-foreground text-[10px] font-bold"
                                               style={{
