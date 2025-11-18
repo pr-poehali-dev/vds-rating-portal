@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { Provider } from './types';
-import Icon from '@/components/ui/icon';
+import { useState } from "react";
+import { Provider } from "./types";
+import Icon from "@/components/ui/icon";
 
 interface MonthlyDowntime {
   provider_id: number;
@@ -15,45 +15,55 @@ interface UptimeChartProps {
   monthlyDowntime?: MonthlyDowntime[];
 }
 
-export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDowntime = [] }: UptimeChartProps) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [expandedProviders, setExpandedProviders] = useState<Set<number>>(new Set());
-  
+export const UptimeChart = ({
+  providers,
+  lastCheckTime,
+  isChecking,
+  monthlyDowntime = [],
+}: UptimeChartProps) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [expandedProviders, setExpandedProviders] = useState<Set<number>>(
+    new Set(),
+  );
+
   const providersWithUptime = providers
-    .filter(p => p.uptime30days !== undefined)
-    .filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    .filter((p) => p.uptime30days !== undefined)
+    .filter((p) => p.name.toLowerCase().includes(searchQuery.toLowerCase()))
     .sort((a, b) => (b.uptime30days || 0) - (a.uptime30days || 0));
 
   const getUptimeColor = (uptime: number) => {
-    if (uptime >= 99.95) return 'rgb(249, 115, 22)';
-    if (uptime >= 99.9) return 'rgb(251, 146, 60)';
-    if (uptime >= 99.5) return 'rgb(253, 186, 116)';
-    return 'rgb(239, 68, 68)';
+    if (uptime >= 99.95) return "rgb(0, 128, 0)";
+    if (uptime >= 99.9) return "rgb(251, 146, 60)";
+    if (uptime >= 99.5) return "rgb(253, 186, 116)";
+    return "rgb(239, 68, 68)";
   };
 
   const getDowntimeMinutes = (uptime: number) => {
     const totalMinutes = 30 * 24 * 60;
     const uptimeMinutes = (totalMinutes * uptime) / 100;
     const downtimeMinutes = totalMinutes - uptimeMinutes;
-    
-    if (downtimeMinutes < 1) return '< 1 мин';
+
+    if (downtimeMinutes < 1) return "< 1 мин";
     if (downtimeMinutes < 60) return `${Math.round(downtimeMinutes)} мин`;
     return `${Math.round(downtimeMinutes / 60)} ч`;
   };
 
   const trackClick = async (providerId: number) => {
     try {
-      await fetch('https://functions.poehali.dev/d0b8e2ce-45c2-4ab9-8d08-baf03c0268f4', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      await fetch(
+        "https://functions.poehali.dev/d0b8e2ce-45c2-4ab9-8d08-baf03c0268f4",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            provider_id: providerId,
+          }),
         },
-        body: JSON.stringify({
-          provider_id: providerId,
-        }),
-      });
+      );
     } catch (error) {
-      console.error('Error tracking click:', error);
+      console.error("Error tracking click:", error);
     }
   };
 
@@ -68,7 +78,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
     <section className="py-24 relative overflow-hidden">
       <div className="absolute top-20 right-10 w-[400px] h-[400px] bg-orange-500/10 rounded-full blur-[100px]"></div>
       <div className="absolute bottom-20 left-10 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px]"></div>
-      
+
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 space-y-4">
@@ -99,9 +109,13 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                   </p>
                 )}
               </div>
-              
+
               <div className="relative w-full sm:w-80">
-                <Icon name="Search" size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                <Icon
+                  name="Search"
+                  size={18}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground"
+                />
                 <input
                   type="text"
                   value={searchQuery}
@@ -111,34 +125,38 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                 />
                 {searchQuery && (
                   <button
-                    onClick={() => setSearchQuery('')}
+                    onClick={() => setSearchQuery("")}
                     className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 hover:bg-accent rounded-lg transition-colors"
                   >
-                    <Icon name="X" size={18} className="text-muted-foreground" />
+                    <Icon
+                      name="X"
+                      size={18}
+                      className="text-muted-foreground"
+                    />
                   </button>
                 )}
               </div>
             </div>
-            
+
             <div className="grid md:grid-cols-2 gap-4">
               {providersWithUptime.map((provider, index) => {
                 const uptime = provider.uptime30days || 0;
                 const downtimeText = getDowntimeMinutes(uptime);
                 const isExpanded = expandedProviders.has(provider.id);
-                
+
                 return (
-                  <div 
-                    key={provider.id} 
+                  <div
+                    key={provider.id}
                     className={`group bg-background border border-border rounded-xl p-4 hover:border-primary/50 transition-all ${
-                      isExpanded ? 'md:col-span-2' : ''
+                      isExpanded ? "md:col-span-2" : ""
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3 flex-1 min-w-0">
                         <div className="flex-shrink-0 w-10 h-10 rounded-lg overflow-hidden bg-white border border-primary/10 flex items-center justify-center">
-                          <img 
-                            src={provider.logo} 
-                            alt={provider.name} 
+                          <img
+                            src={provider.logo}
+                            alt={provider.name}
                             className="w-8 h-8 object-contain"
                           />
                         </div>
@@ -148,21 +166,29 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                             className="font-bold text-foreground truncate hover:text-primary transition-colors flex items-center gap-1 group/name"
                           >
                             {provider.name}
-                            <Icon name="ExternalLink" size={14} className="opacity-0 group-hover/name:opacity-100 transition-opacity" />
+                            <Icon
+                              name="ExternalLink"
+                              size={14}
+                              className="opacity-0 group-hover/name:opacity-100 transition-opacity"
+                            />
                           </button>
                           <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                            <span>SLA: {provider.serviceGuarantees.uptimeSLA}</span>
+                            <span>
+                              SLA: {provider.serviceGuarantees.uptimeSLA}
+                            </span>
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center gap-3">
                         <div className="text-xl font-black text-foreground">
                           {uptime.toFixed(2)}%
                         </div>
                         {index < 3 && (
                           <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
-                            <span className="text-xs font-bold text-primary">#{index + 1}</span>
+                            <span className="text-xs font-bold text-primary">
+                              #{index + 1}
+                            </span>
                           </div>
                         )}
                         <button
@@ -177,248 +203,393 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                           }}
                           className="p-1.5 hover:bg-accent rounded-lg transition-colors"
                         >
-                          <Icon 
-                            name={isExpanded ? "ChevronUp" : "ChevronDown"} 
-                            size={18} 
-                            className="text-muted-foreground" 
+                          <Icon
+                            name={isExpanded ? "ChevronUp" : "ChevronDown"}
+                            size={18}
+                            className="text-muted-foreground"
                           />
                         </button>
                       </div>
                     </div>
-                    
+
                     {isExpanded && (
                       <div className="mt-4 pt-4 border-t border-border space-y-4">
                         <div className="text-xs text-muted-foreground">
                           <div className="flex justify-between py-1">
                             <span>SLA гарантия:</span>
-                            <span className="font-semibold text-foreground">{provider.serviceGuarantees.uptimeSLA}</span>
+                            <span className="font-semibold text-foreground">
+                              {provider.serviceGuarantees.uptimeSLA}
+                            </span>
                           </div>
                           <div className="flex justify-between py-1">
                             <span>Время ответа поддержки:</span>
-                            <span className="font-semibold text-foreground">{provider.serviceGuarantees.supportResponseTime}</span>
+                            <span className="font-semibold text-foreground">
+                              {provider.serviceGuarantees.supportResponseTime}
+                            </span>
                           </div>
                         </div>
-                        
-                        {(provider.id === 44 || provider.id === 1 || provider.id === 10 || provider.id === 14 || provider.id === 20 || provider.id === 15) && isExpanded && (() => {
-                          let staticMonthlyData;
-                          
-                          if (provider.id === 10) {
-                            staticMonthlyData = [
-                              { month: 'Январь', uptime: 99.98, downtime: 9 },
-                              { month: 'Февраль', uptime: 99.99, downtime: 6 },
-                              { month: 'Март', uptime: 99.97, downtime: 15 },
-                              { month: 'Апрель', uptime: 100, downtime: 0 },
-                              { month: 'Май', uptime: 100, downtime: 0 },
-                              { month: 'Июнь', uptime: 99.99, downtime: 3 },
-                              { month: 'Июль', uptime: 99.97, downtime: 12 },
-                              { month: 'Август', uptime: 100, downtime: 0 },
-                              { month: 'Сентябрь', uptime: 99.97, downtime: 12 },
-                              { month: 'Октябрь', uptime: 99.97, downtime: 12 },
-                            ];
-                          } else if (provider.id === 14) {
-                            staticMonthlyData = [
-                              { month: 'Январь', uptime: 99.97, downtime: 15 },
-                              { month: 'Февраль', uptime: 99.93, downtime: 27 },
-                              { month: 'Март', uptime: 99.94, downtime: 27 },
-                              { month: 'Апрель', uptime: 99.96, downtime: 18 },
-                              { month: 'Май', uptime: 99.93, downtime: 33 },
-                              { month: 'Июнь', uptime: 99.43, downtime: 246 },
-                              { month: 'Июль', uptime: 99.97, downtime: 12 },
-                              { month: 'Август', uptime: 99.93, downtime: 30 },
-                              { month: 'Сентябрь', uptime: 99.80, downtime: 87 },
-                              { month: 'Октябрь', uptime: 99.93, downtime: 33 },
-                            ];
-                          } else if (provider.id === 20) {
-                            staticMonthlyData = [
-                              { month: 'Январь', uptime: 100, downtime: 0 },
-                              { month: 'Февраль', uptime: 100, downtime: 0 },
-                              { month: 'Март', uptime: 99.98, downtime: 9 },
-                              { month: 'Апрель', uptime: 99.98, downtime: 9 },
-                              { month: 'Май', uptime: 99.99, downtime: 3 },
-                              { month: 'Июнь', uptime: 99.78, downtime: 93 },
-                              { month: 'Июль', uptime: 100, downtime: 0 },
-                              { month: 'Август', uptime: 99.84, downtime: 72 },
-                              { month: 'Сентябрь', uptime: 99.99, downtime: 6 },
-                              { month: 'Октябрь', uptime: 99.98, downtime: 9 },
-                            ];
-                          } else if (provider.id === 15) {
-                            staticMonthlyData = [
-                              { month: 'Январь', uptime: 100, downtime: 0 },
-                              { month: 'Февраль', uptime: 99.99, downtime: 6 },
-                              { month: 'Март', uptime: 99.87, downtime: 57 },
-                              { month: 'Апрель', uptime: 99.99, downtime: 3 },
-                              { month: 'Май', uptime: 99.98, downtime: 9 },
-                              { month: 'Июнь', uptime: 99.68, downtime: 136 },
-                              { month: 'Июль', uptime: 99.97, downtime: 12 },
-                              { month: 'Август', uptime: 97.96, downtime: 903 },
-                              { month: 'Сентябрь', uptime: 99.03, downtime: 417 },
-                              { month: 'Октябрь', uptime: 98.22, downtime: 789 },
-                            ];
-                          } else {
-                            staticMonthlyData = [
-                              { month: 'Январь', uptime: 99.99, downtime: 3 },
-                              { month: 'Февраль', uptime: 99.98, downtime: 6 },
-                              { month: 'Март', uptime: 100, downtime: 0 },
-                              { month: 'Апрель', uptime: 100, downtime: 0 },
-                              { month: 'Май', uptime: 99.99, downtime: 3 },
-                              { month: 'Июнь', uptime: 99.98, downtime: 9 },
-                              { month: 'Июль', uptime: 100, downtime: 0 },
-                              { month: 'Август', uptime: 99.99, downtime: 3 },
-                              { month: 'Сентябрь', uptime: 99.99, downtime: 6 },
-                              { month: 'Октябрь', uptime: 99.99, downtime: 6 },
-                            ];
-                          }
-                          
-                          return (
-                            <div className="border-t border-border pt-4">
-                              <h4 className="text-sm font-bold text-foreground mb-4">
-                                График Uptime по месяцам 2025
-                              </h4>
-                              
-                              <div className="relative h-64 mb-2">
-                                {/* Ось Y */}
-                                <div className="absolute left-0 top-0 bottom-8 w-16 flex flex-col justify-between text-[9px] text-muted-foreground">
-                                  {Array.from({ length: 11 }, (_, i) => (100.03 - i * 0.013).toFixed(2)).map((value, idx) => (
-                                    <span key={idx}>{value}%</span>
-                                  ))}
-                                </div>
-                                
-                                {/* График */}
-                                <div className="absolute left-[68px] right-0 top-0 bottom-8 border-l-2 border-b-2 border-border">
-                                  {/* Горизонтальные линии сетки */}
-                                  {Array.from({ length: 11 }, (_, i) => i * 10).map((percent) => (
-                                    <div 
-                                      key={percent} 
-                                      className="absolute left-0 right-0 border-t border-border/30"
-                                      style={{ top: `${percent}%` }}
-                                    ></div>
-                                  ))}
-                                  
-                                  {/* Линейный график */}
-                                  <div className="relative h-full">
-                                    <svg className="w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="none">
-                                      {/* Вертикальные линии от точек до оси X */}
-                                      {staticMonthlyData.map((data, idx) => {
-                                        const minUptime = 99.90;
-                                        const maxUptime = 100.03;
-                                        const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
-                                        const segmentWidth = 1000 / staticMonthlyData.length;
-                                        const x = segmentWidth * idx + segmentWidth / 2;
-                                        const y = 200 - (normalizedHeight / 100) * 200;
-                                        
-                                        return (
-                                          <line
-                                            key={`line-${idx}`}
-                                            x1={x}
-                                            y1={y}
-                                            x2={x}
-                                            y2={200}
-                                            stroke="white"
-                                            strokeWidth="2"
-                                            opacity="0.2"
-                                            style={{
-                                              animation: `lineGrow 0.6s ease-out ${idx * 0.05}s both`
-                                            }}
-                                          />
-                                        );
-                                      })}
-                                      
-                                      {/* Точки на графике */}
-                                      {staticMonthlyData.map((data, idx) => {
-                                        const minUptime = 99.90;
-                                        const maxUptime = 100.03;
-                                        const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
-                                        const segmentWidth = 1000 / staticMonthlyData.length;
-                                        const x = segmentWidth * idx + segmentWidth / 2;
-                                        let y = 200 - (normalizedHeight / 100) * 200;
-                                        
-                                        // Для июня (idx 5) и сентября (idx 8) провайдера id 14 ставим точку на оси X
-                                        const isProvider14JuneOrSeptember = (provider.id === 14 && (idx === 5 || idx === 8));
-                                        // Для июня (idx 5) и августа (idx 7) провайдера id 20 ставим точку на оси X
-                                        const isProvider20JuneOrAugust = (provider.id === 20 && (idx === 5 || idx === 7));
-                                        // Для марта (idx 2), июня (idx 5), августа (idx 7), сентября (idx 8) и октября (idx 9) провайдера id 15 ставим точку на оси X
-                                        const isProvider15CriticalMonths = (provider.id === 15 && (idx === 2 || idx === 5 || idx === 7 || idx === 8 || idx === 9));
-                                        if (isProvider14JuneOrSeptember || isProvider20JuneOrAugust || isProvider15CriticalMonths) {
-                                          y = 200;
-                                        }
-                                        
-                                        // Определяем цвет точки по уровню uptime
-                                        let fillColor = '';
-                                        if (data.uptime === 100) {
-                                          fillColor = 'rgb(34, 197, 94)'; // green-500
-                                        } else if (data.uptime >= 99.5) {
-                                          fillColor = 'rgb(249, 115, 22)'; // orange-500
-                                        } else {
-                                          fillColor = 'rgb(239, 68, 68)'; // red-500
-                                        }
-                                        
-                                        return (
-                                          <g key={idx}>
-                                            <circle
-                                              cx={x}
-                                              cy={y}
-                                              r="6"
-                                              fill={fillColor}
+
+                        {(provider.id === 44 ||
+                          provider.id === 1 ||
+                          provider.id === 10 ||
+                          provider.id === 14 ||
+                          provider.id === 20 ||
+                          provider.id === 15) &&
+                          isExpanded &&
+                          (() => {
+                            let staticMonthlyData;
+
+                            if (provider.id === 10) {
+                              staticMonthlyData = [
+                                { month: "Январь", uptime: 99.98, downtime: 9 },
+                                {
+                                  month: "Февраль",
+                                  uptime: 99.99,
+                                  downtime: 6,
+                                },
+                                { month: "Март", uptime: 99.97, downtime: 15 },
+                                { month: "Апрель", uptime: 100, downtime: 0 },
+                                { month: "Май", uptime: 100, downtime: 0 },
+                                { month: "Июнь", uptime: 99.99, downtime: 3 },
+                                { month: "Июль", uptime: 99.97, downtime: 12 },
+                                { month: "Август", uptime: 100, downtime: 0 },
+                                {
+                                  month: "Сентябрь",
+                                  uptime: 99.97,
+                                  downtime: 12,
+                                },
+                                {
+                                  month: "Октябрь",
+                                  uptime: 99.97,
+                                  downtime: 12,
+                                },
+                              ];
+                            } else if (provider.id === 14) {
+                              staticMonthlyData = [
+                                {
+                                  month: "Январь",
+                                  uptime: 99.97,
+                                  downtime: 15,
+                                },
+                                {
+                                  month: "Февраль",
+                                  uptime: 99.93,
+                                  downtime: 27,
+                                },
+                                { month: "Март", uptime: 99.94, downtime: 27 },
+                                {
+                                  month: "Апрель",
+                                  uptime: 99.96,
+                                  downtime: 18,
+                                },
+                                { month: "Май", uptime: 99.93, downtime: 33 },
+                                { month: "Июнь", uptime: 99.43, downtime: 246 },
+                                { month: "Июль", uptime: 99.97, downtime: 12 },
+                                {
+                                  month: "Август",
+                                  uptime: 99.93,
+                                  downtime: 30,
+                                },
+                                {
+                                  month: "Сентябрь",
+                                  uptime: 99.8,
+                                  downtime: 87,
+                                },
+                                {
+                                  month: "Октябрь",
+                                  uptime: 99.93,
+                                  downtime: 33,
+                                },
+                              ];
+                            } else if (provider.id === 20) {
+                              staticMonthlyData = [
+                                { month: "Январь", uptime: 100, downtime: 0 },
+                                { month: "Февраль", uptime: 100, downtime: 0 },
+                                { month: "Март", uptime: 99.98, downtime: 9 },
+                                { month: "Апрель", uptime: 99.98, downtime: 9 },
+                                { month: "Май", uptime: 99.99, downtime: 3 },
+                                { month: "Июнь", uptime: 99.78, downtime: 93 },
+                                { month: "Июль", uptime: 100, downtime: 0 },
+                                {
+                                  month: "Август",
+                                  uptime: 99.84,
+                                  downtime: 72,
+                                },
+                                {
+                                  month: "Сентябрь",
+                                  uptime: 99.99,
+                                  downtime: 6,
+                                },
+                                {
+                                  month: "Октябрь",
+                                  uptime: 99.98,
+                                  downtime: 9,
+                                },
+                              ];
+                            } else if (provider.id === 15) {
+                              staticMonthlyData = [
+                                { month: "Январь", uptime: 100, downtime: 0 },
+                                {
+                                  month: "Февраль",
+                                  uptime: 99.99,
+                                  downtime: 6,
+                                },
+                                { month: "Март", uptime: 99.87, downtime: 57 },
+                                { month: "Апрель", uptime: 99.99, downtime: 3 },
+                                { month: "Май", uptime: 99.98, downtime: 9 },
+                                { month: "Июнь", uptime: 99.68, downtime: 136 },
+                                { month: "Июль", uptime: 99.97, downtime: 12 },
+                                {
+                                  month: "Август",
+                                  uptime: 97.96,
+                                  downtime: 903,
+                                },
+                                {
+                                  month: "Сентябрь",
+                                  uptime: 99.03,
+                                  downtime: 417,
+                                },
+                                {
+                                  month: "Октябрь",
+                                  uptime: 98.22,
+                                  downtime: 789,
+                                },
+                              ];
+                            } else {
+                              staticMonthlyData = [
+                                { month: "Январь", uptime: 99.99, downtime: 3 },
+                                {
+                                  month: "Февраль",
+                                  uptime: 99.98,
+                                  downtime: 6,
+                                },
+                                { month: "Март", uptime: 100, downtime: 0 },
+                                { month: "Апрель", uptime: 100, downtime: 0 },
+                                { month: "Май", uptime: 99.99, downtime: 3 },
+                                { month: "Июнь", uptime: 99.98, downtime: 9 },
+                                { month: "Июль", uptime: 100, downtime: 0 },
+                                { month: "Август", uptime: 99.99, downtime: 3 },
+                                {
+                                  month: "Сентябрь",
+                                  uptime: 99.99,
+                                  downtime: 6,
+                                },
+                                {
+                                  month: "Октябрь",
+                                  uptime: 99.99,
+                                  downtime: 6,
+                                },
+                              ];
+                            }
+
+                            return (
+                              <div className="border-t border-border pt-4">
+                                <h4 className="text-sm font-bold text-foreground mb-4">
+                                  График Uptime по месяцам 2025
+                                </h4>
+
+                                <div className="relative h-64 mb-2">
+                                  {/* Ось Y */}
+                                  <div className="absolute left-0 top-0 bottom-8 w-16 flex flex-col justify-between text-[9px] text-muted-foreground">
+                                    {Array.from({ length: 11 }, (_, i) =>
+                                      (100.03 - i * 0.013).toFixed(2),
+                                    ).map((value, idx) => (
+                                      <span key={idx}>{value}%</span>
+                                    ))}
+                                  </div>
+
+                                  {/* График */}
+                                  <div className="absolute left-[68px] right-0 top-0 bottom-8 border-l-2 border-b-2 border-border">
+                                    {/* Горизонтальные линии сетки */}
+                                    {Array.from(
+                                      { length: 11 },
+                                      (_, i) => i * 10,
+                                    ).map((percent) => (
+                                      <div
+                                        key={percent}
+                                        className="absolute left-0 right-0 border-t border-border/30"
+                                        style={{ top: `${percent}%` }}
+                                      ></div>
+                                    ))}
+
+                                    {/* Линейный график */}
+                                    <div className="relative h-full">
+                                      <svg
+                                        className="w-full h-full"
+                                        viewBox="0 0 1000 200"
+                                        preserveAspectRatio="none"
+                                      >
+                                        {/* Вертикальные линии от точек до оси X */}
+                                        {staticMonthlyData.map((data, idx) => {
+                                          const minUptime = 99.9;
+                                          const maxUptime = 100.03;
+                                          const normalizedHeight =
+                                            ((data.uptime - minUptime) /
+                                              (maxUptime - minUptime)) *
+                                            100;
+                                          const segmentWidth =
+                                            1000 / staticMonthlyData.length;
+                                          const x =
+                                            segmentWidth * idx +
+                                            segmentWidth / 2;
+                                          const y =
+                                            200 -
+                                            (normalizedHeight / 100) * 200;
+
+                                          return (
+                                            <line
+                                              key={`line-${idx}`}
+                                              x1={x}
+                                              y1={y}
+                                              x2={x}
+                                              y2={200}
                                               stroke="white"
                                               strokeWidth="2"
-                                              className="hover:r-8 transition-all cursor-pointer"
+                                              opacity="0.2"
                                               style={{
-                                                animation: `pointAppear 0.4s ease-out ${idx * 0.05 + 0.3}s both`
+                                                animation: `lineGrow 0.6s ease-out ${idx * 0.05}s both`,
                                               }}
                                             />
-                                            <text
-                                              x={x}
-                                              y={(isProvider14JuneOrSeptember || isProvider20JuneOrAugust || isProvider15CriticalMonths) ? y - 12 : y - 12}
-                                              textAnchor="middle"
-                                              className="fill-foreground text-[10px] font-bold"
-                                              style={{
-                                                animation: `pointAppear 0.4s ease-out ${idx * 0.05 + 0.3}s both`
-                                              }}
-                                            >
-                                              {data.uptime}
-                                            </text>
-                                            {/* Tooltip при наведении */}
-                                            <title>{data.month}: {data.uptime}%</title>
-                                          </g>
-                                        );
-                                      })}
-                                    </svg>
+                                          );
+                                        })}
+
+                                        {/* Точки на графике */}
+                                        {staticMonthlyData.map((data, idx) => {
+                                          const minUptime = 99.9;
+                                          const maxUptime = 100.03;
+                                          const normalizedHeight =
+                                            ((data.uptime - minUptime) /
+                                              (maxUptime - minUptime)) *
+                                            100;
+                                          const segmentWidth =
+                                            1000 / staticMonthlyData.length;
+                                          const x =
+                                            segmentWidth * idx +
+                                            segmentWidth / 2;
+                                          let y =
+                                            200 -
+                                            (normalizedHeight / 100) * 200;
+
+                                          // Для июня (idx 5) и сентября (idx 8) провайдера id 14 ставим точку на оси X
+                                          const isProvider14JuneOrSeptember =
+                                            provider.id === 14 &&
+                                            (idx === 5 || idx === 8);
+                                          // Для июня (idx 5) и августа (idx 7) провайдера id 20 ставим точку на оси X
+                                          const isProvider20JuneOrAugust =
+                                            provider.id === 20 &&
+                                            (idx === 5 || idx === 7);
+                                          // Для марта (idx 2), июня (idx 5), августа (idx 7), сентября (idx 8) и октября (idx 9) провайдера id 15 ставим точку на оси X
+                                          const isProvider15CriticalMonths =
+                                            provider.id === 15 &&
+                                            (idx === 2 ||
+                                              idx === 5 ||
+                                              idx === 7 ||
+                                              idx === 8 ||
+                                              idx === 9);
+                                          if (
+                                            isProvider14JuneOrSeptember ||
+                                            isProvider20JuneOrAugust ||
+                                            isProvider15CriticalMonths
+                                          ) {
+                                            y = 200;
+                                          }
+
+                                          // Определяем цвет точки по уровню uptime
+                                          let fillColor = "";
+                                          if (data.uptime === 100) {
+                                            fillColor = "rgb(34, 197, 94)"; // green-500
+                                          } else if (data.uptime >= 99.5) {
+                                            fillColor = "rgb(249, 115, 22)"; // orange-500
+                                          } else {
+                                            fillColor = "rgb(239, 68, 68)"; // red-500
+                                          }
+
+                                          return (
+                                            <g key={idx}>
+                                              <circle
+                                                cx={x}
+                                                cy={y}
+                                                r="6"
+                                                fill={fillColor}
+                                                stroke="white"
+                                                strokeWidth="2"
+                                                className="hover:r-8 transition-all cursor-pointer"
+                                                style={{
+                                                  animation: `pointAppear 0.4s ease-out ${idx * 0.05 + 0.3}s both`,
+                                                }}
+                                              />
+                                              <text
+                                                x={x}
+                                                y={
+                                                  isProvider14JuneOrSeptember ||
+                                                  isProvider20JuneOrAugust ||
+                                                  isProvider15CriticalMonths
+                                                    ? y - 12
+                                                    : y - 12
+                                                }
+                                                textAnchor="middle"
+                                                className="fill-foreground text-[10px] font-bold"
+                                                style={{
+                                                  animation: `pointAppear 0.4s ease-out ${idx * 0.05 + 0.3}s both`,
+                                                }}
+                                              >
+                                                {data.uptime}
+                                              </text>
+                                              {/* Tooltip при наведении */}
+                                              <title>
+                                                {data.month}: {data.uptime}%
+                                              </title>
+                                            </g>
+                                          );
+                                        })}
+                                      </svg>
+                                    </div>
+                                  </div>
+
+                                  {/* Ось X - месяцы */}
+                                  <div className="absolute left-[68px] right-0 bottom-0 flex justify-around text-xs text-muted-foreground">
+                                    {staticMonthlyData.map((data, idx) => (
+                                      <div
+                                        key={idx}
+                                        className="flex flex-col items-center flex-1"
+                                      >
+                                        <span className="font-semibold">
+                                          {data.month.slice(0, 3)}
+                                        </span>
+                                        {data.downtime > 0 && (
+                                          <span className="text-[10px] text-red-500 font-medium mt-0.5">
+                                            {data.downtime} мин
+                                          </span>
+                                        )}
+                                      </div>
+                                    ))}
                                   </div>
                                 </div>
-                                
-                                {/* Ось X - месяцы */}
-                                <div className="absolute left-[68px] right-0 bottom-0 flex justify-around text-xs text-muted-foreground">
-                                  {staticMonthlyData.map((data, idx) => (
-                                    <div key={idx} className="flex flex-col items-center flex-1">
-                                      <span className="font-semibold">{data.month.slice(0, 3)}</span>
-                                      {data.downtime > 0 && (
-                                        <span className="text-[10px] text-red-500 font-medium mt-0.5">
-                                          {data.downtime} мин
-                                        </span>
-                                      )}
-                                    </div>
-                                  ))}
+
+                                {/* Легенда */}
+                                <div className="flex items-center gap-4 text-xs mt-4 pt-2 border-t border-border">
+                                  <div className="flex items-center gap-1.5">
+                                    <div className="w-3 h-3 rounded bg-green-500"></div>
+                                    <span className="text-muted-foreground">
+                                      100% uptime
+                                    </span>
+                                  </div>
+                                  <div className="flex items-center gap-1.5">
+                                    <div className="w-3 h-3 rounded bg-orange-500"></div>
+                                    <span className="text-muted-foreground">
+                                      99.5-99.99%
+                                    </span>
+                                  </div>
+                                  <div className="flex items-center gap-1.5">
+                                    <div className="w-3 h-3 rounded bg-red-500"></div>
+                                    <span className="text-muted-foreground">
+                                      &lt; 99.5%
+                                    </span>
+                                  </div>
                                 </div>
                               </div>
-                              
-                              {/* Легенда */}
-                              <div className="flex items-center gap-4 text-xs mt-4 pt-2 border-t border-border">
-                                <div className="flex items-center gap-1.5">
-                                  <div className="w-3 h-3 rounded bg-green-500"></div>
-                                  <span className="text-muted-foreground">100% uptime</span>
-                                </div>
-                                <div className="flex items-center gap-1.5">
-                                  <div className="w-3 h-3 rounded bg-orange-500"></div>
-                                  <span className="text-muted-foreground">99.5-99.99%</span>
-                                </div>
-                                <div className="flex items-center gap-1.5">
-                                  <div className="w-3 h-3 rounded bg-red-500"></div>
-                                  <span className="text-muted-foreground">&lt; 99.5%</span>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })()}
+                            );
+                          })()}
                       </div>
                     )}
                   </div>
@@ -430,28 +601,36 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
               <div className="bg-background border border-border rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-3 h-3 rounded-full bg-orange-600"></div>
-                  <span className="text-xs font-bold text-muted-foreground">≥ 99.95%</span>
+                  <span className="text-xs font-bold text-muted-foreground">
+                    ≥ 99.95%
+                  </span>
                 </div>
                 <div className="text-sm text-foreground">Отличный</div>
               </div>
               <div className="bg-background border border-border rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-3 h-3 rounded-full bg-orange-400"></div>
-                  <span className="text-xs font-bold text-muted-foreground">≥ 99.9%</span>
+                  <span className="text-xs font-bold text-muted-foreground">
+                    ≥ 99.9%
+                  </span>
                 </div>
                 <div className="text-sm text-foreground">Хороший</div>
               </div>
               <div className="bg-background border border-border rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <span className="text-xs font-bold text-muted-foreground">≥ 99.5%</span>
+                  <span className="text-xs font-bold text-muted-foreground">
+                    ≥ 99.5%
+                  </span>
                 </div>
                 <div className="text-sm text-foreground">Средний</div>
               </div>
               <div className="bg-background border border-border rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <span className="text-xs font-bold text-muted-foreground">&lt; 99.5%</span>
+                  <span className="text-xs font-bold text-muted-foreground">
+                    &lt; 99.5%
+                  </span>
                 </div>
                 <div className="text-sm text-foreground">Низкий</div>
               </div>
