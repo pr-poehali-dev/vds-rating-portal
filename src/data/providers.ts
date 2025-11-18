@@ -2438,7 +2438,7 @@ export const providers: Provider[] = [
       "E-commerce",
       "Dev окружения",
     ],
-    uptime30days: 99.91,
+    uptime30days: 99.97,
     reviews: [
       {
         author: "Алексей Т.",
