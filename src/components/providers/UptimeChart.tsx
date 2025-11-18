@@ -336,7 +336,9 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                         const isProvider14JuneOrSeptember = (provider.id === 14 && (idx === 5 || idx === 8));
                                         // Для июня (idx 5) и августа (idx 7) провайдера id 20 ставим точку на оси X
                                         const isProvider20JuneOrAugust = (provider.id === 20 && (idx === 5 || idx === 7));
-                                        if (isProvider14JuneOrSeptember || isProvider20JuneOrAugust) {
+                                        // Для марта (idx 2), июня (idx 5), августа (idx 7), сентября (idx 8) и октября (idx 9) провайдера id 15 ставим точку на оси X
+                                        const isProvider15CriticalMonths = (provider.id === 15 && (idx === 2 || idx === 5 || idx === 7 || idx === 8 || idx === 9));
+                                        if (isProvider14JuneOrSeptember || isProvider20JuneOrAugust || isProvider15CriticalMonths) {
                                           y = 200;
                                         }
                                         
@@ -366,7 +368,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                             />
                                             <text
                                               x={x}
-                                              y={(isProvider14JuneOrSeptember || isProvider20JuneOrAugust) ? y - 12 : y - 12}
+                                              y={(isProvider14JuneOrSeptember || isProvider20JuneOrAugust || isProvider15CriticalMonths) ? y - 12 : y - 12}
                                               textAnchor="middle"
                                               className="fill-foreground text-[10px] font-bold"
                                               style={{
