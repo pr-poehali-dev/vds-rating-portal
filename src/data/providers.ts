@@ -3155,7 +3155,7 @@ export const providers: Provider[] = [
       "Финтех приложения",
       "Игровые серверы",
     ],
-    uptime30days: 99.96,
+    uptime30days: 99.99,
     reviews: [
       {
         author: "Мария К.",
