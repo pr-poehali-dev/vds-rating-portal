@@ -151,6 +151,8 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                             <Icon name="ExternalLink" size={14} className="opacity-0 group-hover/name:opacity-100 transition-opacity" />
                           </button>
                           <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                            <span>Простой: {downtimeText}</span>
+                            <span>•</span>
                             <span>SLA: {provider.serviceGuarantees.uptimeSLA}</span>
                           </div>
                         </div>
@@ -222,7 +224,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                               <div className="relative h-64 mb-2">
                                 {/* Ось Y */}
                                 <div className="absolute left-0 top-0 bottom-8 w-16 flex flex-col justify-between text-[9px] text-muted-foreground">
-                                  {Array.from({ length: 11 }, (_, i) => (100.03 - i * 0.013).toFixed(2)).map((value, idx) => (
+                                  {Array.from({ length: 11 }, (_, i) => (100.05 - i * 0.015).toFixed(2)).map((value, idx) => (
                                     <span key={idx}>{value}%</span>
                                   ))}
                                 </div>
@@ -239,15 +241,14 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                   ))}
                                   
                                   {/* Линейный график */}
-                                  <div className="relative h-full">
+                                  <div className="relative h-full px-2">
                                     <svg className="w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="none">
                                       {/* Вертикальные линии от точек до оси X */}
                                       {staticMonthlyData.map((data, idx) => {
                                         const minUptime = 99.90;
-                                        const maxUptime = 100.03;
+                                        const maxUptime = 100.05;
                                         const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
-                                        const segmentWidth = 1000 / staticMonthlyData.length;
-                                        const x = segmentWidth * idx + segmentWidth / 2;
+                                        const x = (idx / (staticMonthlyData.length - 1)) * 1000;
                                         const y = 200 - (normalizedHeight / 100) * 200;
                                         
                                         return (
@@ -257,23 +258,37 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                             y1={y}
                                             x2={x}
                                             y2={200}
-                                            stroke="white"
-                                            strokeWidth="2"
-                                            opacity="0.2"
-                                            style={{
-                                              animation: `lineGrow 0.6s ease-out ${idx * 0.05}s both`
-                                            }}
+                                            stroke="rgb(249, 115, 22)"
+                                            strokeWidth="1"
+                                            strokeDasharray="4 4"
+                                            opacity="0.3"
                                           />
                                         );
                                       })}
                                       
+                                      {/* Линия графика */}
+                                      <polyline
+                                        points={staticMonthlyData.map((data, idx) => {
+                                          const minUptime = 99.90;
+                                          const maxUptime = 100.05;
+                                          const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
+                                          const x = (idx / (staticMonthlyData.length - 1)) * 1000;
+                                          const y = 200 - (normalizedHeight / 100) * 200;
+                                          return `${x},${y}`;
+                                        }).join(' ')}
+                                        fill="none"
+                                        stroke="rgb(249, 115, 22)"
+                                        strokeWidth="3"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                      />
+                                      
                                       {/* Точки на графике */}
                                       {staticMonthlyData.map((data, idx) => {
                                         const minUptime = 99.90;
-                                        const maxUptime = 100.03;
+                                        const maxUptime = 100.05;
                                         const normalizedHeight = ((data.uptime - minUptime) / (maxUptime - minUptime)) * 100;
-                                        const segmentWidth = 1000 / staticMonthlyData.length;
-                                        const x = segmentWidth * idx + segmentWidth / 2;
+                                        const x = (idx / (staticMonthlyData.length - 1)) * 1000;
                                         const y = 200 - (normalizedHeight / 100) * 200;
                                         
                                         // Определяем цвет точки по уровню uptime
@@ -296,21 +311,7 @@ export const UptimeChart = ({ providers, lastCheckTime, isChecking, monthlyDownt
                                               stroke="white"
                                               strokeWidth="2"
                                               className="hover:r-8 transition-all cursor-pointer"
-                                              style={{
-                                                animation: `pointAppear 0.4s ease-out ${idx * 0.05 + 0.3}s both`
-                                              }}
                                             />
-                                            <text
-                                              x={x}
-                                              y={y - 12}
-                                              textAnchor="middle"
-                                              className="fill-foreground text-[10px] font-bold"
-                                              style={{
-                                                animation: `pointAppear 0.4s ease-out ${idx * 0.05 + 0.3}s both`
-                                              }}
-                                            >
-                                              {data.uptime}
-                                            </text>
                                             {/* Tooltip при наведении */}
                                             <title>{data.month}: {data.uptime}%</title>
                                           </g>
