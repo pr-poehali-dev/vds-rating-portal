@@ -116,7 +116,7 @@ export const UptimeProviderCard = ({
       ];
     }else if (providerId === 19) {
       return [
-        { month: "Январь", uptime: 100, downtime: 0 },
+        { month: "Январь", uptime: 100, downtime:  },
         { month: "Февраль", uptime: 99.98, downtime: 9 },
         { month: "Март", uptime: 100, downtime: 0 },
         { month: "Апрель", uptime: 99.99, downtime: 3 },
