@@ -127,7 +127,19 @@ export const UptimeProviderCard = ({
         { month: "Сентябрь", uptime: 99.99, downtime: 6 },
         { month: "Октябрь", uptime: 99.99, downtime: 6 },
       ];
-    }
+    } else if (providerId === 23) {
+      return [
+        { month: "Январь", uptime: 100, downtime: 0 },
+        { month: "Февраль", uptime: 99.99, downtime: 3 },
+        { month: "Март", uptime: 99.84, downtime: 3 },
+        { month: "Апрель", uptime: 100, downtime: 0 },
+        { month: "Май", uptime: 100, downtime: 0 },
+        { month: "Июнь", uptime: 99.99, downtime: 3 },
+        { month: "Июль", uptime: 100, downtime: 0 },
+        { month: "Август", uptime: 99,99, downtime: 3 },
+        { month: "Сентябрь", uptime: 100, downtime: 0 },
+        { month: "Октябрь", uptime: 100, downtime: 0 },
+      ];
   };
 
   const shouldShowGraph =
@@ -139,6 +151,7 @@ export const UptimeProviderCard = ({
     provider.id === 5 ||
     provider.id === 6 ||
     provider.id === 12 ||
+    provider.id === 23 ||
     provider.id === 19;
 
   return (
