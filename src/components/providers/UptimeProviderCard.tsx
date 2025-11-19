@@ -153,6 +153,7 @@ export const UptimeProviderCard = ({
         { month: "Сентябрь", uptime: 99.99, downtime: 6 },
         { month: "Октябрь", uptime: 99.99, downtime: 6 },
       ];
+    }
   };
 
   const shouldShowGraph =
