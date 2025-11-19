@@ -153,6 +153,7 @@ export const UptimeProviderCard = ({
     provider.id === 5 ||
     provider.id === 6 ||
     provider.id === 12 ||
+    provider.id === 23 ||
     provider.id === 19;
 
   return (
