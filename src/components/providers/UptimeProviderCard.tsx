@@ -131,7 +131,6 @@ export const UptimeProviderCard = ({
   };
 
   const shouldShowGraph =
-    provider.id === 44 ||
     provider.id === 1 ||
     provider.id === 10 ||
     provider.id === 14 ||
