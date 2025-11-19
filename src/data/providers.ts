@@ -1517,8 +1517,8 @@ export const providers: Provider[] = [
       ddosProtection: "До 50 Гбит/с",
     },
     serviceGuarantees: {
-      uptimeSLA: "99.98%",
-      supportResponseTime: "< 60 мин",
+      uptimeSLA: "99.9%",
+      supportResponseTime: "< 20 мин",
       moneyBackGuarantee: 0,
     },
     additionalServices: {
@@ -1544,7 +1544,7 @@ export const providers: Provider[] = [
       "CMS проекты",
       "Веб-приложения",
     ],
-    uptime30days: 99.98,
+    uptime30days: 99.89,
     reviews: [
       {
         author: "Сергей Д.",
