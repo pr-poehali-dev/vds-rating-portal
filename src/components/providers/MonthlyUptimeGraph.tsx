@@ -32,7 +32,7 @@ export const MonthlyUptimeGraph = ({
         {/* График */}
         <div className="absolute left-[68px] right-0 top-0 bottom-8 border-l-2 border-b-2 border-border">
           {/* Горизонтальные линии сетки */}
-          {Array.from({ length: 15 }, (_, i) => i * 10).map((percent) => (
+          {Array.from({ length: 21 }, (_, i) => i * 10).map((percent) => (
             <div
               key={percent}
               className="absolute left-0 right-0 border-t border-border/30"
