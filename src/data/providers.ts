@@ -1195,8 +1195,8 @@ export const providers: Provider[] = [
       ddosProtection: "Базовая защита",
     },
     serviceGuarantees: {
-      uptimeSLA: "99.9%",
-      supportResponseTime: "< 25 мин",
+      uptimeSLA: "99.98%",
+      supportResponseTime: "< 10 мин",
       moneyBackGuarantee: 0,
     },
     additionalServices: {
@@ -1222,7 +1222,7 @@ export const providers: Provider[] = [
       "OpenCart магазины",
       "Корпоративный сектор",
     ],
-    uptime30days: 99.88,
+    uptime30days: 99.99,
     reviews: [
       {
         author: "Сергей М.",
