@@ -88,13 +88,10 @@ export const MonthlyUptimeGraph = ({
 
                 const isProvider14JuneOrSeptember =
                   providerId === 14 && (idx === 5 || idx === 8);
-                const isProvider20JuneOrAugust =
-                  providerId === 20 && (idx === 5 || idx === 7);
                 const isProvider15 = providerId === 15 && idx >= 7;
 
                 if (
                   isProvider14JuneOrSeptember ||
-                  isProvider20JuneOrAugust ||
                   isProvider15
                 ) {
                   y = 200;
