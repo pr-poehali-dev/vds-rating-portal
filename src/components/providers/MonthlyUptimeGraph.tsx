@@ -22,11 +22,11 @@ export const MonthlyUptimeGraph = ({
       <div className="relative h-64 mb-2">
         {/* Ось Y */}
         <div className="absolute left-0 top-0 bottom-8 w-16 flex flex-col justify-between text-[9px] text-muted-foreground">
-          {Array.from({ length: 54 }, (_, i) =>
-            (100.03 - i * 0.01).toFixed(2),
-          ).filter((_, idx) => idx % 5 === 0).map((value, idx) => (
-            <span key={idx}>{value}%</span>
-          ))}
+          {Array.from({ length: 54 }, (_, i) => (100.1 - i * 0.01).toFixed(2))
+            .filter((_, idx) => idx % 5 === 0)
+            .map((value, idx) => (
+              <span key={idx}>{value}%</span>
+            ))}
         </div>
 
         {/* График */}
@@ -50,7 +50,7 @@ export const MonthlyUptimeGraph = ({
               {/* Вертикальные линии от точек до оси X */}
               {data.map((dataPoint, idx) => {
                 const minUptime = 99.5;
-                const maxUptime = 100.03;
+                const maxUptime = 100.1;
                 const normalizedHeight =
                   ((dataPoint.uptime - minUptime) / (maxUptime - minUptime)) *
                   100;
@@ -78,7 +78,7 @@ export const MonthlyUptimeGraph = ({
               {/* Точки на графике */}
               {data.map((dataPoint, idx) => {
                 const minUptime = 99.5;
-                const maxUptime = 100.03;
+                const maxUptime = 100.1;
                 const normalizedHeight =
                   ((dataPoint.uptime - minUptime) / (maxUptime - minUptime)) *
                   100;
