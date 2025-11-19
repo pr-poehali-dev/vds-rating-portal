@@ -48,6 +48,12 @@ export interface PricingDetails {
   minPrice: number;
 }
 
+export interface MonthlyUptime {
+  month: string;
+  uptime: number;
+  downtime_minutes: number;
+}
+
 export interface Provider {
   id: number;
   name: string;
@@ -76,6 +82,7 @@ export interface Provider {
   promoText?: string;
   caseStudies?: string[];
   uptime30days?: number;
+  monthlyUptimeData?: MonthlyUptime[];
 }
 
 export interface ResourceConfig {
