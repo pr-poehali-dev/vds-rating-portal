@@ -477,7 +477,7 @@ export const providers: Provider[] = [
     },
     serviceGuarantees: {
       uptimeSLA: "99.95%",
-      supportResponseTime: "< 15 мин",
+      supportResponseTime: "< 120 мин",
       moneyBackGuarantee: 30,
     },
     additionalServices: {
@@ -590,8 +590,8 @@ export const providers: Provider[] = [
       },
     },
     serviceGuarantees: {
-      uptimeSLA: "99.95%",
-      supportResponseTime: "< 25 мин",
+      uptimeSLA: "99.98%",
+      supportResponseTime: "< 60 мин",
       moneyBackGuarantee: 30,
     },
     additionalServices: {
@@ -722,8 +722,8 @@ export const providers: Provider[] = [
       },
     },
     serviceGuarantees: {
-      uptimeSLA: "99.95%",
-      supportResponseTime: "< 10 мин",
+      uptimeSLA: "99.9%",
+      supportResponseTime: "< 15 мин",
       moneyBackGuarantee: 10,
     },
     additionalServices: {
@@ -818,7 +818,6 @@ export const providers: Provider[] = [
       "60 дней бесплатного использования",
       "Экосистема Яндекса",
       "Мощное API и CLI",
-      "Гарантия доступности 99.95%",
     ],
     cons: [
       "Повышение цен в мае 2025 (+5%)",
@@ -849,8 +848,8 @@ export const providers: Provider[] = [
       ddosProtection: "До 1 Тбит/с",
     },
     serviceGuarantees: {
-      uptimeSLA: "99.95%",
-      supportResponseTime: "< 30 мин",
+      uptimeSLA: "Нет единого SLA",
+      supportResponseTime: "< 15 мин",
       moneyBackGuarantee: 0,
     },
     additionalServices: {
