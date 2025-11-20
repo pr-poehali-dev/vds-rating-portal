@@ -155,12 +155,12 @@ export const UptimeProviderCard = ({
       ];
     } else if (providerId === 22) {
       return [
-        { month: "Январь", uptime: 87, downtime: 0 },
+        { month: "Январь", uptime: 100, downtime: 0 },
         { month: "Февраль", uptime: 100, downtime: 0 },
         { month: "Март", uptime: 99.99, downtime: 6 },
         { month: "Апрель", uptime: 100, downtime: 0 },
         { month: "Май", uptime: 99.99, downtime: 3 },
-        { month: "Июнь", uptime: 35, downtime: 27 },
+        { month: "Июнь", uptime: 99.94, downtime: 27 },
         { month: "Июль", uptime: 100, downtime: 0 },
         { month: "Август", uptime: 100, downtime: 0 },
         { month: "Сентябрь", uptime: 100, downtime: 0 },
