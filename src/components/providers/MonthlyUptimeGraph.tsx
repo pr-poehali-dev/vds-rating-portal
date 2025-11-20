@@ -118,7 +118,7 @@ export const MonthlyUptimeGraph = ({
                       r="6"
                       fill={fillColor}
                       stroke="darkgrey"
-                      strokeWidth="2"
+                      strokeWidth="12"
                       style={{
                         animation: `pointAppear 0.4s ease-out ${idx * 0.05 + 0.3}s both`,
                       }}
