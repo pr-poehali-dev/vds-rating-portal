@@ -1257,7 +1257,7 @@ export const providers: Provider[] = [
   },
   {
     id: 21,
-    name: "handyhost",
+    name: "HANDYHOST",
     logo: "http://handyhost.ru/tpl/img/logo3.png",
     rating: 9.0,
     basePrice: 160,
