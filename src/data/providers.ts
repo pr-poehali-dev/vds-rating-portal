@@ -1221,7 +1221,7 @@ export const providers: Provider[] = [
       "OpenCart магазины",
       "Корпоративный сектор",
     ],
-    uptime30days: 99.99,
+    uptime30days: 99.98,
     reviews: [
       {
         author: "Сергей М.",
