@@ -344,8 +344,8 @@ export const providers: Provider[] = [
       },
     },
     serviceGuarantees: {
-      uptimeSLA: "99.9%",
-      supportResponseTime: "< 20 мин",
+      uptimeSLA: "Не имеет единого SLA",
+      supportResponseTime: "< 15 мин",
       moneyBackGuarantee: 0,
     },
     additionalServices: {
