@@ -49,8 +49,8 @@ export const MonthlyUptimeGraph = ({
             >
               {/* Вертикальные линии от точек до оси X */}
               {data.map((dataPoint, idx) => {
-                const minUptime = 99.0;
-                const maxUptime = 100.5;
+                const minUptime = 99.5;
+                const maxUptime = 100.3;
                 const normalizedHeight =
                   ((dataPoint.uptime - minUptime) / (maxUptime - minUptime)) *
                   100;
