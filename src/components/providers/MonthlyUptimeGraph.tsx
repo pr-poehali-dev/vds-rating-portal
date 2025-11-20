@@ -65,8 +65,8 @@ export const MonthlyUptimeGraph = ({
                     y1={y}
                     x2={x}
                     y2={200}
-                    stroke="blue"
-                    strokeWidth="5"
+                    stroke="white"
+                    strokeWidth="2"
                     opacity="0.2"
                     style={{
                       animation: `lineGrow 0.6s ease-out ${idx * 0.05}s both`,
@@ -99,7 +99,7 @@ export const MonthlyUptimeGraph = ({
                 //   y = 200;
                 // }
 
-                if (dataPoint.uptime > 99.5) {
+                if (dataPoint.uptime < 99.5) {
                   y = 200;
                 }
 
