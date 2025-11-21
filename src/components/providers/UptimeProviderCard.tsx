@@ -292,8 +292,7 @@ export const UptimeProviderCard = ({
             </div>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <span>
-                Общее время простоя:{" "}
-                {getStaticDowntimeYear(provider.providerId)}
+                Общее время простоя:{getStaticDowntimeYear(provider.providerId)}
               </span>
             </div>
           </div>
