@@ -28,7 +28,7 @@ export const PrivacySection = () => {
                   <h2 className="text-2xl font-bold text-foreground mb-3">Общие положения</h2>
                   <p className="text-muted-foreground leading-relaxed mb-4">
                     Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных 
-                    пользователей сайта top-vds.com (далее — "Сайт").
+                    пользователей сайта TopCloudHub (далее — "Сайт").
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
                     Используя Сайт, вы соглашаетесь с условиями данной Политики конфиденциальности. 

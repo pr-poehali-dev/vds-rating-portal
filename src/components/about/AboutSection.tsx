@@ -13,7 +13,7 @@ export const AboutSection = () => {
               <span className="text-sm font-bold text-primary">О проекте</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
-              О top-vds
+              О TopCloudHub
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Независимая платформа для сравнения VDS хостинг-провайдеров
@@ -43,7 +43,7 @@ export const AboutSection = () => {
                   <Icon name="Heart" size={24} className="text-primary" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-foreground mb-3">Почему мы создали top-vds</h2>
+                  <h2 className="text-2xl font-bold text-foreground mb-3">Почему мы создали TopCloudHub</h2>
                   <p className="text-muted-foreground leading-relaxed mb-4">
                     Выбор VDS хостинга — это сложная задача. Провайдеров десятки, у каждого свои тарифы, 
                     особенности и подводные камни. Мы сами столкнулись с этой проблемой при выборе 
