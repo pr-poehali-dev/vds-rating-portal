@@ -112,7 +112,7 @@ export const UptimeProviderCard = ({
         { month: "Июль", uptime: 100, downtime: 0 },
         { month: "Август", uptime: 100, downtime: 0 },
         { month: "Сентябрь", uptime: 99.99, downtime: 6 },
-        { month: "Октябрь", uptime: 99.98, downtime: 9  },
+        { month: "Октябрь", uptime: 99.98, downtime: 9 },
       ];
     } else if (providerId === 14) {
       return [
@@ -140,7 +140,7 @@ export const UptimeProviderCard = ({
         { month: "Сентябрь", uptime: 99.03, downtime: 417 },
         { month: "Октябрь", uptime: 98.22, downtime: 789 },
       ];
-    }  else if (providerId === 18) {
+    } else if (providerId === 18) {
       return [
         { month: "Январь", uptime: 99.97, downtime: 15 },
         { month: "Февраль", uptime: 100, downtime: 0 },
@@ -192,7 +192,7 @@ export const UptimeProviderCard = ({
         { month: "Сентябрь", uptime: 100, downtime: 0 },
         { month: "Октябрь", uptime: 99.89, downtime: 48 },
       ];
-      else if (providerId === 21) {
+    } else if (providerId === 21) {
       return [
         { month: "Январь", uptime: 100, downtime: 0 },
         { month: "Февраль", uptime: 100, downtime: 0 },
@@ -218,7 +218,7 @@ export const UptimeProviderCard = ({
         { month: "Сентябрь", uptime: 100, downtime: 0 },
         { month: "Октябрь", uptime: 100, downtime: 0 },
       ];
-    } 
+    }
   };
 
   const shouldShowGraph =
