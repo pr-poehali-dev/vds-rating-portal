@@ -2255,7 +2255,7 @@ export const providers: Provider[] = [
   },
   {
     id: 13,
-    name: "Smartape",
+    name: "SmartApe",
     logo: "https://smartape.ru/images/logo/logo_header_default_ru.svg",
     rating: 8.9,
     basePrice: 145,
@@ -2294,8 +2294,8 @@ export const providers: Provider[] = [
       ddosProtection: "Базовая защита",
     },
     serviceGuarantees: {
-      uptimeSLA: "99.9%",
-      supportResponseTime: "< 30 мин",
+      uptimeSLA: "99.98",
+      supportResponseTime: "< 15 мин",
       moneyBackGuarantee: 0,
     },
     additionalServices: {
