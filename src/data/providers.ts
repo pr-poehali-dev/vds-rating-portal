@@ -2559,7 +2559,7 @@ export const providers: Provider[] = [
       "Блоги",
       "Корпоративные порталы",
     ],
-    uptime30days: 99.89,
+    uptime30days: 99.99,
     reviews: [
       {
         author: "Иван С.",
