@@ -215,6 +215,7 @@ export const UptimeProviderCard = ({
     provider.id === 7 ||
     provider.id === 10 ||
     provider.id === 12 ||
+    provider.id === 13 ||
     provider.id === 14 ||
     provider.id === 15 ||
     provider.id === 18 ||
