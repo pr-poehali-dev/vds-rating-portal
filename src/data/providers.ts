@@ -1304,7 +1304,7 @@ export const providers: Provider[] = [
     },
     serviceGuarantees: {
       uptimeSLA: "99.9%",
-      supportResponseTime: "< 20 мин",
+      supportResponseTime: "< 10 мин",
       moneyBackGuarantee: 7,
     },
     additionalServices: {
@@ -1330,7 +1330,7 @@ export const providers: Provider[] = [
       "Малый бизнес",
       "Веб-разработка",
     ],
-    uptime30days: 99.87,
+    uptime30days: 99.99,
     reviews: [
       {
         author: "Владимир К.",
