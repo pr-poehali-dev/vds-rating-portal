@@ -1968,8 +1968,8 @@ export const providers: Provider[] = [
       },
     },
     serviceGuarantees: {
-      uptimeSLA: "99.9%",
-      supportResponseTime: "< 20 мин",
+      uptimeSLA: "99.99%",
+      supportResponseTime: "< 10 мин",
       moneyBackGuarantee: 0,
     },
     additionalServices: {
