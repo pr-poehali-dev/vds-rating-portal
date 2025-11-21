@@ -2087,7 +2087,7 @@ export const providers: Provider[] = [
   },
   {
     id: 14,
-    name: "MCHost",
+    name: "Макхост",
     logo: "https://mchost.ru/files/img/logo.svg",
     rating: 9.2,
     basePrice: 220,
