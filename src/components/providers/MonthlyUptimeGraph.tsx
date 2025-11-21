@@ -67,7 +67,7 @@ export const MonthlyUptimeGraph = ({
                     y2={200}
                     stroke="darkgrey"
                     strokeWidth="12"
-                    opacity="1.2"
+                    opacity="5.2"
                     style={{
                       animation: `lineGrow 0.6s ease-out ${idx * 0.05}s both`,
                     }}
