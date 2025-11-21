@@ -1472,7 +1472,7 @@ export const providers: Provider[] = [
   },
   {
     id: 19,
-    name: "eurobyte",
+    name: "Евробайт",
     logo: "https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/50a5c758-a64e-44fe-911b-6d12ea0637a9.jpg",
     rating: 9.1,
     basePrice: 195,
