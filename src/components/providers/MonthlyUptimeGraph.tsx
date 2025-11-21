@@ -22,11 +22,11 @@ export const MonthlyUptimeGraph = ({
       <div className="relative h-64 mb-2">
         {/* Ось Y */}
         <div className="absolute left-0 top-0 bottom-8 w-16 flex flex-col justify-between text-[9px] text-muted-foreground">
-          {Array.from({ length: 81 }, (_, i) => (100.3 - i * 0.01).toFixed(2))
-            .filter((_, idx) => idx % 8 === 0)
-            .map((value, idx) => (
-              <span key={idx}>{value}%</span>
-            ))}
+          {Array.from({ length: 81 }, (_, i) =>
+            (100.3 - i * 0.01).toFixed(2),
+          ).filter((_, idx) => idx % 8 === 0).map((value, idx) => (
+            <span key={idx}>{value}%</span>
+          ))}
         </div>
 
         {/* График */}
@@ -65,7 +65,7 @@ export const MonthlyUptimeGraph = ({
                     y1={y}
                     x2={x}
                     y2={200}
-                    stroke="darkgrey"
+                    stroke="white"
                     strokeWidth="2"
                     opacity="0.2"
                     style={{
@@ -91,15 +91,11 @@ export const MonthlyUptimeGraph = ({
                 const isProvider15 = providerId === 15 && idx >= 7;
                 const isProvider7May = providerId === 7 && idx === 4;
 
-                // if (
-                //   isProvider14JuneOrSeptember ||
-                //   isProvider15 ||
-                //   isProvider7May
-                // ) {
-                //   y = 200;
-                // }
-
-                if (dataPoint.uptime < 99.5) {
+                if (
+                  isProvider14JuneOrSeptember ||
+                  isProvider15 ||
+                  isProvider7May
+                ) {
                   y = 200;
                 }
 
@@ -117,8 +113,8 @@ export const MonthlyUptimeGraph = ({
                       cy={y}
                       r="6"
                       fill={fillColor}
-                      stroke="darkgrey"
-                      strokeWidth="12"
+                      stroke="white"
+                      strokeWidth="2"
                       style={{
                         animation: `pointAppear 0.4s ease-out ${idx * 0.05 + 0.3}s both`,
                       }}

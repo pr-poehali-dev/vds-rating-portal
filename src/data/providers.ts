@@ -70,7 +70,7 @@ export const providers: Provider[] = [
       },
     },
     serviceGuarantees: {
-      uptimeSLA: "Нет единого SLA",
+      uptimeSLA: "Нет официального SLA",
       supportResponseTime: "< 15 мин",
       moneyBackGuarantee: 0,
     },
@@ -105,7 +105,7 @@ export const providers: Provider[] = [
       "Веб-разработка",
       "Стриминг",
     ],
-    uptime30days: 97.54,
+    uptime30days: 99.85,
     reviews: [
       {
         author: "Артём К.",
@@ -203,8 +203,8 @@ export const providers: Provider[] = [
       },
     },
     serviceGuarantees: {
-      uptimeSLA: "99,9",
-      supportResponseTime: "< 10 мин",
+      uptimeSLA: "Нет официального SLA",
+      supportResponseTime: "< 30 мин",
       moneyBackGuarantee: 0,
     },
     additionalServices: {
@@ -344,8 +344,8 @@ export const providers: Provider[] = [
       },
     },
     serviceGuarantees: {
-      uptimeSLA: "Нет единого SLA",
-      supportResponseTime: "< 15 мин",
+      uptimeSLA: "99.9%",
+      supportResponseTime: "< 20 мин",
       moneyBackGuarantee: 0,
     },
     additionalServices: {
@@ -477,7 +477,7 @@ export const providers: Provider[] = [
     },
     serviceGuarantees: {
       uptimeSLA: "99.95%",
-      supportResponseTime: "< 120 мин",
+      supportResponseTime: "< 15 мин",
       moneyBackGuarantee: 30,
     },
     additionalServices: {
@@ -590,8 +590,8 @@ export const providers: Provider[] = [
       },
     },
     serviceGuarantees: {
-      uptimeSLA: "99.98%",
-      supportResponseTime: "< 60 мин",
+      uptimeSLA: "99.95%",
+      supportResponseTime: "< 25 мин",
       moneyBackGuarantee: 30,
     },
     additionalServices: {
@@ -722,8 +722,8 @@ export const providers: Provider[] = [
       },
     },
     serviceGuarantees: {
-      uptimeSLA: "99.9%",
-      supportResponseTime: "< 15 мин",
+      uptimeSLA: "99.95%",
+      supportResponseTime: "< 10 мин",
       moneyBackGuarantee: 10,
     },
     additionalServices: {
@@ -818,6 +818,7 @@ export const providers: Provider[] = [
       "60 дней бесплатного использования",
       "Экосистема Яндекса",
       "Мощное API и CLI",
+      "Гарантия доступности 99.95%",
     ],
     cons: [
       "Повышение цен в мае 2025 (+5%)",
@@ -848,8 +849,8 @@ export const providers: Provider[] = [
       ddosProtection: "До 1 Тбит/с",
     },
     serviceGuarantees: {
-      uptimeSLA: "Нет единого SLA",
-      supportResponseTime: "< 15 мин",
+      uptimeSLA: "99.95%",
+      supportResponseTime: "< 30 мин",
       moneyBackGuarantee: 0,
     },
     additionalServices: {
@@ -1221,7 +1222,7 @@ export const providers: Provider[] = [
       "OpenCart магазины",
       "Корпоративный сектор",
     ],
-    uptime30days: 99.98,
+    uptime30days: 99.99,
     reviews: [
       {
         author: "Сергей М.",
@@ -1257,7 +1258,7 @@ export const providers: Provider[] = [
   },
   {
     id: 21,
-    name: "HANDYHOST",
+    name: "handyhost",
     logo: "http://handyhost.ru/tpl/img/logo3.png",
     rating: 9.0,
     basePrice: 160,
@@ -1303,7 +1304,7 @@ export const providers: Provider[] = [
     },
     serviceGuarantees: {
       uptimeSLA: "99.9%",
-      supportResponseTime: "< 10 мин",
+      supportResponseTime: "< 20 мин",
       moneyBackGuarantee: 7,
     },
     additionalServices: {
@@ -1329,7 +1330,7 @@ export const providers: Provider[] = [
       "Малый бизнес",
       "Веб-разработка",
     ],
-    uptime30days: 99.99,
+    uptime30days: 99.87,
     reviews: [
       {
         author: "Владимир К.",
@@ -1409,7 +1410,7 @@ export const providers: Provider[] = [
     },
     serviceGuarantees: {
       uptimeSLA: "99.9%",
-      supportResponseTime: "< 5 мин",
+      supportResponseTime: "< 15 мин",
       moneyBackGuarantee: 10,
     },
     additionalServices: {
@@ -1471,7 +1472,7 @@ export const providers: Provider[] = [
   },
   {
     id: 19,
-    name: "Евробайт",
+    name: "eurobyte",
     logo: "https://cdn.poehali.dev/projects/59a78fde-be4d-41d0-a25a-c34adf675973/files/50a5c758-a64e-44fe-911b-6d12ea0637a9.jpg",
     rating: 9.1,
     basePrice: 195,
@@ -1543,7 +1544,7 @@ export const providers: Provider[] = [
       "CMS проекты",
       "Веб-приложения",
     ],
-    uptime30days: 99.97,
+    uptime30days: 99.98,
     reviews: [
       {
         author: "Сергей Д.",
@@ -1624,8 +1625,8 @@ export const providers: Provider[] = [
       ddosProtection: "До 100 Гбит/с",
     },
     serviceGuarantees: {
-      uptimeSLA: "99.98%",
-      supportResponseTime: "< 5 мин",
+      uptimeSLA: "99.9%",
+      supportResponseTime: "< 15 мин",
       moneyBackGuarantee: 7,
     },
     additionalServices: {
@@ -1651,7 +1652,7 @@ export const providers: Provider[] = [
       "Корпоративные сайты",
       "Dev окружения",
     ],
-    uptime30days: 99.98,
+    uptime30days: 99.86,
     reviews: [
       {
         author: "Алексей М.",
@@ -3492,8 +3493,8 @@ export const providers: Provider[] = [
       ddosProtection: "Базовая защита",
     },
     serviceGuarantees: {
-      uptimeSLA: "99.98%",
-      supportResponseTime: "< 10 мин",
+      uptimeSLA: "99.9%",
+      supportResponseTime: "< 15 мин",
       moneyBackGuarantee: 14,
     },
     additionalServices: {
@@ -3525,7 +3526,7 @@ export const providers: Provider[] = [
       "Корпоративные порталы",
       "Блоги и форумы",
     ],
-    uptime30days: 99.99,
+    uptime30days: 99.88,
     reviews: [
       {
         author: "Ольга В.",
