@@ -2405,7 +2405,7 @@ export const providers: Provider[] = [
     },
     serviceGuarantees: {
       uptimeSLA: "99.99%",
-      supportResponseTime: "< 20 мин",
+      supportResponseTime: "< 60  мин",
       moneyBackGuarantee: 0,
     },
     additionalServices: {
@@ -2486,7 +2486,7 @@ export const providers: Provider[] = [
   },
   {
     id: 11,
-    name: "Hostland",
+    name: "HostLand",
     logo: "https://hostland.ru/img/logotypes/logo_cm_1.png",
     rating: 9.0,
     basePrice: 216,
