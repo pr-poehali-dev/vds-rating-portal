@@ -91,13 +91,16 @@ export const MonthlyUptimeGraph = ({
                 const isProvider15 = providerId === 15 && idx >= 7;
                 const isProvider7May = providerId === 7 && idx === 4;
 
-                if (
-                  isProvider14JuneOrSeptember ||
-                  isProvider15 ||
-                  isProvider7May
-                ) {
+                if (dataPoint.uptime < 99.5) {
                   y = 200;
                 }
+                // if (
+                //   isProvider14JuneOrSeptember ||
+                //   isProvider15 ||
+                //   isProvider7May
+                // ) {
+                //   y = 200;
+                // }
 
                 let fillColor = "rgb(0, 128, 0)";
                 if (dataPoint.uptime < 99.5) {
