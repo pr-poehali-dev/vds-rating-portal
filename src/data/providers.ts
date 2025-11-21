@@ -2525,8 +2525,8 @@ export const providers: Provider[] = [
       ddosProtection: "Базовая защита",
     },
     serviceGuarantees: {
-      uptimeSLA: "99.9%",
-      supportResponseTime: "< 30 мин",
+      uptimeSLA: "99.98%",
+      supportResponseTime: "< 60 мин",
       moneyBackGuarantee: 30,
     },
     additionalServices: {
