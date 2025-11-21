@@ -2323,7 +2323,7 @@ export const providers: Provider[] = [
       "Малый бизнес",
       "Личные проекты",
     ],
-    uptime30days: 99.86,
+    uptime30days: 99.98,
     reviews: [
       {
         author: "Александр В.",
