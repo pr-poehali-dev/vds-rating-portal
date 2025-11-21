@@ -16,6 +16,6 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://vps-rating.poehali.dev/sitemap.xml
+Sitemap: https://topcloudhub.ru/sitemap.xml
 
-Host: https://vps-rating.poehali.dev
+Host: https://topcloudhub.ru

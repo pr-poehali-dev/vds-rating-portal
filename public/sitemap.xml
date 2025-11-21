@@ -7,15 +7,15 @@
   
   <!-- Главная страница -->
   <url>
-    <loc>https://vps-rating.poehali.dev/</loc>
-    <lastmod>2025-11-09</lastmod>
+    <loc>https://topcloudhub.ru/</loc>
+    <lastmod>2025-11-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   
   <!-- FAQ -->
   <url>
-    <loc>https://vps-rating.poehali.dev/faq</loc>
+    <loc>https://topcloudhub.ru/faq</loc>
     <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -23,7 +23,7 @@
   
   <!-- О проекте -->
   <url>
-    <loc>https://vps-rating.poehali.dev/about</loc>
+    <loc>https://topcloudhub.ru/about</loc>
     <lastmod>2025-11-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -31,7 +31,7 @@
   
   <!-- Политика конфиденциальности -->
   <url>
-    <loc>https://vps-rating.poehali.dev/privacy</loc>
+    <loc>https://topcloudhub.ru/privacy</loc>
     <lastmod>2025-11-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -39,7 +39,7 @@
   
   <!-- Uptime статистика -->
   <url>
-    <loc>https://vps-rating.poehali.dev/uptime</loc>
+    <loc>https://topcloudhub.ru/uptime</loc>
     <lastmod>2025-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -47,7 +47,7 @@
   
   <!-- Спецпредложения -->
   <url>
-    <loc>https://vps-rating.poehali.dev/promo</loc>
+    <loc>https://topcloudhub.ru/promo</loc>
     <lastmod>2025-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -55,23 +55,23 @@
   
   <!-- Блог -->
   <url>
-    <loc>https://vps-rating.poehali.dev/blog</loc>
-    <lastmod>2025-11-09</lastmod>
+    <loc>https://topcloudhub.ru/blog</loc>
+    <lastmod>2025-11-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <!-- Статья: Как выбрать VPS хостинг 2025 -->
   <url>
-    <loc>https://vps-rating.poehali.dev/blog/kak-vybrat-vps-hosting-2025</loc>
-    <lastmod>2025-11-09</lastmod>
+    <loc>https://topcloudhub.ru/blog/kak-vybrat-vps-hosting-2025</loc>
+    <lastmod>2025-11-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <!-- Статья: NVMe vs SSD -->
   <url>
-    <loc>https://vps-rating.poehali.dev/blog/nvme-vs-ssd-sravnenie</loc>
+    <loc>https://topcloudhub.ru/blog/nvme-vs-ssd-sravnenie</loc>
     <lastmod>2025-11-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -79,7 +79,7 @@
   
   <!-- Статья: Миграция на VPS -->
   <url>
-    <loc>https://vps-rating.poehali.dev/blog/migraciya-na-vps-instrukciya</loc>
+    <loc>https://topcloudhub.ru/blog/migraciya-na-vps-instrukciya</loc>
     <lastmod>2025-11-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -87,7 +87,7 @@
   
   <!-- Статья: 152-ФЗ -->
   <url>
-    <loc>https://vps-rating.poehali.dev/blog/152-fz-chto-nuzhno-znat</loc>
+    <loc>https://topcloudhub.ru/blog/152-fz-chto-nuzhno-znat</loc>
     <lastmod>2025-11-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -95,7 +95,7 @@
   
   <!-- Статья: DDoS защита -->
   <url>
-    <loc>https://vps-rating.poehali.dev/blog/ddos-zaschita-vps</loc>
+    <loc>https://topcloudhub.ru/blog/ddos-zaschita-vps</loc>
     <lastmod>2025-11-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
